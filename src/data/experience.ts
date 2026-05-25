@@ -16,14 +16,14 @@ export const experience: ExperienceItem[] = [
       name: '📌 DMS Platform',
       teamSize: 12,
       description:
-        'Decision Management System with a rule engine to assess user eligibility for personal loans, credit cards, and overdrafts at one of the UAE\'s largest banks.',
+        "Decision Management System with a rule engine to assess user eligibility for personal loans, credit cards, and overdrafts at one of the UAE's largest banks.",
       tech: ['React.js', 'TypeScript', 'Python', 'PostgreSQL', 'Oracle'],
     },
   },
   {
     id: 'byjus',
     role: 'Senior Software Engineer',
-    company: 'Byju\'s',
+    company: "Byju's",
     period: 'Oct 2021 – Apr 2024',
     duration: '2.6 yrs',
     bullets: [
@@ -32,7 +32,7 @@ export const experience: ExperienceItem[] = [
       'Created a native bridge between the web platform and the mobile Flutter app.',
     ],
     project: {
-      name: '📌 Byju\'s Student Learn Portal',
+      name: "📌 Byju's Student Learn Portal",
       teamSize: 20,
       description:
         'Learning portal giving enrolled students access to live classes, chapter tests, and video content — serving millions of students across India.',
@@ -53,7 +53,7 @@ export const experience: ExperienceItem[] = [
       name: '📌 OlaElectric.com',
       teamSize: 18,
       description:
-        'MERN-stack web app for reserving and purchasing Ola Electric scooters — one of India\'s largest EV product launches.',
+        "MERN-stack web app for reserving and purchasing Ola Electric scooters — one of India's largest EV product launches.",
       tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js'],
     },
   },

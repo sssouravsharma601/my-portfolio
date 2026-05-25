@@ -12,11 +12,14 @@
   backdrop-filter: blur(12px);
   position: relative;
   overflow: hidden;
-  transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+  transition:
+    border-color var(--t),
+    transform var(--t),
+    box-shadow var(--t);
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -33,9 +36,15 @@
   box-shadow: var(--glow-lg);
 }
 
-.card:hover::before { opacity: 1; }
+.card:hover::before {
+  opacity: 1;
+}
 
-.icon  { font-size: 1.65rem; display: block; margin-bottom: 0.8rem; }
+.icon {
+  font-size: 1.65rem;
+  display: block;
+  margin-bottom: 0.8rem;
+}
 
 .title {
   font-size: 0.7rem;
@@ -46,11 +55,15 @@
   margin-bottom: 1rem;
 }
 
-.tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
 
 .tag {
-  background: rgba(255, 255, 255, .04);
-  border: 1px solid rgba(255, 255, 255, .08);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text);
   font-size: 0.82rem;
   padding: 0.28rem 0.72rem;
@@ -59,9 +72,9 @@
   transition: all var(--t);
 }
 
-[data-theme='light'] .tag {
-  background: rgba(0, 0, 0, .04);
-  border-color: rgba(0, 0, 0, .09);
+[data-theme="light"] .tag {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.09);
 }
 
 .tag:hover {

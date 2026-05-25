@@ -8,7 +8,7 @@ export function useTyping(
 ): string {
   const [displayed, setDisplayed] = useState('');
   const [phraseIdx, setPhraseIdx] = useState(0);
-  const [charIdx, setCharIdx]     = useState(0);
+  const [charIdx, setCharIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {

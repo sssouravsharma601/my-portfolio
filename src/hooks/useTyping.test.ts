@@ -19,15 +19,21 @@ describe('useTyping', () => {
   it('types the first character after one tick', () => {
     const { result } = renderHook(() => useTyping(['Hi'], 75, 45));
 
-    act(() => { vi.advanceTimersByTime(75); });
+    act(() => {
+      vi.advanceTimersByTime(75);
+    });
     expect(result.current).toBe('H');
   });
 
   it('types the second character after two ticks', () => {
     const { result } = renderHook(() => useTyping(['Hi'], 75, 45));
 
-    act(() => { vi.advanceTimersByTime(75); });
-    act(() => { vi.advanceTimersByTime(75); });
+    act(() => {
+      vi.advanceTimersByTime(75);
+    });
+    act(() => {
+      vi.advanceTimersByTime(75);
+    });
     expect(result.current).toBe('Hi');
   });
 
@@ -36,13 +42,19 @@ describe('useTyping', () => {
     const { result } = renderHook(() => useTyping([phrase, 'DEF'], 10, 10));
 
     // Each character requires one separate act() for React to process the state update
-    act(() => { vi.advanceTimersByTime(10); });
+    act(() => {
+      vi.advanceTimersByTime(10);
+    });
     expect(result.current).toBe('A');
 
-    act(() => { vi.advanceTimersByTime(10); });
+    act(() => {
+      vi.advanceTimersByTime(10);
+    });
     expect(result.current).toBe('AB');
 
-    act(() => { vi.advanceTimersByTime(10); });
+    act(() => {
+      vi.advanceTimersByTime(10);
+    });
     expect(result.current).toBe('ABC');
   });
 });

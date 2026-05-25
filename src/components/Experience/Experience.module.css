@@ -4,7 +4,7 @@
 }
 
 .timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 10px;
@@ -38,7 +38,10 @@
   border-radius: 16px;
   padding: 1.8rem;
   backdrop-filter: blur(12px);
-  transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+  transition:
+    border-color var(--t),
+    transform var(--t),
+    box-shadow var(--t);
 }
 
 .card:hover {
@@ -56,8 +59,17 @@
   margin-bottom: 1.1rem;
 }
 
-.role    { font-size: 1.05rem; font-weight: 700; color: var(--text); }
-.company { color: var(--primary-light); font-size: 0.9rem; font-weight: 500; margin-top: 0.15rem; }
+.role {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.company {
+  color: var(--primary-light);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.15rem;
+}
 
 .period {
   background: var(--tag-bg);
@@ -84,7 +96,7 @@
 }
 
 .bullets li::before {
-  content: '▸';
+  content: "▸";
   position: absolute;
   left: 0;
   color: var(--cyan);
@@ -99,13 +111,31 @@
   padding: 1rem 1.25rem;
 }
 
-[data-theme='light'] .project { background: var(--bg3); }
+[data-theme="light"] .project {
+  background: var(--bg3);
+}
 
-.projectName { font-weight: 700; color: var(--text); font-size: 0.88rem; margin-bottom: 0.42rem; }
-.projectDesc { color: var(--text2); font-size: 0.84rem; line-height: 1.72; margin-bottom: 0.75rem; }
+.projectName {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 0.88rem;
+  margin-bottom: 0.42rem;
+}
+.projectDesc {
+  color: var(--text2);
+  font-size: 0.84rem;
+  line-height: 1.72;
+  margin-bottom: 0.75rem;
+}
 
-.tags { display: flex; flex-wrap: wrap; gap: 0.42rem; }
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+}
 
 @media (max-width: 768px) {
-  .card:hover { transform: none; }
+  .card:hover {
+    transform: none;
+  }
 }

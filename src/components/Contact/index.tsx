@@ -9,7 +9,9 @@ export default function Contact() {
       <ScrollReveal className="sec-hd">
         <div className="sec-label">Let's Talk</div>
         <h2 className="sec-title">Get In Touch</h2>
-        <p className="sec-desc">Open to senior frontend and full-stack roles in the UAE and remotely.</p>
+        <p className="sec-desc">
+          Open to senior frontend and full-stack roles in the UAE and remotely.
+        </p>
       </ScrollReveal>
 
       <div className={styles.grid}>
@@ -21,17 +23,19 @@ export default function Contact() {
                 <a
                   href={ch.href}
                   className={styles.channel}
-                  {...(ch.external
-                    ? { target: '_blank', rel: 'noopener noreferrer' }
-                    : {})}
+                  {...(ch.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   aria-label={`${ch.label}: ${ch.value}`}
                 >
-                  <div className={styles.chIcon} aria-hidden="true">{ch.icon}</div>
+                  <div className={styles.chIcon} aria-hidden="true">
+                    {ch.icon}
+                  </div>
                   <div className={styles.chBody}>
                     <div className={styles.chLabel}>{ch.label}</div>
                     <div className={styles.chValue}>{ch.value}</div>
                   </div>
-                  <span className={styles.chArrow} aria-hidden="true">{ch.arrowLabel}</span>
+                  <span className={styles.chArrow} aria-hidden="true">
+                    {ch.arrowLabel}
+                  </span>
                 </a>
               </li>
             ))}

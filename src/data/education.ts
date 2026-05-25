@@ -29,7 +29,7 @@ export const education: EducationItem[] = [
 
 export const heroStats: StatItem[] = [
   { value: 8, suffix: '+', label: 'Years Experience' },
-  { value: 4, suffix: '',  label: 'Companies' },
+  { value: 4, suffix: '', label: 'Companies' },
   { value: 6, suffix: '+', label: 'Major Projects' },
   { value: 'UAE', label: 'Dubai Based' },
 ];

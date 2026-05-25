@@ -13,7 +13,15 @@ const PHRASES = [
   'MERN Stack Developer',
 ];
 
-function StatCounter({ value, suffix, label }: { value: number | string; suffix?: string; label: string }) {
+function StatCounter({
+  value,
+  suffix,
+  label,
+}: {
+  value: number | string;
+  suffix?: string;
+  label: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [triggered, setTriggered] = useState(false);
   const count = useCounter(typeof value === 'number' ? value : 0, 1600, triggered);
@@ -22,7 +30,12 @@ function StatCounter({ value, suffix, label }: { value: number | string; suffix?
     const el = ref.current;
     if (!el || typeof value !== 'number') return;
     const io = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setTriggered(true); io.disconnect(); } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTriggered(true);
+          io.disconnect();
+        }
+      },
       { threshold: 0.6 },
     );
     io.observe(el);
@@ -45,7 +58,7 @@ export default function Hero() {
   return (
     <section id="hero" className={styles.hero} aria-label="Introduction">
       <ParticleCanvas />
-      <div className={styles.grid}      aria-hidden="true" />
+      <div className={styles.grid} aria-hidden="true" />
       <div className={`${styles.blob} ${styles.b1}`} aria-hidden="true" />
       <div className={`${styles.blob} ${styles.b2}`} aria-hidden="true" />
       <div className={`${styles.blob} ${styles.b3}`} aria-hidden="true" />
@@ -72,8 +85,12 @@ export default function Hero() {
         </p>
 
         <div className={styles.cta}>
-          <a href="#experience" className="btn-primary">View My Work ↓</a>
-          <a href="#contact"    className="btn-ghost">Get In Touch</a>
+          <a href="#experience" className="btn-primary">
+            View My Work ↓
+          </a>
+          <a href="#contact" className="btn-ghost">
+            Get In Touch
+          </a>
         </div>
 
         <div className={styles.stats} role="list" aria-label="Career highlights">
@@ -83,7 +100,9 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className={styles.scrollCue} aria-hidden="true">Scroll</div>
+      <div className={styles.scrollCue} aria-hidden="true">
+        Scroll
+      </div>
     </section>
   );
 }

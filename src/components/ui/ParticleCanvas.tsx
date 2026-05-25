@@ -41,7 +41,7 @@ export default function ParticleCanvas() {
     let lastTime = 0;
 
     const resize = () => {
-      canvas.width  = canvas.offsetWidth;
+      canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
       particles = Array.from({ length: PARTICLE_COUNT }, () =>
         makeParticle(canvas.width, canvas.height),

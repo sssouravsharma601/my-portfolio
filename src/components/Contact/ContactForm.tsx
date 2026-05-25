@@ -9,16 +9,15 @@ import styles from './Contact.module.css';
 const EMPTY_FORM: FormData = { name: '', email: '', subject: '', message: '' };
 
 export default function ContactForm() {
-  const [form, setForm]           = useState<FormData>(EMPTY_FORM);
-  const [errors, setErrors]       = useState<FormErrors>({});
-  const [honeypot, setHoneypot]   = useState('');
-  const [sending, setSending]     = useState(false);
-  const [sent, setSent]           = useState(false);
+  const [form, setForm] = useState<FormData>(EMPTY_FORM);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [honeypot, setHoneypot] = useState('');
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
 
   const update =
-    (field: keyof FormData) =>
-    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (field: keyof FormData) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setForm((prev) => ({ ...prev, [field]: e.target.value }));
       // Clear field-level error on change so the user gets immediate feedback
       setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -60,7 +59,9 @@ export default function ContactForm() {
       <div className={styles.success} role="status" aria-live="polite">
         <div className={styles.successIcon}>🎉</div>
         <h3>Message Sent!</h3>
-        <p>Thanks for reaching out. I&apos;ll reply within 24–48 hours to the email you provided.</p>
+        <p>
+          Thanks for reaching out. I&apos;ll reply within 24–48 hours to the email you provided.
+        </p>
         <a href={mailtoHref} className={styles.mailtoLink} rel="noopener noreferrer">
           Or open your email client →
         </a>
@@ -69,17 +70,9 @@ export default function ContactForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      noValidate
-      aria-label="Contact form"
-      className={styles.form}
-    >
+    <form onSubmit={handleSubmit} noValidate aria-label="Contact form" className={styles.form}>
       {/* Honeypot — visually hidden, traps bots that fill every input */}
-      <div
-        aria-hidden="true"
-        style={{ position: 'absolute', left: '-9999px', top: '-9999px' }}
-      >
+      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px' }}>
         <label htmlFor="hp">Leave this blank</label>
         <input
           id="hp"

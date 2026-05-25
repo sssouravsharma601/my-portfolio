@@ -4,8 +4,8 @@ import { useScrollReveal } from '../../hooks/useScrollReveal';
 type Direction = 'up' | 'left' | 'right';
 
 const directionClass: Record<Direction, string> = {
-  up:    'reveal-up',
-  left:  'reveal-left',
+  up: 'reveal-up',
+  left: 'reveal-left',
   right: 'reveal-right',
 };
 

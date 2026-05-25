@@ -16,9 +16,14 @@
   font-size: 0.84rem;
 }
 
-.left strong { color: var(--text2); }
+.left strong {
+  color: var(--text2);
+}
 
-.right { display: flex; gap: 1.2rem; }
+.right {
+  display: flex;
+  gap: 1.2rem;
+}
 
 .link {
   color: var(--muted);
@@ -28,8 +33,13 @@
   transition: color var(--t);
 }
 
-.link:hover { color: var(--primary-light); }
+.link:hover {
+  color: var(--primary-light);
+}
 
 @media (max-width: 768px) {
-  .footer { flex-direction: column; text-align: center; }
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
 }

@@ -2,10 +2,21 @@ import ScrollReveal from '../ui/ScrollReveal';
 import styles from './About.module.css';
 
 const INFO = [
-  { icon: '📍', label: 'Location',  value: 'Dubai, UAE',                href: null },
-  { icon: '✉️', label: 'Email',     value: 'sssouravsharma601@gmail.com', href: 'mailto:sssouravsharma601@gmail.com' },
-  { icon: '📱', label: 'Phone',     value: '+971 589 850 644',           href: 'tel:+971589850644' },
-  { icon: '💼', label: 'LinkedIn',  value: 'sssouravsharma601 ↗',        href: 'https://www.linkedin.com/in/sssouravsharma601/', external: true },
+  { icon: '📍', label: 'Location', value: 'Dubai, UAE', href: null },
+  {
+    icon: '✉️',
+    label: 'Email',
+    value: 'sssouravsharma601@gmail.com',
+    href: 'mailto:sssouravsharma601@gmail.com',
+  },
+  { icon: '📱', label: 'Phone', value: '+971 589 850 644', href: 'tel:+971589850644' },
+  {
+    icon: '💼',
+    label: 'LinkedIn',
+    value: 'sssouravsharma601 ↗',
+    href: 'https://www.linkedin.com/in/sssouravsharma601/',
+    external: true,
+  },
   { icon: '🎓', label: 'Education', value: 'B.Tech Computer Science, 2016', href: null },
 ];
 
@@ -15,7 +26,9 @@ export default function About() {
       <ScrollReveal className="sec-hd">
         <div className="sec-label">About Me</div>
         <h2 className="sec-title">Who I Am</h2>
-        <p className="sec-desc">Bridging engineering depth with product thinking — building software that lasts.</p>
+        <p className="sec-desc">
+          Bridging engineering depth with product thinking — building software that lasts.
+        </p>
       </ScrollReveal>
 
       <div className={styles.grid}>
@@ -39,7 +52,9 @@ export default function About() {
             </p>
           </div>
           <div className={styles.callout}>
-            <span className={styles.calloutIcon} aria-hidden="true">🏦</span>
+            <span className={styles.calloutIcon} aria-hidden="true">
+              🏦
+            </span>
             <div>
               Currently delivering <strong>Decision Management Systems</strong> for real-time loan
               eligibility and credit-card assessment at one of the UAE's largest banks.
@@ -51,7 +66,9 @@ export default function About() {
           <ul className={styles.infoList} role="list" aria-label="Personal info">
             {INFO.map(({ icon, label, value, href, external }) => (
               <li key={label} className={styles.infoItem}>
-                <div className={styles.infoIcon} aria-hidden="true">{icon}</div>
+                <div className={styles.infoIcon} aria-hidden="true">
+                  {icon}
+                </div>
                 <div>
                   <div className={styles.infoLabel}>{label}</div>
                   <div className={styles.infoValue}>

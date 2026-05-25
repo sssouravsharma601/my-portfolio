@@ -1,4 +1,5 @@
-.about {}
+.about {
+}
 
 .grid {
   display: grid;
@@ -14,7 +15,10 @@
   line-height: 1.9;
 }
 
-.text strong { color: var(--text); font-weight: 600; }
+.text strong {
+  color: var(--text);
+  font-weight: 600;
+}
 
 .callout {
   display: flex;
@@ -32,11 +36,21 @@
   line-height: 1.65;
 }
 
-.callout strong { color: var(--cyan); }
-.calloutIcon { font-size: 1.4rem; flex-shrink: 0; }
+.callout strong {
+  color: var(--cyan);
+}
+.calloutIcon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
 
 /* Info list */
-.infoList { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.infoList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
 
 .infoItem {
   display: flex;
@@ -47,7 +61,10 @@
   border-radius: 12px;
   padding: 1.1rem 1.3rem;
   backdrop-filter: blur(12px);
-  transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+  transition:
+    border-color var(--t),
+    transform var(--t),
+    box-shadow var(--t);
 }
 
 .infoItem:hover {
@@ -82,10 +99,20 @@
   font-size: 0.9rem;
 }
 
-.infoValue a { color: var(--primary-light); text-decoration: none; }
-.infoValue a:hover { text-decoration: underline; }
+.infoValue a {
+  color: var(--primary-light);
+  text-decoration: none;
+}
+.infoValue a:hover {
+  text-decoration: underline;
+}
 
 @media (max-width: 768px) {
-  .grid { grid-template-columns: 1fr; gap: 2.8rem; }
-  .infoItem:hover { transform: none; }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2.8rem;
+  }
+  .infoItem:hover {
+    transform: none;
+  }
 }

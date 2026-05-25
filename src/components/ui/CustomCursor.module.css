@@ -31,5 +31,8 @@
 }
 
 @media (max-width: 768px) {
-  .dot, .ring { display: none; }
+  .dot,
+  .ring {
+    display: none;
+  }
 }

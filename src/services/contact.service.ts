@@ -22,8 +22,8 @@ export async function sendContactForm(data: FormData): Promise<SendResult> {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          name:    sanitize(data.name),
-          email:   sanitize(data.email),
+          name: sanitize(data.name),
+          email: sanitize(data.email),
           subject: sanitize(data.subject),
           message: sanitize(data.message),
         }),
@@ -43,15 +43,15 @@ export async function sendContactForm(data: FormData): Promise<SendResult> {
 
   // ── Strategy 2: mailto fallback ──────────────────────────────────────────
   const subject = encodeURIComponent(sanitize(data.subject));
-  const body    = encodeURIComponent(
+  const body = encodeURIComponent(
     `From: ${sanitize(data.name)} <${sanitize(data.email)}>\n\n${sanitize(data.message)}`,
   );
   const href = `mailto:${OWNER_EMAIL}?subject=${subject}&body=${body}`;
 
   // Use a hidden anchor so we don't block on window.open
-  const anchor      = document.createElement('a');
-  anchor.href       = href;
-  anchor.rel        = 'noopener noreferrer';
+  const anchor = document.createElement('a');
+  anchor.href = href;
+  anchor.rel = 'noopener noreferrer';
   anchor.style.display = 'none';
   document.body.appendChild(anchor);
   anchor.click();

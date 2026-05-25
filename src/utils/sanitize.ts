@@ -6,10 +6,7 @@ import { VALIDATION } from '../constants';
  * Safe to call server-side (e.g. Vitest/jsdom) because it detects the DOM
  * absence and falls back to a regex strip.
  */
-export function sanitize(
-  input: string,
-  maxLength: number = VALIDATION.SANITIZE_MAX_LEN,
-): string {
+export function sanitize(input: string, maxLength: number = VALIDATION.SANITIZE_MAX_LEN): string {
   const trimmed = input.trim().slice(0, maxLength);
 
   if (typeof document === 'undefined') {

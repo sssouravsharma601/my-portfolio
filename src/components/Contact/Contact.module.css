@@ -6,7 +6,12 @@
 }
 
 /* Channels */
-.channels { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.channels {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
 
 .channel {
   display: flex;
@@ -19,7 +24,11 @@
   padding: 1rem 1.25rem;
   border-radius: 12px;
   backdrop-filter: blur(12px);
-  transition: border-color var(--t), transform var(--t), box-shadow var(--t), color var(--t);
+  transition:
+    border-color var(--t),
+    transform var(--t),
+    box-shadow var(--t),
+    color var(--t);
 }
 
 .channel:hover {
@@ -42,9 +51,19 @@
   flex-shrink: 0;
 }
 
-.chBody  { flex: 1; }
-.chLabel { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-.chValue { font-weight: 600; font-size: 0.89rem; }
+.chBody {
+  flex: 1;
+}
+.chLabel {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.chValue {
+  font-weight: 600;
+  font-size: 0.89rem;
+}
 
 .chArrow {
   color: var(--muted);
@@ -52,7 +71,9 @@
   font-size: 1rem;
 }
 
-.channel:hover .chArrow { transform: translateX(4px); }
+.channel:hover .chArrow {
+  transform: translateX(4px);
+}
 
 /* Form card */
 .formCard {
@@ -63,10 +84,17 @@
   backdrop-filter: blur(14px);
 }
 
-.formTitle { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.6rem; }
+.formTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.6rem;
+}
 
 /* Form */
-.form { display: flex; flex-direction: column; }
+.form {
+  display: flex;
+  flex-direction: column;
+}
 
 .row {
   display: grid;
@@ -74,7 +102,9 @@
   gap: 1rem;
 }
 
-.group { margin-bottom: 1.1rem; }
+.group {
+  margin-bottom: 1.1rem;
+}
 
 .label {
   display: block;
@@ -96,7 +126,9 @@
   font-size: 0.9rem;
   font-family: var(--font);
   outline: none;
-  transition: border-color var(--t), box-shadow var(--t);
+  transition:
+    border-color var(--t),
+    box-shadow var(--t);
   -webkit-appearance: none;
 }
 
@@ -112,9 +144,14 @@
 }
 
 .input::placeholder,
-.textarea::placeholder { color: var(--muted); }
+.textarea::placeholder {
+  color: var(--muted);
+}
 
-.textarea { min-height: 128px; resize: vertical; }
+.textarea {
+  min-height: 128px;
+  resize: vertical;
+}
 
 .err {
   display: block;
@@ -135,13 +172,24 @@
   font-family: var(--font);
   cursor: pointer;
   box-shadow: 0 4px 22px rgba(99, 102, 241, 0.38);
-  transition: transform var(--t), box-shadow var(--t), opacity var(--t);
+  transition:
+    transform var(--t),
+    box-shadow var(--t),
+    opacity var(--t);
   margin-top: 0.4rem;
 }
 
-.submit:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(99, 102, 241, 0.52); }
-.submit:active { transform: translateY(0); }
-.busy { opacity: 0.75; pointer-events: none; }
+.submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.52);
+}
+.submit:active {
+  transform: translateY(0);
+}
+.busy {
+  opacity: 0.75;
+  pointer-events: none;
+}
 
 /* Success */
 .success {
@@ -149,9 +197,20 @@
   padding: 2.5rem 1rem;
 }
 
-.successIcon { font-size: 3.2rem; margin-bottom: 1rem; }
-.success h3  { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.6rem; }
-.success p   { color: var(--text2); font-size: 0.9rem; line-height: 1.7; }
+.successIcon {
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+}
+.success h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.success p {
+  color: var(--text2);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
 
 .mailtoLink {
   display: inline-block;
@@ -161,17 +220,36 @@
   text-decoration: none;
 }
 
-.mailtoLink:hover { text-decoration: underline; }
+.mailtoLink:hover {
+  text-decoration: underline;
+}
 
 @media (max-width: 1024px) {
-  .grid { grid-template-columns: 1fr; }
-  .channels { flex-direction: row; flex-wrap: wrap; }
-  .channels li { flex: 1; min-width: 200px; }
-  .channel:hover { transform: none; }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .channels {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .channels li {
+    flex: 1;
+    min-width: 200px;
+  }
+  .channel:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 768px) {
-  .row { grid-template-columns: 1fr; }
-  .formCard { padding: 1.6rem; }
-  .channels li { flex: none; width: 100%; }
+  .row {
+    grid-template-columns: 1fr;
+  }
+  .formCard {
+    padding: 1.6rem;
+  }
+  .channels li {
+    flex: none;
+    width: 100%;
+  }
 }

@@ -12,11 +12,14 @@
   backdrop-filter: blur(12px);
   position: relative;
   overflow: hidden;
-  transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+  transition:
+    border-color var(--t),
+    transform var(--t),
+    box-shadow var(--t);
 }
 
 .card::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -34,13 +37,33 @@
   box-shadow: var(--glow);
 }
 
-.card:hover::after { transform: scaleX(1); }
+.card:hover::after {
+  transform: scaleX(1);
+}
 
-.icon   { font-size: 2rem; display: block; margin-bottom: 1rem; }
-.degree { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.38rem; }
-.school { color: var(--primary-light); font-size: 0.88rem; font-weight: 500; margin-bottom: 1rem; }
+.icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+.degree {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.38rem;
+}
+.school {
+  color: var(--primary-light);
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
 
-.meta { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.meta {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
 
 .badge {
   background: var(--tag-bg);
@@ -53,6 +76,6 @@
 
 .highlight {
   color: var(--cyan);
-  border-color: rgba(34, 211, 238, .22);
-  background: rgba(34, 211, 238, .08);
+  border-color: rgba(34, 211, 238, 0.22);
+  background: rgba(34, 211, 238, 0.08);
 }

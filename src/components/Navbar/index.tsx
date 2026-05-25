@@ -8,9 +8,9 @@ const SECTION_IDS = [...NAV_LINKS];
 
 export default function Navbar() {
   const { theme, toggle } = useThemeContext();
-  const [menuOpen, setMenuOpen]   = useState(false);
-  const [scrolled, setScrolled]   = useState(false);
-  const activeSection             = useActiveSection(SECTION_IDS);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const activeSection = useActiveSection(SECTION_IDS);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -30,7 +30,9 @@ export default function Navbar() {
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [menuOpen]);
 
   const close = () => setMenuOpen(false);
@@ -44,7 +46,9 @@ export default function Navbar() {
       >
         {/* Logo */}
         <a href="#hero" className={styles.logo} aria-label="Sourav Sharma — home">
-          <div className={styles.logoBadge} aria-hidden="true">SS</div>
+          <div className={styles.logoBadge} aria-hidden="true">
+            SS
+          </div>
           <span className={styles.logoName}>Sourav Sharma</span>
         </a>
 
@@ -88,7 +92,9 @@ export default function Navbar() {
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
         >
-          <span /><span /><span />
+          <span />
+          <span />
+          <span />
         </button>
       </nav>
 
@@ -106,11 +112,7 @@ export default function Navbar() {
             {id.charAt(0).toUpperCase() + id.slice(1)}
           </a>
         ))}
-        <a
-          href="mailto:sssouravsharma601@gmail.com"
-          className={styles.mobileHire}
-          onClick={close}
-        >
+        <a href="mailto:sssouravsharma601@gmail.com" className={styles.mobileHire} onClick={close}>
           Hire Me →
         </a>
       </div>

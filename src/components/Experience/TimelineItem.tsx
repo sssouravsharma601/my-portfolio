@@ -2,7 +2,9 @@ import type { ExperienceItem } from '../../types';
 import ScrollReveal from '../ui/ScrollReveal';
 import styles from './Experience.module.css';
 
-interface Props { item: ExperienceItem; }
+interface Props {
+  item: ExperienceItem;
+}
 
 export default function TimelineItem({ item }: Props) {
   return (
@@ -14,11 +16,15 @@ export default function TimelineItem({ item }: Props) {
             <div className={styles.role}>{item.role}</div>
             <div className={styles.company}>{item.company}</div>
           </div>
-          <span className={styles.period}>{item.period} · {item.duration}</span>
+          <span className={styles.period}>
+            {item.period} · {item.duration}
+          </span>
         </div>
 
         <ul className={styles.bullets} aria-label="Responsibilities">
-          {item.bullets.map((b, i) => <li key={i}>{b}</li>)}
+          {item.bullets.map((b, i) => (
+            <li key={i}>{b}</li>
+          ))}
         </ul>
 
         <div className={styles.project}>
@@ -28,7 +34,9 @@ export default function TimelineItem({ item }: Props) {
           <p className={styles.projectDesc}>{item.project.description}</p>
           <div className={styles.tags}>
             {item.project.tech.map((t) => (
-              <span key={t} className="tag">{t}</span>
+              <span key={t} className="tag">
+                {t}
+              </span>
             ))}
           </div>
         </div>

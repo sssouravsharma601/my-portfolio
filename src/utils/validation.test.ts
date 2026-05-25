@@ -1,10 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  isValidEmail,
-  isMinLength,
-  isNonEmpty,
-  validateContactForm,
-} from './validation';
+import { isValidEmail, isMinLength, isNonEmpty, validateContactForm } from './validation';
 
 // ── isValidEmail ──────────────────────────────────────────────────────────────
 
@@ -89,8 +84,8 @@ describe('isNonEmpty', () => {
 
 describe('validateContactForm', () => {
   const valid = {
-    name:    'Sourav Sharma',
-    email:   'user@example.com',
+    name: 'Sourav Sharma',
+    email: 'user@example.com',
     subject: 'Hello there',
     message: 'This is a test message long enough.',
   };
@@ -122,8 +117,8 @@ describe('validateContactForm', () => {
 
   it('can report multiple errors simultaneously', () => {
     const result = validateContactForm({
-      name:    '',
-      email:   '',
+      name: '',
+      email: '',
       subject: '',
       message: '',
     });
