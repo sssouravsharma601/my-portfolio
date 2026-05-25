@@ -1,0 +1,248 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--nav-h) + 5rem) 6% 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(100px);
+  animation: floatBlob 10s ease-in-out infinite;
+}
+
+.b1 {
+  width: 750px;
+  height: 750px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.16), transparent 68%);
+  top: -220px;
+  right: -180px;
+  animation-delay: 0s;
+}
+.b2 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.1), transparent 68%);
+  bottom: -160px;
+  left: -140px;
+  animation-delay: -5s;
+}
+.b3 {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.08), transparent 68%);
+  top: 35%;
+  left: 28%;
+  animation-delay: -2.5s;
+}
+
+@keyframes floatBlob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(18px, -22px) scale(1.04);
+  }
+  66% {
+    transform: translate(-12px, 14px) scale(0.97);
+  }
+}
+
+/* Content */
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  padding: 0.38rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  color: var(--primary-light);
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  margin-bottom: 1.6rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.5);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+    box-shadow: 0 0 0 7px rgba(34, 211, 238, 0);
+  }
+}
+
+.name {
+  font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+  font-weight: 900;
+  letter-spacing: -3px;
+  line-height: 1.03;
+  margin-bottom: 0.6rem;
+}
+
+.role {
+  font-size: clamp(1.15rem, 2.8vw, 1.75rem);
+  font-weight: 600;
+  color: var(--text2);
+  letter-spacing: -0.5px;
+  min-height: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2.5px;
+  height: 1.1em;
+  background: var(--primary);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.desc {
+  font-size: 1.08rem;
+  color: var(--text2);
+  max-width: 580px;
+  line-height: 1.85;
+  margin-bottom: 2.4rem;
+}
+
+.desc strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+/* Stats */
+.stats {
+  display: flex;
+  gap: 2.8rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 2.4rem;
+}
+
+.stat {
+  cursor: default;
+}
+
+.statNum {
+  font-size: 2.3rem;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--primary-light), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Scroll cue */
+.scrollCue {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  z-index: 1;
+  animation: cueFloat 2.4s ease-in-out infinite;
+}
+
+.scrollCue::after {
+  content: "";
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(var(--primary), transparent);
+}
+
+@keyframes cueFloat {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-6px);
+  }
+}
+
+@media (max-width: 480px) {
+  .cta {
+    flex-direction: column;
+  }
+  .name {
+    letter-spacing: -2px;
+  }
+  .stats {
+    gap: 1.6rem;
+  }
+}

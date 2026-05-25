@@ -1,0 +1,282 @@
+/* ═══════════════════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════════════════ */
+:root {
+  /* Brand */
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #818cf8;
+  --cyan: #22d3ee;
+  --red: #ef4444;
+
+  /* Dark theme (default) */
+  --bg: #05050f;
+  --bg2: #090918;
+  --bg3: #0d0d22;
+  --card: rgba(12, 12, 28, 0.85);
+  --border: rgba(99, 102, 241, 0.14);
+  --border-h: rgba(99, 102, 241, 0.42);
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --muted: #64748b;
+  --tag-bg: rgba(99, 102, 241, 0.1);
+
+  /* Effects */
+  --glow: 0 0 60px rgba(99, 102, 241, 0.18);
+  --glow-lg: 0 0 100px rgba(99, 102, 241, 0.32);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+
+  /* Typography */
+  --font: "Inter", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", "Courier New", monospace;
+
+  /* Layout */
+  --nav-h: 68px;
+  --section-pad: 6.5rem 6%;
+
+  /* Motion */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --t: 0.28s;
+}
+
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --bg2: #f1f5f9;
+  --bg3: #e8eef6;
+  --card: rgba(255, 255, 255, 0.9);
+  --border: rgba(99, 102, 241, 0.18);
+  --border-h: rgba(99, 102, 241, 0.5);
+  --text: #0f172a;
+  --text2: #475569;
+  --muted: #94a3b8;
+  --tag-bg: rgba(99, 102, 241, 0.07);
+  --glow: 0 0 60px rgba(99, 102, 241, 0.1);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition:
+    background var(--t),
+    color var(--t);
+}
+
+/* ── Noise overlay ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--primary), var(--cyan));
+  border-radius: 10px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SHARED UTILITIES
+═══════════════════════════════════════════════════════════ */
+.section {
+  padding: var(--section-pad);
+  position: relative;
+}
+
+.alt-bg {
+  background: var(--bg2);
+}
+
+/* Section header */
+.sec-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--primary-light);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.sec-label::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, var(--primary), var(--cyan));
+}
+
+.sec-title {
+  font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.14;
+}
+
+.sec-desc {
+  color: var(--text2);
+  max-width: 540px;
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.82;
+}
+
+.sec-hd {
+  margin-bottom: 3.8rem;
+}
+
+/* Gradient text */
+.grad {
+  background: linear-gradient(135deg, #fff 0%, var(--primary-light) 45%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .grad {
+  background: linear-gradient(135deg, #1e1b4b 0%, var(--primary) 45%, #0e7490 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  padding: 0.82rem 1.9rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--font);
+  box-shadow: 0 4px 26px rgba(99, 102, 241, 0.42);
+  transition:
+    transform var(--t) var(--ease),
+    box-shadow var(--t);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(99, 102, 241, 0.55);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  padding: 0.82rem 1.9rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font);
+  transition:
+    border-color var(--t),
+    background var(--t),
+    transform var(--t);
+}
+
+.btn-ghost:hover {
+  border-color: var(--primary);
+  background: var(--tag-bg);
+  transform: translateY(-2px);
+}
+
+/* Tech / skill tags */
+.tag {
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  color: var(--primary-light);
+  font-size: 0.71rem;
+  padding: 0.18rem 0.62rem;
+  border-radius: 4px;
+  font-family: var(--mono);
+  letter-spacing: 0.3px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════════ */
+.reveal-up,
+.reveal-left,
+.reveal-right {
+  transition:
+    opacity 0.65s var(--ease),
+    transform 0.65s var(--ease);
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.reveal-up.revealed,
+.reveal-left.revealed,
+.reveal-right.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root {
+    --section-pad: 4.5rem 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-pad: 4rem 4%;
+  }
+}
