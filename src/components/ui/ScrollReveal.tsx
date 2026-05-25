@@ -1,5 +1,4 @@
-import { createElement } from 'react';
-import type { ComponentPropsWithoutRef, ElementType } from 'react';
+import { createElement, type ComponentPropsWithoutRef, type ElementType } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 
 type Direction = 'up' | 'left' | 'right';
