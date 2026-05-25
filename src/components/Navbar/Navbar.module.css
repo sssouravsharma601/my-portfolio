@@ -36,16 +36,28 @@
 .logoBadge {
   width: 36px;
   height: 36px;
-  border-radius: var(--radius-sm);
-  background: var(--primary);
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #07111e;
   flex-shrink: 0;
+  transition:
+    border-color var(--t),
+    box-shadow var(--t);
+}
+
+.logo:hover .logoBadge {
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.logoAvatar {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
 .logoName {

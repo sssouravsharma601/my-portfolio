@@ -1,18 +1,191 @@
 .about {
 }
 
+/* ── Two-column layout: photo | content ────────────────── */
 .grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 340px 1fr;
   gap: 5rem;
   align-items: start;
 }
 
+/* ── Photo column ───────────────────────────────────────── */
+.photoCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.photoWrap {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0;
+}
+
+/* Teal corner accents — decorative */
+.corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cornerTL {
+  top: -6px;
+  left: -6px;
+  border-top: 2.5px solid var(--primary);
+  border-left: 2.5px solid var(--primary);
+  border-radius: 3px 0 0 0;
+}
+
+.cornerBR {
+  bottom: -6px;
+  right: -6px;
+  border-bottom: 2.5px solid var(--primary);
+  border-right: 2.5px solid var(--primary);
+  border-radius: 0 0 3px 0;
+}
+
+.photo {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  display: block;
+  transition: border-color var(--t);
+  filter: grayscale(8%);
+}
+
+.photoWrap:hover .photo {
+  border-color: var(--primary);
+  filter: none;
+}
+
+/* Subtle glow behind photo */
+.photoWrap::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--radius) + 2px);
+  background: var(--primary-glow);
+  opacity: 0;
+  transition: opacity var(--t);
+  z-index: -1;
+}
+
+.photoWrap:hover::before {
+  opacity: 1;
+}
+
+/* Availability badge — floating bottom-left */
+.availBadge {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.3rem 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--primary);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.availDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.75);
+  }
+}
+
+/* Stat chips below photo */
+.chips {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1rem;
+  min-width: 72px;
+  transition:
+    border-color var(--t),
+    transform var(--t);
+  cursor: default;
+}
+
+.chip:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.chipNum {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.chipLabel {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 0.2rem;
+}
+
+/* ── Content column ─────────────────────────────────────── */
+.contentCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .text p {
   color: var(--text-2);
-  margin-bottom: 1.3rem;
+  margin-bottom: 1.2rem;
   font-size: 1rem;
   line-height: 1.9;
+}
+
+.text p:last-child {
+  margin-bottom: 0;
 }
 
 .text strong {
@@ -29,7 +202,6 @@
   border-left: 3px solid var(--primary);
   border-radius: var(--radius-sm);
   padding: 1rem 1.25rem;
-  margin-top: 1.8rem;
   font-size: 0.9rem;
   color: var(--text-2);
   line-height: 1.7;
@@ -38,27 +210,29 @@
 .callout strong {
   color: var(--primary);
 }
+
 .calloutIcon {
   font-size: 1.3rem;
   flex-shrink: 0;
   line-height: 1.5;
 }
 
+/* ── Info list ──────────────────────────────────────────── */
 .infoList {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
 }
 
 .infoItem {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 1rem 1.2rem;
+  padding: 0.85rem 1rem;
   transition:
     border-color var(--t),
     transform var(--t);
@@ -66,25 +240,30 @@
 
 .infoItem:hover {
   border-color: var(--primary);
-  transform: translateX(4px);
+  transform: translateX(3px);
+}
+
+/* LinkedIn item spans full width */
+.infoItem:nth-child(4) {
+  grid-column: 1 / -1;
 }
 
 .infoIcon {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border-radius: var(--radius-sm);
   background: var(--primary-dim);
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 0.95rem;
   flex-shrink: 0;
 }
 
 .infoLabel {
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -93,7 +272,7 @@
 .infoValue {
   font-weight: 600;
   color: var(--text);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
 }
 
 .infoValue a {
@@ -105,11 +284,52 @@
   text-decoration: underline;
 }
 
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 280px 1fr;
+    gap: 3.5rem;
+  }
+
+  .photoWrap {
+    width: 260px;
+    height: 260px;
+  }
+
+  .photo {
+    width: 260px;
+    height: 260px;
+  }
+}
+
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 3rem;
   }
+
+  .photoCol {
+    align-items: center;
+  }
+
+  .photoWrap {
+    width: 220px;
+    height: 220px;
+  }
+
+  .photo {
+    width: 220px;
+    height: 220px;
+  }
+
+  .infoList {
+    grid-template-columns: 1fr;
+  }
+
+  .infoItem:nth-child(4) {
+    grid-column: auto;
+  }
+
   .infoItem:hover {
     transform: none;
   }
