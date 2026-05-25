@@ -13,7 +13,7 @@ const INFO = [
   {
     icon: '💼',
     label: 'LinkedIn',
-    value: 'sssouravsharma601 ↗',
+    value: 'linkedin/sssouravsharma601 ↗',
     href: 'https://www.linkedin.com/in/sssouravsharma601/',
     external: true,
   },
@@ -32,7 +32,48 @@ export default function About() {
       </ScrollReveal>
 
       <div className={styles.grid}>
-        <ScrollReveal direction="left">
+        {/* ── Left: photo card ─────────────────────────────── */}
+        <ScrollReveal direction="left" className={styles.photoCol}>
+          <div className={styles.photoWrap}>
+            {/* Decorative corner accents */}
+            <span className={`${styles.corner} ${styles.cornerTL}`} aria-hidden="true" />
+            <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
+
+            <img
+              src="/avatar.jpg"
+              alt="Sourav Sharma — Senior Frontend Engineer"
+              className={styles.photo}
+              width={320}
+              height={320}
+              loading="lazy"
+            />
+
+            {/* Availability badge */}
+            <div className={styles.availBadge} aria-label="Open to opportunities">
+              <span className={styles.availDot} aria-hidden="true" />
+              Open to opportunities
+            </div>
+          </div>
+
+          {/* Quick stat chips below photo */}
+          <div className={styles.chips}>
+            <div className={styles.chip}>
+              <span className={styles.chipNum}>8+</span>
+              <span className={styles.chipLabel}>Years exp.</span>
+            </div>
+            <div className={styles.chip}>
+              <span className={styles.chipNum}>15+</span>
+              <span className={styles.chipLabel}>Projects</span>
+            </div>
+            <div className={styles.chip}>
+              <span className={styles.chipNum}>4</span>
+              <span className={styles.chipLabel}>Industries</span>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* ── Right: bio + info ─────────────────────────────── */}
+        <ScrollReveal direction="right" className={styles.contentCol}>
           <div className={styles.text}>
             <p>
               I'm a <strong>Senior Associate at Synechron Technologies</strong>, embedded on-site at{' '}
@@ -51,6 +92,7 @@ export default function About() {
               <strong>MERN stack</strong>.
             </p>
           </div>
+
           <div className={styles.callout}>
             <span className={styles.calloutIcon} aria-hidden="true">
               🏦
@@ -60,9 +102,7 @@ export default function About() {
               eligibility and credit-card assessment at one of the UAE's largest banks.
             </div>
           </div>
-        </ScrollReveal>
 
-        <ScrollReveal direction="right">
           <ul className={styles.infoList} role="list" aria-label="Personal info">
             {INFO.map(({ icon, label, value, href, external }) => (
               <li key={label} className={styles.infoItem}>

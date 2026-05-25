@@ -46,8 +46,15 @@ export default function Navbar() {
       >
         {/* Logo */}
         <a href="#hero" className={styles.logo} aria-label="Sourav Sharma — home">
-          <div className={styles.logoBadge} aria-hidden="true">
-            SS
+          <div className={styles.logoBadge}>
+            <img
+              src="/avatar.jpg"
+              alt=""
+              aria-hidden="true"
+              className={styles.logoAvatar}
+              width={36}
+              height={36}
+            />
           </div>
           <span className={styles.logoName}>Sourav Sharma</span>
         </a>
