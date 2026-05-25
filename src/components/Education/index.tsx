@@ -6,7 +6,7 @@ export default function Education() {
   return (
     <section id="education" className="section" aria-label="Education">
       <ScrollReveal className="sec-hd">
-        <div className="sec-label">Academic</div>
+        <span className="sec-label">04 — Education</span>
         <h2 className="sec-title">Education</h2>
         <p className="sec-desc">
           Solid computer-science foundation built across three institutions in Punjab, India.

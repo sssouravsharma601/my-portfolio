@@ -24,7 +24,7 @@ export default function About() {
   return (
     <section id="about" className={`section alt-bg ${styles.about}`} aria-label="About">
       <ScrollReveal className="sec-hd">
-        <div className="sec-label">About Me</div>
+        <span className="sec-label">02 — About</span>
         <h2 className="sec-title">Who I Am</h2>
         <p className="sec-desc">
           Bridging engineering depth with product thinking — building software that lasts.
