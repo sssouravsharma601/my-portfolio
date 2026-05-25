@@ -1,0 +1,177 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.55fr;
+  gap: 4.5rem;
+  align-items: start;
+}
+
+/* Channels */
+.channels { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+
+.channel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  transition: border-color var(--t), transform var(--t), box-shadow var(--t), color var(--t);
+}
+
+.channel:hover {
+  border-color: var(--border-h);
+  transform: translateX(5px);
+  box-shadow: var(--glow);
+  color: var(--primary-light);
+}
+
+.chIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.chBody  { flex: 1; }
+.chLabel { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.chValue { font-weight: 600; font-size: 0.89rem; }
+
+.chArrow {
+  color: var(--muted);
+  transition: transform var(--t);
+  font-size: 1rem;
+}
+
+.channel:hover .chArrow { transform: translateX(4px); }
+
+/* Form card */
+.formCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  backdrop-filter: blur(14px);
+}
+
+.formTitle { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.6rem; }
+
+/* Form */
+.form { display: flex; flex-direction: column; }
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.group { margin-bottom: 1.1rem; }
+
+.label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text2);
+  margin-bottom: 0.42rem;
+  letter-spacing: 0.2px;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.72rem 1rem;
+  font-size: 0.9rem;
+  font-family: var(--font);
+  outline: none;
+  transition: border-color var(--t), box-shadow var(--t);
+  -webkit-appearance: none;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.16);
+}
+
+.inputErr {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.input::placeholder,
+.textarea::placeholder { color: var(--muted); }
+
+.textarea { min-height: 128px; resize: vertical; }
+
+.err {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--red);
+  margin-top: 0.3rem;
+}
+
+.submit {
+  width: 100%;
+  padding: 0.88rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--font);
+  cursor: pointer;
+  box-shadow: 0 4px 22px rgba(99, 102, 241, 0.38);
+  transition: transform var(--t), box-shadow var(--t), opacity var(--t);
+  margin-top: 0.4rem;
+}
+
+.submit:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(99, 102, 241, 0.52); }
+.submit:active { transform: translateY(0); }
+.busy { opacity: 0.75; pointer-events: none; }
+
+/* Success */
+.success {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.successIcon { font-size: 3.2rem; margin-bottom: 1rem; }
+.success h3  { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.6rem; }
+.success p   { color: var(--text2); font-size: 0.9rem; line-height: 1.7; }
+
+.mailtoLink {
+  display: inline-block;
+  margin-top: 1.2rem;
+  color: var(--primary-light);
+  font-size: 0.86rem;
+  text-decoration: none;
+}
+
+.mailtoLink:hover { text-decoration: underline; }
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; }
+  .channels { flex-direction: row; flex-wrap: wrap; }
+  .channels li { flex: 1; min-width: 200px; }
+  .channel:hover { transform: none; }
+}
+
+@media (max-width: 768px) {
+  .row { grid-template-columns: 1fr; }
+  .formCard { padding: 1.6rem; }
+  .channels li { flex: none; width: 100%; }
+}

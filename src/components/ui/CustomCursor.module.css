@@ -1,0 +1,35 @@
+.dot,
+.ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--primary);
+  transition: transform 0.08s;
+}
+
+.ring {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid rgba(99, 102, 241, 0.5);
+  transition:
+    width var(--t) var(--ease),
+    height var(--t) var(--ease),
+    border-color var(--t);
+}
+
+.ringExpanded {
+  width: 58px;
+  height: 58px;
+  border-color: rgba(99, 102, 241, 0.75);
+}
+
+@media (max-width: 768px) {
+  .dot, .ring { display: none; }
+}
