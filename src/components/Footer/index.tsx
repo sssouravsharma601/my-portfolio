@@ -1,10 +1,12 @@
 import styles from './Footer.module.css';
 
+const YEAR = new Date().getFullYear();
+
 export default function Footer() {
   return (
     <footer className={styles.footer} role="contentinfo">
       <div className={styles.left}>
-        © 2025 <strong>Sourav Sharma</strong> · Built with ❤️ in Dubai, UAE
+        © {YEAR} <strong>Sourav Sharma</strong> · Designed &amp; built by me, in Dubai, UAE
       </div>
       <div className={styles.right}>
         <a href="#hero" className={styles.link}>
