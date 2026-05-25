@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { NAV_SECTION_OFFSET_PX } from '../constants';
 
 export function useActiveSection(sectionIds: string[]): string {
   const [active, setActive] = useState<string>('');
@@ -9,7 +10,7 @@ export function useActiveSection(sectionIds: string[]): string {
       let current = '';
       for (const id of sectionIds) {
         const el = document.getElementById(id);
-        if (el && scrollY >= el.offsetTop - 130) {
+        if (el && scrollY >= el.offsetTop - NAV_SECTION_OFFSET_PX) {
           current = id;
         }
       }
@@ -17,7 +18,7 @@ export function useActiveSection(sectionIds: string[]): string {
     };
 
     window.addEventListener('scroll', handler, { passive: true });
-    handler(); // run once on mount
+    handler(); // run once on mount to set initial state
     return () => window.removeEventListener('scroll', handler);
   }, [sectionIds]);
 

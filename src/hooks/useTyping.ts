@@ -1,13 +1,18 @@
 import { useState, useEffect } from 'react';
+import { TYPING_SPEED_MS, DELETING_SPEED_MS } from '../constants';
 
-export function useTyping(phrases: string[], typingSpeed = 75, deletingSpeed = 45): string {
+export function useTyping(
+  phrases: string[],
+  typingSpeed: number = TYPING_SPEED_MS,
+  deletingSpeed: number = DELETING_SPEED_MS,
+): string {
   const [displayed, setDisplayed] = useState('');
   const [phraseIdx, setPhraseIdx] = useState(0);
-  const [charIdx, setCharIdx] = useState(0);
+  const [charIdx, setCharIdx]     = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const phrase = phrases[phraseIdx];
+    const phrase = phrases[phraseIdx] ?? '';
 
     const timeout = setTimeout(
       () => {
@@ -17,7 +22,7 @@ export function useTyping(phrases: string[], typingSpeed = 75, deletingSpeed = 4
           setCharIdx(next);
 
           if (next === phrase.length) {
-            // Pause then start deleting
+            // Pause before starting to delete
             setTimeout(() => setIsDeleting(true), 2400);
           }
         } else {

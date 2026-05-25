@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { SCROLL_REVEAL_THRESHOLD, SCROLL_REVEAL_ROOT_MARGIN } from '../constants';
 
 interface Options {
   threshold?: number;
@@ -15,7 +16,7 @@ export function useScrollReveal<T extends HTMLElement>(opts: Options = {}) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           setTimeout(() => {
             el.classList.add('revealed');
           }, opts.delay ?? 0);
@@ -23,8 +24,8 @@ export function useScrollReveal<T extends HTMLElement>(opts: Options = {}) {
         }
       },
       {
-        threshold: opts.threshold ?? 0.1,
-        rootMargin: opts.rootMargin ?? '0px 0px -35px 0px',
+        threshold: opts.threshold ?? SCROLL_REVEAL_THRESHOLD,
+        rootMargin: opts.rootMargin ?? SCROLL_REVEAL_ROOT_MARGIN,
       },
     );
 

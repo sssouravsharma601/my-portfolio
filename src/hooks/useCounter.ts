@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
+import { COUNTER_DURATION_MS } from '../constants';
 
-export function useCounter(target: number, duration = 1600, trigger: boolean): number {
+export function useCounter(
+  target: number,
+  duration: number = COUNTER_DURATION_MS,
+  trigger: boolean,
+): number {
   const [count, setCount] = useState(0);
   const rafRef = useRef<number | null>(null);
 
@@ -11,7 +16,7 @@ export function useCounter(target: number, duration = 1600, trigger: boolean): n
 
     const step = (now: number) => {
       const progress = Math.min((now - startTime) / duration, 1);
-      // ease-out-cubic
+      // ease-out-cubic: decelerates as it approaches the target
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
       if (progress < 1) {
