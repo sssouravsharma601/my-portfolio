@@ -3,25 +3,24 @@
   bottom: 2rem;
   right: 2rem;
   z-index: 900;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: #fff;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: #07111e;
   border: none;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 22px rgba(99, 102, 241, 0.42);
   opacity: 0;
   pointer-events: none;
-  transform: translateY(12px);
+  transform: translateY(10px);
   transition:
     opacity var(--t),
     transform var(--t) var(--ease),
-    box-shadow var(--t);
+    filter var(--t);
 }
 
 .visible {
@@ -31,6 +30,6 @@
 }
 
 .btn:hover {
+  filter: brightness(1.12);
   transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.6);
 }

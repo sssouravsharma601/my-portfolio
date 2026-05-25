@@ -7,7 +7,7 @@ export default function Contact() {
   return (
     <section id="contact" className="section alt-bg" aria-label="Contact">
       <ScrollReveal className="sec-hd">
-        <div className="sec-label">Let's Talk</div>
+        <span className="sec-label">05 — Contact</span>
         <h2 className="sec-title">Get In Touch</h2>
         <p className="sec-desc">
           Open to senior frontend and full-stack roles in the UAE and remotely.

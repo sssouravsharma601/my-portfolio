@@ -7,7 +7,7 @@ export default function Experience() {
   return (
     <section id="experience" className="section" aria-label="Work experience">
       <ScrollReveal className="sec-hd">
-        <div className="sec-label">Career</div>
+        <span className="sec-label">01 — Experience</span>
         <h2 className="sec-title">Work Experience</h2>
         <p className="sec-desc">
           8+ years across fintech, edtech, e-commerce, and ad-tech — always building at scale.
