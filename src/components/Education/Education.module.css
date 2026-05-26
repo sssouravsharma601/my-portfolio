@@ -5,39 +5,40 @@
 }
 
 .card {
-  background: var(--surface);
+  background: var(--bg-alt);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.6rem;
+  padding: 1.8rem;
   border-left: 3px solid transparent;
-  transition:
-    border-color var(--t),
-    transform var(--t);
+  transition: border-color var(--t), transform var(--t) var(--ease), box-shadow var(--t);
 }
 
 .card:hover {
   border-left-color: var(--primary);
+  border-color: var(--border-h);
   transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
 }
 
 .icon {
-  font-size: 1.8rem;
   display: block;
   margin-bottom: 1rem;
+  color: var(--primary);
 }
 
 .degree {
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 0.35rem;
+  letter-spacing: -0.3px;
 }
 
 .school {
   color: var(--primary);
-  font-size: 0.86rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
 }
 
 .meta {
@@ -49,15 +50,15 @@
 .badge {
   background: var(--tag-bg);
   border: 1px solid var(--border);
-  color: var(--muted);
+  color: var(--text-2);
   font-family: var(--mono);
   font-size: 0.72rem;
-  padding: 0.18rem 0.62rem;
+  padding: 0.2rem 0.65rem;
   border-radius: 4px;
 }
 
 .highlight {
   color: var(--primary);
-  border-color: rgba(0, 197, 199, 0.25);
-  background: rgba(0, 197, 199, 0.07);
+  border-color: rgba(var(--primary-rgb), 0.25);
+  background: var(--primary-dim);
 }

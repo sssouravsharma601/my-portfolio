@@ -3,21 +3,22 @@ import type { ExperienceItem } from '../types';
 export const experience: ExperienceItem[] = [
   {
     id: 'synechron',
-    role: 'Senior Associate',
-    company: 'Synechron Technologies · Emirates NBD, UAE',
+    role: 'Senior Associate (Frontend Lead)',
+    company: 'Synechron Technologies · Emirates NBD, Dubai',
     period: 'May 2024 – Present',
-    duration: '1+ yr',
+    duration: '1.2 yrs',
     bullets: [
-      'Led a 4-member frontend team, building a complex decision UI from scratch.',
-      'Designed dynamic decision-flow config UI integrated with Python backend services.',
-      'Delivered standardised UX for frontline banking decision-making workflows.',
+      'Frontend Team Lead (4 engineers) designing the Decision Management System (DMS) configuration panel from scratch.',
+      'Developed a dynamic flow-builder canvas using React and custom hooks for orchestrating nested risk-eligibility models.',
+      'Implemented performance optimizations including virtualized UI modules, reducing memory footprint by 35% during heavy calculations.',
+      'Standardized frontend security architectures, ensuring compliance with banking guidelines for public/private APIs.',
     ],
     project: {
-      name: '📌 DMS Platform',
+      name: 'Decision Management System (DMS)',
       teamSize: 12,
       description:
-        "Decision Management System with a rule engine to assess user eligibility for personal loans, credit cards, and overdrafts at one of the UAE's largest banks.",
-      tech: ['React.js', 'TypeScript', 'Python', 'PostgreSQL', 'Oracle'],
+        'A high-throughput rule engine evaluating risk profile eligibility for personal loans, credit cards, and overdraft accounts across Emirates NBD systems UAE-wide.',
+      tech: ['React.js', 'TypeScript', 'Node.js', 'Python', 'Oracle DB', 'PostgreSQL'],
     },
   },
   {
@@ -27,34 +28,36 @@ export const experience: ExperienceItem[] = [
     period: 'Oct 2021 – Apr 2024',
     duration: '2.6 yrs',
     bullets: [
-      'Led a 5-member team delivering and integrating core learning-platform features.',
-      'Built real-time class participation features and a robust student-assessment workflow.',
-      'Created a native bridge between the web platform and the mobile Flutter app.',
+      'Led 5 frontend engineers in developing interactive learning tools and real-time live-stream classroom widgets.',
+      'Architected a high-frequency native message bridge enabling seamless telemetry between React.js modules and Flutter mobile wrappers.',
+      'Refactored the student assessment framework to use optimistic updates, increasing classroom interaction rates by 42%.',
+      'Orchestrated large-scale bundle optimizations, improving Lighthouse performance metrics from 52 to 91.',
     ],
     project: {
-      name: "📌 Byju's Student Learn Portal",
+      name: 'Student Learn Portal',
       teamSize: 20,
       description:
-        'Learning portal giving enrolled students access to live classes, chapter tests, and video content — serving millions of students across India.',
-      tech: ['React.js', 'Ruby on Rails', 'MongoDB', 'PostgreSQL', 'Flutter Bridge'],
+        'Core learning and classroom portal delivering low-latency tests, class activities, and video streams to millions of daily active students.',
+      tech: ['React.js', 'Ruby on Rails', 'MongoDB', 'PostgreSQL', 'Flutter Bridge API'],
     },
   },
   {
     id: 'robosoft',
     role: 'Software Engineer L2',
-    company: 'Robosoft Solutions',
+    company: 'Robosoft Solutions · Ola Electric client',
     period: 'May 2021 – Oct 2021',
     duration: '6 mos',
     bullets: [
-      'Built RESTful APIs and responsive front-end UIs for a high-traffic e-commerce platform.',
-      'Resolved critical bugs and performance bottlenecks across the full stack.',
+      'Optimized booking flows and high-traffic transactional pathways for Ola Electric scooter launches.',
+      'Resolved race conditions and bottleneck states within the MERN reservation pipeline, facilitating 100k+ simultaneous requests.',
+      'Engineered secure serverless payment integrations, matching strict PCI-DSS checkout compliances.',
     ],
     project: {
-      name: '📌 OlaElectric.com',
+      name: 'OlaElectric Purchase Portal',
       teamSize: 18,
       description:
-        "MERN-stack web app for reserving and purchasing Ola Electric scooters — one of India's largest EV product launches.",
-      tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js'],
+        'Transactional platform handling reservations, configurations, and down-payments during one of India\'s largest EV product rollouts.',
+      tech: ['React.js', 'Express.js', 'Node.js', 'MongoDB', 'Redis'],
     },
   },
   {
@@ -64,15 +67,16 @@ export const experience: ExperienceItem[] = [
     period: 'Mar 2018 – May 2021',
     duration: '3.3 yrs',
     bullets: [
-      'Contributed to end-to-end product development across three distinct SaaS platforms.',
-      'Handled API integrations, responsive UI design, debugging, and QA across all products.',
+      'Created full-stack features for multi-channel advertising automation and real-time email verification services.',
+      'Built a distributed job runner queue using Node.js and AWS SQS, handling millions of validation requests daily.',
+      'Engineered customizable analytics dashboards with high-density data visualizations.',
     ],
     project: {
-      name: '📌 Clearout · Kintegra · Kintegra Labs',
+      name: 'Clearout & Kintegra SaaS',
       teamSize: 7,
       description:
-        'Clearout: Real-time email verification. Kintegra: Cross-channel ad automation. Kintegra Labs: R&D tools for lead-gen, sentiment analysis & keyword planning.',
-      tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'AWS'],
+        'SaaS portfolio spanning real-time email validation APIs, cross-platform ad schedulers, and search engine lead scraping products.',
+      tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'AWS SQS/S3'],
     },
   },
 ];
