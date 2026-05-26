@@ -39,7 +39,10 @@
   border-radius: var(--radius);
   padding: 1.8rem 2rem;
   border-left: 3px solid transparent;
-  transition: border-color var(--t), transform var(--t) var(--ease), box-shadow var(--t);
+  transition:
+    border-color var(--t),
+    transform var(--t) var(--ease),
+    box-shadow var(--t);
   position: relative;
 }
 

@@ -12,7 +12,9 @@
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   border-bottom: 1px solid var(--border);
-  transition: box-shadow var(--t), background var(--t);
+  transition:
+    box-shadow var(--t),
+    background var(--t);
 }
 
 [data-theme="light"] .nav {
@@ -41,7 +43,9 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: border-color var(--t), box-shadow var(--t);
+  transition:
+    border-color var(--t),
+    box-shadow var(--t);
 }
 
 .logo:hover .logoBadge {
@@ -79,7 +83,9 @@
   font-weight: 500;
   padding: 0.45rem 0.9rem;
   border-radius: var(--radius-sm);
-  transition: color var(--t), background var(--t);
+  transition:
+    color var(--t),
+    background var(--t);
   position: relative;
 }
 
@@ -136,7 +142,10 @@
   font-weight: 600;
   letter-spacing: 0.2px;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
-  transition: filter var(--t), transform var(--t) var(--ease), box-shadow var(--t);
+  transition:
+    filter var(--t),
+    transform var(--t) var(--ease),
+    box-shadow var(--t);
   white-space: nowrap;
 }
 
@@ -227,7 +236,9 @@
   padding: 0.8rem 2.2rem;
   border-radius: var(--radius-sm);
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
-  transition: filter var(--t), transform var(--t);
+  transition:
+    filter var(--t),
+    transform var(--t);
 }
 
 .mobileHire:hover {

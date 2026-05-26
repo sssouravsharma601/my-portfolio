@@ -7,11 +7,11 @@
   --primary-rgb: 99, 102, 241;
   --primary-dim: rgba(99, 102, 241, 0.05);
   --primary-glow: rgba(99, 102, 241, 0.15);
-  
+
   --secondary: #06b6d4;
   --secondary-rgb: 6, 182, 212;
   --secondary-dim: rgba(6, 182, 212, 0.05);
-  
+
   /* Obsidian Dark Theme (Default) */
   --bg: #09090b;
   --bg-alt: #121214;
@@ -91,7 +91,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  transition: background var(--t), color var(--t);
+  transition:
+    background var(--t),
+    color var(--t);
 }
 
 /* Custom premium scrollbar */
@@ -175,7 +177,10 @@ body {
   font-weight: 600;
   font-family: var(--font);
   box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
-  transition: filter var(--t), transform var(--t) var(--ease), box-shadow var(--t);
+  transition:
+    filter var(--t),
+    transform var(--t) var(--ease),
+    box-shadow var(--t);
 }
 
 .btn-primary:hover {
@@ -198,7 +203,10 @@ body {
   font-size: 0.95rem;
   font-weight: 500;
   font-family: var(--font);
-  transition: border-color var(--t), background var(--t), transform var(--t) var(--ease);
+  transition:
+    border-color var(--t),
+    background var(--t),
+    transform var(--t) var(--ease);
 }
 
 .btn-ghost:hover {
@@ -218,7 +226,10 @@ body {
   padding: 0.25rem 0.75rem;
   border-radius: 4px;
   font-family: var(--mono);
-  transition: border-color var(--t), color var(--t), background var(--t);
+  transition:
+    border-color var(--t),
+    color var(--t),
+    background var(--t);
 }
 
 .tag:hover {
@@ -233,7 +244,9 @@ body {
 .reveal-up,
 .reveal-left,
 .reveal-right {
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transition:
+    opacity 0.8s var(--ease),
+    transform 0.8s var(--ease);
 }
 
 .reveal-up {
@@ -266,14 +279,14 @@ body {
   width: 100%;
   height: 100%;
   background-size: 40px 40px;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
   pointer-events: none;
 }
 
 [data-theme="light"] .engineering-grid {
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
 }

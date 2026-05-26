@@ -56,7 +56,7 @@ export const experience: ExperienceItem[] = [
       name: 'OlaElectric Purchase Portal',
       teamSize: 18,
       description:
-        'Transactional platform handling reservations, configurations, and down-payments during one of India\'s largest EV product rollouts.',
+        "Transactional platform handling reservations, configurations, and down-payments during one of India's largest EV product rollouts.",
       tech: ['React.js', 'Express.js', 'Node.js', 'MongoDB', 'Redis'],
     },
   },

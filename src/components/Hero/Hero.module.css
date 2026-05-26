@@ -67,7 +67,8 @@
 }
 
 @keyframes statusPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -107,8 +108,13 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .desc {
@@ -211,9 +217,15 @@
   height: 10px;
   border-radius: 50%;
 }
-.dotRed { background: var(--red); }
-.dotYellow { background: #eab308; }
-.dotGreen { background: var(--green); }
+.dotRed {
+  background: var(--red);
+}
+.dotYellow {
+  background: #eab308;
+}
+.dotGreen {
+  background: var(--green);
+}
 
 .sandboxTabs {
   display: flex;
@@ -234,7 +246,9 @@
   display: flex;
   align-items: center;
   border-bottom: 2px solid transparent;
-  transition: color var(--t), border-color var(--t);
+  transition:
+    color var(--t),
+    border-color var(--t);
 }
 
 .tabBtn:hover {
@@ -313,7 +327,11 @@
   align-items: center;
   justify-content: center;
   color: var(--text-2);
-  transition: color 0.4s, border-color 0.4s, box-shadow 0.4s, transform 0.4s var(--ease);
+  transition:
+    color 0.4s,
+    border-color 0.4s,
+    box-shadow 0.4s,
+    transform 0.4s var(--ease);
 }
 
 .nodeActive .nodeCircle {
@@ -357,7 +375,9 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  transition: left 0.5s linear, opacity 0.2s;
+  transition:
+    left 0.5s linear,
+    opacity 0.2s;
   pointer-events: none;
 }
 
@@ -391,7 +411,10 @@
   align-items: center;
   gap: 0.4rem;
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
-  transition: filter var(--t), transform var(--t) var(--ease), background var(--t);
+  transition:
+    filter var(--t),
+    transform var(--t) var(--ease),
+    background var(--t);
 }
 
 .simulateBtn:hover:not(:disabled) {
@@ -479,7 +502,8 @@
 }
 
 @keyframes scrollFloat {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.45;
     transform: translateX(-50%) translateY(0);
   }
@@ -495,7 +519,8 @@
     grid-template-columns: 1fr;
     gap: 3rem;
   }
-  .terminal, .sandbox {
+  .terminal,
+  .sandbox {
     max-width: 100%;
   }
 }

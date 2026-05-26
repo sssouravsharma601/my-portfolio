@@ -1,12 +1,12 @@
 import type { SkillCategory } from '../../types';
 import ScrollReveal from '../ui/ScrollReveal';
-import { 
-  FrontendIcon, 
-  BackendIcon, 
-  DatabaseIcon, 
-  LanguagesIcon, 
-  ToolsIcon, 
-  PlatformsIcon 
+import {
+  FrontendIcon,
+  BackendIcon,
+  DatabaseIcon,
+  LanguagesIcon,
+  ToolsIcon,
+  PlatformsIcon,
 } from '../ui/Icons';
 import styles from './Skills.module.css';
 

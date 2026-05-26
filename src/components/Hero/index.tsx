@@ -2,13 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useTyping } from '../../hooks/useTyping';
 import { useCounter } from '../../hooks/useCounter';
 import { heroStats } from '../../data/education';
-import { 
-  CpuIcon, 
-  ServerIcon, 
-  DatabaseIcon, 
-  PlatformsIcon, 
-  ArrowRightIcon 
-} from '../ui/Icons';
+import { CpuIcon, ServerIcon, DatabaseIcon, PlatformsIcon, ArrowRightIcon } from '../ui/Icons';
 import styles from './Hero.module.css';
 
 const PHRASES = [
@@ -85,7 +79,8 @@ interface ProjectSystem {
 const SYSTEMS: Record<ProjectKey, ProjectSystem> = {
   dms: {
     title: 'Emirates NBD Decision Management System',
-    description: 'Automated real-time loan & card eligibility engine running 18 critical risk assessments.',
+    description:
+      'Automated real-time loan & card eligibility engine running 18 critical risk assessments.',
     nodes: [
       { id: 'client', label: 'DMS Portal', icon: <PlatformsIcon size={20} /> },
       { id: 'gateway', label: 'API Gateway', icon: <CpuIcon size={20} /> },
@@ -94,16 +89,37 @@ const SYSTEMS: Record<ProjectKey, ProjectSystem> = {
     ],
     metrics: { latency: '145ms', code: '200 OK', size: '1.2 KB' },
     logs: [
-      { delay: 0, message: 'Initiated eligibility check for application UID-77291...', type: 'info' },
-      { delay: 400, message: 'API Gateway: Route resolved. Bearer JWT signature validated.', type: 'highlight' },
-      { delay: 800, message: 'Rules Engine: Evaluating loan assessment decision matrix...', type: 'info' },
-      { delay: 1200, message: 'Oracle DB: Fetching applicant credit history (cache hit).', type: 'highlight' },
-      { delay: 1600, message: 'Result: APPROVED. Eligibility payload dispatched successfully.', type: 'success' },
+      {
+        delay: 0,
+        message: 'Initiated eligibility check for application UID-77291...',
+        type: 'info',
+      },
+      {
+        delay: 400,
+        message: 'API Gateway: Route resolved. Bearer JWT signature validated.',
+        type: 'highlight',
+      },
+      {
+        delay: 800,
+        message: 'Rules Engine: Evaluating loan assessment decision matrix...',
+        type: 'info',
+      },
+      {
+        delay: 1200,
+        message: 'Oracle DB: Fetching applicant credit history (cache hit).',
+        type: 'highlight',
+      },
+      {
+        delay: 1600,
+        message: 'Result: APPROVED. Eligibility payload dispatched successfully.',
+        type: 'success',
+      },
     ],
   },
   byjus: {
-    title: 'Byju\'s Student Learn Portal',
-    description: 'Low-latency streaming activity feed and optimistic-update student quiz telemetry.',
+    title: "Byju's Student Learn Portal",
+    description:
+      'Low-latency streaming activity feed and optimistic-update student quiz telemetry.',
     nodes: [
       { id: 'client', label: 'Learn Web', icon: <PlatformsIcon size={20} /> },
       { id: 'gateway', label: 'Flutter Bridge', icon: <CpuIcon size={20} /> },
@@ -113,15 +129,28 @@ const SYSTEMS: Record<ProjectKey, ProjectSystem> = {
     metrics: { latency: '65ms', code: '101 Switching', size: '0.4 KB' },
     logs: [
       { delay: 0, message: 'Dispatched live quiz submission: Activity ID #AQ-80...', type: 'info' },
-      { delay: 400, message: 'Flutter Bridge: Marshalled native event payload to mobile context.', type: 'highlight' },
-      { delay: 800, message: 'Assess Engine: Telemetry queueing via websocket thread...', type: 'info' },
-      { delay: 1200, message: 'MongoDB: Incrementing user metrics and leaderboards.', type: 'highlight' },
+      {
+        delay: 400,
+        message: 'Flutter Bridge: Marshalled native event payload to mobile context.',
+        type: 'highlight',
+      },
+      {
+        delay: 800,
+        message: 'Assess Engine: Telemetry queueing via websocket thread...',
+        type: 'info',
+      },
+      {
+        delay: 1200,
+        message: 'MongoDB: Incrementing user metrics and leaderboards.',
+        type: 'highlight',
+      },
       { delay: 1600, message: 'Connection sync status: Synchronized in-memory.', type: 'success' },
     ],
   },
   ola: {
     title: 'Ola Electric Reservation Pipeline',
-    description: 'High-concurrency EV configuration checkout queue protecting inventories from race states.',
+    description:
+      'High-concurrency EV configuration checkout queue protecting inventories from race states.',
     nodes: [
       { id: 'client', label: 'Reserve App', icon: <PlatformsIcon size={20} /> },
       { id: 'gateway', label: 'Checkout API', icon: <CpuIcon size={20} /> },
@@ -130,11 +159,23 @@ const SYSTEMS: Record<ProjectKey, ProjectSystem> = {
     ],
     metrics: { latency: '190ms', code: '201 Created', size: '2.1 KB' },
     logs: [
-      { delay: 0, message: 'Checkout payload received: SKU-092 (Midnight Black Scooter)...', type: 'info' },
+      {
+        delay: 0,
+        message: 'Checkout payload received: SKU-092 (Midnight Black Scooter)...',
+        type: 'info',
+      },
       { delay: 400, message: 'Checkout API: Verifying payment gateway session...', type: 'info' },
-      { delay: 800, message: 'Reserve Core: Acquiring atomic item lock in Redis cluster...', type: 'highlight' },
+      {
+        delay: 800,
+        message: 'Reserve Core: Acquiring atomic item lock in Redis cluster...',
+        type: 'highlight',
+      },
       { delay: 1200, message: 'PostgreSQL: Ledger write completed. Lock released.', type: 'info' },
-      { delay: 1600, message: 'Booking completed: reservation ID OLE-90221 confirmed.', type: 'success' },
+      {
+        delay: 1600,
+        message: 'Booking completed: reservation ID OLE-90221 confirmed.',
+        type: 'success',
+      },
     ],
   },
 };
@@ -154,11 +195,11 @@ function SandboxPanel() {
     setSimulating(false);
     setSimStep(-1);
     setLogs([
-      { 
-        text: `Switched to ${activeSystem.toUpperCase()} schematic. Ready for simulation.`, 
-        type: 'info', 
-        time: new Date().toLocaleTimeString().split(' ')[0] 
-      }
+      {
+        text: `Switched to ${activeSystem.toUpperCase()} schematic. Ready for simulation.`,
+        type: 'info',
+        time: new Date().toLocaleTimeString().split(' ')[0],
+      },
     ]);
   }, [activeSystem]);
 
@@ -166,7 +207,7 @@ function SandboxPanel() {
     if (simulating) return;
     setSimulating(true);
     setSimStep(0);
-    
+
     // Clear logs
     const initialTime = new Date().toLocaleTimeString().split(' ')[0];
     setLogs([{ text: `Simulating flow: ${system.title}...`, type: 'info', time: initialTime }]);
@@ -177,14 +218,14 @@ function SandboxPanel() {
       const t = setTimeout(() => {
         setSimStep(index);
         setLogs((prev) => [
-          ...prev, 
-          { 
-            text: logItem.message, 
-            type: logItem.type, 
-            time: new Date().toLocaleTimeString().split(' ')[0] 
-          }
+          ...prev,
+          {
+            text: logItem.message,
+            type: logItem.type,
+            time: new Date().toLocaleTimeString().split(' ')[0],
+          },
         ]);
-        
+
         // Final complete step
         if (index === system.logs.length - 1) {
           setSimulating(false);
@@ -238,30 +279,26 @@ function SandboxPanel() {
         {/* Node Diagram */}
         <div className={styles.diagram}>
           <div className={styles.connectorLine}>
-            <div 
-              className={styles.connectorProgress} 
-              style={{ width: simulating ? `${(simStep / 3) * 100}%` : simStep === 4 ? '100%' : '0%' }}
+            <div
+              className={styles.connectorProgress}
+              style={{
+                width: simulating ? `${(simStep / 3) * 100}%` : simStep === 4 ? '100%' : '0%',
+              }}
             />
           </div>
 
           {/* Simulated wire pulse */}
-          <div 
-            ref={pulseRef}
-            className={styles.pulseDot} 
-            style={getPulseStyle()}
-          />
+          <div ref={pulseRef} className={styles.pulseDot} style={getPulseStyle()} />
 
           {system.nodes.map((node, i) => {
             const isActive = i === simStep;
             const isSuccess = simStep === 4;
             return (
-              <div 
-                key={node.id} 
+              <div
+                key={node.id}
                 className={`${styles.node} ${isActive ? styles.nodeActive : ''} ${isSuccess ? styles.nodeSuccess : ''}`}
               >
-                <div className={styles.nodeCircle}>
-                  {node.icon}
-                </div>
+                <div className={styles.nodeCircle}>{node.icon}</div>
                 <span className={styles.nodeLabel}>{node.label}</span>
               </div>
             );
@@ -272,11 +309,7 @@ function SandboxPanel() {
       {/* Terminal Sandbox Console */}
       <div className={styles.sandboxConsole}>
         <div className={styles.consoleHeader}>
-          <button
-            onClick={runSimulation}
-            className={styles.simulateBtn}
-            disabled={simulating}
-          >
+          <button onClick={runSimulation} className={styles.simulateBtn} disabled={simulating}>
             {simulating ? 'Processing...' : 'Run Simulation'} <ArrowRightIcon size={12} />
           </button>
 
@@ -336,10 +369,11 @@ export default function Hero() {
           </p>
 
           <p className={styles.desc}>
-            I am a senior frontend engineer focused on building robust, high-performance web products. 
-            From orchestrating eligibility decision platforms at <strong>Emirates NBD</strong> to scaling 
-            transaction checkout lines for major consumer launches, I design frontend systems with an 
-            uncompromising focus on speed, structure, and accessibility.
+            I am a senior frontend engineer focused on building robust, high-performance web
+            products. From orchestrating eligibility decision platforms at{' '}
+            <strong>Emirates NBD</strong> to scaling transaction checkout lines for major consumer
+            launches, I design frontend systems with an uncompromising focus on speed, structure,
+            and accessibility.
           </p>
 
           <div className={styles.cta}>

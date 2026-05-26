@@ -154,9 +154,15 @@ export default function ContactForm() {
         className={`${styles.submit} ${sending ? styles.busy : ''}`}
         disabled={sending}
       >
-        {sending ? 'Sending...' : (
+        {sending ? (
+          'Sending...'
+        ) : (
           <>
-            Send Message <ArrowRightIcon size={14} style={{ marginLeft: '0.4rem', display: 'inline-block', verticalAlign: 'middle' }} />
+            Send Message{' '}
+            <ArrowRightIcon
+              size={14}
+              style={{ marginLeft: '0.4rem', display: 'inline-block', verticalAlign: 'middle' }}
+            />
           </>
         )}
       </button>
