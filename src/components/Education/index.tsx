@@ -1,15 +1,29 @@
 import ScrollReveal from '../ui/ScrollReveal';
 import { education } from '../../data/education';
+import { GraduationIcon, RulerIcon, BooksIcon } from '../ui/Icons';
 import styles from './Education.module.css';
+
+const getEducationIcon = (iconKey: string) => {
+  switch (iconKey) {
+    case 'graduation':
+      return <GraduationIcon size={22} />;
+    case 'ruler':
+      return <RulerIcon size={22} />;
+    case 'books':
+      return <BooksIcon size={22} />;
+    default:
+      return <GraduationIcon size={22} />;
+  }
+};
 
 export default function Education() {
   return (
     <section id="education" className="section" aria-label="Education">
       <ScrollReveal className="sec-hd">
         <span className="sec-label">04 — Education</span>
-        <h2 className="sec-title">Education</h2>
+        <h2 className="sec-title">Academic History</h2>
         <p className="sec-desc">
-          Solid computer-science foundation built across three institutions in Punjab, India.
+          Formal engineering foundations built across technical training institutions.
         </p>
       </ScrollReveal>
 
@@ -17,9 +31,9 @@ export default function Education() {
         {education.map((item, i) => (
           <ScrollReveal key={item.id} delay={i * 100} as="article" className={styles.card}>
             <span className={styles.icon} aria-hidden="true">
-              {item.icon}
+              {getEducationIcon(item.icon)}
             </span>
-            <div className={styles.degree}>{item.degree}</div>
+            <h3 className={styles.degree}>{item.degree}</h3>
             <div className={styles.school}>{item.school}</div>
             <div className={styles.meta}>
               <span className={styles.badge}>{item.year}</span>

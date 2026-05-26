@@ -4,6 +4,7 @@ import { validateContactForm } from '../../utils/validation';
 import { sanitize } from '../../utils/sanitize';
 import { sendContactForm } from '../../services/contact.service';
 import { OWNER_EMAIL } from '../../constants';
+import { ArrowRightIcon } from '../ui/Icons';
 import styles from './Contact.module.css';
 
 const EMPTY_FORM: FormData = { name: '', email: '', subject: '', message: '' };
@@ -57,7 +58,23 @@ export default function ContactForm() {
 
     return (
       <div className={styles.success} role="status" aria-live="polite">
-        <div className={styles.successIcon}>🎉</div>
+        <div className={styles.successIcon}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--green)"
+            strokeWidth="25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ strokeWidth: 2 }}
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
         <h3>Message Sent!</h3>
         <p>
           Thanks for reaching out. I&apos;ll reply within 24–48 hours to the email you provided.
@@ -137,7 +154,17 @@ export default function ContactForm() {
         className={`${styles.submit} ${sending ? styles.busy : ''}`}
         disabled={sending}
       >
-        {sending ? 'Sending…' : 'Send Message ✈️'}
+        {sending ? (
+          'Sending...'
+        ) : (
+          <>
+            Send Message{' '}
+            <ArrowRightIcon
+              size={14}
+              style={{ marginLeft: '0.4rem', display: 'inline-block', verticalAlign: 'middle' }}
+            />
+          </>
+        )}
       </button>
     </form>
   );

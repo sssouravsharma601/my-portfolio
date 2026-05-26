@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useThemeContext } from '../../context/ThemeContext';
 import { useActiveSection } from '../../hooks/useActiveSection';
+import { SunIcon, MoonIcon } from '../ui/Icons';
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = ['about', 'experience', 'skills', 'education', 'contact'] as const;
@@ -80,14 +81,14 @@ export default function Navbar() {
             onClick={toggle}
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >
-            {theme === 'dark' ? '🌙' : '☀️'}
+            {theme === 'dark' ? <SunIcon size={16} /> : <MoonIcon size={16} />}
           </button>
           <a
             href="mailto:sssouravsharma601@gmail.com"
             className={styles.hireBtn}
             aria-label="Hire me"
           >
-            Hire Me →
+            Get In Touch
           </a>
         </div>
 
@@ -120,7 +121,7 @@ export default function Navbar() {
           </a>
         ))}
         <a href="mailto:sssouravsharma601@gmail.com" className={styles.mobileHire} onClick={close}>
-          Hire Me →
+          Get In Touch
         </a>
       </div>
     </>

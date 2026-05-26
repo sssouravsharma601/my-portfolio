@@ -1,7 +1,21 @@
 import ScrollReveal from '../ui/ScrollReveal';
 import ContactForm from './ContactForm';
 import { contactChannels } from '../../data/education';
+import { MailIcon, LinkedInIcon, PhoneIcon } from '../ui/Icons';
 import styles from './Contact.module.css';
+
+const getContactIcon = (iconKey: string) => {
+  switch (iconKey) {
+    case 'email':
+      return <MailIcon size={18} />;
+    case 'linkedin':
+      return <LinkedInIcon size={18} />;
+    case 'phone':
+      return <PhoneIcon size={18} />;
+    default:
+      return <MailIcon size={18} />;
+  }
+};
 
 export default function Contact() {
   return (
@@ -10,7 +24,7 @@ export default function Contact() {
         <span className="sec-label">05 — Contact</span>
         <h2 className="sec-title">Get In Touch</h2>
         <p className="sec-desc">
-          Open to senior frontend and full-stack roles in the UAE and remotely.
+          Open to senior roles, technical advisory, and consulting opportunities globally.
         </p>
       </ScrollReveal>
 
@@ -27,7 +41,7 @@ export default function Contact() {
                   aria-label={`${ch.label}: ${ch.value}`}
                 >
                   <div className={styles.chIcon} aria-hidden="true">
-                    {ch.icon}
+                    {getContactIcon(ch.icon)}
                   </div>
                   <div className={styles.chBody}>
                     <div className={styles.chLabel}>{ch.label}</div>

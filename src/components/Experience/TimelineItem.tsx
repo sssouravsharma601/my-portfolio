@@ -1,10 +1,26 @@
 import type { ExperienceItem } from '../../types';
 import ScrollReveal from '../ui/ScrollReveal';
+import { CpuIcon, ServerIcon, PlatformsIcon, CloudIcon } from '../ui/Icons';
 import styles from './Experience.module.css';
 
 interface Props {
   item: ExperienceItem;
 }
+
+const getProjectIcon = (id: string) => {
+  switch (id) {
+    case 'synechron':
+      return <ServerIcon size={16} />;
+    case 'byjus':
+      return <CpuIcon size={16} />;
+    case 'robosoft':
+      return <PlatformsIcon size={16} />;
+    case 'social-frontier':
+      return <CloudIcon size={16} />;
+    default:
+      return <ServerIcon size={16} />;
+  }
+};
 
 export default function TimelineItem({ item }: Props) {
   return (
@@ -13,7 +29,7 @@ export default function TimelineItem({ item }: Props) {
       <div className={styles.card}>
         <div className={styles.head}>
           <div>
-            <div className={styles.role}>{item.role}</div>
+            <h3 className={styles.role}>{item.role}</h3>
             <div className={styles.company}>{item.company}</div>
           </div>
           <span className={styles.period}>
@@ -29,7 +45,11 @@ export default function TimelineItem({ item }: Props) {
 
         <div className={styles.project}>
           <div className={styles.projectName}>
-            {item.project.name} · Team: {item.project.teamSize} engineers
+            <span className={styles.projectIcon} aria-hidden="true">
+              {getProjectIcon(item.id)}
+            </span>
+            <span className={styles.projectTitleText}>{item.project.name}</span>
+            <span className={styles.teamBadge}>Scale: {item.project.teamSize}-Engineer Team</span>
           </div>
           <p className={styles.projectDesc}>{item.project.description}</p>
           <div className={styles.tags}>
