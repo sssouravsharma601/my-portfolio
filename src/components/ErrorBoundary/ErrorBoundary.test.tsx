@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import ErrorBoundary from './index';
 
 /** Helper component that throws on demand */
@@ -19,30 +19,30 @@ describe('ErrorBoundary', () => {
   });
 
   it('renders children when there is no error', () => {
-    const { getByText } = render(
+    render(
       <ErrorBoundary>
         <Bomb />
       </ErrorBoundary>,
     );
-    expect(getByText('All good')).toBeInTheDocument();
+    expect(screen.getByText('All good')).toBeInTheDocument();
   });
 
   it('renders the fallback UI when a child throws', () => {
-    const { getByRole, getByText } = render(
+    render(
       <ErrorBoundary>
         <Bomb shouldThrow />
       </ErrorBoundary>,
     );
-    expect(getByRole('alert')).toBeInTheDocument();
-    expect(getByText(/something went wrong/i)).toBeInTheDocument();
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.getByText(/something went wrong/i)).toBeInTheDocument();
   });
 
   it('renders a custom fallback when provided', () => {
-    const { getByText } = render(
+    render(
       <ErrorBoundary fallback={(err) => <p>Custom: {err.message}</p>}>
         <Bomb shouldThrow />
       </ErrorBoundary>,
     );
-    expect(getByText(/Custom: Test explosion/)).toBeInTheDocument();
+    expect(screen.getByText(/Custom: Test explosion/)).toBeInTheDocument();
   });
 });
