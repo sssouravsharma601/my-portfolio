@@ -31,31 +31,31 @@ export default function CustomCursor() {
       rafId = requestAnimationFrame(animateRing);
     };
 
-    const onEnter = () => {
-      ring.classList.add(styles.ringExpanded);
-    };
-    const onLeave = () => {
-      ring.classList.remove(styles.ringExpanded);
+    // Event delegation: handle hovers on document level for dynamic content
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest('a, button, input, textarea, [role="button"], [data-cursor="pointer"]')) {
+        ring.classList.add(styles.ringExpanded);
+      }
     };
 
-    const interactables = document.querySelectorAll<HTMLElement>(
-      'a, button, input, textarea, [role="button"]',
-    );
-    interactables.forEach((el) => {
-      el.addEventListener('mouseenter', onEnter);
-      el.addEventListener('mouseleave', onLeave);
-    });
+    const onMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest('a, button, input, textarea, [role="button"], [data-cursor="pointer"]')) {
+        ring.classList.remove(styles.ringExpanded);
+      }
+    };
 
     document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseover', onMouseOver);
+    document.addEventListener('mouseout', onMouseOut);
     rafId = requestAnimationFrame(animateRing);
 
     return () => {
       document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseover', onMouseOver);
+      document.removeEventListener('mouseout', onMouseOut);
       cancelAnimationFrame(rafId);
-      interactables.forEach((el) => {
-        el.removeEventListener('mouseenter', onEnter);
-        el.removeEventListener('mouseleave', onLeave);
-      });
     };
   }, []);
 

@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 
 import CustomCursor from './components/ui/CustomCursor';
 import BackToTop from './components/ui/BackToTop';
+import ScrollProgress from './components/ui/ScrollProgress';
 
 import './styles/globals.css';
 import './styles/animations.css';
@@ -32,6 +33,7 @@ export default function App() {
     <ErrorBoundary>
       <ThemeProvider>
         <FrameGuard />
+        <ScrollProgress />
         <CustomCursor />
         <BackToTop />
         <Navbar />
