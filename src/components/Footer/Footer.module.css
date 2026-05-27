@@ -1,14 +1,98 @@
 .footer {
-  background: var(--bg);
+  background: var(--bg-alt);
   border-top: 1px solid var(--border);
-  padding: 1.8rem 6%;
+  padding: 3rem 8% 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Diagnostics Console Row ───────────────────────────────── */
+.top {
+  width: 100%;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2rem;
+}
+
+.diagnostics {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.diagTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.diagDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  animation: diagPulse 2s ease-in-out infinite;
+}
+
+@keyframes diagPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.diagGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.diagItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-left: 2px solid var(--border);
+  padding-left: 0.8rem;
+  transition: border-color var(--t);
+}
+
+.diagItem:hover {
+  border-left-color: var(--primary);
+}
+
+.diagLabel {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.diagVal {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Bottom row ────────────────────────────────────────────── */
+.bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
-  position: relative;
-  z-index: 1;
+  gap: 1.2rem;
 }
 
 .left {
@@ -23,7 +107,7 @@
 
 .right {
   display: flex;
-  gap: 1.2rem;
+  gap: 1.5rem;
 }
 
 .link {
@@ -39,9 +123,30 @@
   color: var(--primary);
 }
 
-@media (max-width: 768px) {
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .diagGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 640px) {
   .footer {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    gap: 1.5rem;
+  }
+  .diagGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .bottom {
     flex-direction: column;
     text-align: center;
+    gap: 1rem;
+  }
+  .right {
+    justify-content: center;
   }
 }
