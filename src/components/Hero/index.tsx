@@ -212,7 +212,7 @@ function SandboxPanel() {
     const initialTime = new Date().toLocaleTimeString().split(' ')[0];
     setLogs([{ text: `Simulating flow: ${system.title}...`, type: 'info', time: initialTime }]);
 
-    const timeouts: number[] = [];
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
 
     system.logs.forEach((logItem, index) => {
       const t = setTimeout(() => {
