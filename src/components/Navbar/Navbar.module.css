@@ -141,7 +141,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.2px;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 4px 12px rgba(91, 141, 239, 0.15);
   transition:
     filter var(--t),
     transform var(--t) var(--ease),
@@ -152,7 +152,7 @@
 .hireBtn:hover {
   filter: brightness(1.12);
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 6px 16px rgba(91, 141, 239, 0.28);
 }
 
 /* ── Hamburger ─────────────────────────────────────────────── */
@@ -235,7 +235,7 @@
   background: var(--primary);
   padding: 0.8rem 2.2rem;
   border-radius: var(--radius-sm);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 12px rgba(91, 141, 239, 0.18);
   transition:
     filter var(--t),
     transform var(--t);
