@@ -5,25 +5,55 @@
 }
 
 .card {
-  background: var(--surface);
+  position: relative;
+  background-color: var(--surface);
+  background-image: var(--grad-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.5rem;
-  border-top: 2px solid transparent;
+  padding: 1.6rem;
+  overflow: hidden;
   transition:
     border-color var(--t),
-    transform var(--t);
+    box-shadow var(--t),
+    transform var(--t) var(--ease);
+}
+
+/* Gradient accent line that wipes in on hover */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--grad-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t) var(--ease);
 }
 
 .card:hover {
-  border-top-color: var(--primary);
+  border-color: var(--border-bright);
   transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
 }
 
 .icon {
   font-size: 1.5rem;
-  display: block;
-  margin-bottom: 0.8rem;
+  display: inline-flex;
+  margin-bottom: 0.9rem;
+  color: var(--primary);
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--primary-dim);
+  border: 1px solid var(--border);
 }
 
 .title {

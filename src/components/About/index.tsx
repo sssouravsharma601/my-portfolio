@@ -114,10 +114,10 @@ export default function About() {
               operations across the UAE.
             </p>
             <p>
-              My stack revolves around the **React.js ecosystem**—with a specific focus on
-              structural optimization, Redux state orchestration, performance budgeting, and custom
-              native bridges. I design frontend architectures that are modular, strictly typed, and
-              easily maintainable.
+              My stack revolves around the <strong>React.js ecosystem</strong> — with a specific
+              focus on structural optimization, Redux state orchestration, performance budgeting,
+              and custom native bridges. I design frontend architectures that are modular, strictly
+              typed, and easily maintainable.
             </p>
             <p>
               Over my career, I have worked across diverse industries including fintech (Emirates

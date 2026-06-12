@@ -12,6 +12,13 @@
   --secondary-rgb: 147, 197, 253;
   --secondary-dim: rgba(147, 197, 253, 0.08);
 
+  /* Accent gradient — used for headings, buttons, accents */
+  --grad-accent: linear-gradient(120deg, #5b8def 0%, #818cf8 50%, #93c5fd 100%);
+  /* Subtle top-light card surface gradient (adds depth vs flat fills) */
+  --grad-card: linear-gradient(160deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 60%);
+  /* Brighter hairline for card edges */
+  --border-bright: rgba(255, 255, 255, 0.12);
+
   /* Obsidian Dark Theme (Default) */
   --bg: #09090b;
   --bg-alt: #121214;
@@ -64,6 +71,9 @@
   --tag-bg: rgba(0, 0, 0, 0.03);
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
   --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --grad-accent: linear-gradient(120deg, #3b6cdb 0%, #4f46e5 50%, #2563eb 100%);
+  --grad-card: linear-gradient(160deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
+  --border-bright: rgba(0, 0, 0, 0.1);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -96,6 +106,25 @@ body {
     color var(--t);
 }
 
+/* Ambient depth — soft accent glows fixed behind everything,
+   so the page reads layered instead of flat monotone. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 80% -5%, rgba(var(--primary-rgb), 0.14) 0%, transparent 60%),
+    radial-gradient(50% 40% at 0% 100%, rgba(var(--primary-rgb), 0.08) 0%, transparent 55%);
+}
+
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(60% 50% at 80% -5%, rgba(var(--primary-rgb), 0.08) 0%, transparent 60%),
+    radial-gradient(50% 40% at 0% 100%, rgba(var(--primary-rgb), 0.05) 0%, transparent 55%);
+}
+
 /* Custom premium scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
@@ -121,7 +150,7 @@ body {
 }
 
 .alt-bg {
-  background: var(--bg-alt);
+  background: color-mix(in srgb, var(--bg-alt) 90%, transparent);
 }
 
 /* ── Section header ───────────────────────────────────────── */
@@ -146,9 +175,12 @@ body {
 .sec-title {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
-  letter-spacing: -1px;
+  letter-spacing: -1.2px;
   line-height: 1.1;
-  color: var(--text);
+  background: linear-gradient(120deg, var(--text) 30%, var(--primary) 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .sec-desc {
@@ -166,7 +198,8 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: var(--primary);
+  background: var(--grad-accent);
+  background-size: 140% 140%;
   color: #ffffff;
   text-decoration: none;
   cursor: pointer;
@@ -176,17 +209,17 @@ body {
   font-size: 0.95rem;
   font-weight: 600;
   font-family: var(--font);
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.3);
   transition:
-    filter var(--t),
+    background-position var(--t) var(--ease),
     transform var(--t) var(--ease),
     box-shadow var(--t);
 }
 
 .btn-primary:hover {
-  filter: brightness(1.15);
+  background-position: 100% 100%;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 8px 26px rgba(var(--primary-rgb), 0.45);
 }
 
 .btn-ghost {
@@ -223,19 +256,21 @@ body {
   border: 1px solid var(--border);
   color: var(--text-2);
   font-size: 0.75rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
+  padding: 0.3rem 0.85rem;
+  border-radius: 100px;
   font-family: var(--mono);
   transition:
     border-color var(--t),
     color var(--t),
-    background var(--t);
+    background var(--t),
+    transform var(--t) var(--ease);
 }
 
 .tag:hover {
-  border-color: var(--primary);
-  color: var(--text);
+  border-color: var(--border-h);
+  color: var(--primary);
   background: var(--primary-dim);
+  transform: translateY(-1px);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -297,14 +332,14 @@ body {
   right: 10%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.1) 0%, transparent 70%);
   filter: blur(40px);
   pointer-events: none;
   z-index: 0;
 }
 
 [data-theme="light"] .radial-glow {
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.03) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.04) 0%, transparent 70%);
 }
 
 /* ═══════════════════════════════════════════════════════════
