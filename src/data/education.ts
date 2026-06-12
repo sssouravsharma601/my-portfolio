@@ -27,8 +27,14 @@ export const education: EducationItem[] = [
   },
 ];
 
+/** Career began March 2018 — derive whole years of experience to today. */
+const CAREER_START_YEAR = 2018;
+const yearsActive = Math.floor(
+  (Date.now() - new Date(CAREER_START_YEAR, 2, 1).getTime()) / 3.15576e10,
+);
+
 export const heroStats: StatItem[] = [
-  { value: 8, suffix: '+', label: 'Years Active' },
+  { value: yearsActive, suffix: '+', label: 'Years Active' },
   { value: 4, suffix: '', label: 'Tech Scales' },
   { value: 12, suffix: '+', label: 'Systems Shipped' },
   { value: 'DXB', label: 'Dubai Based' },

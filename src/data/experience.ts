@@ -1,12 +1,24 @@
 import type { ExperienceItem } from '../types';
 
+/**
+ * Derives a human "N.N yrs" / "N mos" label from a start date to today.
+ * Keeps the current ("Present") role duration accurate on every build
+ * instead of drifting out of date.
+ */
+function durationSince(year: number, monthIndex: number): string {
+  const now = new Date();
+  const months = (now.getFullYear() - year) * 12 + (now.getMonth() - monthIndex);
+  if (months < 12) return `${months} mos`;
+  return `${(months / 12).toFixed(1)} yrs`;
+}
+
 export const experience: ExperienceItem[] = [
   {
     id: 'synechron',
     role: 'Senior Associate (Frontend Lead)',
     company: 'Synechron Technologies · Emirates NBD, Dubai',
     period: 'May 2024 – Present',
-    duration: '1.2 yrs',
+    duration: durationSince(2024, 4), // May 2024 → today (auto-updates)
     bullets: [
       'Frontend Team Lead (4 engineers) designing the Decision Management System (DMS) configuration panel from scratch.',
       'Developed a dynamic flow-builder canvas using React and custom hooks for orchestrating nested risk-eligibility models.',
