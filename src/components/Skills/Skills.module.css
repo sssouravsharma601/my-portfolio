@@ -14,9 +14,11 @@
   overflow: hidden;
   transition:
     border-color var(--t),
-    box-shadow var(--t),
-    transform var(--t) var(--ease);
+    box-shadow var(--t);
 }
+
+/* transform (tilt + lift) is owned by Framer Motion (SkillCard.tsx) once JS
+   is active — this class only carries the resting shadow/border look. */
 
 /* Gradient accent line that wipes in on hover */
 .card::before {
@@ -34,7 +36,6 @@
 
 .card:hover {
   border-color: var(--border-bright);
-  transform: translateY(-4px);
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
 }
 

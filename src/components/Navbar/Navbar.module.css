@@ -83,21 +83,30 @@
   font-weight: 500;
   padding: 0.45rem 0.9rem;
   border-radius: var(--radius-sm);
-  transition:
-    color var(--t),
-    background var(--t);
+  transition: color var(--t);
   position: relative;
 }
 
-.link:hover,
-.active {
+.link:hover {
   color: var(--text);
-  background: var(--tag-bg);
 }
 
 .active {
   color: var(--primary);
   font-weight: 600;
+}
+
+/* Framer Motion layoutId pill — morphs between links instead of jump-cutting */
+.activePill {
+  position: absolute;
+  inset: 0;
+  background: var(--primary-dim);
+  border: 1px solid var(--border-h);
+  border-radius: var(--radius-sm);
+}
+
+.linkLabel {
+  position: relative;
 }
 
 /* ── Right controls ────────────────────────────────────────── */
@@ -200,18 +209,10 @@
   align-items: center;
   justify-content: center;
   gap: 2.2rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--t) var(--ease);
 }
 
 [data-theme="light"] .mobileNav {
   background: rgba(248, 250, 252, 0.98);
-}
-
-.mobileOpen {
-  opacity: 1;
-  pointer-events: all;
 }
 
 .mobileLink {

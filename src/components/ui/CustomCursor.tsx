@@ -31,17 +31,30 @@ export default function CustomCursor() {
       rafId = requestAnimationFrame(animateRing);
     };
 
-    // Event delegation: handle hovers on document level for dynamic content
+    // Event delegation: handle hovers on document level for dynamic content.
+    // Magnetic targets (see useMagneticHover) already pull themselves toward
+    // the pointer, so the ring gets its own distinct "field" treatment instead
+    // of just expanding — expanding *too* would fight the element's own pull.
     const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      if (target?.closest('a, button, input, textarea, [role="button"], [data-cursor="pointer"]')) {
+      if (!target) return;
+      if (target.closest('[data-cursor="magnetic"]')) {
+        ring.classList.add(styles.ringMagnetic);
+        return;
+      }
+      if (target.closest('a, button, input, textarea, [role="button"], [data-cursor="pointer"]')) {
         ring.classList.add(styles.ringExpanded);
       }
     };
 
     const onMouseOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      if (target?.closest('a, button, input, textarea, [role="button"], [data-cursor="pointer"]')) {
+      if (!target) return;
+      if (target.closest('[data-cursor="magnetic"]')) {
+        ring.classList.remove(styles.ringMagnetic);
+        return;
+      }
+      if (target.closest('a, button, input, textarea, [role="button"], [data-cursor="pointer"]')) {
         ring.classList.remove(styles.ringExpanded);
       }
     };

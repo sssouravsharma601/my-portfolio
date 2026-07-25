@@ -90,6 +90,10 @@
   color: transparent;
 }
 
+.nameChar {
+  will-change: transform, opacity;
+}
+
 .role {
   font-family: var(--mono);
   font-size: clamp(1rem, 2vw, 1.3rem);
@@ -177,6 +181,12 @@
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-top: 0.4rem;
+}
+
+.sandboxWrap {
+  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 /* ── Interactive Architecture Sandbox ─────────────────────── */

@@ -1,7 +1,52 @@
-.grid {
+/* Mobile-first: plain stacked grid, identical to the old layout. */
+.trackViewport {
+  position: relative;
+}
+
+.track {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 1rem;
+}
+
+.scrollHint {
+  display: none;
+}
+
+/* Desktop-with-a-mouse: horizontal scroll-jack track (see Education/index.tsx).
+   Must match the JS matchMedia condition exactly, or the two fall out of sync
+   — in particular, reduced-motion must also fall back to the stacked grid,
+   since without the JS pin/scrub, a flex row here would overflow with no way
+   to reach the cards past the first (overflow is hidden, not scrollable). */
+@media (min-width: 1024px) and (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .trackViewport {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+  }
+
+  .track .card {
+    flex: 0 0 380px;
+  }
+
+  .scrollHint {
+    display: block;
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 }
 
 .card {

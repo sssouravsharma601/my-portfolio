@@ -1,17 +1,36 @@
 /* Timeline */
+.timelineWrap {
+  position: relative;
+}
+
 .timeline {
   list-style: none;
   position: relative;
 }
 
-.timeline::before {
-  content: "";
+/* Static faint track, always visible */
+.lineTrack {
   position: absolute;
   left: 0;
   top: 10px;
   bottom: 10px;
   width: 1px;
-  background: linear-gradient(180deg, var(--primary) 0%, var(--border) 85%, transparent 100%);
+  background: var(--border);
+}
+
+/* Draws in as the user scrolls — see Experience/index.tsx's ScrollTrigger.
+   Defaults to fully drawn so reduced-motion users (who skip the GSAP branch)
+   still see a complete line, not a stuck scaleY(0). */
+.lineProgress {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+  box-shadow: 0 0 8px var(--primary-glow);
+  transform-origin: top;
+  transform: scaleY(1);
 }
 
 .item {

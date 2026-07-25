@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
+import { SmoothScrollProvider } from './animation/SmoothScrollProvider';
 import ErrorBoundary from './components/ErrorBoundary';
 
 import Navbar from './components/Navbar';
@@ -31,22 +33,29 @@ function FrameGuard() {
 export default function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider>
-        <FrameGuard />
-        <ScrollProgress />
-        <CustomCursor />
-        <BackToTop />
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Experience />
-          <Skills />
-          <Education />
-          <Contact />
-        </main>
-        <Footer />
-      </ThemeProvider>
+      {/* reducedMotion="user" makes every Framer Motion animation in the tree
+          respect the OS-level prefers-reduced-motion setting automatically —
+          GSAP work is gated separately per-component via matchMedia. */}
+      <MotionConfig reducedMotion="user">
+        <ThemeProvider>
+          <SmoothScrollProvider>
+            <FrameGuard />
+            <ScrollProgress />
+            <CustomCursor />
+            <BackToTop />
+            <Navbar />
+            <main>
+              <Hero />
+              <About />
+              <Experience />
+              <Skills />
+              <Education />
+              <Contact />
+            </main>
+            <Footer />
+          </SmoothScrollProvider>
+        </ThemeProvider>
+      </MotionConfig>
     </ErrorBoundary>
   );
 }

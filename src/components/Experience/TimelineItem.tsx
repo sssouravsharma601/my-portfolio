@@ -1,5 +1,4 @@
 import type { ExperienceItem } from '../../types';
-import ScrollReveal from '../ui/ScrollReveal';
 import { CpuIcon, ServerIcon, PlatformsIcon, CloudIcon } from '../ui/Icons';
 import styles from './Experience.module.css';
 
@@ -24,9 +23,9 @@ const getProjectIcon = (id: string) => {
 
 export default function TimelineItem({ item }: Props) {
   return (
-    <ScrollReveal className={styles.item} as="li" role="listitem">
-      <div className={styles.dot} aria-hidden="true" />
-      <div className={styles.card}>
+    <li className={styles.item} data-timeline-item>
+      <div className={styles.dot} data-timeline-dot aria-hidden="true" />
+      <div className={styles.card} data-timeline-card>
         <div className={styles.head}>
           <div>
             <h3 className={styles.role}>{item.role}</h3>
@@ -61,6 +60,6 @@ export default function TimelineItem({ item }: Props) {
           </div>
         </div>
       </div>
-    </ScrollReveal>
+    </li>
   );
 }

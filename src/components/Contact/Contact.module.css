@@ -107,15 +107,28 @@
   margin-bottom: 1rem;
 }
 
-.label {
-  display: block;
+/* Floating label — sits inside the field at rest, floats up on focus/fill. */
+.inputWrap {
+  position: relative;
+}
+
+.floatLabel {
+  position: absolute;
+  left: 0.95rem;
+  top: 1.5rem;
+  transform-origin: left top;
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 500;
   color: var(--text-2);
-  margin-bottom: 0.4rem;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  pointer-events: none;
+  transition: color var(--t);
+}
+
+.floatLabelActive {
+  color: var(--primary);
 }
 
 .input,
@@ -125,7 +138,7 @@
   border: 1px solid var(--border);
   color: var(--text);
   border-radius: var(--radius-sm);
-  padding: 0.7rem 0.95rem;
+  padding: 1.5rem 0.95rem 0.55rem;
   font-size: 0.9rem;
   font-family: var(--font);
   outline: none;

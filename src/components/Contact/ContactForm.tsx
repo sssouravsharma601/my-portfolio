@@ -1,9 +1,11 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
+import { motion } from 'framer-motion';
 import type { FormData, FormErrors } from '../../types';
 import { validateContactForm } from '../../utils/validation';
 import { sanitize } from '../../utils/sanitize';
 import { sendContactForm } from '../../services/contact.service';
 import { OWNER_EMAIL } from '../../constants';
+import { useMagneticHover } from '../../hooks/useMagneticHover';
 import { ArrowRightIcon } from '../ui/Icons';
 import styles from './Contact.module.css';
 
@@ -16,6 +18,7 @@ export default function ContactForm() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
+  const submitRef = useMagneticHover<HTMLButtonElement>({ strength: 0.25 });
 
   const update =
     (field: keyof FormData) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -150,9 +153,11 @@ export default function ContactForm() {
       )}
 
       <button
+        ref={submitRef}
         type="submit"
         className={`${styles.submit} ${sending ? styles.busy : ''}`}
         disabled={sending}
+        data-cursor="magnetic"
       >
         {sending ? (
           'Sending...'
@@ -184,22 +189,34 @@ interface FieldProps {
 }
 
 function Field({ id, label, error, type, value, onChange, placeholder, autoComplete }: FieldProps) {
+  const [focused, setFocused] = useState(false);
+  const active = focused || value.length > 0;
+
   return (
     <div className={styles.group}>
-      <label className={styles.label} htmlFor={id}>
-        {label} <span aria-hidden="true">*</span>
-      </label>
-      <input
-        id={id}
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        className={`${styles.input} ${error ? styles.inputErr : ''}`}
-        aria-invalid={!!error}
-        aria-describedby={error ? `${id}-err` : undefined}
-      />
+      <div className={styles.inputWrap}>
+        <input
+          id={id}
+          type={type}
+          value={value}
+          onChange={onChange}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          placeholder={active ? placeholder : ''}
+          autoComplete={autoComplete}
+          className={`${styles.input} ${error ? styles.inputErr : ''}`}
+          aria-invalid={!!error}
+          aria-describedby={error ? `${id}-err` : undefined}
+        />
+        <motion.label
+          htmlFor={id}
+          className={`${styles.floatLabel} ${active ? styles.floatLabelActive : ''}`}
+          animate={active ? { y: -26, scale: 0.78 } : { y: 0, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+        >
+          {label} <span aria-hidden="true">*</span>
+        </motion.label>
+      </div>
       {error && (
         <span id={`${id}-err`} className={styles.err} role="alert">
           {error}
@@ -219,20 +236,32 @@ interface TextareaProps {
 }
 
 function TextareaField({ id, label, error, value, onChange, placeholder }: TextareaProps) {
+  const [focused, setFocused] = useState(false);
+  const active = focused || value.length > 0;
+
   return (
     <div className={styles.group}>
-      <label className={styles.label} htmlFor={id}>
-        {label} <span aria-hidden="true">*</span>
-      </label>
-      <textarea
-        id={id}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className={`${styles.textarea} ${error ? styles.inputErr : ''}`}
-        aria-invalid={!!error}
-        aria-describedby={error ? `${id}-err` : undefined}
-      />
+      <div className={styles.inputWrap}>
+        <textarea
+          id={id}
+          value={value}
+          onChange={onChange}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          placeholder={active ? placeholder : ''}
+          className={`${styles.textarea} ${error ? styles.inputErr : ''}`}
+          aria-invalid={!!error}
+          aria-describedby={error ? `${id}-err` : undefined}
+        />
+        <motion.label
+          htmlFor={id}
+          className={`${styles.floatLabel} ${active ? styles.floatLabelActive : ''}`}
+          animate={active ? { y: -26, scale: 0.78 } : { y: 0, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+        >
+          {label} <span aria-hidden="true">*</span>
+        </motion.label>
+      </div>
       {error && (
         <span id={`${id}-err`} className={styles.err} role="alert">
           {error}

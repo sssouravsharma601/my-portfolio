@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styles from './Footer.module.css';
 
 const YEAR = new Date().getFullYear();
@@ -6,7 +7,13 @@ export default function Footer() {
   return (
     <footer className={styles.footer} role="contentinfo">
       {/* ── Top row: Performance Diagnostics Console ── */}
-      <div className={styles.top}>
+      <motion.div
+        className={styles.top}
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className={styles.diagnostics}>
           <div className={styles.diagTitle}>
             <span className={styles.diagDot} aria-hidden="true" />
@@ -31,10 +38,16 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* ── Bottom row: Copyright & Links ── */}
-      <div className={styles.bottom}>
+      <motion.div
+        className={styles.bottom}
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className={styles.left}>
           © {YEAR} <strong>Sourav Sharma</strong> · Crafted in Dubai, UAE 🇦🇪
         </div>
@@ -54,7 +67,7 @@ export default function Footer() {
             LinkedIn ↗
           </a>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }

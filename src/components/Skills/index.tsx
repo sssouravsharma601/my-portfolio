@@ -1,7 +1,13 @@
+import { motion, type Variants } from 'framer-motion';
 import ScrollReveal from '../ui/ScrollReveal';
 import SkillCard from './SkillCard';
 import { skills } from '../../data/skills';
 import styles from './Skills.module.css';
+
+const gridVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+};
 
 export default function Skills() {
   return (
@@ -15,11 +21,17 @@ export default function Skills() {
         </p>
       </ScrollReveal>
 
-      <div className={styles.grid}>
+      <motion.div
+        className={styles.grid}
+        variants={gridVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+      >
         {skills.map((cat) => (
           <SkillCard key={cat.id} category={cat} />
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

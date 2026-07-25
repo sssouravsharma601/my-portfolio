@@ -30,6 +30,13 @@
   border-color: rgba(var(--primary-rgb), 0.75);
 }
 
+.ringMagnetic {
+  width: 74px;
+  height: 74px;
+  border-color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.08);
+}
+
 @media (max-width: 768px) {
   .dot,
   .ring {

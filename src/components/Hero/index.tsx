@@ -1,8 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useTyping } from '../../hooks/useTyping';
 import { useCounter } from '../../hooks/useCounter';
+import { useMagneticHover } from '../../hooks/useMagneticHover';
 import { heroStats } from '../../data/education';
 import { CpuIcon, ServerIcon, DatabaseIcon, PlatformsIcon, ArrowRightIcon } from '../ui/Icons';
+import { useGsapAnimation } from '../../animation/useGsapAnimation';
+import { gsap } from '../../animation/gsapConfig';
+import SplitText from '../../animation/SplitText';
 import styles from './Hero.module.css';
 
 const PHRASES = [
@@ -347,28 +351,79 @@ function SandboxPanel() {
 
 export default function Hero() {
   const typed = useTyping(PHRASES);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const sandboxWrapRef = useRef<HTMLDivElement>(null);
+  const exploreRef = useMagneticHover<HTMLAnchorElement>({ strength: 0.3 });
+
+  const heroRef = useGsapAnimation<HTMLElement>((scope) => {
+    const el = scope.current;
+    if (!el || !contentRef.current) return;
+
+    const mm = gsap.matchMedia();
+
+    // Load-in reveal: split name chars + staggered content, runs everywhere
+    // except when the user has asked for reduced motion.
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const chars = el.querySelectorAll('[data-hero-name] [data-split-part]');
+      const items = el.querySelectorAll('[data-hero-item]');
+
+      gsap
+        .timeline({ delay: 0.15, defaults: { ease: 'power4.out' } })
+        .from(chars, { yPercent: 130, opacity: 0, duration: 0.9, stagger: 0.03 })
+        .from(items, { y: 24, opacity: 0, duration: 0.7, stagger: 0.08 }, '-=0.55')
+        .from(sandboxWrapRef.current, { y: 40, opacity: 0, scale: 0.97, duration: 0.9 }, '-=0.6');
+    });
+
+    // Scroll-scrubbed pin + layered parallax exit, desktop only — pinning on
+    // touch devices tends to jank and hurts more than it helps.
+    mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: el,
+            start: 'top top',
+            end: '+=90%',
+            pin: true,
+            scrub: 1,
+          },
+        })
+        .to(contentRef.current, { yPercent: -16, opacity: 0.15, ease: 'none' })
+        .to(
+          sandboxWrapRef.current,
+          { yPercent: -6, scale: 0.92, opacity: 0.25, ease: 'none' },
+          '<',
+        );
+    });
+  }, []);
 
   return (
-    <section id="hero" className={styles.hero} aria-label="Introduction">
+    <section id="hero" className={styles.hero} aria-label="Introduction" ref={heroRef}>
       <div className={styles.dotGrid} aria-hidden="true" />
       <div className="radial-glow" aria-hidden="true" />
 
       <div className={styles.inner}>
         {/* ── Left column: profile detail ── */}
-        <div className={styles.content}>
-          <div className={styles.badge}>
+        <div className={styles.content} ref={contentRef}>
+          <div className={styles.badge} data-hero-item>
             <span className={styles.statusDot} aria-hidden="true" />
             Currently active on UAE fintech integrations
           </div>
 
-          <h1 className={styles.name}>Sourav Sharma</h1>
+          <h1 className={styles.name} data-hero-name>
+            <SplitText
+              as="span"
+              text="Sourav Sharma"
+              mode="chars"
+              partClassName={styles.nameChar}
+            />
+          </h1>
 
-          <p className={styles.role} aria-label="Role">
+          <p className={styles.role} data-hero-item aria-label="Role">
             <span>{typed}</span>
             <span className={styles.cursor} aria-hidden="true" />
           </p>
 
-          <p className={styles.desc}>
+          <p className={styles.desc} data-hero-item>
             I am a senior frontend engineer focused on building robust, high-performance web
             products. From orchestrating eligibility decision platforms at{' '}
             <strong>Emirates NBD</strong> to scaling transaction checkout lines for major consumer
@@ -376,8 +431,8 @@ export default function Hero() {
             and accessibility.
           </p>
 
-          <div className={styles.cta}>
-            <a href="#experience" className="btn-primary">
+          <div className={styles.cta} data-hero-item>
+            <a href="#experience" className="btn-primary" ref={exploreRef} data-cursor="magnetic">
               Explore Systems ↓
             </a>
             <a href="#contact" className="btn-ghost">
@@ -385,7 +440,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className={styles.stats} role="list" aria-label="Engineering stats">
+          <div className={styles.stats} data-hero-item role="list" aria-label="Engineering stats">
             {heroStats.map((s) => (
               <StatCounter key={s.label} value={s.value} suffix={s.suffix} label={s.label} />
             ))}
@@ -393,7 +448,9 @@ export default function Hero() {
         </div>
 
         {/* ── Right column: Interactive Architecture Diagram ── */}
-        <SandboxPanel />
+        <div className={styles.sandboxWrap} ref={sandboxWrapRef}>
+          <SandboxPanel />
+        </div>
       </div>
 
       <div className={styles.scrollCue} aria-hidden="true">

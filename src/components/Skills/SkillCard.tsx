@@ -1,5 +1,7 @@
+import { type PointerEvent } from 'react';
+import { motion, useMotionValue, useSpring, useTransform, type Variants } from 'framer-motion';
 import type { SkillCategory } from '../../types';
-import ScrollReveal from '../ui/ScrollReveal';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import {
   FrontendIcon,
   BackendIcon,
@@ -13,6 +15,13 @@ import styles from './Skills.module.css';
 interface Props {
   category: SkillCategory;
 }
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+};
+
+const TILT_SPRING = { stiffness: 220, damping: 22, mass: 0.6 };
 
 const getCategoryIcon = (iconKey: string) => {
   switch (iconKey) {
@@ -34,8 +43,38 @@ const getCategoryIcon = (iconKey: string) => {
 };
 
 export default function SkillCard({ category }: Props) {
+  const reducedMotion = usePrefersReducedMotion();
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(pointerY, [-0.5, 0.5], [7, -7]), TILT_SPRING);
+  const rotateY = useSpring(useTransform(pointerX, [-0.5, 0.5], [-7, 7]), TILT_SPRING);
+
+  const handlePointerMove = (e: PointerEvent<HTMLElement>) => {
+    if (reducedMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    pointerX.set((e.clientX - rect.left) / rect.width - 0.5);
+    pointerY.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const handlePointerLeave = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
+
   return (
-    <ScrollReveal className={styles.card} as="article" aria-label={category.title}>
+    <motion.article
+      className={styles.card}
+      aria-label={category.title}
+      variants={cardVariants}
+      style={
+        reducedMotion
+          ? undefined
+          : { rotateX, rotateY, transformPerspective: 900, transformStyle: 'preserve-3d' }
+      }
+      whileHover={reducedMotion ? undefined : { y: -6 }}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+    >
       <span className={styles.icon} aria-hidden="true">
         {getCategoryIcon(category.icon)}
       </span>
@@ -47,6 +86,6 @@ export default function SkillCard({ category }: Props) {
           </span>
         ))}
       </div>
-    </ScrollReveal>
+    </motion.article>
   );
 }
