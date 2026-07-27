@@ -49,29 +49,38 @@
   }
 }
 
+/* Hairline left-accent, not a bordered/filled box — matches the
+   editorial language used everywhere else now. */
 .card {
-  background: var(--bg-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.8rem;
-  border-left: 3px solid transparent;
-  transition:
-    border-color var(--t),
-    transform var(--t) var(--ease),
-    box-shadow var(--t);
+  border-left: 1px solid var(--border);
+  padding-left: 1.75rem;
+  transition: border-color var(--t);
 }
 
 .card:hover {
-  border-left-color: var(--primary);
-  border-color: var(--border-h);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-sm);
+  border-left-color: var(--border-h);
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
 }
 
 .icon {
   display: block;
-  margin-bottom: 1rem;
   color: var(--primary);
+}
+
+.year {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border-bright);
+  user-select: none;
 }
 
 .degree {
@@ -86,27 +95,11 @@
   color: var(--primary);
   font-size: 0.88rem;
   font-weight: 600;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.8rem;
 }
 
-.meta {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.badge {
-  background: var(--tag-bg);
-  border: 1px solid var(--border);
-  color: var(--text-2);
+.score {
   font-family: var(--mono);
-  font-size: 0.72rem;
-  padding: 0.2rem 0.65rem;
-  border-radius: 4px;
-}
-
-.highlight {
-  color: var(--primary);
-  border-color: rgba(var(--primary-rgb), 0.25);
-  background: var(--primary-dim);
+  font-size: 0.75rem;
+  color: var(--muted);
 }

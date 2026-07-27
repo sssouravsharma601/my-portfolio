@@ -1,4 +1,5 @@
 import ScrollReveal from '../ui/ScrollReveal';
+import SectionHeading from '../ui/SectionHeading';
 import ContactForm from './ContactForm';
 import { contactChannels } from '../../data/education';
 import { MailIcon, LinkedInIcon, PhoneIcon } from '../ui/Icons';
@@ -20,16 +21,15 @@ const getContactIcon = (iconKey: string) => {
 export default function Contact() {
   return (
     <section id="contact" className="section alt-bg" aria-label="Contact">
-      <ScrollReveal className="sec-hd">
-        <span className="sec-label">05 — Contact</span>
-        <h2 className="sec-title">Get In Touch</h2>
-        <p className="sec-desc">
-          Open to senior roles, technical advisory, and consulting opportunities globally.
-        </p>
-      </ScrollReveal>
+      <SectionHeading
+        index="05"
+        label="Contact"
+        title="Get In Touch"
+        description="Open to senior roles, technical advisory, and consulting opportunities globally."
+      />
 
       <div className={styles.grid}>
-        {/* Contact channels */}
+        {/* Contact channels — large list rows, not boxed cards */}
         <ScrollReveal direction="left">
           <ul className={styles.channels} role="list" aria-label="Contact channels">
             {contactChannels.map((ch) => (
@@ -56,9 +56,9 @@ export default function Contact() {
           </ul>
         </ScrollReveal>
 
-        {/* Form */}
+        {/* Form — flush, not a bordered card */}
         <ScrollReveal direction="right">
-          <div className={styles.formCard}>
+          <div className={styles.formWrap}>
             <div className={styles.formTitle}>Send a Message</div>
             <ContactForm />
           </div>

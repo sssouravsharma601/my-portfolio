@@ -4,7 +4,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { SmoothScrollProvider } from './animation/SmoothScrollProvider';
 import ErrorBoundary from './components/ErrorBoundary';
 
-import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
@@ -43,16 +43,18 @@ export default function App() {
             <ScrollProgress />
             <CustomCursor />
             <BackToTop />
-            <Navbar />
-            <main>
-              <Hero />
-              <About />
-              <Experience />
-              <Skills />
-              <Education />
-              <Contact />
-            </main>
-            <Footer />
+            <Sidebar />
+            <div className="content-shell">
+              <main id="main-content">
+                <Hero />
+                <About />
+                <Experience />
+                <Skills />
+                <Education />
+                <Contact />
+              </main>
+              <Footer />
+            </div>
           </SmoothScrollProvider>
         </ThemeProvider>
       </MotionConfig>

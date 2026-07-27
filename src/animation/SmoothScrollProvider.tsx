@@ -41,6 +41,8 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     // next animation frame then fights and snaps back from. Route in-page
     // hash links through `lenis.scrollTo()` instead so every "About" /
     // "Get In Touch" / back-to-top link keeps working.
+    // Offset compensates for the mobile top bar; the desktop sidebar takes
+    // no vertical space, so it only needs a small breathing-room gap.
     const onClick = (e: MouseEvent) => {
       const anchor = (e.target as HTMLElement).closest('a[href^="#"]');
       const hash = anchor?.getAttribute('href');
@@ -48,7 +50,8 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
       const target = document.querySelector(hash);
       if (!target) return;
       e.preventDefault();
-      instance.scrollTo(target as HTMLElement, { offset: -88 });
+      const isDesktopSidebar = window.matchMedia('(min-width: 1025px)').matches;
+      instance.scrollTo(target as HTMLElement, { offset: isDesktopSidebar ? -24 : -88 });
     };
     document.addEventListener('click', onClick);
 

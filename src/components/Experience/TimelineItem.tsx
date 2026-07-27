@@ -4,6 +4,7 @@ import styles from './Experience.module.css';
 
 interface Props {
   item: ExperienceItem;
+  index: number;
 }
 
 const getProjectIcon = (id: string) => {
@@ -21,21 +22,23 @@ const getProjectIcon = (id: string) => {
   }
 };
 
-export default function TimelineItem({ item }: Props) {
+export default function TimelineItem({ item, index }: Props) {
   return (
     <li className={styles.item} data-timeline-item>
-      <div className={styles.dot} data-timeline-dot aria-hidden="true" />
-      <div className={styles.card} data-timeline-card>
-        <div className={styles.head}>
-          <div>
-            <h3 className={styles.role}>{item.role}</h3>
-            <div className={styles.company}>{item.company}</div>
-          </div>
-          <span className={styles.period}>
-            {item.period} · {item.duration}
-          </span>
+      <div className={styles.head}>
+        <span className={styles.itemIndex} aria-hidden="true">
+          {String(index).padStart(2, '0')}
+        </span>
+        <div className={styles.headBody}>
+          <h3 className={styles.role}>{item.role}</h3>
+          <div className={styles.company}>{item.company}</div>
         </div>
+        <span className={styles.period}>
+          {item.period} · {item.duration}
+        </span>
+      </div>
 
+      <div className={styles.body}>
         <ul className={styles.bullets} aria-label="Responsibilities">
           {item.bullets.map((b, i) => (
             <li key={i}>{b}</li>

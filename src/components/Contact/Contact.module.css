@@ -5,47 +5,38 @@
   align-items: start;
 }
 
-/* Channels */
+/* ── Channels — large list rows with hairline dividers, not
+   small bordered/boxed cards ────────────────────────────────── */
 .channels {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
+  border-top: 1px solid var(--border);
 }
 
 .channel {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  gap: 1.25rem;
   color: var(--text);
   text-decoration: none;
-  padding: 1rem 1.2rem;
-  border-radius: var(--radius-sm);
-  border-left: 3px solid transparent;
+  padding: 1.6rem 0.25rem;
+  border-bottom: 1px solid var(--border);
   transition:
+    padding-left var(--t) var(--ease),
     border-color var(--t),
-    transform var(--t),
     color var(--t);
 }
 
 .channel:hover {
-  border-left-color: var(--primary);
-  transform: translateX(4px);
+  padding-left: 0.6rem;
+  border-color: var(--border-h);
   color: var(--primary);
 }
 
 .chIcon {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-sm);
-  background: var(--primary-dim);
-  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.05rem;
+  color: var(--primary);
   flex-shrink: 0;
 }
 
@@ -62,26 +53,26 @@
 }
 
 .chValue {
-  font-weight: 600;
-  font-size: 0.87rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: -0.3px;
+  margin-top: 0.25rem;
 }
 
 .chArrow {
   color: var(--muted);
   transition: transform var(--t);
-  font-size: 0.95rem;
+  font-size: 1.1rem;
 }
 
 .channel:hover .chArrow {
   transform: translateX(4px);
+  color: var(--primary);
 }
 
-/* Form card */
-.formCard {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2.2rem;
+/* ── Form — flush, no bordered card wrapper ─────────────────── */
+.formWrap {
+  max-width: 560px;
 }
 
 .formTitle {
@@ -131,37 +122,30 @@
   color: var(--primary);
 }
 
+/* Flush underline inputs, not filled bordered boxes */
 .input,
 .textarea {
   width: 100%;
-  background: var(--bg);
-  border: 1px solid var(--border);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
   color: var(--text);
-  border-radius: var(--radius-sm);
-  padding: 1.5rem 0.95rem 0.55rem;
-  font-size: 0.9rem;
+  padding: 1.5rem 0.1rem 0.6rem;
+  font-size: 0.95rem;
   font-family: var(--font);
   outline: none;
-  transition:
-    border-color var(--t),
-    box-shadow var(--t);
+  transition: border-color var(--t);
   -webkit-appearance: none;
-}
-
-[data-theme="light"] .input,
-[data-theme="light"] .textarea {
-  background: var(--bg-alt);
 }
 
 .input:focus,
 .textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-dim);
 }
 
 .inputErr {
   border-color: var(--red);
-  box-shadow: 0 0 0 3px rgba(255, 95, 109, 0.12);
 }
 
 .input::placeholder,
@@ -247,17 +231,7 @@
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: 1fr;
-  }
-  .channels {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .channels li {
-    flex: 1;
-    min-width: 200px;
-  }
-  .channel:hover {
-    transform: none;
+    gap: 3rem;
   }
 }
 
@@ -265,11 +239,7 @@
   .row {
     grid-template-columns: 1fr;
   }
-  .formCard {
-    padding: 1.5rem;
-  }
-  .channels li {
-    flex: none;
-    width: 100%;
+  .chValue {
+    font-size: 1.1rem;
   }
 }

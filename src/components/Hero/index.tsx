@@ -418,32 +418,34 @@ export default function Hero() {
             />
           </h1>
 
-          <p className={styles.role} data-hero-item aria-label="Role">
-            <span>{typed}</span>
-            <span className={styles.cursor} aria-hidden="true" />
-          </p>
+          <div className={styles.metaRow}>
+            <p className={styles.role} data-hero-item aria-label="Role">
+              <span>{typed}</span>
+              <span className={styles.cursor} aria-hidden="true" />
+            </p>
 
-          <p className={styles.desc} data-hero-item>
-            I am a senior frontend engineer focused on building robust, high-performance web
-            products. From orchestrating eligibility decision platforms at{' '}
-            <strong>Emirates NBD</strong> to scaling transaction checkout lines for major consumer
-            launches, I design frontend systems with an uncompromising focus on speed, structure,
-            and accessibility.
-          </p>
+            <p className={styles.desc} data-hero-item>
+              I am a senior frontend engineer focused on building robust, high-performance web
+              products. From orchestrating eligibility decision platforms at{' '}
+              <strong>Emirates NBD</strong> to scaling transaction checkout lines for major consumer
+              launches, I design frontend systems with an uncompromising focus on speed, structure,
+              and accessibility.
+            </p>
 
-          <div className={styles.cta} data-hero-item>
-            <a href="#experience" className="btn-primary" ref={exploreRef} data-cursor="magnetic">
-              Explore Systems ↓
-            </a>
-            <a href="#contact" className="btn-ghost">
-              Contact Engineer
-            </a>
-          </div>
+            <div className={styles.cta} data-hero-item>
+              <a href="#experience" className="btn-primary" ref={exploreRef} data-cursor="magnetic">
+                Explore Systems ↓
+              </a>
+              <a href="#contact" className="btn-ghost">
+                Contact Engineer
+              </a>
+            </div>
 
-          <div className={styles.stats} data-hero-item role="list" aria-label="Engineering stats">
-            {heroStats.map((s) => (
-              <StatCounter key={s.label} value={s.value} suffix={s.suffix} label={s.label} />
-            ))}
+            <div className={styles.stats} data-hero-item role="list" aria-label="Engineering stats">
+              {heroStats.map((s) => (
+                <StatCounter key={s.label} value={s.value} suffix={s.suffix} label={s.label} />
+              ))}
+            </div>
           </div>
         </div>
 

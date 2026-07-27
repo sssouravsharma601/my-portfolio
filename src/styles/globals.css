@@ -44,7 +44,10 @@
 
   /* Layout Spacing */
   --nav-h: 72px;
-  --section-pad: 8rem 8%;
+  --sidebar-w: 100px;
+  --section-pad-block: 8rem;
+  --section-pad-inline: 6vw;
+  --section-pad-inline-end: 9%;
   --radius: 12px;
   --radius-sm: 6px;
 
@@ -141,10 +144,46 @@ body::before {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   LAYOUT SHELL — sidebar-offset content column (desktop only;
+   the sidebar nav is fixed and takes no flow space, so content
+   needs an explicit offset instead of relying on a top navbar).
+   ═══════════════════════════════════════════════════════════ */
+.content-shell {
+  margin-left: 0;
+}
+
+@media (min-width: 1025px) {
+  .content-shell {
+    margin-left: var(--sidebar-w);
+  }
+}
+
+/* Visually hidden until focused — first tab stop, jumps past the sidebar. */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 10001;
+  background: var(--primary);
+  color: #ffffff;
+  padding: 0.7rem 1.2rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: top 0.2s var(--ease);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
    SECTION LAYOUT
    ═══════════════════════════════════════════════════════════ */
 .section {
-  padding: var(--section-pad);
+  padding-block: var(--section-pad-block);
+  padding-inline: var(--section-pad-inline) var(--section-pad-inline-end);
   position: relative;
   border-bottom: 1px solid var(--border);
 }
@@ -153,10 +192,32 @@ body::before {
   background: color-mix(in srgb, var(--bg-alt) 90%, transparent);
 }
 
-/* ── Section header ───────────────────────────────────────── */
+/* ── Section header — editorial index numeral instead of a
+   gradient-clipped eyebrow+title recipe repeated everywhere ── */
 .sec-hd {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.75rem;
   margin-bottom: 4.5rem;
-  max-width: 800px;
+  max-width: none;
+}
+
+.sec-index {
+  font-family: var(--mono);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 700;
+  line-height: 0.75;
+  flex-shrink: 0;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--border-bright);
+  user-select: none;
+}
+
+.sec-hd-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-bottom: 0.3rem;
 }
 
 .sec-label {
@@ -169,7 +230,6 @@ body::before {
   text-transform: uppercase;
   color: var(--primary);
   font-weight: 600;
-  margin-bottom: 1rem;
 }
 
 .sec-title {
@@ -177,18 +237,24 @@ body::before {
   font-weight: 700;
   letter-spacing: -1.2px;
   line-height: 1.1;
-  background: linear-gradient(120deg, var(--text) 30%, var(--primary) 130%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--text);
 }
 
 .sec-desc {
   color: var(--text-2);
   max-width: 600px;
-  margin-top: 1rem;
+  margin-top: 0.3rem;
   font-size: 1.1rem;
   line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .sec-hd {
+    gap: 1rem;
+  }
+  .sec-index {
+    font-size: 2.4rem;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -347,16 +413,22 @@ body::before {
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   :root {
-    --section-pad: 6rem 6%;
+    --section-pad-block: 6rem;
+    --section-pad-inline: 6%;
+    --section-pad-inline-end: 6%;
   }
 }
 @media (max-width: 768px) {
   :root {
-    --section-pad: 5rem 5%;
+    --section-pad-block: 5rem;
+    --section-pad-inline: 5%;
+    --section-pad-inline-end: 5%;
   }
 }
 @media (max-width: 480px) {
   :root {
-    --section-pad: 4rem 4%;
+    --section-pad-block: 4rem;
+    --section-pad-inline: 4%;
+    --section-pad-inline-end: 4%;
   }
 }

@@ -1,109 +1,68 @@
-/* Timeline */
-.timelineWrap {
-  position: relative;
-}
-
-.timeline {
+/* ── Editorial index list — large numerals + hairline rules,
+   not the dot-marker+bordered-card timeline recipe ────────── */
+.list {
   list-style: none;
-  position: relative;
-}
-
-/* Static faint track, always visible */
-.lineTrack {
-  position: absolute;
-  left: 0;
-  top: 10px;
-  bottom: 10px;
-  width: 1px;
-  background: var(--border);
-}
-
-/* Draws in as the user scrolls — see Experience/index.tsx's ScrollTrigger.
-   Defaults to fully drawn so reduced-motion users (who skip the GSAP branch)
-   still see a complete line, not a stuck scaleY(0). */
-.lineProgress {
-  position: absolute;
-  left: 0;
-  top: 10px;
-  bottom: 10px;
-  width: 1px;
-  background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
-  box-shadow: 0 0 8px var(--primary-glow);
-  transform-origin: top;
-  transform: scaleY(1);
 }
 
 .item {
-  position: relative;
-  padding-left: 2.6rem;
-  margin-bottom: 2.4rem;
+  padding-block: 2.6rem;
+  border-top: 1px solid var(--border);
 }
 
-.dot {
-  position: absolute;
-  left: -6px;
-  top: 12px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 3px solid var(--primary);
-  box-shadow: 0 0 8px var(--primary-glow);
-}
-
-/* Card */
-.card {
-  background: var(--bg-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.8rem 2rem;
-  border-left: 3px solid transparent;
-  transition:
-    border-color var(--t),
-    transform var(--t) var(--ease),
-    box-shadow var(--t);
-  position: relative;
-}
-
-.card:hover {
-  border-left-color: var(--primary);
-  border-color: var(--border-h);
-  transform: translateX(4px);
-  box-shadow: var(--shadow-sm);
+.item:last-child {
+  padding-bottom: 0;
 }
 
 .head {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: 1.2rem;
+  gap: 1.5rem;
+  margin-bottom: 1.6rem;
+}
+
+.itemIndex {
+  font-family: var(--mono);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 0.8;
+  flex-shrink: 0;
+  color: transparent;
+  -webkit-text-stroke: 1.25px var(--border-bright);
+  user-select: none;
+  padding-top: 0.2rem;
+}
+
+.headBody {
+  flex: 1;
+  min-width: 0;
 }
 
 .role {
-  font-size: 1.15rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--text);
-  letter-spacing: -0.5px;
+  letter-spacing: -0.6px;
 }
 
 .company {
   color: var(--primary);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  margin-top: 0.15rem;
+  margin-top: 0.3rem;
 }
 
 .period {
-  background: var(--tag-bg);
-  border: 1px solid var(--border);
-  color: var(--text-2);
+  color: var(--muted);
   font-family: var(--mono);
-  font-size: 0.72rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
+  font-size: 0.75rem;
   white-space: nowrap;
+  padding-top: 0.4rem;
+  flex-shrink: 0;
+}
+
+/* Body indents to align under the headline, past the numeral column */
+.body {
+  padding-left: calc(2.6rem + 1.5rem);
 }
 
 .bullets {
@@ -129,15 +88,10 @@
   top: 0.1rem;
 }
 
+/* Project sub-block — a left accent rule, not a nested bordered box */
 .project {
-  background: rgba(255, 255, 255, 0.015);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 1rem 1.25rem;
-}
-
-[data-theme="light"] .project {
-  background: var(--bg);
+  border-left: 2px solid var(--border-h);
+  padding-left: 1.25rem;
 }
 
 .projectName {
@@ -166,10 +120,6 @@
   font-family: var(--mono);
   font-size: 0.68rem;
   color: var(--muted);
-  background: var(--tag-bg);
-  border: 1px solid var(--border);
-  padding: 0.15rem 0.5rem;
-  border-radius: 3px;
   white-space: nowrap;
 }
 
@@ -187,10 +137,20 @@
 }
 
 @media (max-width: 768px) {
-  .card:hover {
-    transform: none;
-  }
   .item {
-    padding-left: 1.8rem;
+    padding-block: 2rem;
+  }
+  .itemIndex {
+    font-size: 2rem;
+  }
+  .head {
+    gap: 1rem;
+  }
+  .body {
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+  .period {
+    padding-top: 0;
   }
 }

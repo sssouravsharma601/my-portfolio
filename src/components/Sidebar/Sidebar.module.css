@@ -1,0 +1,290 @@
+/* ── Desktop sidebar ───────────────────────────────────────── */
+.sidebar {
+  display: none;
+  position: fixed;
+  inset-block: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  z-index: 1000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1.8rem;
+  border-right: 1px solid var(--border);
+  background: rgba(9, 9, 11, 0.7);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+[data-theme="light"] .sidebar {
+  background: rgba(248, 250, 252, 0.75);
+}
+
+@media (min-width: 1025px) {
+  .sidebar {
+    display: flex;
+  }
+}
+
+.logo {
+  display: flex;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logoAvatar {
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  object-fit: cover;
+  display: block;
+  transition: border-color var(--t);
+}
+
+.logo:hover .logoAvatar {
+  border-color: var(--primary);
+}
+
+/* ── Vertical nav rail ─────────────────────────────────────── */
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.navLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.navDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition:
+    background var(--t),
+    transform var(--t) var(--ease);
+}
+
+.navLink:hover .navDot,
+.navLinkActive .navDot {
+  background: var(--primary);
+  transform: scale(1.5);
+}
+
+.activeRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary-glow);
+}
+
+.navTooltip {
+  position: absolute;
+  left: calc(100% + 0.85rem);
+  top: 50%;
+  transform: translateY(-50%) translateX(-6px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--text);
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: var(--shadow-sm);
+  transition:
+    opacity var(--t) var(--ease),
+    transform var(--t) var(--ease);
+}
+
+.navLink:hover .navTooltip,
+.navLink:focus-visible .navTooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── Sidebar footer: theme toggle + CTA ───────────────────────*/
+.sidebarFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.themeBtn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--t);
+  flex-shrink: 0;
+}
+
+.themeBtn:hover {
+  border-color: var(--primary);
+  color: var(--text);
+  background: var(--primary-dim);
+}
+
+.themeBtn svg {
+  display: block;
+}
+
+.hireDot {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.32);
+  transition:
+    filter var(--t),
+    box-shadow var(--t);
+}
+
+.hireDot:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.45);
+}
+
+/* ── Mobile top bar (< 1025px) ─────────────────────────────── */
+.mobileBar {
+  display: flex;
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  height: var(--nav-h);
+  z-index: 1000;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6%;
+  background: rgba(9, 9, 11, 0.85);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-bottom: 1px solid var(--border);
+  transition:
+    box-shadow var(--t),
+    background var(--t);
+}
+
+[data-theme="light"] .mobileBar {
+  background: rgba(248, 250, 252, 0.85);
+}
+
+.mobileBarScrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 1025px) {
+  .mobileBar {
+    display: none;
+  }
+}
+
+.mobileActions {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all var(--t);
+}
+
+.hamburgerOpen span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburgerOpen span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-8px);
+}
+.hamburgerOpen span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ── Mobile full-screen nav overlay ───────────────────────────*/
+.mobileNav {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  z-index: 999;
+  background: rgba(9, 9, 11, 0.98);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.2rem;
+}
+
+[data-theme="light"] .mobileNav {
+  background: rgba(248, 250, 252, 0.98);
+}
+
+.mobileLink {
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  transition: color var(--t);
+}
+
+.mobileLink:hover {
+  color: var(--text);
+}
+
+.mobileHire {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  background: var(--primary);
+  padding: 0.8rem 2.2rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 12px rgba(91, 141, 239, 0.18);
+  transition:
+    filter var(--t),
+    transform var(--t);
+}
+
+.mobileHire:hover {
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+}

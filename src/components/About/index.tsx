@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, type Variants } from 'framer-motion';
-import ScrollReveal from '../ui/ScrollReveal';
+import SectionHeading from '../ui/SectionHeading';
 import {
   LocationIcon,
   MailIcon,
@@ -97,14 +97,12 @@ export default function About() {
 
   return (
     <section id="about" className={`section alt-bg ${styles.about}`} aria-label="About">
-      <ScrollReveal className="sec-hd">
-        <span className="sec-label">02 — Profile Overview</span>
-        <h2 className="sec-title">The Engineer</h2>
-        <p className="sec-desc">
-          Building durable frontend foundations and low-latency API wrappers to power enterprise web
-          clients.
-        </p>
-      </ScrollReveal>
+      <SectionHeading
+        index="02"
+        label="Profile Overview"
+        title="The Engineer"
+        description="Building durable frontend foundations and low-latency API wrappers to power enterprise web clients."
+      />
 
       <div className={styles.grid}>
         {/* ── Left: photo card ─────────────────────────────── */}
@@ -130,25 +128,25 @@ export default function About() {
             </div>
           </div>
 
-          {/* Quick stat chips below photo */}
+          {/* Quick stats below photo — hairline-divided, not boxed chips */}
           <motion.div
-            className={styles.chips}
+            className={styles.stats}
             variants={chipVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.4 }}
           >
-            <motion.div className={styles.chip} variants={itemVariants}>
-              <span className={styles.chipNum}>8+</span>
-              <span className={styles.chipLabel}>Years Exp</span>
+            <motion.div className={styles.stat} variants={itemVariants}>
+              <span className={styles.statNum}>8+</span>
+              <span className={styles.statLabel}>Years Exp</span>
             </motion.div>
-            <motion.div className={styles.chip} variants={itemVariants}>
-              <span className={styles.chipNum}>12+</span>
-              <span className={styles.chipLabel}>Systems</span>
+            <motion.div className={styles.stat} variants={itemVariants}>
+              <span className={styles.statNum}>12+</span>
+              <span className={styles.statLabel}>Systems</span>
             </motion.div>
-            <motion.div className={styles.chip} variants={itemVariants}>
-              <span className={styles.chipNum}>4</span>
-              <span className={styles.chipLabel}>Scales</span>
+            <motion.div className={styles.stat} variants={itemVariants}>
+              <span className={styles.statNum}>4</span>
+              <span className={styles.statLabel}>Scales</span>
             </motion.div>
           </motion.div>
         </div>

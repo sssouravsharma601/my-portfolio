@@ -7,7 +7,9 @@ export const COUNTER_DURATION_MS = 1600;
 export const SCROLL_REVEAL_THRESHOLD = 0.15; // 15 % visible before triggering
 export const SCROLL_REVEAL_ROOT_MARGIN = '0px 0px -60px 0px';
 export const BACK_TO_TOP_THRESHOLD_PX = 400;
-export const NAV_SECTION_OFFSET_PX = 130;
+// Tuned for a borderless sidebar on desktop (no fixed top bar to compensate
+// for) and the shorter mobile top bar — smaller than the old top-navbar era.
+export const NAV_SECTION_OFFSET_PX = 96;
 
 // ── Canvas particle network ──────────────────────────────────────────────────
 export const PARTICLE_COUNT = 65;
