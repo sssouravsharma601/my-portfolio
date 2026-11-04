@@ -1,156 +1,140 @@
-/* ── Editorial index list — large numerals + hairline rules,
-   not the dot-marker+bordered-card timeline recipe ────────── */
 .list {
+  padding: 0;
   list-style: none;
 }
 
 .item {
-  padding-block: 2.6rem;
-  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 32px;
+  padding-block: 36px;
+  border-top: 1px solid var(--rule);
 }
 
-.item:last-child {
-  padding-bottom: 0;
+.item:first-child {
+  padding-top: 0;
+  border-top: 0;
 }
 
-.head {
+.when {
   display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin-bottom: 1.6rem;
-}
-
-.itemIndex {
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 6px;
+  color: var(--ink-2);
   font-family: var(--mono);
-  font-size: 2.6rem;
-  font-weight: 700;
-  line-height: 0.8;
-  flex-shrink: 0;
-  color: transparent;
-  -webkit-text-stroke: 1.25px var(--border-bright);
-  user-select: none;
-  padding-top: 0.2rem;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
-.headBody {
-  flex: 1;
-  min-width: 0;
+.duration {
+  color: var(--ink-3);
 }
 
-.role {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.6px;
+.what {
+  max-width: var(--measure);
 }
 
-.company {
-  color: var(--primary);
-  font-size: 0.92rem;
-  font-weight: 600;
-  margin-top: 0.3rem;
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 8px;
+  font-family: var(--serif);
+  font-size: 1.875rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
-.period {
-  color: var(--muted);
-  font-family: var(--mono);
+.context {
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+.now {
+  align-self: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--sans);
   font-size: 0.75rem;
-  white-space: nowrap;
-  padding-top: 0.4rem;
-  flex-shrink: 0;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
-/* Body indents to align under the headline, past the numeral column */
-.body {
-  padding-left: calc(2.6rem + 1.5rem);
+.title {
+  margin-top: 4px;
+  font-size: 0.9375rem;
+  font-weight: 500;
 }
 
-.bullets {
+.summary {
+  margin-top: 14px;
+  color: var(--ink-2);
+}
+
+.highlights {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 0;
   list-style: none;
-  margin-bottom: 1.5rem;
+  color: var(--ink-2);
 }
 
-.bullets li {
+.highlights li {
   position: relative;
-  padding-left: 1.5rem;
-  color: var(--text-2);
-  font-size: 0.95rem;
-  line-height: 1.7;
-  margin-bottom: 0.5rem;
+  padding-left: 20px;
 }
 
-.bullets li::before {
-  content: "→";
+.highlights li::before {
+  content: "";
   position: absolute;
-  left: 0;
-  color: var(--primary);
-  font-size: 0.8rem;
-  top: 0.1rem;
+  left: 2px;
+  top: 0.8em;
+  width: 8px;
+  height: 1px;
+  background: var(--ink-3);
 }
 
-/* Project sub-block — a left accent rule, not a nested bordered box */
-.project {
-  border-left: 2px solid var(--border-h);
-  padding-left: 1.25rem;
-}
-
-.projectName {
+.stack {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-weight: 700;
-  color: var(--text);
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
   flex-wrap: wrap;
-}
-
-.projectIcon {
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.projectTitleText {
-  flex-grow: 1;
-}
-
-.teamBadge {
+  margin-top: 18px;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-3);
   font-family: var(--mono);
-  font-size: 0.68rem;
-  color: var(--muted);
+  font-size: 0.8125rem;
+  letter-spacing: -0.01em;
+}
+
+.stack li {
   white-space: nowrap;
 }
 
-.projectDesc {
-  color: var(--text-2);
-  font-size: 0.86rem;
-  line-height: 1.6;
-  margin-bottom: 0.8rem;
+.stack li:not(:last-child)::after {
+  content: "·";
+  margin-inline: 0.6em;
+  opacity: 0.7;
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 680px) {
   .item {
-    padding-block: 2rem;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
-  .itemIndex {
-    font-size: 2rem;
-  }
-  .head {
-    gap: 1rem;
-  }
-  .body {
-    padding-left: 0;
-    margin-top: 1rem;
-  }
-  .period {
+
+  .when {
+    flex-direction: row;
+    gap: 10px;
     padding-top: 0;
+  }
+
+  .duration::before {
+    content: "·";
+    margin-right: 10px;
   }
 }

@@ -7,18 +7,28 @@ Live site → [sssouravsharma601.github.io/my-portfolio](https://sssouravsharma6
 
 ---
 
+## Design
+
+Quiet, typographic, content-first. The page is built to be skimmed by a recruiter in under a minute and read properly by an engineer.
+
+- **Type:** Instrument Serif for display, Geist for text, Geist Mono for dates and stacks.
+- **Colour:** warm paper / ink with a single blue accent. Light and dark themes; the initial theme is resolved before first paint from the saved choice or the OS preference, and follows OS changes until the visitor picks one.
+- **Layout:** one editorial grid (sticky section label + content column) that collapses to a single column under 820px.
+- **Motion:** one staggered entrance on load and CSS scroll-driven reveals (`animation-timeline: view()`) where supported. No animation libraries. Content is always visible when motion is unsupported, reduced, or printed.
+
 ## Tech Stack
 
 | Layer | Choice |
 |---|---|
-| UI framework | React 18 (StrictMode) |
-| Language | TypeScript 5 strict |
+| UI | React 18 (StrictMode), no runtime deps beyond React |
+| Language | TypeScript 5, strict |
 | Bundler | Vite 5 |
-| Styling | CSS Modules + CSS custom properties |
+| Styling | CSS Modules + custom properties |
 | Testing | Vitest + Testing Library |
-| Linting | ESLint 8 + `@typescript-eslint` |
-| Formatting | Prettier 3 |
+| Lint / format | ESLint 8 + `@typescript-eslint`, Prettier 3 |
 | CI/CD | GitHub Actions → GitHub Pages |
+
+Production JS is ~55 KB gzipped (React ~45 KB, app ~10 KB).
 
 ---
 
@@ -26,36 +36,29 @@ Live site → [sssouravsharma601.github.io/my-portfolio](https://sssouravsharma6
 
 ```
 src/
+├── App.tsx                 # Page composition + best-effort framebusting
+├── data/profile.ts         # All content: roles, highlights, skills, education
 ├── components/
-│   ├── ErrorBoundary/      # Class-based error boundary with recovery UI
-│   ├── Navbar/
-│   ├── Hero/
-│   ├── About/
-│   ├── Experience/
-│   ├── Skills/
-│   ├── Education/
-│   ├── Contact/            # ContactForm uses service + validation utils
+│   ├── Header/             # Sticky bar, anchor nav, theme toggle
+│   ├── Intro/              # Statement, at-a-glance facts, primary actions
+│   ├── Section/            # Shared two-column section layout
+│   ├── About/              # Bio + selected results
+│   ├── Experience/         # Roles with computed durations
+│   ├── Skills/             # Toolkit + education
+│   ├── Contact/            # Email (copy), links, ContactForm
+│   ├── LocalTime/          # Live Dubai time
 │   ├── Footer/
-│   └── ui/
-│       ├── ScrollReveal.tsx   # Polymorphic IntersectionObserver wrapper
-│       ├── ParticleCanvas.tsx # Canvas particle network (~30 fps)
-│       ├── CustomCursor.tsx
-│       └── BackToTop.tsx
-├── constants/index.ts      # All magic numbers / strings in one place
-├── context/ThemeContext.tsx # Dark / light theme via Context API
-├── data/                   # Static content (experience, skills, education)
-├── hooks/                  # useScrollReveal · useTyping · useCounter · …
-├── services/
-│   └── contact.service.ts  # Formspree (primary) → mailto fallback
-├── styles/
-│   ├── globals.css         # CSS tokens + resets + utility classes
-│   └── animations.css      # reveal-up / reveal-left / reveal-right
-├── test/setup.ts           # @testing-library/jest-dom global matchers
-├── types/index.ts          # Shared TypeScript interfaces
-└── utils/
-    ├── sanitize.ts         # DOM text-node sanitiser, regex fallback for SSR
-    └── validation.ts       # isValidEmail · isMinLength · validateContactForm
+│   ├── ErrorBoundary/
+│   └── Icons.tsx
+├── context/ThemeContext.tsx
+├── hooks/useTheme.ts       # Saved choice → OS preference → live OS changes
+├── services/contact.service.ts  # Formspree → mailto fallback
+├── styles/globals.css      # Tokens, base, primitives, motion
+├── utils/                  # date · sanitize · validation (+ tests)
+└── types/index.ts
 ```
+
+To update content, edit `src/data/profile.ts`. Durations and years of experience are computed from dates, so they never go stale.
 
 ---
 
@@ -106,8 +109,8 @@ Without this the form falls back to a pre-filled `mailto:` link.
 
 ## Security Highlights
 
-- **Content-Security-Policy** meta tag (script-src self only, no unsafe-inline)
-- **X-Frame-Options: DENY** + JS `FrameGuard` component — double-fenced against clickjacking
+- **Content-Security-Policy** meta tag. `script-src` still allows `'unsafe-inline'` for the pre-paint theme script and JSON-LD; moving to a hash-based policy is a possible follow-up.
+- **Clickjacking:** GitHub Pages can't send `X-Frame-Options` or `frame-ancestors` headers, and neither works from a `<meta>` tag, so the site uses JS framebusting as a best-effort fallback. A CDN in front (e.g. Cloudflare) is needed for a real header.
 - **Permissions-Policy** — disables camera, microphone, geolocation
 - **Referrer-Policy: strict-origin-when-cross-origin**
 - **Honeypot field** on the contact form to filter bot submissions
@@ -131,4 +134,4 @@ Every push to `main` or a feature branch runs:
 
 ## License
 
-MIT — feel free to use this as a template for your own portfolio.
+MIT.
