@@ -1,18 +1,35 @@
+import { useEffect, useState } from 'react';
 import { useThemeContext } from '../../context/ThemeContext';
+import { useActiveSection } from '../../hooks/useActiveSection';
 import { profile } from '../../data/profile';
+import CommandPalette from '../CommandPalette';
 import { Moon, Sun } from '../Icons';
 import styles from './Header.module.css';
 
 const NAV = [
-  { href: '#about', label: 'About' },
-  { href: '#work', label: 'Work' },
-  { href: '#skills', label: 'Toolkit' },
-  { href: '#contact', label: 'Contact' },
+  { id: 'about', label: 'About' },
+  { id: 'work', label: 'Work' },
+  { id: 'skills', label: 'Toolkit' },
+  { id: 'contact', label: 'Contact' },
 ];
+const IDS = NAV.map((n) => n.id);
 
 export default function Header() {
   const { theme, toggle } = useThemeContext();
+  const active = useActiveSection(IDS);
+  const [palette, setPalette] = useState(false);
   const next = theme === 'dark' ? 'light' : 'dark';
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setPalette((open) => !open);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   return (
     <header className={styles.bar}>
@@ -21,19 +38,32 @@ export default function Header() {
           <span className={styles.prompt} aria-hidden="true">
             ~/
           </span>
-          <span className={styles.brandFull}>sourav-sharma</span>
-          <span className={styles.brandShort} aria-hidden="true">
-            ss
-          </span>
+          sourav-sharma
         </a>
 
         <nav aria-label="Primary" className={styles.nav}>
           {NAV.map((n) => (
-            <a key={n.href} href={n.href} className={`label ${styles.navLink}`}>
+            <a
+              key={n.id}
+              href={`#${n.id}`}
+              className={`label ${styles.navLink}`}
+              aria-current={active === n.id ? 'location' : undefined}
+            >
               {n.label}
             </a>
           ))}
         </nav>
+
+        <button
+          type="button"
+          className={`label ${styles.command}`}
+          onClick={() => setPalette(true)}
+          aria-haspopup="dialog"
+          aria-label="Open command palette"
+        >
+          <span className={styles.menuWord}>Menu</span>
+          <kbd className={styles.keys}>⌘K</kbd>
+        </button>
 
         <button
           type="button"
@@ -45,6 +75,8 @@ export default function Header() {
           {theme === 'dark' ? <Sun /> : <Moon />}
         </button>
       </div>
+
+      <CommandPalette open={palette} onClose={() => setPalette(false)} />
     </header>
   );
 }

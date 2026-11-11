@@ -1,4 +1,5 @@
 import { highlights, profile, YEARS } from '../../data/profile';
+import CountUp from '../CountUp';
 import Section from '../Section';
 import styles from './About.module.css';
 
@@ -22,9 +23,11 @@ export default function About() {
 
       <ul className={styles.numbers} aria-label="Selected results">
         {highlights.map((h) => (
-          <li key={h.label} className="reveal">
+          <li key={h.label} className="reveal" data-spot>
             <span className={`label ${styles.where}`}>{h.where}</span>
-            <span className={styles.value}>{h.value}</span>
+            <span className={styles.value}>
+              <CountUp value={h.value} />
+            </span>
             <span className={styles.label}>{h.label}</span>
           </li>
         ))}

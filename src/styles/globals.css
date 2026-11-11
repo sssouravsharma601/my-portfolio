@@ -17,9 +17,10 @@
   --ink-3: #5f6776;
   --line: #c9ced8;
   --grid: rgba(11, 13, 18, 0.055);
-  --accent: #2b59ff;
+  --accent: #5163e0;
+  --accent-soft: rgba(81, 99, 224, 0.13);
   /* Accent for small text on the page background. */
-  --accent-text: #2247d6;
+  --accent-text: #4252cc;
   --on-accent: #ffffff;
   --string: #8a4a06;
   --danger: #b3261e;
@@ -28,7 +29,7 @@
   --sans: "Archivo Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
 
-  --page: 1360px;
+  --page: 85rem;
   --gutter: clamp(18px, 4vw, 56px);
   --rule: 1px;
   --bar: 60px;
@@ -46,8 +47,9 @@
   --ink-3: #838b9a;
   --line: #262b35;
   --grid: rgba(232, 235, 240, 0.05);
-  --accent: #3160ff;
-  --accent-text: #8ea8ff;
+  --accent: #5566e3;
+  --accent-soft: rgba(124, 138, 245, 0.14);
+  --accent-text: #a9b3ff;
   --on-accent: #ffffff;
   --string: #e2ab72;
   --danger: #ff8f7a;
@@ -67,9 +69,12 @@
 }
 
 html {
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--bar) + 16px);
+  /* Type and the page width (set in rem) grow together on large displays. */
+  font-size: clamp(100%, 0.5vw + 0.5rem, 137.5%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -146,7 +151,8 @@ p {
   width: 100%;
   max-width: calc(var(--page) + var(--gutter) * 2);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
 }
 
 /* Small uppercase mono label: the "spec sheet" voice of the page. */
@@ -192,6 +198,32 @@ p {
   clip: rect(0 0 0 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Pointer spotlight. hooks/useSpotlight.ts writes --mx / --my. */
+[data-spot] {
+  position: relative;
+}
+
+[data-spot]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    280px circle at var(--mx, 50%) var(--my, 50%),
+    var(--accent-soft),
+    transparent 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+@media (hover: hover) {
+  [data-spot]:hover::after {
+    opacity: 1;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────

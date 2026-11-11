@@ -21,7 +21,7 @@ main {
   font-size: clamp(6rem, 30vw, 16rem);
   font-weight: 800;
   line-height: 0.8;
-  color: #2b59ff;
+  color: #5163e0;
 }
 
 h1 {
@@ -41,6 +41,6 @@ a {
   }
 
   .code {
-    color: #8ea8ff;
+    color: #a9b3ff;
   }
 }

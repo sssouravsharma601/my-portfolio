@@ -12,10 +12,25 @@ Live site → [souravsharma.in](https://souravsharma.in/)
 Built to read as an engineer's site: precise, cool, and a little like an editor.
 
 - **Type:** Archivo (variable weight and width) for display and text, JetBrains Mono for labels, the nav and the code panel. Both self-hosted.
-- **Colour:** cool neutrals with one blue accent, in light and dark. The initial theme is resolved before first paint from the saved choice or the OS preference.
+- **Colour:** cool neutrals with one soft indigo accent, in light and dark. The initial theme is resolved before first paint from the saved choice or the OS preference.
 - **Technical cues:** a drafting grid behind the hero, 1px hairlines, a `~/sourav-sharma` brand, and the at-a-glance facts written as a TypeScript object.
-- **Signature interaction:** letters of the name lose weight and width near the pointer, so the cursor dents the wordmark. Fine pointers only; off under reduced motion.
-- **Motion:** everything else is scroll-linked CSS (`animation-timeline`): reveals, the wire that fills beside the experience list, the ticker, the page progress bar. Nothing runs on its own, and content is fully visible when motion is unsupported, reduced, or printed. No animation libraries.
+
+### Interaction
+
+Everything responds to the visitor; nothing plays on its own.
+
+- **Kinetic name:** letters lose weight and width near the pointer, or under a finger dragged across them.
+- **Reactive grid:** the hero grid lights up and trails behind the pointer (`Hero/Field.tsx`, a small canvas that only draws while something is changing). The portrait leans toward the cursor.
+- **Command palette:** `⌘K` / `Ctrl+K`, or the header button, opens a native `<dialog>` to jump to a section, switch theme or copy the email. Below 760px it is the menu.
+- **Spotlight:** cards and the contact panel show a soft light under the cursor (`hooks/useSpotlight.ts`).
+- **Count-up:** the result figures count to their value the first time they scroll into view.
+- **Scroll-linked CSS** (`animation-timeline`): reveals, the wire beside the experience list, the ticker, the progress bar, and the current-section marker in the nav.
+
+All of it is off under `prefers-reduced-motion`, and the content is complete without JavaScript.
+
+### Displays
+
+Sizes are fluid from 320px phones to 4K. The root font size and the page width (set in `rem`) scale together above 1440px, safe-area insets are respected on notched phones, and hover-only effects are limited to devices that can hover.
 
 ## SEO
 
@@ -61,7 +76,9 @@ src/
 ├── data/profile.ts         # All content: roles, highlights, skills, education
 ├── components/
 │   ├── Header/             # Sticky bar, anchor nav, theme toggle
-│   ├── Hero/               # Kinetic wordmark, portrait, code panel, ticker
+│   ├── Hero/               # Kinetic wordmark, reactive grid, portrait, code panel
+│   ├── CommandPalette/     # ⌘K dialog; the menu on small screens
+│   ├── CountUp/            # Figures that count up when scrolled into view
 │   ├── Section/            # Shared numbered section header
 │   ├── About/              # Bio + selected results
 │   ├── Experience/         # Roles on a scroll-filled wire, computed durations
@@ -72,7 +89,7 @@ src/
 │   ├── ErrorBoundary/
 │   └── Icons.tsx
 ├── context/ThemeContext.tsx
-├── hooks/useTheme.ts       # Theme as an external store (hydration-safe)
+├── hooks/                  # useTheme (external store) · useSpotlight · useActiveSection
 ├── services/contact.service.ts  # Formspree → mailto fallback
 ├── styles/globals.css      # Fonts, tokens, base, primitives, motion
 ├── utils/                  # date · sanitize · validation (+ tests)

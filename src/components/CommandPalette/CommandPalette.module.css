@@ -1,0 +1,107 @@
+.dialog {
+  width: min(560px, calc(100vw - 24px));
+  max-height: min(480px, calc(100dvh - 96px));
+  margin: 12vh auto auto;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  overflow: visible;
+}
+
+.dialog::backdrop {
+  background: color-mix(in srgb, var(--paper) 55%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  max-height: inherit;
+  background: var(--paper);
+  border: var(--rule) solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 24px 80px -20px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dialog[open] .panel {
+    animation: pop 0.22s var(--ease-out);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: var(--rule) solid var(--line);
+  font-family: var(--mono);
+}
+
+.caret {
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-family: var(--mono);
+  font-size: 0.9375rem;
+}
+
+.search input::placeholder {
+  color: var(--ink-3);
+}
+
+.esc {
+  padding: 3px 7px;
+  background: transparent;
+  border: var(--rule) solid var(--line);
+  border-radius: 4px;
+  color: var(--ink-3);
+}
+
+.list {
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.item[aria-selected="true"] {
+  background: var(--accent-soft);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.hint {
+  color: var(--ink-3);
+}
+
+.empty {
+  padding: 16px 12px;
+  color: var(--ink-3);
+}

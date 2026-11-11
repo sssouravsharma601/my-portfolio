@@ -29,26 +29,14 @@
   flex-direction: column;
   gap: 6px;
   padding: clamp(16px, 2vw, 28px);
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease;
 }
 
 .numbers li + li {
   border-left: var(--rule) solid var(--line);
 }
 
-.numbers li:hover {
-  background: var(--accent);
-  color: var(--on-accent);
-}
-
 .where {
   color: var(--ink-3);
-}
-
-.numbers li:hover .where {
-  color: inherit;
 }
 
 .value {
