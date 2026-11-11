@@ -1,6 +1,7 @@
 import { useEffect, useRef, type ReactNode, type RefObject } from 'react';
 import { profile } from '../../data/profile';
 import LocalTime from '../LocalTime';
+import Field from './Field';
 import { ArrowUpRight } from '../Icons';
 import styles from './Hero.module.css';
 
@@ -21,13 +22,13 @@ const WDTH = { rest: 100, min: 66 };
 /**
  * The name is set in a variable font. Letters near the pointer lose weight
  * and width, so the cursor leaves a dent in the wordmark as it moves.
- * Fine pointers only, and never when the visitor prefers reduced motion.
+ * Works with a mouse, a pen, or a finger dragged across the name; never when
+ * the visitor prefers reduced motion.
  */
 function useKineticType(ref: RefObject<HTMLElement>) {
   useEffect(() => {
     const el = ref.current;
     if (!el || !window.matchMedia) return;
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const letters = Array.from(el.querySelectorAll<HTMLElement>('[data-letter]'));
@@ -55,7 +56,9 @@ function useKineticType(ref: RefObject<HTMLElement>) {
       y = e.clientY;
       if (!frame) frame = requestAnimationFrame(paint);
     };
-    const onLeave = () => {
+    const onLeave = (e: PointerEvent) => {
+      // A mouse button release is not the end of a hover.
+      if (e.type === 'pointerup' && e.pointerType === 'mouse') return;
       cancelAnimationFrame(frame);
       frame = 0;
       letters.forEach((l) => {
@@ -64,11 +67,14 @@ function useKineticType(ref: RefObject<HTMLElement>) {
       });
     };
 
+    const events = ['pointerleave', 'pointerup', 'pointercancel'] as const;
     el.addEventListener('pointermove', onMove);
-    el.addEventListener('pointerleave', onLeave);
+    el.addEventListener('pointerdown', onMove);
+    events.forEach((t) => el.addEventListener(t, onLeave));
     return () => {
       el.removeEventListener('pointermove', onMove);
-      el.removeEventListener('pointerleave', onLeave);
+      el.removeEventListener('pointerdown', onMove);
+      events.forEach((t) => el.removeEventListener(t, onLeave));
       cancelAnimationFrame(frame);
     };
   }, [ref]);
@@ -94,7 +100,7 @@ const S = ({ children }: { children: ReactNode }) => (
 /** The at-a-glance facts, written the way the owner would write them. */
 function Snippet() {
   return (
-    <figure className={styles.code} aria-label="Profile summary as a TypeScript object">
+    <figure className={styles.code} aria-label="Profile summary as a TypeScript object" data-spot>
       <figcaption className={`label ${styles.codeBar}`}>
         <span>sourav.ts</span>
         <span aria-hidden="true">TS</span>
@@ -127,11 +133,13 @@ function Snippet() {
 }
 
 export default function Hero() {
+  const hero = useRef<HTMLElement>(null);
   const name = useRef<HTMLHeadingElement>(null);
   useKineticType(name);
 
   return (
-    <section id="top" className={styles.hero} aria-label="Introduction">
+    <section ref={hero} id="top" className={styles.hero} aria-label="Introduction">
+      <Field host={hero} />
       <div className={`page ${styles.inner}`}>
         <ul className={`label ${styles.meta}`}>
           <li>{profile.title}</li>

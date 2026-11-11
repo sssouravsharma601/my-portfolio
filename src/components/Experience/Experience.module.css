@@ -193,3 +193,9 @@
     width: 100%;
   }
 }
+
+.what {
+  margin: calc(-1 * clamp(12px, 1.6vw, 20px));
+  padding: clamp(12px, 1.6vw, 20px);
+  border-radius: 12px;
+}

@@ -6,7 +6,7 @@ import styles from './Contact.module.css';
 
 export default function Contact() {
   return (
-    <section id="contact" aria-labelledby="contact-heading" className={styles.contact}>
+    <section id="contact" aria-labelledby="contact-heading" className={styles.contact} data-spot>
       <div className={`page ${styles.inner}`}>
         <header className={styles.head}>
           <span className="label" aria-hidden="true">

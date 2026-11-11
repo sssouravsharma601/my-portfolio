@@ -8,6 +8,7 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { useSpotlight } from './hooks/useSpotlight';
 import './styles/globals.css';
 
 /**
@@ -24,6 +25,7 @@ function useFrameGuard() {
 
 export default function App() {
   useFrameGuard();
+  useSpotlight();
   return (
     <ErrorBoundary>
       <ThemeProvider>

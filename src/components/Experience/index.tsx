@@ -30,7 +30,7 @@ function RoleItem({ role: r, n }: { role: Role; n: number }) {
         <span className={`label ${styles.duration}`}>{formatDuration(r.start, r.end)}</span>
       </div>
 
-      <div className={`${styles.what} reveal`}>
+      <div className={`${styles.what} reveal`} data-spot>
         <h3 className={styles.heading}>
           <span className={styles.company}>{r.company}</span>
           {r.context && <span className={styles.context}>{r.context}</span>}
