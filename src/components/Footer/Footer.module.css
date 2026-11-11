@@ -1,13 +1,35 @@
 .footer {
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.inner {
+  padding-block: clamp(28px, 4vw, 48px) 20px;
+}
+
+.wordmark {
+  font-family: var(--display);
+  font-size: clamp(2.5rem, 17.2vw, 16rem);
+  font-weight: 800;
+  font-variation-settings:
+    "wdth" 75,
+    "opsz" 96;
+  line-height: 0.8;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--accent);
+}
+
+.row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 8px 24px;
-  padding-block: 28px 40px;
-  color: var(--ink-3);
-  font-size: 0.8125rem;
+  margin-top: clamp(20px, 3vw, 36px);
 }
 
-.colophon a {
-  color: var(--ink-2);
+.row :global(.link):hover {
+  text-decoration-color: var(--accent);
 }

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
-import Intro from './components/Intro';
+import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
@@ -27,9 +27,10 @@ export default function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider>
+        <div className="progress" aria-hidden="true" />
         <Header />
         <main id="main">
-          <Intro />
+          <Hero />
           <About />
           <Experience />
           <Skills />

@@ -4,31 +4,32 @@ import styles from './Skills.module.css';
 
 export default function Skills() {
   return (
-    <Section id="skills" title="Toolkit" aside="What I reach for, and what I studied.">
-      <div className={styles.grid}>
+    <Section id="skills" index="03" title="Toolkit" aside="What I reach for, and what I studied">
+      <div className={styles.rows}>
         {skills.map((g) => (
-          <div key={g.title} className={`${styles.group} reveal`}>
-            <h3 className={styles.groupTitle}>{g.title}</h3>
-            <ul>
+          <div key={g.title} className={`${styles.row} reveal`}>
+            <h3 className={`label ${styles.rowTitle}`}>{g.title}</h3>
+            <ul className={styles.items}>
               {g.items.map((s) => (
                 <li key={s}>{s}</li>
               ))}
             </ul>
           </div>
         ))}
-      </div>
 
-      <div className={`${styles.edu} reveal`}>
-        <h3 className={styles.groupTitle}>Education</h3>
-        <ul>
-          {education.map((d) => (
-            <li key={d.title}>
-              <span className={styles.degree}>{d.title}</span>
-              <span className={styles.school}>{d.school}</span>
-              <span className={styles.year}>{d.year}</span>
-            </li>
-          ))}
-        </ul>
+        <div className={`${styles.row} reveal`}>
+          <h3 className={`label ${styles.rowTitle}`}>Education</h3>
+          <ul className={styles.edu}>
+            {education.map((d) => (
+              <li key={d.title}>
+                <span className={styles.degree}>{d.title}</span>
+                <span className={styles.school}>
+                  {d.school}, {d.year}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </Section>
   );
