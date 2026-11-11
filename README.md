@@ -9,10 +9,11 @@ Live site → [souravsharma.in](https://souravsharma.in/)
 
 ## Design
 
-A type poster. The name is the hero, set edge to edge in a variable font, and the rest of the page keeps that voice: heavy condensed headings, hard 2px rules, mono spec-sheet labels.
+Built to read as an engineer's site: precise, cool, and a little like an editor.
 
-- **Type:** Bricolage Grotesque (variable weight and width) for everything, JetBrains Mono for labels. Both self-hosted.
-- **Colour:** warm paper and ink. The accent changes with the theme: vermilion on paper, lime on ink. The initial theme is resolved before first paint from the saved choice or the OS preference.
+- **Type:** Archivo (variable weight and width) for display and text, JetBrains Mono for labels, the nav and the code panel. Both self-hosted.
+- **Colour:** cool neutrals with one blue accent, in light and dark. The initial theme is resolved before first paint from the saved choice or the OS preference.
+- **Technical cues:** a drafting grid behind the hero, 1px hairlines, a `~/sourav-sharma` brand, and the at-a-glance facts written as a TypeScript object.
 - **Signature interaction:** letters of the name lose weight and width near the pointer, so the cursor dents the wordmark. Fine pointers only; off under reduced motion.
 - **Motion:** everything else is scroll-linked CSS (`animation-timeline`): reveals, the wire that fills beside the experience list, the ticker, the page progress bar. Nothing runs on its own, and content is fully visible when motion is unsupported, reduced, or printed. No animation libraries.
 
@@ -60,7 +61,7 @@ src/
 ├── data/profile.ts         # All content: roles, highlights, skills, education
 ├── components/
 │   ├── Header/             # Sticky bar, anchor nav, theme toggle
-│   ├── Hero/               # Kinetic wordmark, portrait stamp, statement, ticker
+│   ├── Hero/               # Kinetic wordmark, portrait, code panel, ticker
 │   ├── Section/            # Shared numbered section header
 │   ├── About/              # Bio + selected results
 │   ├── Experience/         # Roles on a scroll-filled wire, computed durations

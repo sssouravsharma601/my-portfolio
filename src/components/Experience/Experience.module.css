@@ -14,13 +14,13 @@
   top: 0;
   bottom: 0;
   width: var(--rule);
-  background: var(--ink);
+  background: var(--line);
 }
 
 .list::after {
   display: none;
-  left: calc(var(--wire) - 2px);
-  width: 4px;
+  left: calc(var(--wire) - 1px);
+  width: 2px;
   background: var(--accent);
   transform-origin: 50% 0;
 }
@@ -51,7 +51,7 @@
 }
 
 .item + .item {
-  border-top: var(--rule) solid var(--ink);
+  border-top: var(--rule) solid var(--line);
 }
 
 .item:first-child {
@@ -65,10 +65,10 @@
   z-index: 1;
   left: calc(-1 * clamp(28px, 4vw, 56px));
   top: clamp(28px, 4vw, 56px);
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   background: var(--paper);
-  border: var(--rule) solid var(--ink);
+  border: 1.5px solid var(--ink-3);
 }
 
 .item:first-child::before {
@@ -77,6 +77,7 @@
 
 .current::before {
   background: var(--accent);
+  border-color: var(--accent);
 }
 
 .when {
@@ -90,9 +91,7 @@
   font-family: var(--display);
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 800;
-  font-variation-settings:
-    "wdth" 75,
-    "opsz" 96;
+  font-variation-settings: "wdth" 75;
   line-height: 0.8;
   color: var(--ink-3);
 }
@@ -111,9 +110,7 @@
 .company {
   font-family: var(--display);
   font-size: clamp(2.25rem, 6.4vw, 5.25rem);
-  font-variation-settings:
-    "wdth" 78,
-    "opsz" 96;
+  font-variation-settings: "wdth" 78;
   line-height: 0.85;
   letter-spacing: -0.03em;
   text-transform: uppercase;
@@ -130,7 +127,7 @@
   padding: 3px 9px;
   background: var(--accent);
   color: var(--on-accent);
-  border: var(--rule) solid var(--ink);
+  border-radius: 4px;
 }
 
 .title {
@@ -176,7 +173,9 @@
 
 .stack li {
   padding: 4px 9px;
-  border: 1.5px solid var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink-2);
 }
 
 @media (max-width: 760px) {

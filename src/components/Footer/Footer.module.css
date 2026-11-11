@@ -1,6 +1,6 @@
 .footer {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper-2);
+  border-top: var(--rule) solid var(--line);
   overflow: hidden;
 }
 
@@ -10,16 +10,15 @@
 
 .wordmark {
   font-family: var(--display);
-  font-size: clamp(2.5rem, 17.2vw, 16rem);
+  font-size: clamp(2rem, 12.4vw, 11.6rem);
   font-weight: 800;
-  font-variation-settings:
-    "wdth" 75,
-    "opsz" 96;
+  font-variation-settings: "wdth" 75;
   line-height: 0.8;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: var(--accent);
+  color: var(--ink);
+  opacity: 0.08;
 }
 
 .row {

@@ -1,34 +1,36 @@
-@import "@fontsource-variable/bricolage-grotesque/standard.css";
+@import "@fontsource-variable/archivo/standard.css";
 @import "@fontsource-variable/jetbrains-mono/wght.css";
 
 /* ─────────────────────────────────────────────────────────────
    Tokens
-   Light ("paper") is the base; dark ("ink") overrides. The accent
-   changes with the theme: vermilion on paper, lime on ink. The
-   initial theme is set by an inline script in index.html before
-   first paint.
+   Cool neutrals and one blue. Light is the base; dark overrides.
+   The initial theme is set by an inline script in index.html
+   before first paint.
    ───────────────────────────────────────────────────────────── */
 :root {
   color-scheme: light;
 
-  --paper: #f2ede4;
-  --paper-2: #e9e2d5;
-  --ink: #15120e;
-  --ink-2: #4a443b;
-  --ink-3: #6b6459;
-  --accent: #ff4f1f;
-  /* Accent dark enough for small text on paper. */
-  --accent-text: #b8350a;
-  --on-accent: #15120e;
-  --danger: #a3200c;
+  --paper: #f6f7f9;
+  --paper-2: #eceef2;
+  --ink: #0b0d12;
+  --ink-2: #3d4350;
+  --ink-3: #5f6776;
+  --line: #c9ced8;
+  --grid: rgba(11, 13, 18, 0.055);
+  --accent: #2b59ff;
+  /* Accent for small text on the page background. */
+  --accent-text: #2247d6;
+  --on-accent: #ffffff;
+  --string: #8a4a06;
+  --danger: #b3261e;
 
-  --display: "Bricolage Grotesque Variable", "Arial Narrow", system-ui, sans-serif;
-  --sans: "Bricolage Grotesque Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Archivo Variable", "Arial Narrow", system-ui, sans-serif;
+  --sans: "Archivo Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
 
   --page: 1360px;
   --gutter: clamp(18px, 4vw, 56px);
-  --rule: 2px;
+  --rule: 1px;
   --bar: 60px;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -37,14 +39,17 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --paper: #0e0d0b;
-  --paper-2: #191714;
-  --ink: #f2ede4;
-  --ink-2: #c2baab;
-  --ink-3: #958d7f;
-  --accent: #d4ff3a;
-  --accent-text: #d4ff3a;
-  --on-accent: #0e0d0b;
+  --paper: #0a0c10;
+  --paper-2: #11141a;
+  --ink: #e8ebf0;
+  --ink-2: #aab1be;
+  --ink-3: #838b9a;
+  --line: #262b35;
+  --grid: rgba(232, 235, 240, 0.05);
+  --accent: #3160ff;
+  --accent-text: #8ea8ff;
+  --on-accent: #ffffff;
+  --string: #e2ab72;
   --danger: #ff8f7a;
 }
 
@@ -130,7 +135,7 @@ p {
 }
 
 :focus-visible {
-  outline: 3px solid var(--accent-text);
+  outline: 2px solid var(--accent-text);
   outline-offset: 3px;
 }
 
@@ -210,7 +215,7 @@ p {
       position: fixed;
       inset: 0 0 auto;
       z-index: 60;
-      height: 4px;
+      height: 2px;
       background: var(--accent);
       transform-origin: 0 50%;
       animation: grow linear both;

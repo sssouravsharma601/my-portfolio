@@ -13,7 +13,7 @@ export default function Footer() {
             © {new Date().getFullYear()} {profile.name}
           </p>
           <p>
-            Set in Bricolage Grotesque. Built with React and Vite.{' '}
+            Set in Archivo and JetBrains Mono. Built with React and Vite.{' '}
             <a
               className="link"
               href="https://github.com/sssouravsharma601/my-portfolio"

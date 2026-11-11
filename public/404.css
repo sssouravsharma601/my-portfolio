@@ -7,8 +7,8 @@ body {
   min-height: 100vh;
   margin: 0;
   place-items: center;
-  background: #f2ede4;
-  color: #15120e;
+  background: #f6f7f9;
+  color: #0b0d12;
   font-family: system-ui, sans-serif;
 }
 
@@ -21,7 +21,7 @@ main {
   font-size: clamp(6rem, 30vw, 16rem);
   font-weight: 800;
   line-height: 0.8;
-  color: #ff4f1f;
+  color: #2b59ff;
 }
 
 h1 {
@@ -36,11 +36,11 @@ a {
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: #0e0d0b;
-    color: #f2ede4;
+    background: #0a0c10;
+    color: #e8ebf0;
   }
 
   .code {
-    color: #d4ff3a;
+    color: #8ea8ff;
   }
 }

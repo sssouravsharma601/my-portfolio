@@ -61,7 +61,7 @@ function preloadDisplayFont(): Plugin {
       order: 'post',
       handler(html, ctx) {
         const font = Object.keys(ctx.bundle ?? {}).find((f) =>
-          /bricolage-grotesque-latin-standard-normal.*\.woff2$/.test(f),
+          /archivo-latin-standard-normal.*\.woff2$/.test(f),
         );
         if (!font) return html;
         return {

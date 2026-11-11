@@ -1,4 +1,4 @@
-import { useEffect, useRef, type RefObject } from 'react';
+import { useEffect, useRef, type ReactNode, type RefObject } from 'react';
 import { profile } from '../../data/profile';
 import LocalTime from '../LocalTime';
 import { ArrowUpRight } from '../Icons';
@@ -15,8 +15,8 @@ const TICKER = [
 
 /** How far the pointer's pull reaches, in px, and how thin a letter can get. */
 const RADIUS = 340;
-const WGHT = { rest: 800, min: 220 };
-const WDTH = { rest: 100, min: 75 };
+const WGHT = { rest: 800, min: 180 };
+const WDTH = { rest: 100, min: 66 };
 
 /**
  * The name is set in a variable font. Letters near the pointer lose weight
@@ -86,6 +86,46 @@ function Letters({ word }: { word: string }) {
   );
 }
 
+const K = ({ children }: { children: ReactNode }) => <span className={styles.kw}>{children}</span>;
+const S = ({ children }: { children: ReactNode }) => (
+  <span className={styles.str}>&quot;{children}&quot;</span>
+);
+
+/** The at-a-glance facts, written the way the owner would write them. */
+function Snippet() {
+  return (
+    <figure className={styles.code} aria-label="Profile summary as a TypeScript object">
+      <figcaption className={`label ${styles.codeBar}`}>
+        <span>sourav.ts</span>
+        <span aria-hidden="true">TS</span>
+      </figcaption>
+      <pre className={styles.pre}>
+        <code>
+          <span className={styles.ln}>
+            <K>export const</K> sourav = {'{'}
+          </span>
+          <span className={styles.ln}>
+            {'  '}role: <S>{profile.title}</S>,
+          </span>
+          <span className={styles.ln}>
+            {'  '}now: <S>Synechron, for Emirates NBD</S>,
+          </span>
+          <span className={styles.ln}>
+            {'  '}before: [<S>BYJU’S</S>, <S>Ola Electric</S>, <S>Clearout</S>],
+          </span>
+          <span className={styles.ln}>
+            {'  '}focus: [<S>React</S>, <S>TypeScript</S>, <S>Performance</S>],
+          </span>
+          <span className={styles.ln}>
+            {'  '}leadsTeams: <K>true</K>,
+          </span>
+          <span className={styles.ln}>{'}'};</span>
+        </code>
+      </pre>
+    </figure>
+  );
+}
+
 export default function Hero() {
   const name = useRef<HTMLHeadingElement>(null);
   useKineticType(name);
@@ -125,8 +165,8 @@ export default function Hero() {
             <img
               src="./avatar.jpg"
               alt={`Portrait of ${profile.name}`}
-              width={400}
-              height={400}
+              width={560}
+              height={560}
               className={styles.avatar}
             />
           </div>
@@ -138,16 +178,7 @@ export default function Hero() {
             launch&#8209;day checkouts.
           </p>
 
-          <dl className={styles.facts}>
-            <div>
-              <dt className="label">Now</dt>
-              <dd>Frontend lead at Synechron, for Emirates NBD</dd>
-            </div>
-            <div>
-              <dt className="label">Before</dt>
-              <dd>BYJU’S, Ola Electric, Clearout</dd>
-            </div>
-          </dl>
+          <Snippet />
 
           <div className={styles.actions}>
             <a href={`mailto:${profile.email}`} className={styles.primary}>
