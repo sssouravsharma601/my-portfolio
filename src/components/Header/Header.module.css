@@ -39,9 +39,10 @@
   border-radius: 7px;
   background: var(--ink);
   color: var(--bg);
-  font-family: var(--serif);
-  font-size: 0.9375rem;
-  letter-spacing: 0.02em;
+  font-family: var(--display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   transition: transform 0.4s var(--ease-out);
 }
 

@@ -8,7 +8,7 @@ export default function Footer() {
         © {new Date().getFullYear()} {profile.name}
       </p>
       <p className={styles.colophon}>
-        Set in Instrument Serif and Geist. Built with React and Vite.{' '}
+        Set in Geist. Built with React and Vite.{' '}
         <a
           className="link"
           href="https://github.com/sssouravsharma601/my-portfolio"

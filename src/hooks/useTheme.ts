@@ -29,7 +29,7 @@ export function useTheme(): [Theme, () => void] {
     root.setAttribute('data-theme', theme);
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', theme === 'dark' ? '#0f0f0e' : '#f6f5f1');
+      ?.setAttribute('content', theme === 'dark' ? '#0a0a0a' : '#fafafa');
   }, [theme]);
 
   useEffect(() => {

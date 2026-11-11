@@ -34,15 +34,16 @@
 
 .statement {
   margin-top: 36px;
-  max-width: 20ch;
-  font-family: var(--serif);
-  font-size: clamp(2.5rem, 6vw, 4.75rem);
-  line-height: 1.02;
-  letter-spacing: -0.022em;
+  max-width: 19ch;
+  font-family: var(--display);
+  font-size: clamp(2.25rem, 5.4vw, 4.25rem);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
 }
 
 .statement em {
-  font-style: italic;
+  font-style: normal;
   color: var(--accent);
 }
 
