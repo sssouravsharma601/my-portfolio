@@ -1,56 +1,40 @@
 export type Theme = 'dark' | 'light';
 
-export interface NavLink {
-  label: string;
-  href: string;
+/** Year + zero-based month. Day precision is noise on a CV. */
+export interface YearMonth {
+  year: number;
+  month: number;
 }
 
-export interface ExperienceProject {
-  name: string;
-  teamSize: number;
-  description: string;
-  tech: string[];
-}
-
-export interface ExperienceItem {
+export interface Role {
   id: string;
-  role: string;
-  company: string;
-  period: string;
-  duration: string;
-  bullets: string[];
-  project: ExperienceProject;
-}
-
-export interface SkillCategory {
-  id: string;
-  icon: string;
   title: string;
-  skills: string[];
+  company: string;
+  /** Client or context, e.g. "for Emirates NBD". Rendered muted. */
+  context?: string;
+  start: YearMonth;
+  /** Omitted = current role. */
+  end?: YearMonth;
+  summary: string;
+  highlights: string[];
+  stack: string[];
 }
 
-export interface EducationItem {
-  id: string;
-  icon: string;
-  degree: string;
+export interface Highlight {
+  value: string;
+  label: string;
+  where: string;
+}
+
+export interface SkillGroup {
+  title: string;
+  items: string[];
+}
+
+export interface Degree {
+  title: string;
   school: string;
   year: string;
-  score: string;
-}
-
-export interface ContactChannel {
-  icon: string;
-  label: string;
-  value: string;
-  href: string;
-  external?: boolean;
-  arrowLabel: string;
-}
-
-export interface StatItem {
-  value: number | string;
-  suffix?: string;
-  label: string;
 }
 
 export interface FormData {

@@ -1,45 +1,51 @@
-import SectionHeading from '../ui/SectionHeading';
-import TimelineItem from './TimelineItem';
-import { experience } from '../../data/experience';
-import { useGsapAnimation } from '../../animation/useGsapAnimation';
-import { gsap } from '../../animation/gsapConfig';
+import { roles } from '../../data/profile';
+import { formatDuration, formatYearMonth } from '../../utils/date';
+import type { Role } from '../../types';
+import Section from '../Section';
 import styles from './Experience.module.css';
 
 export default function Experience() {
-  const listRef = useGsapAnimation<HTMLOListElement>((scope) => {
-    const el = scope.current;
-    if (!el) return;
-
-    gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
-      gsap.utils.toArray<HTMLElement>('[data-timeline-item]', el).forEach((item) => {
-        gsap.fromTo(
-          item,
-          { autoAlpha: 0, y: 24 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            ease: 'none',
-            scrollTrigger: { trigger: item, start: 'top 92%', end: 'top 65%', scrub: 0.6 },
-          },
-        );
-      });
-    });
-  }, []);
-
   return (
-    <section id="experience" className="section" aria-label="Work experience">
-      <SectionHeading
-        index="01"
-        label="Experience"
-        title="Work Experience"
-        description="8+ years across fintech, edtech, e-commerce, and ad-tech — always building at scale."
-      />
-
-      <ol className={styles.list} aria-label="Career timeline" ref={listRef}>
-        {experience.map((item, i) => (
-          <TimelineItem key={item.id} item={item} index={i + 1} />
+    <Section id="work" title="Experience" aside="Four companies, from SaaS to banking.">
+      <ol className={styles.list}>
+        {roles.map((r) => (
+          <RoleItem key={r.id} role={r} />
         ))}
       </ol>
-    </section>
+    </Section>
+  );
+}
+
+function RoleItem({ role: r }: { role: Role }) {
+  const current = !r.end;
+  return (
+    <li className={`${styles.item} reveal`}>
+      <div className={styles.when}>
+        <span>
+          {formatYearMonth(r.start)} – {r.end ? formatYearMonth(r.end) : 'Present'}
+        </span>
+        <span className={styles.duration}>{formatDuration(r.start, r.end)}</span>
+      </div>
+
+      <div className={styles.what}>
+        <h3 className={styles.heading}>
+          <span className={styles.company}>{r.company}</span>
+          {r.context && <span className={styles.context}> {r.context}</span>}
+          {current && <span className={styles.now}>Now</span>}
+        </h3>
+        <p className={styles.title}>{r.title}</p>
+        <p className={styles.summary}>{r.summary}</p>
+        <ul className={styles.highlights}>
+          {r.highlights.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </ul>
+        <ul className={styles.stack} aria-label="Stack">
+          {r.stack.map((s) => (
+            <li key={s}>{s}</li>
+          ))}
+        </ul>
+      </div>
+    </li>
   );
 }

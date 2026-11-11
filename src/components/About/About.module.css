@@ -1,320 +1,67 @@
-.about {
-}
-
-/* ── Two-column layout: photo | content ────────────────── */
-.grid {
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 5rem;
-  align-items: start;
-}
-
-/* ── Photo column — bleeds up into the header row for an
-   asymmetric, "pinned photograph" offset instead of sitting
-   flush in its grid cell ──────────────────────────────────── */
-.photoCol {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.2rem;
-  margin-top: -2.75rem;
-}
-
-.photoWrap {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  flex-shrink: 0;
-  /* standalone `rotate` (not the `transform` shorthand) so it composes
-     cleanly with GSAP's independently-animated `scale`/clip-path */
-  rotate: -1.5deg;
-}
-
-/* Teal corner accents — decorative */
-.corner {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.cornerTL {
-  top: -6px;
-  left: -6px;
-  border-top: 2.5px solid var(--primary);
-  border-left: 2.5px solid var(--primary);
-  border-radius: 3px 0 0 0;
-}
-
-.cornerBR {
-  bottom: -6px;
-  right: -6px;
-  border-bottom: 2.5px solid var(--primary);
-  border-right: 2.5px solid var(--primary);
-  border-radius: 0 0 3px 0;
-}
-
-.photo {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-  object-position: center top;
-  border-radius: var(--radius);
-  border: 2px solid var(--border);
-  display: block;
-  transition: border-color var(--t);
-  filter: grayscale(8%);
-}
-
-.photoWrap:hover .photo {
-  border-color: var(--primary);
-  filter: none;
-}
-
-/* Subtle glow behind photo */
-.photoWrap::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: calc(var(--radius) + 2px);
-  background: var(--primary-glow);
-  opacity: 0;
-  transition: opacity var(--t);
-  z-index: -1;
-}
-
-.photoWrap:hover::before {
-  opacity: 1;
-}
-
-/* Availability badge — floating bottom-left */
-.availBadge {
-  position: absolute;
-  bottom: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  padding: 0.3rem 0.9rem;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  color: var(--primary);
-  letter-spacing: 0.3px;
-  white-space: nowrap;
-  box-shadow: var(--shadow-sm);
-}
-
-.availDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #4ade80;
-  flex-shrink: 0;
-  animation: pulse 2.4s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(0.75);
-  }
-}
-
-/* Quick stats below photo — hairline-divided row, matches the same
-   language as Hero's stat strip instead of a grid of boxed chips */
-.stats {
-  display: flex;
-  margin-top: 0.4rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid var(--border);
-}
-
-.stat {
-  padding-right: 1.5rem;
-  margin-right: 1.5rem;
-  border-right: 1px solid var(--border);
-  cursor: default;
-}
-
-.stat:last-child {
-  border-right: none;
-  padding-right: 0;
-  margin-right: 0;
-}
-
-.statNum {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.5px;
-  line-height: 1;
-}
-
-.statLabel {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1.3px;
-  margin-top: 0.35rem;
-}
-
-/* ── Content column ─────────────────────────────────────── */
-.contentCol {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.text p {
-  color: var(--text-2);
-  margin-bottom: 1.2rem;
-  font-size: 1rem;
-  line-height: 1.9;
-}
-
-.text p:last-child {
-  margin-bottom: 0;
-}
-
-.text strong {
-  color: var(--text);
-  font-weight: 600;
-}
-
-.callout {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.9rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--primary);
-  border-radius: var(--radius-sm);
-  padding: 1rem 1.25rem;
-  font-size: 0.9rem;
-  color: var(--text-2);
+.prose {
+  max-width: var(--measure);
+  color: var(--ink-2);
+  font-size: 1.125rem;
   line-height: 1.7;
 }
 
-.callout strong {
-  color: var(--primary);
+.prose p + p {
+  margin-top: 1.1em;
 }
 
-.calloutIcon {
-  font-size: 1.3rem;
-  flex-shrink: 0;
-  line-height: 1.5;
-}
-
-/* ── Info list — hairline-divided rows, not a grid of bordered
-   icon-boxes (that recipe is retired everywhere except the one
-   intentional callout accent above) ───────────────────────── */
-.infoList {
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 56px;
+  padding: 0;
   list-style: none;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--rule);
 }
 
-.infoItem {
+.numbers li {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 0.25rem;
-  border-bottom: 1px solid var(--border);
-  transition:
-    padding-left var(--t) var(--ease),
-    border-color var(--t);
+  flex-direction: column;
+  padding: 22px 20px 4px 0;
 }
 
-.infoItem:hover {
-  padding-left: 0.6rem;
-  border-color: var(--border-h);
+.numbers li + li {
+  padding-left: 20px;
+  border-left: 1px solid var(--rule);
 }
 
-.infoIcon {
-  width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary);
-  flex-shrink: 0;
+.value {
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums;
 }
 
-.infoLabel {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
+.label {
+  margin-top: 12px;
+  font-size: 0.875rem;
+  line-height: 1.4;
 }
 
-.infoValue {
-  font-weight: 600;
-  color: var(--text);
-  font-size: 0.9rem;
-  margin-top: 0.2rem;
+.where {
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: 0.8125rem;
 }
 
-.infoValue a {
-  color: var(--primary);
-  text-decoration: none;
-}
-
-.infoValue a:hover {
-  text-decoration: underline;
-}
-
-/* ── Responsive ─────────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: 280px 1fr;
-    gap: 3.5rem;
+@media (max-width: 1000px) {
+  .numbers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .photoWrap {
-    width: 260px;
-    height: 260px;
+  .numbers li:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
   }
 
-  .photo {
-    width: 260px;
-    height: 260px;
-  }
-}
-
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .photoCol {
-    align-items: center;
-    margin-top: 0;
-  }
-
-  .photoWrap {
-    width: 220px;
-    height: 220px;
-    rotate: 0deg;
-  }
-
-  .photo {
-    width: 220px;
-    height: 220px;
-  }
-
-  .infoItem:hover {
-    padding-left: 0.25rem;
+  .numbers li:nth-child(n + 3) {
+    border-top: 1px solid var(--rule);
+    padding-top: 22px;
+    margin-top: 18px;
   }
 }

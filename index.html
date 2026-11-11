@@ -1,8 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Resolve theme before first paint: saved choice, else OS preference. Mirrors hooks/useTheme.ts. -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('ss_theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 
   <!-- ═══════════════════════════════════════════════════════════
        SECURITY
@@ -19,7 +30,6 @@
                  base-uri 'self';
                  form-action 'self' https://formspree.io;">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
 
@@ -156,7 +166,7 @@
         "about": { "@id": "https://souravsharma.in/#person" },
         "mainEntity": { "@id": "https://souravsharma.in/#person" },
         "inLanguage": "en-US",
-        "dateModified": "2026-06-12"
+        "dateModified": "2026-11-04"
       }
     ]
   }
@@ -170,21 +180,23 @@
   <link rel="apple-touch-icon" href="./apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#09090b" />
+  <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f0f0e" media="(prefers-color-scheme: dark)" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Sourav Sharma" />
   <meta name="application-name" content="Sourav Sharma" />
-  <meta name="msapplication-TileColor" content="#09090b" />
+  <meta name="msapplication-TileColor" content="#0f0f0e" />
 
   <!-- ═══════════════════════════════════════════════════════════
        FONTS
   ═══════════════════════════════════════════════════════════ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>

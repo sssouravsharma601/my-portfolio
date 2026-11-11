@@ -1,434 +1,247 @@
-/* ═══════════════════════════════════════════════════════════
-   DESIGN SYSTEM & TOKENS  —  Obsidian Engineering Grid
-   ═══════════════════════════════════════════════════════════ */
+/* ─────────────────────────────────────────────────────────────
+   Tokens
+   Light is the base; dark overrides. The initial theme is set by
+   an inline script in index.html before first paint (no flash).
+   ───────────────────────────────────────────────────────────── */
 :root {
-  /* Accent System - Calm Steel Blue */
-  --primary: #5b8def;
-  --primary-rgb: 91, 141, 239;
-  --primary-dim: rgba(91, 141, 239, 0.08);
-  --primary-glow: rgba(91, 141, 239, 0.18);
+  color-scheme: light;
 
-  --secondary: #93c5fd;
-  --secondary-rgb: 147, 197, 253;
-  --secondary-dim: rgba(147, 197, 253, 0.08);
+  --bg: #f6f5f1;
+  --bg-raised: #fbfaf7;
+  --ink: #1b1a17;
+  --ink-2: #4a4843;
+  --ink-3: #7a776f;
+  --rule: #e2dfd7;
+  --rule-strong: #cfcbc0;
+  --accent: #2a5bd7;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(42, 91, 215, 0.09);
+  --ok: #1f8a4c;
+  --danger: #b4311f;
+  --selection: rgba(42, 91, 215, 0.18);
 
-  /* Accent gradient — used for headings, buttons, accents */
-  --grad-accent: linear-gradient(120deg, #5b8def 0%, #818cf8 50%, #93c5fd 100%);
-  /* Subtle top-light card surface gradient (adds depth vs flat fills) */
-  --grad-card: linear-gradient(160deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 60%);
-  /* Brighter hairline for card edges */
-  --border-bright: rgba(255, 255, 255, 0.12);
+  --serif: "Instrument Serif", "Iowan Old Style", "Times New Roman", serif;
+  --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* Obsidian Dark Theme (Default) */
-  --bg: #09090b;
-  --bg-alt: #121214;
-  --surface: #161619;
-  --card: #18181b;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-h: rgba(91, 141, 239, 0.35);
-  --text: #f4f4f5;
-  --text-2: #a1a1aa;
-  --muted: #52525b;
-  --tag-bg: rgba(255, 255, 255, 0.03);
-  --red: #ef4444;
-  --green: #10b981;
+  --measure: 66ch;
+  --page: 1120px;
+  --gutter: clamp(20px, 5vw, 48px);
+  --label-col: 200px;
 
-  /* Elevation Shadows */
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
-  --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-  --shadow-accent: 0 0 0 1px var(--primary-glow);
-
-  /* Typography */
-  --font: "Space Grotesk", system-ui, -apple-system, sans-serif;
-  --mono: "JetBrains Mono", "Fira Code", monospace;
-
-  /* Layout Spacing */
-  --nav-h: 72px;
-  --sidebar-w: 100px;
-  --section-pad-block: 8rem;
-  --section-pad-inline: 6vw;
-  --section-pad-inline-end: 9%;
-  --radius: 12px;
-  --radius-sm: 6px;
-
-  /* Motion */
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --t: 0.28s;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-[data-theme="light"] {
-  --bg: #f8fafc;
-  --bg-alt: #ffffff;
-  --surface: #f1f5f9;
-  --card: #ffffff;
-  --border: rgba(0, 0, 0, 0.06);
-  --border-h: rgba(59, 108, 219, 0.45);
-  --text: #0f172a;
-  --text-2: #475569;
-  --muted: #94a3b8;
-  --primary: #3b6cdb;
-  --primary-rgb: 59, 108, 219;
-  --primary-dim: rgba(59, 108, 219, 0.08);
-  --primary-glow: rgba(59, 108, 219, 0.18);
-  --secondary: #60a5fa;
-  --tag-bg: rgba(0, 0, 0, 0.03);
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
-  --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  --grad-accent: linear-gradient(120deg, #3b6cdb 0%, #4f46e5 50%, #2563eb 100%);
-  --grad-card: linear-gradient(160deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
-  --border-bright: rgba(0, 0, 0, 0.1);
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0f0f0e;
+  --bg-raised: #161614;
+  --ink: #ecebe6;
+  --ink-2: #b3b1aa;
+  --ink-3: #85837c;
+  --rule: #262623;
+  --rule-strong: #393935;
+  --accent: #86a8ff;
+  --accent-ink: #0f0f0e;
+  --accent-soft: rgba(134, 168, 255, 0.1);
+  --ok: #4cc382;
+  --danger: #ff8a75;
+  --selection: rgba(134, 168, 255, 0.25);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   RESET & FOUNDATION
-   ═══════════════════════════════════════════════════════════ */
+/* ─────────────────────────────────────────────────────────────
+   Base
+   ───────────────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+* {
   margin: 0;
-  padding: 0;
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 88px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
   background: var(--bg);
-  color: var(--text);
-  font-family: var(--font);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
   line-height: 1.6;
-  overflow-x: hidden;
+  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   transition:
-    background var(--t),
-    color var(--t);
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
-/* Ambient depth — soft accent glows fixed behind everything,
-   so the page reads layered instead of flat monotone. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(60% 50% at 80% -5%, rgba(var(--primary-rgb), 0.14) 0%, transparent 60%),
-    radial-gradient(50% 40% at 0% 100%, rgba(var(--primary-rgb), 0.08) 0%, transparent 55%);
+::selection {
+  background: var(--selection);
 }
 
-[data-theme="light"] body::before {
-  background:
-    radial-gradient(60% 50% at 80% -5%, rgba(var(--primary-rgb), 0.08) 0%, transparent 60%),
-    radial-gradient(50% 40% at 0% 100%, rgba(var(--primary-rgb), 0.05) 0%, transparent 55%);
+img,
+svg {
+  display: block;
+  max-width: 100%;
 }
 
-/* Custom premium scrollbar */
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border-h);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   LAYOUT SHELL — sidebar-offset content column (desktop only;
-   the sidebar nav is fixed and takes no flow space, so content
-   needs an explicit offset instead of relying on a top navbar).
-   ═══════════════════════════════════════════════════════════ */
-.content-shell {
-  margin-left: 0;
+button {
+  cursor: pointer;
 }
 
-@media (min-width: 1025px) {
-  .content-shell {
-    margin-left: var(--sidebar-w);
-  }
-}
-
-/* Visually hidden until focused — first tab stop, jumps past the sidebar. */
-.skip-link {
-  position: fixed;
-  top: -100%;
-  left: 1rem;
-  z-index: 10001;
-  background: var(--primary);
-  color: #ffffff;
-  padding: 0.7rem 1.2rem;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  font-size: 0.85rem;
+a {
+  color: inherit;
   text-decoration: none;
-  transition: top 0.2s var(--ease);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Shared primitives
+   ───────────────────────────────────────────────────────────── */
+.page {
+  width: 100%;
+  max-width: calc(var(--page) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Hairline above a .page block, aligned to the content edge, not the gutter. */
+.ruled {
+  background: linear-gradient(var(--rule), var(--rule)) no-repeat center top /
+    calc(100% - var(--gutter) * 2) 1px;
+}
+
+/* Inline text link: underline sits low and thickens on hover. */
+.link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition:
+    text-decoration-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  letter-spacing: -0.01em;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 6px;
+  font-size: 0.875rem;
 }
 
 .skip-link:focus {
-  top: 1rem;
+  top: 12px;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   SECTION LAYOUT
-   ═══════════════════════════════════════════════════════════ */
-.section {
-  padding-block: var(--section-pad-block);
-  padding-inline: var(--section-pad-inline) var(--section-pad-inline-end);
-  position: relative;
-  border-bottom: 1px solid var(--border);
-}
-
-.alt-bg {
-  background: color-mix(in srgb, var(--bg-alt) 90%, transparent);
-}
-
-/* ── Section header — editorial index numeral instead of a
-   gradient-clipped eyebrow+title recipe repeated everywhere ── */
-.sec-hd {
-  display: flex;
-  align-items: flex-end;
-  gap: 1.75rem;
-  margin-bottom: 4.5rem;
-  max-width: none;
-}
-
-.sec-index {
-  font-family: var(--mono);
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 700;
-  line-height: 0.75;
-  flex-shrink: 0;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--border-bright);
-  user-select: none;
-}
-
-.sec-hd-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  padding-bottom: 0.3rem;
-}
-
-.sec-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--primary);
-  font-weight: 600;
-}
-
-.sec-title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -1.2px;
-  line-height: 1.1;
-  color: var(--text);
-}
-
-.sec-desc {
-  color: var(--text-2);
-  max-width: 600px;
-  margin-top: 0.3rem;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-@media (max-width: 640px) {
-  .sec-hd {
-    gap: 1rem;
-  }
-  .sec-index {
-    font-size: 2.4rem;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   BUTTONS
-   ═══════════════════════════════════════════════════════════ */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--grad-accent);
-  background-size: 140% 140%;
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  padding: 0.8rem 1.8rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.95rem;
-  font-weight: 600;
-  font-family: var(--font);
-  box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.3);
-  transition:
-    background-position var(--t) var(--ease),
-    transform var(--t) var(--ease),
-    box-shadow var(--t);
-}
-
-.btn-primary:hover {
-  background-position: 100% 100%;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(var(--primary-rgb), 0.45);
-}
-
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  border: 1px solid var(--border);
-  color: var(--text);
-  text-decoration: none;
-  cursor: pointer;
-  background: transparent;
-  padding: 0.8rem 1.8rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.95rem;
-  font-weight: 500;
-  font-family: var(--font);
-  transition:
-    border-color var(--t),
-    background var(--t),
-    transform var(--t) var(--ease);
-}
-
-.btn-ghost:hover {
-  border-color: var(--primary);
-  background: var(--primary-dim);
-  transform: translateY(-2px);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   TAGS
-   ═══════════════════════════════════════════════════════════ */
-.tag {
-  background: var(--tag-bg);
-  border: 1px solid var(--border);
-  color: var(--text-2);
-  font-size: 0.75rem;
-  padding: 0.3rem 0.85rem;
-  border-radius: 100px;
-  font-family: var(--mono);
-  transition:
-    border-color var(--t),
-    color var(--t),
-    background var(--t),
-    transform var(--t) var(--ease);
-}
-
-.tag:hover {
-  border-color: var(--border-h);
-  color: var(--primary);
-  background: var(--primary-dim);
-  transform: translateY(-1px);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   SCROLL REVEAL ANIMATIONS
-   ═══════════════════════════════════════════════════════════ */
-.reveal-up,
-.reveal-left,
-.reveal-right {
-  transition:
-    opacity 0.8s var(--ease),
-    transform 0.8s var(--ease);
-}
-
-.reveal-up {
-  opacity: 0;
-  transform: translateY(30px);
-}
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-.reveal-right {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-.reveal-up.revealed,
-.reveal-left.revealed,
-.reveal-right.revealed {
-  opacity: 1;
-  transform: none;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   GRID BACKGROUNDS & LIGHTING EFFECTS
-   ═══════════════════════════════════════════════════════════ */
-.engineering-grid {
+.visually-hidden {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-  pointer-events: none;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-[data-theme="light"] .engineering-grid {
-  background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-}
+/* ─────────────────────────────────────────────────────────────
+   Motion: one entrance, plus scroll reveals where the browser
+   supports scroll-driven animations. Content is never hidden
+   when either is unavailable.
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.9s var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 70ms + 80ms);
+  }
 
-.radial-glow {
-  position: absolute;
-  top: 15%;
-  right: 10%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.1) 0%, transparent 70%);
-  filter: blur(40px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-[data-theme="light"] .radial-glow {
-  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.04) 0%, transparent 70%);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   RESPONSIVE DESIGN
-   ═══════════════════════════════════════════════════════════ */
-@media (max-width: 1024px) {
-  :root {
-    --section-pad-block: 6rem;
-    --section-pad-inline: 6%;
-    --section-pad-inline-end: 6%;
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
   }
 }
-@media (max-width: 768px) {
-  :root {
-    --section-pad-block: 5rem;
-    --section-pad-inline: 5%;
-    --section-pad-inline-end: 5%;
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
   }
 }
-@media (max-width: 480px) {
-  :root {
-    --section-pad-block: 4rem;
-    --section-pad-inline: 4%;
-    --section-pad-inline-end: 4%;
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@media print {
+  .rise,
+  .reveal {
+    animation: none !important;
+  }
+
+  header[class*="bar"],
+  .skip-link {
+    display: none;
   }
 }
