@@ -2,25 +2,43 @@
 
 [![CI](https://github.com/sssouravsharma601/my-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/sssouravsharma601/my-portfolio/actions/workflows/ci.yml)
 
-Production-grade personal portfolio built with **React 18 · TypeScript 5 · Vite 5**.  
-Live site → [sssouravsharma601.github.io/my-portfolio](https://sssouravsharma601.github.io/my-portfolio)
+Personal portfolio of Sourav Sharma, built with **React 18 · TypeScript 5 · Vite 5**.  
+Live site → [souravsharma.in](https://souravsharma.in/)
 
 ---
 
 ## Design
 
-Quiet, typographic, content-first. The page is built to be skimmed by a recruiter in under a minute and read properly by an engineer.
+A type poster. The name is the hero, set edge to edge in a variable font, and the rest of the page keeps that voice: heavy condensed headings, hard 2px rules, mono spec-sheet labels.
 
-- **Type:** Geist throughout (600 weight, tight tracking for display), Geist Mono for dates and stacks.
-- **Colour:** crisp neutrals with a single blue accent. Light and dark themes; the initial theme is resolved before first paint from the saved choice or the OS preference, and follows OS changes until the visitor picks one.
-- **Layout:** one editorial grid (sticky section label + content column) that collapses to a single column under 820px.
-- **Motion:** one staggered entrance on load and CSS scroll-driven reveals (`animation-timeline: view()`) where supported. No animation libraries. Content is always visible when motion is unsupported, reduced, or printed.
+- **Type:** Bricolage Grotesque (variable weight and width) for everything, JetBrains Mono for labels. Both self-hosted.
+- **Colour:** warm paper and ink. The accent changes with the theme: vermilion on paper, lime on ink. The initial theme is resolved before first paint from the saved choice or the OS preference.
+- **Signature interaction:** letters of the name lose weight and width near the pointer, so the cursor dents the wordmark. Fine pointers only; off under reduced motion.
+- **Motion:** everything else is scroll-linked CSS (`animation-timeline`): reveals, the wire that fills beside the experience list, the ticker, the page progress bar. Nothing runs on its own, and content is fully visible when motion is unsupported, reduced, or printed. No animation libraries.
+
+## SEO
+
+- **Prerendered HTML.** `npm run build` renders the app to static markup and writes it into `dist/index.html` (`scripts/prerender.mjs`), then React hydrates it. Crawlers and link previews get the full content without running JavaScript.
+- The `<h1>` is the name; the title leads with it.
+- JSON-LD `Person` + `ProfilePage` + `WebSite` in `index.html`, with `sameAs` pointing at LinkedIn and GitHub.
+- `robots.txt`, `sitemap.xml`, canonical URL, Open Graph image.
+
+When content changes, update `dateModified` in `index.html` and `lastmod` in `public/sitemap.xml`.
+
+## Security
+
+- **Content-Security-Policy** generated at build time (`vite.config.ts`): `default-src 'none'`, same-origin scripts, styles and fonts only, the one inline script allowed by SHA-256 hash, no `unsafe-inline`, and Trusted Types enforced. The only third-party origin is Formspree, and only if the contact form is configured.
+- No third-party scripts, fonts, analytics or cookies.
+- CI: actions pinned to commit SHAs, read-only default token, `npm audit` on production dependencies, Dependabot for npm and actions.
+- `/.well-known/security.txt` for reports.
+
+GitHub Pages cannot send response headers, so `frame-ancestors`, HSTS and `X-Content-Type-Options` cannot be set from this repo (they do not work from `<meta>`). `App.tsx` has a best-effort frame guard. To get real headers, put the site behind a CDN that can add them.
 
 ## Tech Stack
 
 | Layer | Choice |
 |---|---|
-| UI | React 18 (StrictMode), no runtime deps beyond React |
+| UI | React 18 (StrictMode), prerendered and hydrated; no runtime deps beyond React |
 | Language | TypeScript 5, strict |
 | Bundler | Vite 5 |
 | Styling | CSS Modules + custom properties |
@@ -28,32 +46,34 @@ Quiet, typographic, content-first. The page is built to be skimmed by a recruite
 | Lint / format | ESLint 8 + `@typescript-eslint`, Prettier 3 |
 | CI/CD | GitHub Actions → GitHub Pages |
 
-Production JS is ~55 KB gzipped (React ~45 KB, app ~10 KB).
-
 ---
 
 ## Project Structure
 
 ```
+index.html                  # Head: SEO meta, JSON-LD, pre-paint theme script
+vite.config.ts              # CSP generation, display-font preload
+scripts/prerender.mjs       # Build-time render into dist/index.html
 src/
 ├── App.tsx                 # Page composition + best-effort framebusting
+├── entry-server.tsx        # renderToString entry used by the prerender
 ├── data/profile.ts         # All content: roles, highlights, skills, education
 ├── components/
 │   ├── Header/             # Sticky bar, anchor nav, theme toggle
-│   ├── Intro/              # Statement, at-a-glance facts, primary actions
-│   ├── Section/            # Shared two-column section layout
+│   ├── Hero/               # Kinetic wordmark, portrait stamp, statement, ticker
+│   ├── Section/            # Shared numbered section header
 │   ├── About/              # Bio + selected results
-│   ├── Experience/         # Roles with computed durations
+│   ├── Experience/         # Roles on a scroll-filled wire, computed durations
 │   ├── Skills/             # Toolkit + education
-│   ├── Contact/            # Email (copy), links, ContactForm
+│   ├── Contact/            # Accent block: email (copy), links, ContactForm
 │   ├── LocalTime/          # Live Dubai time
 │   ├── Footer/
 │   ├── ErrorBoundary/
 │   └── Icons.tsx
 ├── context/ThemeContext.tsx
-├── hooks/useTheme.ts       # Saved choice → OS preference → live OS changes
+├── hooks/useTheme.ts       # Theme as an external store (hydration-safe)
 ├── services/contact.service.ts  # Formspree → mailto fallback
-├── styles/globals.css      # Tokens, base, primitives, motion
+├── styles/globals.css      # Fonts, tokens, base, primitives, motion
 ├── utils/                  # date · sanitize · validation (+ tests)
 └── types/index.ts
 ```

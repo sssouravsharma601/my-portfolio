@@ -1,8 +1,12 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useSyncExternalStore } from 'react';
 import { STORAGE_KEYS } from '../constants';
 import type { Theme } from '../types';
 
 const QUERY = '(prefers-color-scheme: dark)';
+const THEME_COLOR: Record<Theme, string> = { light: '#f2ede4', dark: '#0e0d0b' };
+
+const listeners = new Set<() => void>();
+const emit = () => listeners.forEach((l) => l());
 
 function readStored(): Theme | null {
   try {
@@ -14,44 +18,52 @@ function readStored(): Theme | null {
 }
 
 function systemTheme(): Theme {
-  return typeof window !== 'undefined' && window.matchMedia?.(QUERY).matches ? 'dark' : 'light';
+  return window.matchMedia?.(QUERY).matches ? 'dark' : 'light';
+}
+
+/** Explicit choice (localStorage) wins; otherwise follow the OS. */
+function getSnapshot(): Theme {
+  return readStored() ?? systemTheme();
+}
+
+/** The prerendered HTML has no visitor, so it is always the light markup. */
+function getServerSnapshot(): Theme {
+  return 'light';
+}
+
+function subscribe(onChange: () => void): () => void {
+  listeners.add(onChange);
+  const mq = window.matchMedia?.(QUERY);
+  mq?.addEventListener('change', onChange);
+  window.addEventListener('storage', onChange);
+  return () => {
+    listeners.delete(onChange);
+    mq?.removeEventListener('change', onChange);
+    window.removeEventListener('storage', onChange);
+  };
 }
 
 /**
- * Explicit choice (localStorage) wins; otherwise follow the OS and keep
- * following it live. index.html applies the same logic before first paint.
+ * Theme as an external store, so hydrating the prerendered page never
+ * mismatches: React renders "light" first, then re-renders with the real
+ * value. index.html applies the same logic to <html> before first paint.
  */
 export function useTheme(): [Theme, () => void] {
-  const [theme, setTheme] = useState<Theme>(() => readStored() ?? systemTheme());
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   useEffect(() => {
-    const root = document.documentElement;
-    root.setAttribute('data-theme', theme);
-    document
-      .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', theme === 'dark' ? '#0a0a0a' : '#fafafa');
+    document.documentElement.setAttribute('data-theme', theme);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLOR[theme]);
   }, [theme]);
 
-  useEffect(() => {
-    const mq = window.matchMedia?.(QUERY);
-    if (!mq) return;
-    const onChange = (e: MediaQueryListEvent) => {
-      if (!readStored()) setTheme(e.matches ? 'dark' : 'light');
-    };
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, []);
-
   const toggle = useCallback(() => {
-    setTheme((prev) => {
-      const next: Theme = prev === 'dark' ? 'light' : 'dark';
-      try {
-        localStorage.setItem(STORAGE_KEYS.THEME, next);
-      } catch {
-        // storage unavailable: the choice lasts for this page view only
-      }
-      return next;
-    });
+    const next: Theme = getSnapshot() === 'dark' ? 'light' : 'dark';
+    try {
+      localStorage.setItem(STORAGE_KEYS.THEME, next);
+    } catch {
+      // Storage unavailable: nothing to persist, so the OS preference stays in charge.
+    }
+    emit();
   }, []);
 
   return [theme, toggle];

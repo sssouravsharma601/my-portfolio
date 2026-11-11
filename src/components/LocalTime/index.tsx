@@ -13,18 +13,24 @@ function format(timeZone: string, d = new Date()): string {
   }).format(d);
 }
 
-/** Live wall-clock time in another zone; updates on the minute boundary. */
+/**
+ * Live wall-clock time in another zone; updates on the minute boundary.
+ * Starts as a placeholder so the prerendered HTML doesn't bake in build time.
+ */
 export default function LocalTime({ timeZone }: Props) {
-  const [now, setNow] = useState(() => format(timeZone));
+  const [now, setNow] = useState('--:--');
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | undefined;
     const tick = () => setNow(format(timeZone));
-    const msToNextMinute = 60_000 - (Date.now() % 60_000);
-    const timeout = setTimeout(() => {
-      tick();
-      interval = setInterval(tick, 60_000);
-    }, msToNextMinute);
+    tick();
+    const timeout = setTimeout(
+      () => {
+        tick();
+        interval = setInterval(tick, 60_000);
+      },
+      60_000 - (Date.now() % 60_000),
+    );
     return () => {
       clearTimeout(timeout);
       if (interval) clearInterval(interval);

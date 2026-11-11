@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- The Content-Security-Policy <meta> is generated at build time (vite.config.ts). -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#f2ede4" />
   <!-- Resolve theme before first paint: saved choice, else OS preference. Mirrors hooks/useTheme.ts. -->
   <script>
     (function () {
@@ -12,77 +15,37 @@
         t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
       document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0e0d0b');
     })();
   </script>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECURITY
-  ═══════════════════════════════════════════════════════════ -->
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self';
-                 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-                 font-src 'self' https://fonts.gstatic.com;
-                 img-src 'self' data: https:;
-                 script-src 'self' 'unsafe-inline';
-                 connect-src 'self' https://formspree.io;
-                 frame-src 'none';
-                 object-src 'none';
-                 base-uri 'self';
-                 form-action 'self' https://formspree.io;">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
-
-  <!-- ═══════════════════════════════════════════════════════════
-       CORE SEO
-  ═══════════════════════════════════════════════════════════ -->
-  <title>Sourav Sharma | Senior Frontend Engineer — React.js · TypeScript · Dubai, UAE</title>
-  <meta name="description" content="Sourav Sharma is a Senior Frontend Engineer with 8+ years of experience building scalable, production-grade web applications. Specialised in React.js, TypeScript, Redux, Next.js, and the MERN stack. Currently at Emirates NBD via Synechron Technologies, Dubai — open to global opportunities." />
-  <meta name="keywords" content="Sourav Sharma, Senior Frontend Engineer, React.js Developer, TypeScript Developer, JavaScript Engineer, MERN Stack, Redux, Next.js, Node.js, MongoDB, Dubai UAE, Frontend Developer, Web Developer, Software Engineer, Emirates NBD, Synechron, Byju's, Ola Electric, Clearout, Kintegra" />
+  <!-- Search -->
+  <title>Sourav Sharma — Senior Frontend Engineer, Dubai</title>
+  <meta name="description" content="Sourav Sharma is a senior frontend engineer in Dubai with 8+ years in React and TypeScript. Frontend lead at Synechron for Emirates NBD; previously BYJU'S and Ola Electric." />
   <meta name="author" content="Sourav Sharma" />
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-  <meta name="googlebot" content="index, follow" />
-  <meta name="revisit-after" content="7 days" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
   <link rel="canonical" href="https://souravsharma.in/" />
+  <link rel="me" href="https://www.linkedin.com/in/sssouravsharma601/" />
+  <link rel="me" href="https://github.com/sssouravsharma601" />
 
-  <!-- Geo tags — help with local / regional search -->
-  <meta name="geo.region" content="AE-DU" />
-  <meta name="geo.placename" content="Dubai, United Arab Emirates" />
-  <meta name="geo.position" content="25.2048;55.2708" />
-  <meta name="ICBM" content="25.2048, 55.2708" />
-
-  <!-- ═══════════════════════════════════════════════════════════
-       OPEN GRAPH  (Facebook · LinkedIn · WhatsApp · Slack)
-  ═══════════════════════════════════════════════════════════ -->
+  <!-- Link previews -->
   <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://souravsharma.in/" />
-  <meta property="og:site_name" content="Sourav Sharma — Portfolio" />
+  <meta property="og:site_name" content="Sourav Sharma" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Sourav Sharma | Senior Frontend Engineer — React.js · TypeScript · Dubai" />
-  <meta property="og:description" content="8+ years building production-grade web applications at scale. React.js, TypeScript, Redux, MERN Stack. Currently at Synechron Technologies (Emirates NBD), Dubai. Open to global opportunities." />
+  <meta property="og:title" content="Sourav Sharma — Senior Frontend Engineer, Dubai" />
+  <meta property="og:description" content="I build frontends for complicated systems: bank rule engines, live classrooms, launch-day checkouts. 8+ years in React and TypeScript." />
   <meta property="og:image" content="https://souravsharma.in/og-image.png" />
-  <meta property="og:image:secure_url" content="https://souravsharma.in/og-image.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Sourav Sharma — Senior Frontend Engineer based in Dubai, UAE" />
+  <meta property="og:image:alt" content="Sourav Sharma, Senior Frontend Engineer, Dubai" />
   <meta property="profile:first_name" content="Sourav" />
   <meta property="profile:last_name" content="Sharma" />
   <meta property="profile:username" content="sssouravsharma601" />
-
-  <!-- ═══════════════════════════════════════════════════════════
-       TWITTER / X CARD
-  ═══════════════════════════════════════════════════════════ -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Sourav Sharma | Senior Frontend Engineer — React.js · TypeScript · Dubai" />
-  <meta name="twitter:description" content="8+ years building scalable web apps. React.js, TypeScript, MERN Stack. Currently at Emirates NBD, Dubai. Open to opportunities." />
-  <meta name="twitter:image" content="https://souravsharma.in/og-image.png" />
-  <meta name="twitter:image:alt" content="Sourav Sharma — Senior Frontend Engineer" />
 
-  <!-- ═══════════════════════════════════════════════════════════
-       STRUCTURED DATA — JSON-LD
-       Person + WebSite + ProfilePage schemas
-  ═══════════════════════════════════════════════════════════ -->
+  <!-- Structured data: tells search engines this page is the home of the person "Sourav Sharma". -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -94,106 +57,76 @@
         "givenName": "Sourav",
         "familyName": "Sharma",
         "jobTitle": "Senior Frontend Engineer",
-        "description": "Senior Frontend Engineer with 8+ years of experience building scalable, production-grade web applications using React.js, TypeScript, Redux, and the MERN stack.",
+        "description": "Senior frontend engineer in Dubai with 8+ years of experience building production web applications in React and TypeScript.",
         "url": "https://souravsharma.in/",
+        "mainEntityOfPage": { "@id": "https://souravsharma.in/#profilepage" },
         "image": {
           "@type": "ImageObject",
           "url": "https://souravsharma.in/avatar.jpg",
           "width": 400,
           "height": 400
         },
-        "email": "sssouravsharma601@gmail.com",
-        "telephone": "+971589850644",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Dubai",
-          "addressRegion": "Dubai",
           "addressCountry": "AE"
         },
+        "nationality": { "@type": "Country", "name": "India" },
         "worksFor": {
           "@type": "Organization",
-          "name": "Synechron Technologies",
+          "name": "Synechron",
           "url": "https://www.synechron.com"
         },
-        "alumniOf": {
-          "@type": "EducationalOrganization",
-          "name": "Desh Bhagat University",
-          "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "IN"
-          }
-        },
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "Desh Bhagat University" },
+          { "@type": "EducationalOrganization", "name": "Mehr Chand Polytechnic" }
+        ],
         "hasOccupation": {
           "@type": "Occupation",
           "name": "Senior Frontend Engineer",
-          "occupationLocation": {
-            "@type": "City",
-            "name": "Dubai"
-          },
-          "skills": "React.js, TypeScript, JavaScript, Redux, Next.js, Node.js, MongoDB, Express.js, Webpack, HTML5, CSS3"
+          "occupationLocation": { "@type": "City", "name": "Dubai" },
+          "skills": "React, TypeScript, JavaScript, Next.js, Redux Toolkit, Node.js, PostgreSQL, MongoDB"
         },
         "knowsAbout": [
-          "React.js", "TypeScript", "JavaScript", "Redux", "Next.js",
-          "Node.js", "MongoDB", "Express.js", "MERN Stack", "Webpack",
-          "Babel", "HTML5", "CSS3", "REST APIs", "GraphQL",
-          "Frontend Architecture", "Web Performance", "UI/UX Design",
-          "Agile", "Git", "CI/CD", "Digital Banking", "Fintech"
+          "React", "TypeScript", "JavaScript", "Next.js", "Redux Toolkit", "Node.js",
+          "Frontend architecture", "Web performance", "Design systems", "Digital banking"
         ],
         "sameAs": [
           "https://www.linkedin.com/in/sssouravsharma601/",
-          "https://github.com/sssouravsharma601",
-          "mailto:sssouravsharma601@gmail.com"
+          "https://github.com/sssouravsharma601"
         ]
       },
       {
         "@type": "WebSite",
         "@id": "https://souravsharma.in/#website",
-        "name": "Sourav Sharma — Senior Frontend Engineer Portfolio",
+        "name": "Sourav Sharma",
+        "alternateName": "Sourav Sharma — Senior Frontend Engineer",
         "url": "https://souravsharma.in/",
-        "description": "Portfolio of Sourav Sharma, Senior Frontend Engineer with 8+ years of experience. React.js, TypeScript, MERN Stack. Dubai, UAE.",
-        "author": { "@id": "https://souravsharma.in/#person" },
-        "inLanguage": "en-US",
-        "potentialAction": {
-          "@type": "ContactAction",
-          "target": "mailto:sssouravsharma601@gmail.com"
-        }
+        "publisher": { "@id": "https://souravsharma.in/#person" },
+        "inLanguage": "en"
       },
       {
         "@type": "ProfilePage",
         "@id": "https://souravsharma.in/#profilepage",
-        "name": "Sourav Sharma — Senior Frontend Engineer",
+        "name": "Sourav Sharma — Senior Frontend Engineer, Dubai",
         "url": "https://souravsharma.in/",
+        "isPartOf": { "@id": "https://souravsharma.in/#website" },
         "about": { "@id": "https://souravsharma.in/#person" },
         "mainEntity": { "@id": "https://souravsharma.in/#person" },
-        "inLanguage": "en-US",
-        "dateModified": "2026-11-04"
+        "primaryImageOfPage": { "@type": "ImageObject", "url": "https://souravsharma.in/og-image.png" },
+        "inLanguage": "en",
+        "dateCreated": "2024-01-01",
+        "dateModified": "2026-11-11"
       }
     ]
   }
   </script>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       FAVICONS & PWA MANIFEST
-  ═══════════════════════════════════════════════════════════ -->
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="./favicon.ico" sizes="32x32">
-  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
-  <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Sourav Sharma" />
-  <meta name="application-name" content="Sourav Sharma" />
-  <meta name="msapplication-TileColor" content="#0a0a0a" />
-
-  <!-- ═══════════════════════════════════════════════════════════
-       FONTS
-  ═══════════════════════════════════════════════════════════ -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="manifest" href="./manifest.json" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>

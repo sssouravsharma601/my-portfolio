@@ -5,3 +5,4 @@ dist/
 
 # graphify knowledge graph (generated artifact — local dev tool only)
 graphify-out/
+dist-ssr/

@@ -21,7 +21,10 @@ beforeAll(() => {
 describe('App', () => {
   it('renders every section with a reachable heading', () => {
     render(<App />);
-    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
+    // The name is the page's primary heading: it is what people search for.
+    expect(screen.getByRole('heading', { level: 1, name: 'Sourav Sharma' })).toHaveTextContent(
+      'Sourav Sharma',
+    );
     for (const name of ['About', 'Experience', 'Toolkit']) {
       expect(screen.getByRole('heading', { level: 2, name })).toBeInTheDocument();
     }

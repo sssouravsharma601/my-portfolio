@@ -6,46 +6,52 @@ import styles from './Contact.module.css';
 
 export default function Contact() {
   return (
-    <section
-      id="contact"
-      aria-labelledby="contact-heading"
-      className={`page ruled ${styles.contact}`}
-    >
-      <div className={styles.lead}>
-        <h2 id="contact-heading" className={`${styles.heading} reveal`}>
-          Working on something hard? <em>Let’s talk.</em>
-        </h2>
-        <p className={`${styles.note} reveal`}>
-          Email is the fastest way to reach me. I usually reply within a day or two.
-        </p>
+    <section id="contact" aria-labelledby="contact-heading" className={styles.contact}>
+      <div className={`page ${styles.inner}`}>
+        <header className={styles.head}>
+          <span className="label" aria-hidden="true">
+            (04)
+          </span>
+          <h2 id="contact-heading" className={styles.heading}>
+            <span className={styles.kicker}>Working on something hard?</span> Let’s talk.
+          </h2>
+        </header>
 
-        <EmailRow />
+        <div className={styles.cols}>
+          <div className={styles.lead}>
+            <p className={styles.note}>
+              Email is the fastest way to reach me. I usually reply within a day or two.
+            </p>
 
-        <ul className={`${styles.links} reveal`}>
-          <li>
-            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
-              <span>LinkedIn</span>
-              <ArrowUpRight />
-            </a>
-          </li>
-          <li>
-            <a href={profile.github} target="_blank" rel="noopener noreferrer">
-              <span>GitHub</span>
-              <ArrowUpRight />
-            </a>
-          </li>
-          <li>
-            <a href={profile.phone.href}>
-              <span>{profile.phone.display}</span>
-              <ArrowUpRight />
-            </a>
-          </li>
-        </ul>
-      </div>
+            <EmailRow />
 
-      <div className={`${styles.formWrap} reveal`}>
-        <h3 className={styles.formTitle}>Or send a note</h3>
-        <ContactForm />
+            <ul className={styles.links}>
+              <li>
+                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer me">
+                  <span>LinkedIn</span>
+                  <ArrowUpRight size={18} />
+                </a>
+              </li>
+              <li>
+                <a href={profile.github} target="_blank" rel="noopener noreferrer me">
+                  <span>GitHub</span>
+                  <ArrowUpRight size={18} />
+                </a>
+              </li>
+              <li>
+                <a href={profile.phone.href}>
+                  <span>{profile.phone.display}</span>
+                  <ArrowUpRight size={18} />
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className={styles.formWrap}>
+            <h3 className={`label ${styles.formTitle}`}>Or send a note</h3>
+            <ContactForm />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -69,14 +75,14 @@ function EmailRow() {
   };
 
   return (
-    <div className={`${styles.email} reveal`}>
+    <div className={styles.email}>
       <a href={`mailto:${profile.email}`} className={styles.emailLink}>
         {profile.email}
       </a>
       <button
         type="button"
         onClick={() => void copy()}
-        className={styles.copy}
+        className={`label ${styles.copy}`}
         aria-label={copied ? 'Email address copied' : 'Copy email address'}
       >
         {copied ? <Check /> : <Copy />}

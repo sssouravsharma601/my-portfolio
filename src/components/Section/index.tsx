@@ -3,23 +3,27 @@ import styles from './Section.module.css';
 
 interface Props {
   id: string;
+  /** Two-digit position on the page, shown beside the title. */
+  index: string;
   title: string;
-  /** Short aside under the title, desktop only. */
   aside?: ReactNode;
   children: ReactNode;
 }
 
-export default function Section({ id, title, aside, children }: Props) {
+export default function Section({ id, index, title, aside, children }: Props) {
   const headingId = `${id}-heading`;
   return (
-    <section id={id} aria-labelledby={headingId} className={`page ruled ${styles.section}`}>
+    <section id={id} aria-labelledby={headingId} className={`page ${styles.section}`}>
       <header className={styles.head}>
+        <span className={`label ${styles.index}`} aria-hidden="true">
+          ({index})
+        </span>
         <h2 id={headingId} className={styles.title}>
           {title}
         </h2>
-        {aside && <div className={styles.aside}>{aside}</div>}
+        {aside && <p className={`label ${styles.aside}`}>{aside}</p>}
       </header>
-      <div className={styles.body}>{children}</div>
+      {children}
     </section>
   );
 }
