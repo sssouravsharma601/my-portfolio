@@ -11,8 +11,8 @@ Live site → [sssouravsharma601.github.io/my-portfolio](https://sssouravsharma6
 
 Quiet, typographic, content-first. The page is built to be skimmed by a recruiter in under a minute and read properly by an engineer.
 
-- **Type:** Instrument Serif for display, Geist for text, Geist Mono for dates and stacks.
-- **Colour:** warm paper / ink with a single blue accent. Light and dark themes; the initial theme is resolved before first paint from the saved choice or the OS preference, and follows OS changes until the visitor picks one.
+- **Type:** Geist throughout (600 weight, tight tracking for display), Geist Mono for dates and stacks.
+- **Colour:** crisp neutrals with a single blue accent. Light and dark themes; the initial theme is resolved before first paint from the saved choice or the OS preference, and follows OS changes until the visitor picks one.
 - **Layout:** one editorial grid (sticky section label + content column) that collapses to a single column under 820px.
 - **Motion:** one staggered entrance on load and CSS scroll-driven reveals (`animation-timeline: view()`) where supported. No animation libraries. Content is always visible when motion is unsupported, reduced, or printed.
 

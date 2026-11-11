@@ -7,14 +7,16 @@
 
 .heading {
   max-width: 16ch;
-  font-family: var(--serif);
-  font-size: clamp(2.5rem, 5.4vw, 4.25rem);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  font-family: var(--display);
+  font-size: clamp(2.25rem, 4.6vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
 }
 
 .heading em {
   display: block;
+  font-style: normal;
   color: var(--accent);
 }
 
@@ -121,9 +123,11 @@
 
 .formTitle {
   margin-bottom: 20px;
-  font-family: var(--serif);
-  font-size: 1.5rem;
-  line-height: 1.1;
+  font-family: var(--display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .form {
