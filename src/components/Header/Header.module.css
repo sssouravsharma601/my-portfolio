@@ -4,7 +4,7 @@
   z-index: 50;
   height: var(--bar);
   background: var(--paper);
-  border-bottom: var(--rule) solid var(--ink);
+  border-bottom: var(--rule) solid var(--line);
 }
 
 .inner {
@@ -16,12 +16,15 @@
 
 .brand {
   margin-right: auto;
-  font-size: 1.125rem;
-  font-weight: 800;
-  font-variation-settings: "wdth" 80;
+  font-family: var(--mono);
+  font-size: 0.9375rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  text-transform: uppercase;
   white-space: nowrap;
+}
+
+.prompt {
+  color: var(--accent-text);
 }
 
 .brandShort {
@@ -61,8 +64,8 @@
   height: 36px;
   flex: none;
   background: transparent;
-  border: var(--rule) solid var(--ink);
-  border-radius: 50%;
+  border: var(--rule) solid var(--line);
+  border-radius: 6px;
   transition:
     background-color 0.2s ease,
     color 0.2s ease;

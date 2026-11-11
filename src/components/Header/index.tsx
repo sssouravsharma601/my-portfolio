@@ -18,9 +18,12 @@ export default function Header() {
     <header className={styles.bar}>
       <div className={`page ${styles.inner}`}>
         <a href="#top" className={styles.brand} aria-label={`${profile.name}, back to top`}>
-          <span className={styles.brandFull}>{profile.name}</span>
+          <span className={styles.prompt} aria-hidden="true">
+            ~/
+          </span>
+          <span className={styles.brandFull}>sourav-sharma</span>
           <span className={styles.brandShort} aria-hidden="true">
-            S/S
+            ss
           </span>
         </a>
 

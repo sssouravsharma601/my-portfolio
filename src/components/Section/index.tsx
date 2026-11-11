@@ -16,7 +16,7 @@ export default function Section({ id, index, title, aside, children }: Props) {
     <section id={id} aria-labelledby={headingId} className={`page ${styles.section}`}>
       <header className={styles.head}>
         <span className={`label ${styles.index}`} aria-hidden="true">
-          ({index})
+          {index} /
         </span>
         <h2 id={headingId} className={styles.title}>
           {title}

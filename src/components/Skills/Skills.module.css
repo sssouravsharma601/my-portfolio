@@ -7,7 +7,7 @@
 }
 
 .row + .row {
-  border-top: var(--rule) solid var(--ink);
+  border-top: var(--rule) solid var(--line);
 }
 
 .row:first-child {

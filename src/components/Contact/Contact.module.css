@@ -3,6 +3,7 @@
 .contact {
   --ink: var(--on-accent);
   --paper: var(--accent);
+  --line: var(--on-accent);
   margin-top: clamp(56px, 9vw, 128px);
   background: var(--accent);
   color: var(--on-accent);
@@ -30,9 +31,7 @@
 .heading {
   font-family: var(--display);
   font-size: clamp(4rem, 17vw, 16rem);
-  font-variation-settings:
-    "wdth" 76,
-    "opsz" 96;
+  font-variation-settings: "wdth" 76;
   line-height: 0.8;
   letter-spacing: -0.035em;
   text-transform: uppercase;

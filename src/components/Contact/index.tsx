@@ -10,7 +10,7 @@ export default function Contact() {
       <div className={`page ${styles.inner}`}>
         <header className={styles.head}>
           <span className="label" aria-hidden="true">
-            (04)
+            04 /
           </span>
           <h2 id="contact-heading" className={styles.heading}>
             <span className={styles.kicker}>Working on something hard?</span> Let’s talk.
