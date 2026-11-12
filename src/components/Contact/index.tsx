@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { profile } from '../../data/profile';
+import { hiring, profile } from '../../data/profile';
 import { ArrowUpRight, Check, Copy } from '../Icons';
 import ContactForm from './ContactForm';
 import styles from './Contact.module.css';
@@ -10,12 +10,21 @@ export default function Contact() {
       <div className={`page ${styles.inner}`}>
         <header className={styles.head}>
           <span className="label" aria-hidden="true">
-            04 /
+            05 /
           </span>
           <h2 id="contact-heading" className={styles.heading}>
             <span className={styles.kicker}>Working on something hard?</span> Let’s talk.
           </h2>
         </header>
+
+        <dl className={styles.hiring} aria-label="Hiring details">
+          {hiring.map((h) => (
+            <div key={h.label}>
+              <dt className="label">{h.label}</dt>
+              <dd>{h.value}</dd>
+            </div>
+          ))}
+        </dl>
 
         <div className={styles.cols}>
           <div className={styles.lead}>

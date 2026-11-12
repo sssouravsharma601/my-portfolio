@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
-import { roles } from './data/profile';
+import { caseStudies, hiring, roles } from './data/profile';
 
 beforeAll(() => {
   // jsdom has no matchMedia
@@ -25,7 +25,7 @@ describe('App', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Sourav Sharma' })).toHaveTextContent(
       'Sourav Sharma',
     );
-    for (const name of ['About', 'Experience', 'Toolkit']) {
+    for (const name of ['About', 'Case studies', 'Experience', 'Toolkit']) {
       expect(screen.getByRole('heading', { level: 2, name })).toBeInTheDocument();
     }
     expect(screen.getByRole('heading', { level: 2, name: /let’s talk/i })).toBeInTheDocument();
@@ -41,6 +41,27 @@ describe('App', () => {
     expect(items).toHaveLength(roles.length);
     expect(items[0]).toHaveTextContent('Now');
     expect(items[0]).toHaveTextContent('Present');
+  });
+
+  it('gives each case study a heading and links to it from its role', () => {
+    render(<App />);
+    for (const c of caseStudies) {
+      expect(screen.getByRole('heading', { level: 3, name: c.title })).toBeInTheDocument();
+      expect(document.getElementById(`case-${c.id}`)).not.toBeNull();
+    }
+    const links = screen.getAllByRole('link', { name: /read the case study/i });
+    expect(links.map((a) => a.getAttribute('href'))).toEqual(
+      caseStudies.map((c) => `#case-${c.id}`),
+    );
+  });
+
+  it('answers the first hiring questions next to the contact details', () => {
+    render(<App />);
+    const list = screen.getByLabelText('Hiring details');
+    for (const h of hiring) {
+      expect(within(list).getByText(h.label)).toBeInTheDocument();
+      expect(within(list).getByText(h.value)).toBeInTheDocument();
+    }
   });
 
   it('toggles and persists the theme', async () => {

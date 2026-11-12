@@ -81,6 +81,7 @@ src/
 │   ├── CountUp/            # Figures that count up when scrolled into view
 │   ├── Section/            # Shared numbered section header
 │   ├── About/              # Bio + selected results
+│   ├── CaseStudies/        # Two projects in depth, each with a system diagram
 │   ├── Experience/         # Roles on a scroll-filled wire, computed durations
 │   ├── Skills/             # Toolkit + education
 │   ├── Contact/            # Accent block: email (copy), links, ContactForm

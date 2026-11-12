@@ -20,6 +20,36 @@ export interface Role {
   stack: string[];
 }
 
+/** One box in a case study's system diagram. */
+export interface FlowStep {
+  label: string;
+  note: string;
+  /** Marks the part of the system the case study is about. */
+  mine?: boolean;
+  /** Label on the connector leading to the next step. */
+  next?: string;
+  /** Short items listed inside the box, e.g. modules. */
+  parts?: string[];
+  /** Something that feeds into or sits beside this step. */
+  aside?: string;
+}
+
+export interface CaseStudy {
+  /** Matches the id of the role it belongs to. */
+  id: string;
+  client: string;
+  period: string;
+  title: string;
+  lede: string;
+  role: string;
+  team: string;
+  context: string[];
+  mine: string;
+  built: string[];
+  figures: { value: string; label: string }[];
+  flow: FlowStep[];
+}
+
 export interface Highlight {
   value: string;
   label: string;
