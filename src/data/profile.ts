@@ -104,12 +104,12 @@ export const caseStudies: CaseStudy[] = [
     title: 'Decision Management System',
     lede: 'The in-house engine that decides who is eligible for a loan, a credit card or an overdraft.',
     role: 'Frontend lead: BRMS and non-functional requirements',
-    team: '10–12 people',
+    team: '10–12 people; I lead four engineers across frontend and backend',
     context: [
-      'Every application for a personal loan, credit card or overdraft has to be checked against the bank’s eligibility rules. The Decision Management System runs that check, and it does so for several banking entities in the group, each with rules of its own.',
+      'Every application for a personal loan, credit card or overdraft has to be checked against the bank’s eligibility rules. The Decision Management System runs that check.',
       'It is a transformation project. These decisions used to run on a third-party tool, and this platform is being built in-house to take over. The rules themselves live in the Business Rule Management System (BRMS), where they are written and maintained.',
     ],
-    mine: 'I work on the BRMS, the application where the rules are defined, and I own the non-functional requirements for the frontend: performance, memory and security.',
+    mine: 'I work on the BRMS, the application where the rules are defined, and lead four engineers across frontend and backend. I also own the non-functional requirements: performance, memory and security.',
     built: [
       'Designed the configuration panel from scratch, including a flow-builder canvas for composing nested risk-eligibility models.',
       'Virtualised the heaviest UI modules, which cut memory use by 35% during large calculations.',
