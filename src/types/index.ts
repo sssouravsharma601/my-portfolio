@@ -34,6 +34,18 @@ export interface FlowStep {
   aside?: string;
 }
 
+/** One branch in an illustrative nested rule. */
+export interface RuleBranch {
+  keyword: 'if' | 'else if' | 'else';
+  /** Conditions on this branch, combined with `join`. */
+  tests?: string[];
+  join?: 'and' | 'or';
+  /** Outcome, when the branch ends here. */
+  outcome?: string;
+  /** Branches nested inside this one. */
+  branches?: RuleBranch[];
+}
+
 export interface CaseStudy {
   /** Matches the id of the role it belongs to. */
   id: string;
@@ -46,6 +58,10 @@ export interface CaseStudy {
   context: string[];
   mine: string;
   built: string[];
+  /** The difficult part of the work, in more detail. */
+  deep: { title: string; intro: string; points: string[] };
+  /** A made-up rule that shows the shape of the problem. Never real client data. */
+  sketch?: { caption: string; branches: RuleBranch[] };
   figures: { value: string; label: string }[];
   flow: FlowStep[];
 }

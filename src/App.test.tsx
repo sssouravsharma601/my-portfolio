@@ -48,7 +48,11 @@ describe('App', () => {
     for (const c of caseStudies) {
       expect(screen.getByRole('heading', { level: 3, name: c.title })).toBeInTheDocument();
       expect(document.getElementById(`case-${c.id}`)).not.toBeNull();
+      expect(screen.getByRole('heading', { level: 4, name: c.deep.title })).toBeInTheDocument();
     }
+    // The nested rule sketch keeps its else-if branch and its disclaimer.
+    expect(screen.getByText('else if')).toBeInTheDocument();
+    expect(screen.getByText(/not the bank’s rules/i)).toBeInTheDocument();
     const links = screen.getAllByRole('link', { name: /read the case study/i });
     expect(links.map((a) => a.getAttribute('href'))).toEqual(
       caseStudies.map((c) => `#case-${c.id}`),

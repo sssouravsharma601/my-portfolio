@@ -112,6 +112,42 @@ export const caseStudies: CaseStudy[] = [
       'Virtualised the heaviest UI modules, which cut memory use by 35% during large calculations.',
       'Set the frontend security baseline for public and private APIs to meet the bank’s compliance requirements.',
     ],
+    deep: {
+      title: 'The hard part',
+      intro:
+        'A single decision is rarely one rule. It is a stack of conditions, with more conditions nested inside them, and the screen has to let someone write all of it without losing their place.',
+      points: [
+        'Conditions stack and nest inside one another, and each level can branch with if, else-if and else.',
+        'Within a branch, conditions combine with AND and OR.',
+        'A decision can be kept as a draft while it is still being written.',
+        'The same interface works on a phone, a tablet and a desktop.',
+      ],
+    },
+    sketch: {
+      caption: 'The shape of one decision. An illustration, not the bank’s rules.',
+      branches: [
+        {
+          keyword: 'if',
+          tests: ['Income meets the threshold', 'Age is within range'],
+          join: 'and',
+          branches: [
+            {
+              keyword: 'if',
+              tests: ['Existing customer', 'Salary is transferred'],
+              join: 'or',
+              outcome: 'Eligible',
+            },
+            {
+              keyword: 'else if',
+              tests: ['Employer is on the approved list'],
+              outcome: 'Eligible, lower limit',
+            },
+            { keyword: 'else', outcome: 'Refer for review' },
+          ],
+        },
+        { keyword: 'else', outcome: 'Not eligible' },
+      ],
+    },
     figures: [{ value: '−35%', label: 'Memory during large calculations' }],
     flow: [
       {
@@ -152,6 +188,16 @@ export const caseStudies: CaseStudy[] = [
       'Moved the assessment flow to optimistic updates; in-class interaction went up 42%.',
       'Built the message bridge between the React modules and the Flutter mobile shell.',
     ],
+    deep: {
+      title: 'How 52 became 91',
+      intro:
+        'There was no single fix. The score moved because of a series of decisions about what the browser has to download, and when.',
+      points: [
+        'Packages were chosen with their bundle cost in mind.',
+        'Lazy loading, so a student downloads only the part of the portal they open.',
+        'Static assets served from a CDN.',
+      ],
+    },
     figures: [
       { value: '52→91', label: 'Lighthouse performance' },
       { value: '+42%', label: 'In-class interaction' },
