@@ -13,8 +13,21 @@ export const profile = {
   phone: { display: '+971 58 985 0644', href: 'tel:+971589850644' },
   linkedin: 'https://www.linkedin.com/in/sssouravsharma601/',
   github: 'https://github.com/sssouravsharma601',
-  availability: 'Open to senior and lead frontend roles',
+  availability: 'Open to new roles · 30 days’ notice',
 } as const;
+
+/** The questions a recruiter asks first, answered up front. */
+export const hiring: { label: string; value: string }[] = [
+  { label: 'Notice period', value: '30 days' },
+  { label: 'Visa', value: 'UAE residence visa, employer-sponsored' },
+  { label: 'Based', value: 'Dubai, working on-site' },
+  { label: 'Time zone', value: 'UAE time (UTC+4)' },
+  {
+    label: 'Roles',
+    value:
+      'Senior Frontend Engineer, Senior Software Engineer, Frontend Engineer, Software Engineer',
+  },
+];
 
 export const roles: Role[] = [
   {

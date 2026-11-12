@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
-import { caseStudies, roles } from './data/profile';
+import { caseStudies, hiring, roles } from './data/profile';
 
 beforeAll(() => {
   // jsdom has no matchMedia
@@ -53,6 +53,15 @@ describe('App', () => {
     expect(links.map((a) => a.getAttribute('href'))).toEqual(
       caseStudies.map((c) => `#case-${c.id}`),
     );
+  });
+
+  it('answers the first hiring questions next to the contact details', () => {
+    render(<App />);
+    const list = screen.getByLabelText('Hiring details');
+    for (const h of hiring) {
+      expect(within(list).getByText(h.label)).toBeInTheDocument();
+      expect(within(list).getByText(h.value)).toBeInTheDocument();
+    }
   });
 
   it('toggles and persists the theme', async () => {

@@ -125,6 +125,9 @@ function Snippet() {
           <span className={styles.ln}>
             {'  '}leadsTeams: <K>true</K>,
           </span>
+          <span className={styles.ln}>
+            {'  '}noticeDays: <K>30</K>,
+          </span>
           <span className={styles.ln}>{'}'};</span>
         </code>
       </pre>
