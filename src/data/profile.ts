@@ -21,12 +21,9 @@ export const hiring: { label: string; value: string }[] = [
   { label: 'Notice period', value: '30 days' },
   { label: 'Visa', value: 'UAE residence visa, employer-sponsored' },
   { label: 'Based', value: 'Dubai, working on-site' },
+  { label: 'Relocation', value: 'Open to other countries with visa sponsorship' },
   { label: 'Time zone', value: 'UAE time (UTC+4)' },
-  {
-    label: 'Roles',
-    value:
-      'Senior Frontend Engineer, Senior Software Engineer, Frontend Engineer, Software Engineer',
-  },
+  { label: 'Roles', value: 'Senior Frontend Engineer, Senior Software Engineer' },
 ];
 
 export const roles: Role[] = [

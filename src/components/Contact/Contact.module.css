@@ -50,11 +50,14 @@
 }
 
 /* ── Hiring details ───────────────────────────────────────── */
+/* Cells sit on the line colour with a 1px gap, so the dividers are right
+   at any column count. */
 .hiring {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 2fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--rule);
   margin-top: clamp(36px, 5vw, 72px);
-  background: var(--paper);
+  background: var(--line);
   border: var(--rule) solid var(--line);
   border-radius: 12px;
   overflow: hidden;
@@ -62,10 +65,7 @@
 
 .hiring > div {
   padding: clamp(14px, 1.6vw, 20px);
-}
-
-.hiring > div + div {
-  border-left: var(--rule) solid var(--line);
+  background: var(--paper);
 }
 
 .hiring dt {
@@ -271,26 +271,9 @@
   line-height: 1.1;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 640px) {
   .hiring {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .hiring > div {
-    border-left: 0;
-    border-top: var(--rule) solid var(--line);
-  }
-
-  .hiring > div:nth-child(-n + 2) {
-    border-top: 0;
-  }
-
-  .hiring > div:nth-child(even) {
-    border-left: var(--rule) solid var(--line);
-  }
-
-  .hiring > div:last-child {
-    grid-column: 1 / -1;
   }
 }
 
