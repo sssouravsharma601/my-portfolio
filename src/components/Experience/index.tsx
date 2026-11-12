@@ -1,12 +1,14 @@
-import { roles } from '../../data/profile';
+import { caseStudies, roles } from '../../data/profile';
 import { formatDuration, formatYearMonth } from '../../utils/date';
 import type { Role } from '../../types';
 import Section from '../Section';
 import styles from './Experience.module.css';
 
+const caseIds = new Set(caseStudies.map((c) => c.id));
+
 export default function Experience() {
   return (
-    <Section id="work" index="02" title="Experience" aside="From SaaS to banking">
+    <Section id="work" index="03" title="Experience" aside="From SaaS to banking">
       <ol className={styles.list}>
         {roles.map((r, i) => (
           <RoleItem key={r.id} role={r} n={roles.length - i} />
@@ -38,6 +40,11 @@ function RoleItem({ role: r, n }: { role: Role; n: number }) {
         </h3>
         <p className={styles.title}>{r.title}</p>
         <p className={styles.summary}>{r.summary}</p>
+        {caseIds.has(r.id) && (
+          <a href={`#case-${r.id}`} className={`label ${styles.caseLink}`}>
+            Read the case study
+          </a>
+        )}
         <ul className={styles.highlights}>
           {r.highlights.map((h) => (
             <li key={h}>{h}</li>

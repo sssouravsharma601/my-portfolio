@@ -18,6 +18,7 @@ interface Props {
 const SECTIONS = [
   { id: 'top', label: 'Go to top' },
   { id: 'about', label: 'Go to About' },
+  { id: 'cases', label: 'Go to Case studies' },
   { id: 'work', label: 'Go to Experience' },
   { id: 'skills', label: 'Go to Toolkit' },
   { id: 'contact', label: 'Go to Contact' },

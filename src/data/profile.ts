@@ -1,4 +1,4 @@
-import type { Degree, Highlight, Role, SkillGroup } from '../types';
+import type { CaseStudy, Degree, Highlight, Role, SkillGroup } from '../types';
 import { yearsSince } from '../utils/date';
 
 export const CAREER_START = { year: 2018, month: 2 };
@@ -76,6 +76,88 @@ export const roles: Role[] = [
       'Built the customer-facing analytics dashboards for dense, high-volume data.',
     ],
     stack: ['React', 'Node.js', 'Express', 'MongoDB', 'AWS'],
+  },
+];
+
+/**
+ * Longer write-ups of two roles. Keep these free of anything an employer
+ * would treat as confidential: no vendor names, screenshots or internal figures.
+ */
+export const caseStudies: CaseStudy[] = [
+  {
+    id: 'synechron',
+    client: 'Emirates NBD, via Synechron',
+    period: '2024 – present',
+    title: 'Decision Management System',
+    lede: 'The in-house engine that decides who is eligible for a loan, a credit card or an overdraft.',
+    role: 'Frontend lead: BRMS and non-functional requirements',
+    team: '10–12 people',
+    context: [
+      'Every application for a personal loan, credit card or overdraft has to be checked against the bank’s eligibility rules. The Decision Management System runs that check, and it does so for several banking entities in the group, each with rules of its own.',
+      'It is a transformation project. These decisions used to run on a third-party tool, and this platform is being built in-house to take over. The rules themselves live in the Business Rule Management System (BRMS), where they are written and maintained.',
+    ],
+    mine: 'I work on the BRMS, the application where the rules are defined, and I own the non-functional requirements for the frontend: performance, memory and security.',
+    built: [
+      'Designed the configuration panel from scratch, including a flow-builder canvas for composing nested risk-eligibility models.',
+      'Virtualised the heaviest UI modules, which cut memory use by 35% during large calculations.',
+      'Set the frontend security baseline for public and private APIs to meet the bank’s compliance requirements.',
+    ],
+    figures: [{ value: '−35%', label: 'Memory during large calculations' }],
+    flow: [
+      {
+        label: 'Rule authors',
+        note: 'Business teams who own the eligibility rules',
+        next: 'write and maintain',
+      },
+      {
+        label: 'BRMS',
+        note: 'Flow-builder canvas for nested eligibility models',
+        mine: true,
+        next: 'rules',
+      },
+      {
+        label: 'Decision engine',
+        note: 'Checks each application against the rules',
+        aside: 'Applications in: personal loans, credit cards, overdrafts',
+        next: 'decision',
+      },
+      { label: 'Eligible, or not', note: 'The answer the bank acts on' },
+    ],
+  },
+  {
+    id: 'byjus',
+    client: 'BYJU’S',
+    period: '2021 – 2024',
+    title: 'Learn Portal 2.0',
+    lede: 'A rebuild of the student portal: live classes, tests and video for millions of daily students.',
+    role: 'Senior software engineer',
+    team: 'Led five frontend engineers',
+    context: [
+      'Learn Portal 2.0 replaced the legacy learn portal. It is the web app where students join live classes, catch up on past ones, take tests, watch learning videos and work through topics from a very large content library.',
+      'Students belong to different kinds of batches, and the portal shows each of them their own class schedule.',
+    ],
+    mine: 'I led five frontend engineers on the portal through the move off the legacy version.',
+    built: [
+      'Took Lighthouse performance from 52 to 91 through a sustained round of bundle work.',
+      'Moved the assessment flow to optimistic updates; in-class interaction went up 42%.',
+      'Built the message bridge between the React modules and the Flutter mobile shell.',
+    ],
+    figures: [
+      { value: '52→91', label: 'Lighthouse performance' },
+      { value: '+42%', label: 'In-class interaction' },
+    ],
+    flow: [
+      { label: 'Student', note: 'In a browser or in the mobile app', next: 'opens' },
+      {
+        label: 'Learn Portal 2.0',
+        note: 'React web app',
+        mine: true,
+        parts: ['Live classes', 'Past classes', 'Tests', 'Videos', 'Schedule'],
+        aside: 'Also runs inside the Flutter mobile app, through a message bridge',
+        next: 'requests',
+      },
+      { label: 'Platform services', note: 'Ruby on Rails, MongoDB, PostgreSQL' },
+    ],
   },
 ];
 
