@@ -144,10 +144,10 @@
 /* ── Portrait stamp ───────────────────────────────────────── */
 .stamp {
   position: absolute;
-  right: 3%;
+  right: 1.5%;
   top: 50%;
-  width: clamp(104px, 15vw, 212px);
-  width: clamp(84px, min(15vw, 27svh), 212px);
+  width: clamp(120px, 20vw, 296px);
+  width: clamp(104px, min(20vw, 36svh), 296px);
   aspect-ratio: 1;
   translate: 0 -50%;
   rotate: -8deg;
@@ -181,9 +181,9 @@
 
 .avatar {
   position: absolute;
-  inset: 16%;
-  width: 68%;
-  height: 68%;
+  inset: 14%;
+  width: 72%;
+  height: 72%;
   border-radius: 50%;
   object-fit: cover;
   background: #fff;
@@ -461,13 +461,13 @@
   .stamp {
     right: 8px;
     top: 100%;
-    width: clamp(84px, 27vw, 104px);
+    width: clamp(104px, 34vw, 140px);
     translate: 0 10%;
   }
 
   /* Leaves the corner beside it to the portrait. */
   .statement {
-    max-width: min(16ch, 100% - 27vw - 20px);
+    max-width: min(16ch, 100% - 34vw - 20px);
   }
 
   /* The way to get in touch comes before the code panel, and stays on the
