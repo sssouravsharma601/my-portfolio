@@ -23,21 +23,21 @@ export const hiring: { label: string; value: string }[] = [
     label: 'Visa',
     value: 'UAE residence visa. A new employer would transfer or sponsor it.',
   },
-  { label: 'Based', value: 'Dubai, working on-site' },
+  { label: 'Based', value: 'Dubai (UTC+4)' },
+  { label: 'Work mode', value: 'On-site only' },
   { label: 'Relocation', value: 'Open to relocating with visa sponsorship' },
-  { label: 'Time zone', value: 'UAE time (UTC+4)' },
   { label: 'Roles', value: 'Senior Frontend Engineer, Senior Software Engineer' },
 ];
 
 export const roles: Role[] = [
   {
     id: 'synechron',
-    title: 'Senior Associate, Frontend Lead',
+    title: 'Senior Associate, Team Lead',
     company: 'Synechron',
     context: 'for Emirates NBD',
     start: { year: 2024, month: 4 },
     summary:
-      'I lead four engineers across frontend and backend on the Decision Management System, the platform the bank is building in-house to decide who is eligible for a personal loan, credit card or overdraft.',
+      'I lead four engineers across frontend and backend on the Decision Management System, the bank’s in-house platform for deciding who is eligible for a personal loan, credit card or overdraft. It is live for multiple products.',
     highlights: [
       'Designed the configuration panel from scratch, including a flow-builder canvas for nested risk-eligibility models.',
       'Cut memory use by 35% during large calculations by virtualising the heaviest UI modules.',
@@ -55,7 +55,7 @@ export const roles: Role[] = [
       'I led five frontend engineers on Learn Portal 2.0, the student portal for live classes, tests and learning videos, used by millions of students a day.',
     highlights: [
       'Took the Lighthouse performance score from 52 to 91 through package choices, lazy loading, a CDN and a service worker.',
-      'Moved the assessment flow to optimistic updates; in-class interaction rose 42%.',
+      'Moved the assessment flow to optimistic updates. In-class interaction, measured by attendance and time spent on the portal, rose 42% over the legacy portal.',
       'Built the message bridge between the React modules and the Flutter mobile shell.',
     ],
     stack: ['React', 'Ruby on Rails', 'MongoDB', 'PostgreSQL', 'Flutter'],
@@ -103,11 +103,11 @@ export const caseStudies: CaseStudy[] = [
     period: '2024 – present',
     title: 'Decision Management System',
     lede: 'A bank’s in-house platform for deciding who is eligible for a loan, a credit card or an overdraft.',
-    role: 'Frontend lead: rule management (BRMS) and non-functional requirements',
+    role: 'Team lead',
     team: 'I lead four engineers, frontend and backend, in a team of 10–12',
     context: [
       'Every application for a personal loan, credit card or overdraft has to be checked against the bank’s eligibility rules. The Decision Management System is the platform that runs that check. The rules themselves are written and maintained in their own application, the Business Rule Management System (BRMS).',
-      'It is a transformation project. The bank has run these decisions on a third-party tool, and this platform is being built in-house to replace it.',
+      'It is a transformation project. The bank has run these decisions on a third-party tool, and this platform was built in-house to replace it. It is already live for multiple products, and the rest of the rollout is due over the next couple of months.',
     ],
     mine: 'Alongside leading four of the engineers, I work on the BRMS and own the non-functional requirements: performance, memory and security.',
     built: [
@@ -120,8 +120,9 @@ export const caseStudies: CaseStudy[] = [
       intro:
         'One decision is a stack of conditions, with more conditions nested inside them. The interface has to let someone write all of it without losing their place.',
       points: [
-        'Branching: conditions stack and nest inside one another, and each level can branch with if, else if and else.',
-        'Combining: within a branch, conditions join with AND and OR.',
+        'Rows: each condition sits on its own row, and further rows join with AND or OR.',
+        'Branching: a decision branches with if, else if and else, and conditions can nest inside one another.',
+        'Actions: each branch ends in a then block, which can assign several values at once.',
         'Drafts: a decision can be kept as a draft while it is still being written.',
         'Screens: the same interface works on a phone, a tablet and a desktop.',
       ],
@@ -131,24 +132,26 @@ export const caseStudies: CaseStudy[] = [
       branches: [
         {
           keyword: 'if',
-          tests: ['Income meets the threshold', 'Age is within range'],
-          join: 'and',
+          rows: [
+            { text: 'Income meets the threshold' },
+            { join: 'and', text: 'Age is within range' },
+            { join: 'or', text: 'Salary is transferred' },
+          ],
           branches: [
             {
               keyword: 'if',
-              tests: ['Existing customer', 'Salary is transferred'],
-              join: 'or',
-              outcome: 'Eligible',
+              rows: [{ text: 'Employer is on the approved list' }],
+              then: ['decision = Eligible', 'limit band = Standard'],
             },
             {
               keyword: 'else if',
-              tests: ['Employer is on the approved list'],
-              outcome: 'Eligible, lower limit',
+              rows: [{ text: 'Existing customer' }],
+              then: ['decision = Eligible', 'limit band = Lower'],
             },
-            { keyword: 'else', outcome: 'Refer for review' },
+            { keyword: 'else', then: ['decision = Refer for review'] },
           ],
         },
-        { keyword: 'else', outcome: 'Not eligible' },
+        { keyword: 'else', then: ['decision = Not eligible', 'reason = Criteria not met'] },
       ],
     },
     figures: [{ value: '−35%', label: 'Memory use during large calculations' }],
@@ -183,12 +186,13 @@ export const caseStudies: CaseStudy[] = [
     team: 'I led five frontend engineers',
     context: [
       'Learn Portal 2.0 replaced the legacy learn portal. It was the web app where students joined live classes, caught up on past ones, took tests, watched learning videos and worked through topics from a very large content library.',
-      'Students were grouped into different kinds of batches, and the portal showed each student their own class schedule. It was a progressive web app, and it worked offline.',
+      'Students were grouped into different kinds of batches, and the portal showed each student their own class schedule. It was a progressive web app, and some free content could still be watched offline.',
     ],
-    mine: 'Beyond leading that team through the move off the legacy portal, I’d point to three pieces of work:',
+    mine: 'Beyond leading that team through the move off the legacy portal, these are the parts I’d point to:',
     built: [
       'Performance: I took the Lighthouse performance score from 52 to 91. The four changes behind it are set out below.',
-      'Assessments: I moved the assessment flow to optimistic updates, so the interface responds at once instead of waiting for the server. In-class interaction went up 42%.',
+      'Assessments: I moved the assessment flow to optimistic updates, so the interface responds at once instead of waiting for the server.',
+      'Engagement: in-class interaction, measured by attendance and time spent on the portal, was 42% higher than on the legacy portal.',
       'Mobile: I built the message bridge that lets the React modules run inside the Flutter mobile shell.',
     ],
     deep: {
@@ -198,12 +202,12 @@ export const caseStudies: CaseStudy[] = [
         'Package choices: dependencies were picked with their bundle cost in mind.',
         'Lazy loading: a student downloaded only the part of the portal they opened.',
         'CDN: static assets were served from a CDN.',
-        'Service worker: it made the portal a progressive web app that worked offline.',
+        'Service worker: it made the portal a progressive web app, with some free content available offline.',
       ],
     },
     figures: [
       { value: '52→91', label: 'Lighthouse performance score' },
-      { value: '+42%', label: 'In-class interaction' },
+      { value: '+42%', label: 'In-class interaction, against the legacy portal' },
     ],
     flow: [
       { label: 'Student', note: 'In a browser or in the mobile app', next: 'opens' },
@@ -223,7 +227,7 @@ export const caseStudies: CaseStudy[] = [
 export const highlights: Highlight[] = [
   { value: '52→91', label: 'Lighthouse performance score', where: 'BYJU’S' },
   { value: '−35%', label: 'Memory use during large calculations', where: 'Emirates NBD' },
-  { value: '+42%', label: 'In-class interaction', where: 'BYJU’S' },
+  { value: '+42%', label: 'In-class interaction vs the legacy portal', where: 'BYJU’S' },
   { value: '100k+', label: 'Concurrent requests on launch day', where: 'Ola Electric' },
 ];
 

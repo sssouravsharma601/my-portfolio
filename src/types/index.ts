@@ -37,11 +37,10 @@ export interface FlowStep {
 /** One branch in an illustrative nested rule. */
 export interface RuleBranch {
   keyword: 'if' | 'else if' | 'else';
-  /** Conditions on this branch, combined with `join`. */
-  tests?: string[];
-  join?: 'and' | 'or';
-  /** Outcome, when the branch ends here. */
-  outcome?: string;
+  /** One condition per row; rows after the first say how they join. */
+  rows?: { join?: 'and' | 'or'; text: string }[];
+  /** The action block: values assigned when the branch ends here. */
+  then?: string[];
   /** Branches nested inside this one. */
   branches?: RuleBranch[];
 }

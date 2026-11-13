@@ -114,23 +114,31 @@ function Case({ study: c }: { study: CaseStudy }) {
 function Branches({ branches }: { branches: RuleBranch[] }) {
   return (
     <ul className={styles.branches}>
-      {branches.map((b) => (
-        <li key={`${b.keyword}-${b.tests?.join() ?? b.outcome ?? ''}`} className={styles.branch}>
-          <p className={styles.branchHead}>
-            <span className={styles.keyword}>{b.keyword}</span>
-            {b.tests?.map((t, i) => (
-              <span key={t} className={styles.testWrap}>
-                {i > 0 && <span className={styles.join}>{b.join}</span>}
-                <span className={styles.test}>{t}</span>
-              </span>
-            ))}
-            {b.outcome && (
-              <span className={styles.outcome}>
-                <span aria-hidden="true">→ </span>
-                {b.outcome}
-              </span>
+      {branches.map((b, i) => (
+        <li key={`${b.keyword}-${i}`} className={styles.branch}>
+          <div className={styles.branchBox}>
+            <p className={styles.keyword}>{b.keyword}</p>
+            {b.rows && (
+              <ul className={styles.rows}>
+                {b.rows.map((r) => (
+                  <li key={r.text} className={styles.row}>
+                    <span className={styles.join}>{r.join}</span>
+                    <span className={styles.test}>{r.text}</span>
+                  </li>
+                ))}
+              </ul>
             )}
-          </p>
+            {b.then && (
+              <div className={styles.then}>
+                <span className={styles.thenKey}>then</span>
+                <ul className={styles.assigns}>
+                  {b.then.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
           {b.branches && <Branches branches={b.branches} />}
         </li>
       ))}
