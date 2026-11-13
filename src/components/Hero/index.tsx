@@ -10,7 +10,7 @@ const TICKER = [
   'Bank rule engines',
   'Live classrooms',
   'Launch-day checkouts',
-  'Design systems',
+  'Analytics dashboards',
   'Performance budgets',
 ];
 

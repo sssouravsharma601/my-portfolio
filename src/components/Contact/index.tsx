@@ -29,7 +29,8 @@ export default function Contact() {
         <div className={styles.cols}>
           <div className={styles.lead}>
             <p className={styles.note}>
-              Email is the fastest way to reach me. I usually reply within a day or two.
+              Email is the fastest way to reach me, and I usually reply within a day or two. A job
+              description or a few lines about the role is enough to start.
             </p>
 
             <EmailRow />
