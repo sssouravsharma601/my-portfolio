@@ -6,3 +6,6 @@ dist/
 # graphify knowledge graph (generated artifact — local dev tool only)
 graphify-out/
 dist-ssr/
+
+# Per-agent git worktrees created by Claude Code (local only)
+.claude/worktrees/

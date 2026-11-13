@@ -45,3 +45,19 @@
     text-align: left;
   }
 }
+
+@media print {
+  .section {
+    padding-top: 32px;
+  }
+
+  .head {
+    margin-bottom: 16px;
+    break-after: avoid;
+    break-inside: avoid;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
+}

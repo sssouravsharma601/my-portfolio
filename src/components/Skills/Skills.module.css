@@ -51,6 +51,7 @@
 .degree {
   font-size: 1.25rem;
   font-weight: 700;
+  line-height: 1.25;
 }
 
 .school {
@@ -61,5 +62,15 @@
   .row,
   .edu {
     grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .row {
+    break-inside: avoid;
+  }
+
+  .items {
+    font-size: 1.5rem;
   }
 }

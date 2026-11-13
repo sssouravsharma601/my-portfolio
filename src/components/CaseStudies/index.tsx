@@ -1,5 +1,5 @@
 import { caseStudies } from '../../data/profile';
-import type { CaseStudy, FlowStep } from '../../types';
+import type { CaseStudy, FlowStep, RuleBranch } from '../../types';
 import CountUp from '../CountUp';
 import Section from '../Section';
 import styles from './CaseStudies.module.css';
@@ -62,6 +62,27 @@ function Case({ study: c }: { study: CaseStudy }) {
             </ul>
           </div>
 
+          <div className="reveal">
+            <h4 className={`label ${styles.sub}`}>{c.deep.title}</h4>
+            <p className={styles.para}>{c.deep.intro}</p>
+            <ul className={styles.built}>
+              {c.deep.points.map((p) => (
+                <li key={p}>{p}</li>
+              ))}
+            </ul>
+          </div>
+
+          {c.sketch && (
+            <figure className={`${styles.sketch} reveal`} data-spot>
+              <figcaption className={`label ${styles.caption}`}>
+                <span>decision.rule</span>
+                <span className={styles.draft}>Draft</span>
+              </figcaption>
+              <Branches branches={c.sketch.branches} />
+              <p className={styles.sketchNote}>{c.sketch.caption}</p>
+            </figure>
+          )}
+
           <ul className={`${styles.figures} reveal`} aria-label="Results">
             {c.figures.map((f) => (
               <li key={f.label}>
@@ -87,6 +108,41 @@ function Case({ study: c }: { study: CaseStudy }) {
         </figure>
       </div>
     </article>
+  );
+}
+
+function Branches({ branches }: { branches: RuleBranch[] }) {
+  return (
+    <ul className={styles.branches}>
+      {branches.map((b, i) => (
+        <li key={`${b.keyword}-${i}`} className={styles.branch}>
+          <div className={styles.branchBox}>
+            <p className={styles.keyword}>{b.keyword}</p>
+            {b.rows && (
+              <ul className={styles.rows}>
+                {b.rows.map((r) => (
+                  <li key={r.text} className={styles.row}>
+                    <span className={styles.join}>{r.join}</span>
+                    <span className={styles.test}>{r.text}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {b.then && (
+              <div className={styles.then}>
+                <span className={styles.thenKey}>then</span>
+                <ul className={styles.assigns}>
+                  {b.then.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+          {b.branches && <Branches branches={b.branches} />}
+        </li>
+      ))}
+    </ul>
   );
 }
 

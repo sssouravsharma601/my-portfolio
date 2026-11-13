@@ -13,32 +13,35 @@ export const profile = {
   phone: { display: '+971 58 985 0644', href: 'tel:+971589850644' },
   linkedin: 'https://www.linkedin.com/in/sssouravsharma601/',
   github: 'https://github.com/sssouravsharma601',
-  availability: 'Open to new roles · 30 days’ notice',
+  availability: 'Open to senior roles · 30 days’ notice',
 } as const;
 
 /** The questions a recruiter asks first, answered up front. */
 export const hiring: { label: string; value: string }[] = [
   { label: 'Notice period', value: '30 days' },
-  { label: 'Visa', value: 'UAE residence visa, employer-sponsored' },
-  { label: 'Based', value: 'Dubai, working on-site' },
-  { label: 'Relocation', value: 'Open to other countries with visa sponsorship' },
-  { label: 'Time zone', value: 'UAE time (UTC+4)' },
+  {
+    label: 'Visa',
+    value: 'UAE residence visa. A new employer would transfer or sponsor it.',
+  },
+  { label: 'Based', value: 'Dubai (UTC+4)' },
+  { label: 'Work mode', value: 'On-site only' },
+  { label: 'Relocation', value: 'Open to relocating with visa sponsorship' },
   { label: 'Roles', value: 'Senior Frontend Engineer, Senior Software Engineer' },
 ];
 
 export const roles: Role[] = [
   {
     id: 'synechron',
-    title: 'Senior Associate, Frontend Lead',
+    title: 'Senior Associate, Team Lead',
     company: 'Synechron',
     context: 'for Emirates NBD',
     start: { year: 2024, month: 4 },
     summary:
-      'Lead a team of four on the Decision Management System, the rule engine that decides eligibility for personal loans, credit cards and overdrafts across the bank.',
+      'I lead four engineers across frontend and backend on the Decision Management System, the bank’s in-house platform for deciding who is eligible for a personal loan, credit card or overdraft. It is live for multiple products.',
     highlights: [
-      'Designed the configuration panel from scratch, including a flow-builder canvas for composing nested risk-eligibility models.',
-      'Virtualised the heaviest UI modules, cutting memory use by 35% during large calculations.',
-      'Set the frontend security baseline for public and private APIs to meet the bank’s compliance requirements.',
+      'Designed the configuration panel from scratch, including a flow-builder canvas for nested risk-eligibility models.',
+      'Cut memory use by 35% during large calculations by virtualising the heaviest UI modules.',
+      'Set the frontend security baseline for public and private APIs, to meet the bank’s compliance requirements.',
     ],
     stack: ['React', 'TypeScript', 'Node.js', 'Python', 'Oracle', 'PostgreSQL'],
   },
@@ -49,10 +52,10 @@ export const roles: Role[] = [
     start: { year: 2021, month: 9 },
     end: { year: 2024, month: 3 },
     summary:
-      'Led five frontend engineers on the Student Learn Portal: tests, live classes and video for millions of daily students.',
+      'I led five frontend engineers on Learn Portal 2.0, the student portal for live classes, tests and learning videos, used by millions of students a day.',
     highlights: [
-      'Took Lighthouse performance from 52 to 91 through a sustained round of bundle work.',
-      'Moved the assessment flow to optimistic updates; in-class interaction went up 42%.',
+      'Took the Lighthouse performance score from 52 to 91 through package choices, lazy loading, a CDN and a service worker.',
+      'Moved the assessment flow to optimistic updates. In-class interaction, measured by attendance and time spent on the portal, rose 42% over the legacy portal.',
       'Built the message bridge between the React modules and the Flutter mobile shell.',
     ],
     stack: ['React', 'Ruby on Rails', 'MongoDB', 'PostgreSQL', 'Flutter'],
@@ -65,7 +68,7 @@ export const roles: Role[] = [
     start: { year: 2021, month: 4 },
     end: { year: 2021, month: 9 },
     summary:
-      'Worked on the reservation and purchase portal for Ola Electric’s scooter launch, one of the largest EV rollouts in India.',
+      'I worked on the reservation and purchase portal for Ola Electric’s scooter launch, one of India’s largest EV rollouts.',
     highlights: [
       'Fixed race conditions in the reservation pipeline so it held up under 100k+ concurrent requests on launch day.',
       'Built the serverless payment integration to PCI-DSS requirements.',
@@ -80,7 +83,7 @@ export const roles: Role[] = [
     start: { year: 2018, month: 2 },
     end: { year: 2021, month: 4 },
     summary:
-      'Full-stack work across a small SaaS portfolio: real-time email verification, ad scheduling and lead generation.',
+      'I worked across the stack on a small SaaS portfolio: real-time email verification, ad scheduling and lead generation.',
     highlights: [
       'Built a job queue on Node.js and AWS SQS that processed millions of verification requests a day.',
       'Built the customer-facing analytics dashboards for dense, high-volume data.',
@@ -99,20 +102,59 @@ export const caseStudies: CaseStudy[] = [
     client: 'Emirates NBD, via Synechron',
     period: '2024 – present',
     title: 'Decision Management System',
-    lede: 'The in-house engine that decides who is eligible for a loan, a credit card or an overdraft.',
-    role: 'Frontend lead: BRMS and non-functional requirements',
-    team: '10–12 people; I lead four engineers across frontend and backend',
+    lede: 'A bank’s in-house platform for deciding who is eligible for a loan, a credit card or an overdraft.',
+    role: 'Team lead',
+    team: 'I lead four engineers, frontend and backend, in a team of 10–12',
     context: [
-      'Every application for a personal loan, credit card or overdraft has to be checked against the bank’s eligibility rules. The Decision Management System runs that check.',
-      'It is a transformation project. These decisions used to run on a third-party tool, and this platform is being built in-house to take over. The rules themselves live in the Business Rule Management System (BRMS), where they are written and maintained.',
+      'Every application for a personal loan, credit card or overdraft has to be checked against the bank’s eligibility rules. The Decision Management System is the platform that runs that check. The rules themselves are written and maintained in their own application, the Business Rule Management System (BRMS).',
+      'It is a transformation project. The bank has run these decisions on a third-party tool, and this platform was built in-house to replace it. It is already live for multiple products, and the rest of the rollout is due over the next couple of months.',
     ],
-    mine: 'I work on the BRMS, the application where the rules are defined, and lead four engineers across frontend and backend. I also own the non-functional requirements: performance, memory and security.',
+    mine: 'Alongside leading four of the engineers, I work on the BRMS and own the non-functional requirements: performance, memory and security.',
     built: [
-      'Designed the configuration panel from scratch, including a flow-builder canvas for composing nested risk-eligibility models.',
-      'Virtualised the heaviest UI modules, which cut memory use by 35% during large calculations.',
-      'Set the frontend security baseline for public and private APIs to meet the bank’s compliance requirements.',
+      'BRMS: I designed the configuration panel from scratch, including the flow-builder canvas where nested risk-eligibility models are composed.',
+      'Memory: I virtualised the heaviest UI modules. Memory use during large calculations fell by 35%.',
+      'Security: I set the frontend security baseline for public and private APIs, to meet the bank’s compliance requirements.',
     ],
-    figures: [{ value: '−35%', label: 'Memory during large calculations' }],
+    deep: {
+      title: 'The hard part',
+      intro:
+        'One decision is a stack of conditions, with more conditions nested inside them. The interface has to let someone write all of it without losing their place.',
+      points: [
+        'Rows: each condition sits on its own row, and further rows join with AND or OR.',
+        'Branching: a decision branches with if, else if and else, and conditions can nest inside one another.',
+        'Actions: each branch ends in a then block, which can assign several values at once.',
+        'Drafts: a decision can be kept as a draft while it is still being written.',
+        'Screens: the same interface works on a phone, a tablet and a desktop.',
+      ],
+    },
+    sketch: {
+      caption: 'The shape of one decision. An illustration, not the bank’s rules.',
+      branches: [
+        {
+          keyword: 'if',
+          rows: [
+            { text: 'Income meets the threshold' },
+            { join: 'and', text: 'Age is within range' },
+            { join: 'or', text: 'Salary is transferred' },
+          ],
+          branches: [
+            {
+              keyword: 'if',
+              rows: [{ text: 'Employer is on the approved list' }],
+              then: ['decision = Eligible', 'limit band = Standard'],
+            },
+            {
+              keyword: 'else if',
+              rows: [{ text: 'Existing customer' }],
+              then: ['decision = Eligible', 'limit band = Lower'],
+            },
+            { keyword: 'else', then: ['decision = Refer for review'] },
+          ],
+        },
+        { keyword: 'else', then: ['decision = Not eligible', 'reason = Criteria not met'] },
+      ],
+    },
+    figures: [{ value: '−35%', label: 'Memory use during large calculations' }],
     flow: [
       {
         label: 'Rule authors',
@@ -139,28 +181,39 @@ export const caseStudies: CaseStudy[] = [
     client: 'BYJU’S',
     period: '2021 – 2024',
     title: 'Learn Portal 2.0',
-    lede: 'A rebuild of the student portal: live classes, tests and video for millions of daily students.',
-    role: 'Senior software engineer',
-    team: 'Led five frontend engineers',
+    lede: 'The replacement for BYJU’S legacy student portal: live classes, tests and learning videos for millions of students a day.',
+    role: 'Senior Software Engineer',
+    team: 'I led five frontend engineers',
     context: [
-      'Learn Portal 2.0 replaced the legacy learn portal. It is the web app where students join live classes, catch up on past ones, take tests, watch learning videos and work through topics from a very large content library.',
-      'Students belong to different kinds of batches, and the portal shows each of them their own class schedule.',
+      'Learn Portal 2.0 replaced the legacy learn portal. It was the web app where students joined live classes, caught up on past ones, took tests, watched learning videos and worked through topics from a very large content library.',
+      'Students were grouped into different kinds of batches, and the portal showed each student their own class schedule. It was a progressive web app, and some free content could still be watched offline.',
     ],
-    mine: 'I led five frontend engineers on the portal through the move off the legacy version.',
+    mine: 'Beyond leading that team through the move off the legacy portal, these are the parts I’d point to:',
     built: [
-      'Took Lighthouse performance from 52 to 91 through a sustained round of bundle work.',
-      'Moved the assessment flow to optimistic updates; in-class interaction went up 42%.',
-      'Built the message bridge between the React modules and the Flutter mobile shell.',
+      'Performance: I took the Lighthouse performance score from 52 to 91. The four changes behind it are set out below.',
+      'Assessments: I moved the assessment flow to optimistic updates, so the interface responds at once instead of waiting for the server.',
+      'Engagement: in-class interaction, measured by attendance and time spent on the portal, was 42% higher than on the legacy portal.',
+      'Mobile: I built the message bridge that lets the React modules run inside the Flutter mobile shell.',
     ],
+    deep: {
+      title: 'How 52 became 91',
+      intro: 'There was no single fix. Four things moved the score:',
+      points: [
+        'Package choices: dependencies were picked with their bundle cost in mind.',
+        'Lazy loading: a student downloaded only the part of the portal they opened.',
+        'CDN: static assets were served from a CDN.',
+        'Service worker: it made the portal a progressive web app, with some free content available offline.',
+      ],
+    },
     figures: [
-      { value: '52→91', label: 'Lighthouse performance' },
-      { value: '+42%', label: 'In-class interaction' },
+      { value: '52→91', label: 'Lighthouse performance score' },
+      { value: '+42%', label: 'In-class interaction, against the legacy portal' },
     ],
     flow: [
       { label: 'Student', note: 'In a browser or in the mobile app', next: 'opens' },
       {
         label: 'Learn Portal 2.0',
-        note: 'React web app',
+        note: 'React progressive web app',
         mine: true,
         parts: ['Live classes', 'Past classes', 'Tests', 'Videos', 'Schedule'],
         aside: 'Also runs inside the Flutter mobile app, through a message bridge',
@@ -172,10 +225,10 @@ export const caseStudies: CaseStudy[] = [
 ];
 
 export const highlights: Highlight[] = [
-  { value: '52→91', label: 'Lighthouse performance', where: 'BYJU’S' },
-  { value: '−35%', label: 'Memory during heavy calculations', where: 'Emirates NBD' },
-  { value: '+42%', label: 'In-class interaction', where: 'BYJU’S' },
-  { value: '100k+', label: 'Concurrent launch-day requests', where: 'Ola Electric' },
+  { value: '52→91', label: 'Lighthouse performance score', where: 'BYJU’S' },
+  { value: '−35%', label: 'Memory use during large calculations', where: 'Emirates NBD' },
+  { value: '+42%', label: 'In-class interaction vs the legacy portal', where: 'BYJU’S' },
+  { value: '100k+', label: 'Concurrent requests on launch day', where: 'Ola Electric' },
 ];
 
 export const skills: SkillGroup[] = [

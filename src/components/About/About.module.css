@@ -72,3 +72,25 @@
     border-top: var(--rule) solid var(--line);
   }
 }
+
+@media print {
+  .numbers {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 24px;
+    break-inside: avoid;
+  }
+
+  .numbers li:nth-child(n) {
+    border-top: 0;
+    border-left: var(--rule) solid var(--line);
+  }
+
+  .numbers li:first-child {
+    border-left: 0;
+  }
+
+  .value {
+    margin-top: 16px;
+    font-size: 2.25rem;
+  }
+}

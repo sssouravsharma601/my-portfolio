@@ -8,16 +8,18 @@ export default function About() {
     <Section id="about" index="01" title="About" aside={`${YEARS} years, four companies`}>
       <div className={styles.prose}>
         <p className={`${styles.lead} reveal`}>
-          I’m {profile.name}, a senior frontend engineer based in Dubai. For {YEARS} years I’ve
-          worked where the frontend meets a hard backend problem: a rule engine that decides loan
-          eligibility across a bank, a classroom portal serving millions of students, and a
-          reservation flow that had to survive one of India’s largest EV launches.
+          I’m {profile.name}, a senior frontend engineer in Dubai. For {YEARS} years I’ve worked
+          where the frontend meets a hard backend problem: the application where a bank writes its
+          loan and credit-card eligibility rules, a learning portal used by millions of students a
+          day, and a reservation flow that had to hold up through one of India’s largest EV
+          launches.
         </p>
         <p className={`${styles.more} reveal`}>
-          I care most about the parts that don’t demo well. I want state that stays predictable,
-          bundles that stay small, and interfaces that make a complicated system feel obvious to the
-          person using it. Most of my work is React and TypeScript, with enough Node, Rails and SQL
-          to own a feature end to end. I’ve led frontend teams of four and five engineers.
+          I care most about the parts that don’t demo well: state that stays predictable, bundles
+          that stay small, and interfaces that make a complicated system feel obvious to the person
+          using it. Most of my work is React and TypeScript, with enough Node, Rails and SQL to own
+          a feature end to end. I lead four engineers across frontend and backend today, and led
+          five frontend engineers at BYJU’S.
         </p>
       </div>
 
