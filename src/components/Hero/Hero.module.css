@@ -440,7 +440,7 @@
 @media (max-width: 900px) {
   /* Wide enough on a tablet for the code panel to keep one line per line. */
   .lower {
-    grid-template-columns: minmax(0, 13fr) minmax(0, 7fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   }
 
   .statement {

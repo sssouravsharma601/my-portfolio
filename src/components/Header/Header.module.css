@@ -127,7 +127,9 @@
   }
 
   .navLink {
+    min-width: 44px;
     padding-block: 14px;
+    text-align: center;
   }
 
   .navLink::after {

@@ -384,8 +384,6 @@
   .diagram {
     grid-area: 2 / 2 / span 2;
     order: 0;
-    position: sticky;
-    top: calc(var(--bar) + 24px);
   }
 
   .text > .sketch {
@@ -395,6 +393,14 @@
   /* No sketch: the results take its place beside the last block of text. */
   .body:not(:has(.sketch)) .figures {
     grid-area: 4 / 2;
+  }
+}
+
+/* Sticky only where the whole diagram fits under the bar. */
+@media (min-width: 901px) and (min-height: 700px) {
+  .diagram {
+    position: sticky;
+    top: calc(var(--bar) + 24px);
   }
 }
 
@@ -428,13 +434,7 @@
   }
 
   .node,
-  .branchHead,
   .figures li {
     break-inside: avoid;
-  }
-
-  .keyword,
-  .tag {
-    border: var(--rule) solid var(--accent);
   }
 }
