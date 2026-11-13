@@ -32,3 +32,18 @@
 .row :global(.link):hover {
   text-decoration-color: var(--accent);
 }
+
+/* Hit area only: the link keeps its place in the line. */
+.row a {
+  display: inline-block;
+  margin-block: -14px;
+  padding-block: 14px;
+}
+
+/* Colophon and credits: nothing a printed copy needs, and it would
+   otherwise land alone on a last page. */
+@media print {
+  .footer {
+    display: none;
+  }
+}
