@@ -37,7 +37,7 @@
    Two columns, each figure beside the text it illustrates:
 
      role / team ────────────────────────────
-     the system        │ diagram (sticky)
+     the system        │ diagram
      my part           │
      the hard part     │ rule sketch, or the results
      results           │   when a study has no sketch
@@ -435,14 +435,6 @@
   /* No sketch: the results take its place beside the last block of text. */
   .body:not(:has(.sketch)) .figures {
     grid-area: 4 / 2;
-  }
-}
-
-/* Sticky only where the whole diagram fits under the bar. */
-@media (min-width: 901px) and (min-height: 700px) {
-  .diagram {
-    position: sticky;
-    top: calc(var(--bar) + 24px);
   }
 }
 
