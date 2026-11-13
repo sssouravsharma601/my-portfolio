@@ -32,3 +32,20 @@
 .row :global(.link):hover {
   text-decoration-color: var(--accent);
 }
+
+/* Hit area only: the link keeps its place in the line. */
+.row a {
+  display: inline-block;
+  margin-block: -14px;
+  padding-block: 14px;
+}
+
+@media print {
+  .footer {
+    border-top: 0;
+  }
+
+  .wordmark {
+    display: none;
+  }
+}

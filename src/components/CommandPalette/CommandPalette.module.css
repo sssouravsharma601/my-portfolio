@@ -1,7 +1,8 @@
 .dialog {
   width: min(560px, calc(100vw - 24px));
-  max-height: min(480px, calc(100dvh - 96px));
-  margin: 12vh auto auto;
+  /* Tall enough for every command on a desktop; scrolls on a short screen. */
+  max-height: min(600px, calc(100dvh - 24px - min(12vh, 96px)));
+  margin: min(12vh, 96px) auto auto;
   padding: 0;
   background: transparent;
   border: 0;
@@ -59,7 +60,9 @@
   border: 0;
   outline: none;
   font-family: var(--mono);
-  font-size: 0.9375rem;
+  /* 16px, or iOS zooms the page when the field takes focus. */
+  font-size: 1rem;
+  text-overflow: ellipsis;
 }
 
 .search input::placeholder {
@@ -67,6 +70,9 @@
 }
 
 .esc {
+  flex: none;
+  min-width: 44px;
+  min-height: 32px;
   padding: 3px 7px;
   background: transparent;
   border: var(--rule) solid var(--line);
@@ -104,4 +110,14 @@
 .empty {
   padding: 16px 12px;
   color: var(--ink-3);
+}
+
+@media (pointer: coarse) {
+  .search {
+    padding-block: 8px;
+  }
+
+  .esc {
+    min-height: 44px;
+  }
 }

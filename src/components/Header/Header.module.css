@@ -118,6 +118,34 @@
   }
 }
 
+/* Fingers get 44px targets; the bar itself stays 60px. */
+@media (max-width: 760px), (pointer: coarse) {
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .navLink {
+    padding-block: 14px;
+  }
+
+  .navLink::after {
+    bottom: 8px;
+  }
+
+  .command,
+  .theme {
+    min-width: 44px;
+    height: 44px;
+  }
+
+  .command {
+    justify-content: center;
+    padding-inline: 12px;
+  }
+}
+
 @media print {
   .bar {
     display: none;

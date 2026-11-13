@@ -16,6 +16,8 @@
   --ink-2: #3d4350;
   --ink-3: #5f6776;
   --line: #c9ced8;
+  /* Boundary of a control that has no other edge (form fields): 3:1 on paper. */
+  --line-strong: #7f8796;
   --grid: rgba(11, 13, 18, 0.055);
   --accent: #5163e0;
   --accent-soft: rgba(81, 99, 224, 0.13);
@@ -46,6 +48,7 @@
   --ink-2: #aab1be;
   --ink-3: #838b9a;
   --line: #262b35;
+  --line-strong: #646c7b;
   --grid: rgba(232, 235, 240, 0.05);
   --accent: #5566e3;
   --accent-soft: rgba(124, 138, 245, 0.14);
@@ -200,8 +203,11 @@ p {
   border: 0;
 }
 
-/* Pointer spotlight. hooks/useSpotlight.ts writes --mx / --my. */
-[data-spot] {
+/* Pointer spotlight. hooks/useSpotlight.ts writes --mx / --my.
+   :where() keeps this at zero specificity: this file loads after the
+   component styles, and a surface that positions itself (the sticky case-study
+   diagram) has to win. */
+:where([data-spot]) {
   position: relative;
 }
 
@@ -269,13 +275,70 @@ p {
   }
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Print. The page doubles as a résumé: ink on white whatever theme
+   is on screen, no chrome, no decoration, nothing split mid-block.
+   ───────────────────────────────────────────────────────────── */
+@page {
+  margin: 14mm 13mm;
+}
+
 @media print {
+  :root,
+  :root[data-theme="dark"] {
+    color-scheme: light;
+
+    --paper: #fff;
+    --paper-2: #fff;
+    --ink: #000;
+    --ink-2: #26292f;
+    --ink-3: #4a505b;
+    --line: #9aa1ad;
+    --line-strong: #4a505b;
+    --grid: transparent;
+    --accent: #3b4bc4;
+    --accent-soft: transparent;
+    --accent-text: #3040b8;
+    --on-accent: #fff;
+    --string: #6b3a05;
+    --gutter: 0px;
+  }
+
+  html {
+    font-size: 81.25%;
+  }
+
+  body {
+    background: #fff;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
   .reveal {
     animation: none !important;
   }
 
   .skip-link,
-  .progress {
+  .progress,
+  [data-spot]::after {
     display: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  figure,
+  dl {
+    break-inside: avoid;
   }
 }

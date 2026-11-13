@@ -33,24 +33,41 @@
   letter-spacing: -0.015em;
 }
 
-/* ── Body ─────────────────────────────────────────────────── */
+/* ── Body ─────────────────────────────────────────────────────
+   Two columns, each figure beside the text it illustrates:
+
+     role / team ────────────────────────────
+     the system        │ diagram (sticky)
+     my part           │
+     the hard part     │ rule sketch, or the results
+     results           │   when a study has no sketch
+
+   .text is display: contents, so its children are placed on this grid
+   directly. The placement is in the min-width query at the end of this
+   file; below it everything is one column, and the diagram moves up to
+   follow "The system" (order), which nothing focusable depends on. */
 .body {
+  --col-gap: clamp(32px, 6vw, 96px);
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: 40px clamp(32px, 6vw, 96px);
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(24px, 3vw, 36px) var(--col-gap);
   align-items: start;
   margin-top: clamp(28px, 4vw, 48px);
 }
 
 .text {
-  display: grid;
-  gap: clamp(24px, 3vw, 36px);
+  display: contents;
+}
+
+/* Role / team and "The system" first, then the diagram, then the rest. */
+.text > :nth-child(-n + 2) {
+  order: -2;
 }
 
 .meta {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px 32px;
+  gap: 16px var(--col-gap);
   padding-block: 16px;
   border-block: var(--rule) solid var(--line);
 }
@@ -105,6 +122,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px clamp(32px, 5vw, 72px);
+  padding-top: clamp(16px, 2vw, 24px);
+  border-top: var(--rule) solid var(--line);
 }
 
 .figures li {
@@ -222,8 +241,7 @@
 
 /* ── Diagram ──────────────────────────────────────────────── */
 .diagram {
-  position: sticky;
-  top: calc(var(--bar) + 24px);
+  order: -1;
   background: var(--paper-2);
   border: var(--rule) solid var(--line);
   border-radius: 12px;
@@ -349,13 +367,34 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (min-width: 901px) {
   .body {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .text > * {
+    grid-column: 1;
+    order: 0;
+  }
+
+  .text > .meta {
+    grid-column: 1 / -1;
   }
 
   .diagram {
-    position: static;
+    grid-area: 2 / 2 / span 2;
+    order: 0;
+    position: sticky;
+    top: calc(var(--bar) + 24px);
+  }
+
+  .text > .sketch {
+    grid-area: 4 / 2 / span 2;
+  }
+
+  /* No sketch: the results take its place beside the last block of text. */
+  .body:not(:has(.sketch)) .figures {
+    grid-area: 4 / 2;
   }
 }
 
@@ -368,5 +407,34 @@
 @media print {
   .diagram {
     position: static;
+  }
+
+  .list {
+    display: block;
+  }
+
+  .case + .case {
+    margin-top: 28px;
+    padding-top: 24px;
+  }
+
+  .head {
+    break-inside: avoid;
+    break-after: avoid;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .node,
+  .branchHead,
+  .figures li {
+    break-inside: avoid;
+  }
+
+  .keyword,
+  .tag {
+    border: var(--rule) solid var(--accent);
   }
 }
