@@ -144,10 +144,9 @@
 /* ── Portrait stamp ───────────────────────────────────────── */
 .stamp {
   position: absolute;
-  right: 3%;
+  right: 1.5%;
   top: 50%;
-  width: clamp(104px, 15vw, 212px);
-  width: clamp(84px, min(15vw, 27svh), 212px);
+  width: clamp(104px, 20vw, 296px);
   aspect-ratio: 1;
   translate: 0 -50%;
   rotate: -8deg;
@@ -181,9 +180,9 @@
 
 .avatar {
   position: absolute;
-  inset: 16%;
-  width: 68%;
-  height: 68%;
+  inset: 14%;
+  width: 72%;
+  height: 72%;
   border-radius: 50%;
   object-fit: cover;
   background: #fff;
@@ -375,6 +374,31 @@
   }
 }
 
+/* ── Name and portrait side by side ───────────────────────────
+   From tablet width up the portrait gets its own column, as tall as the
+   two-line name, instead of sitting on top of the letters. --fit is the
+   name's font size; the portrait is sized from it so the two always match.
+   14vw is what fits beside a portrait of 1.6 × that. */
+@media (min-width: 601px) {
+  .nameWrap {
+    --fit: min(14vw, 13rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 2rem);
+  }
+
+  .name {
+    font-size: var(--fit);
+  }
+
+  .stamp {
+    position: static;
+    width: calc(var(--fit) * 1.6);
+    translate: none;
+  }
+}
+
 /* ── First screen on short viewports ──────────────────────────
    On a 1366×768 or 1280×720 laptop the name at full size pushes the
    statement and the buttons below the fold. So on wide layouts the name is
@@ -389,40 +413,38 @@
    is unsupported the name simply keeps its full size. */
 @supports (width: calc(1svh * tan(atan2(1vw, 1rem)))) {
   @media (min-width: 901px) {
-    .name {
+    .nameWrap {
       --rest: 30.5rem;
-      --full: min(19.4vw, 18.4rem);
-      --fit: min(var(--full), max(13vw, (100svh - var(--rest)) / 1.62));
+      --full: min(14vw, 13rem);
+      --fit: min(var(--full), max(9.5vw, (100svh - var(--rest)) / 1.62));
       --widen: clamp(0, (tan(atan2(var(--full), var(--fit))) - 1) * 95, 25);
-      font-size: var(--fit);
     }
   }
 
   @media (min-width: 1200px) {
-    .name {
+    .nameWrap {
       --rest: 28.5rem;
     }
   }
 
   @media (min-width: 901px) and (max-height: 900px) {
-    .name {
+    .nameWrap {
       --rest: 27.5rem;
     }
   }
 
   @media (min-width: 1200px) and (max-height: 900px) {
-    .name {
+    .nameWrap {
       --rest: 25.5rem;
     }
   }
 
   /* A phone on its side: the name keeps to about a third of the height. */
   @media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
-    .name {
-      --full: 19.4vw;
-      --fit: min(var(--full), max(12.5vw, 30svh));
+    .nameWrap {
+      --full: 14vw;
+      --fit: min(var(--full), max(9vw, 30svh));
       --widen: clamp(0, (tan(atan2(var(--full), var(--fit))) - 1) * 95, 25);
-      font-size: var(--fit);
     }
   }
 }
@@ -461,13 +483,13 @@
   .stamp {
     right: 8px;
     top: 100%;
-    width: clamp(84px, 27vw, 104px);
+    width: clamp(104px, 34vw, 140px);
     translate: 0 10%;
   }
 
   /* Leaves the corner beside it to the portrait. */
   .statement {
-    max-width: min(16ch, 100% - 27vw - 20px);
+    max-width: min(16ch, 100% - 34vw - 20px);
   }
 
   /* The way to get in touch comes before the code panel, and stays on the
