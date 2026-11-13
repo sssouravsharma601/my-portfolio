@@ -40,12 +40,10 @@
   padding-block: 14px;
 }
 
+/* Colophon and credits: nothing a printed copy needs, and it would
+   otherwise land alone on a last page. */
 @media print {
   .footer {
-    border-top: 0;
-  }
-
-  .wordmark {
     display: none;
   }
 }
