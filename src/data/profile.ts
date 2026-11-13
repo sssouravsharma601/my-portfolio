@@ -21,10 +21,10 @@ export const hiring: { label: string; value: string }[] = [
   { label: 'Notice period', value: '30 days' },
   {
     label: 'Visa',
-    value: 'UAE residence visa, employer-sponsored. A new employer would transfer or sponsor it.',
+    value: 'UAE residence visa. A new employer would transfer or sponsor it.',
   },
   { label: 'Based', value: 'Dubai, working on-site' },
-  { label: 'Relocation', value: 'Open to other countries if the employer sponsors the visa' },
+  { label: 'Relocation', value: 'Open to relocating with visa sponsorship' },
   { label: 'Time zone', value: 'UAE time (UTC+4)' },
   { label: 'Roles', value: 'Senior Frontend Engineer, Senior Software Engineer' },
 ];
@@ -109,7 +109,7 @@ export const caseStudies: CaseStudy[] = [
       'Every application for a personal loan, credit card or overdraft has to be checked against the bank’s eligibility rules. The Decision Management System is the platform that runs that check. The rules themselves are written and maintained in their own application, the Business Rule Management System (BRMS).',
       'It is a transformation project. The bank has run these decisions on a third-party tool, and this platform is being built in-house to replace it.',
     ],
-    mine: 'I lead four engineers across frontend and backend. I work on the BRMS myself, and I own the non-functional requirements: performance, memory and security.',
+    mine: 'Alongside leading four of the engineers, I work on the BRMS and own the non-functional requirements: performance, memory and security.',
     built: [
       'BRMS: I designed the configuration panel from scratch, including the flow-builder canvas where nested risk-eligibility models are composed.',
       'Memory: I virtualised the heaviest UI modules. Memory use during large calculations fell by 35%.',
@@ -185,7 +185,7 @@ export const caseStudies: CaseStudy[] = [
       'Learn Portal 2.0 replaced the legacy learn portal. It was the web app where students joined live classes, caught up on past ones, took tests, watched learning videos and worked through topics from a very large content library.',
       'Students were grouped into different kinds of batches, and the portal showed each student their own class schedule. It was a progressive web app, and it worked offline.',
     ],
-    mine: 'I led five frontend engineers on the portal as it replaced the legacy version. Three pieces of that work:',
+    mine: 'Beyond leading that team through the move off the legacy portal, I’d point to three pieces of work:',
     built: [
       'Performance: I took the Lighthouse performance score from 52 to 91. The four changes behind it are set out below.',
       'Assessments: I moved the assessment flow to optimistic updates, so the interface responds at once instead of waiting for the server. In-class interaction went up 42%.',
@@ -209,7 +209,7 @@ export const caseStudies: CaseStudy[] = [
       { label: 'Student', note: 'In a browser or in the mobile app', next: 'opens' },
       {
         label: 'Learn Portal 2.0',
-        note: 'React web app',
+        note: 'React progressive web app',
         mine: true,
         parts: ['Live classes', 'Past classes', 'Tests', 'Videos', 'Schedule'],
         aside: 'Also runs inside the Flutter mobile app, through a message bridge',
