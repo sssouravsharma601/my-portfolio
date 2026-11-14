@@ -36,10 +36,7 @@ export default function Header() {
     <header className={styles.bar}>
       <div className={`page ${styles.inner}`}>
         <a href="#top" className={styles.brand} aria-label={`${profile.name}, back to top`}>
-          <span className={styles.prompt} aria-hidden="true">
-            ~/
-          </span>
-          sourav-sharma
+          {profile.name}
         </a>
 
         <nav aria-label="Primary" className={styles.nav}>
@@ -47,7 +44,7 @@ export default function Header() {
             <a
               key={n.id}
               href={`#${n.id}`}
-              className={`label ${styles.navLink}`}
+              className={styles.navLink}
               aria-current={active === n.id ? 'location' : undefined}
             >
               {n.label}
@@ -57,7 +54,7 @@ export default function Header() {
 
         <button
           type="button"
-          className={`label ${styles.command}`}
+          className={styles.command}
           onClick={() => setPalette(true)}
           aria-haspopup="dialog"
           aria-label="Open command palette"

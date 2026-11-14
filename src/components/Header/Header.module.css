@@ -1,81 +1,87 @@
+/* A thin frosted bar: the page shows through, softly. */
 .bar {
   position: sticky;
   top: 0;
   z-index: 50;
   height: var(--bar);
-  background: var(--paper);
-  border-bottom: var(--rule) solid var(--line);
+  background: color-mix(in srgb, var(--paper) 78%, transparent);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: var(--rule) solid color-mix(in srgb, var(--line) 60%, transparent);
 }
 
 .inner {
   display: flex;
   align-items: center;
-  gap: clamp(12px, 3vw, 32px);
+  gap: clamp(12px, 2.4vw, 28px);
   height: 100%;
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   margin-right: auto;
-  font-family: var(--mono);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   white-space: nowrap;
-}
-
-.prompt {
-  color: var(--accent-text);
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: clamp(12px, 2.4vw, 28px);
+  gap: clamp(14px, 2.2vw, 28px);
 }
 
 .navLink {
-  position: relative;
-  padding-block: 6px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  transition: color 0.2s ease;
 }
 
-.navLink::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-  transition: transform 0.25s var(--ease-out);
-}
-
-.navLink:hover::after,
-.navLink[aria-current]::after {
-  transform: scaleX(1);
+.navLink:hover,
+.navLink[aria-current] {
+  color: var(--ink);
 }
 
 .navLink[aria-current] {
-  color: var(--accent-text);
+  font-weight: 600;
 }
 
-.command {
+.command,
+.theme {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  height: 36px;
-  padding-inline: 10px;
+  justify-content: center;
+  height: 32px;
   flex: none;
-  background: var(--paper-2);
+  background: transparent;
   border: var(--rule) solid var(--line);
-  border-radius: 6px;
+  border-radius: 999px;
   color: var(--ink-2);
   transition:
-    border-color 0.2s ease,
+    background-color 0.2s ease,
     color 0.2s ease;
 }
 
-.command:hover {
-  border-color: var(--accent);
+.command {
+  gap: 8px;
+  padding-inline: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.theme {
+  width: 32px;
+}
+
+.command:hover,
+.theme:hover {
+  background: var(--paper-2);
   color: var(--ink);
 }
 
@@ -85,25 +91,6 @@
 
 .menuWord {
   display: none;
-}
-
-.theme {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  flex: none;
-  background: transparent;
-  border: var(--rule) solid var(--line);
-  border-radius: 6px;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.theme:hover {
-  background: var(--ink);
-  color: var(--paper);
 }
 
 /* Below tablet width the palette is the menu. */
@@ -116,35 +103,19 @@
   .menuWord {
     display: inline;
   }
-}
-
-/* Fingers get 44px targets; the bar itself stays 60px. */
-@media (max-width: 760px), (pointer: coarse) {
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-  }
-
-  .navLink {
-    min-width: 44px;
-    padding-block: 14px;
-    text-align: center;
-  }
-
-  .navLink::after {
-    bottom: 8px;
-  }
 
   .command,
   .theme {
-    min-width: 44px;
     height: 44px;
   }
 
+  .theme {
+    width: 44px;
+  }
+
   .command {
-    justify-content: center;
-    padding-inline: 12px;
+    padding-inline: 16px;
+    font-size: 0.8125rem;
   }
 }
 

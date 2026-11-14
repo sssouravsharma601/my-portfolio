@@ -8,24 +8,21 @@ const caseIds = new Set(caseStudies.map((c) => c.id));
 
 export default function Experience() {
   return (
-    <Section id="work" index="03" title="Experience" aside="From SaaS to banking">
+    <Section id="work" title="Experience" aside="From SaaS to banking">
       <ol className={styles.list}>
-        {roles.map((r, i) => (
-          <RoleItem key={r.id} role={r} n={roles.length - i} />
+        {roles.map((r) => (
+          <RoleItem key={r.id} role={r} />
         ))}
       </ol>
     </Section>
   );
 }
 
-function RoleItem({ role: r, n }: { role: Role; n: number }) {
+function RoleItem({ role: r }: { role: Role }) {
   const current = !r.end;
   return (
     <li className={`${styles.item} ${current ? styles.current : ''}`}>
       <div className={styles.when}>
-        <span className={styles.n} aria-hidden="true">
-          {String(n).padStart(2, '0')}
-        </span>
         <span className="label">
           {formatYearMonth(r.start)} – {r.end ? formatYearMonth(r.end) : 'Present'}
         </span>

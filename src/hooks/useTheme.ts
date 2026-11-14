@@ -3,7 +3,7 @@ import { STORAGE_KEYS } from '../constants';
 import type { Theme } from '../types';
 
 const QUERY = '(prefers-color-scheme: dark)';
-const THEME_COLOR: Record<Theme, string> = { light: '#f6f7f9', dark: '#0a0c10' };
+const THEME_COLOR: Record<Theme, string> = { light: '#ffffff', dark: '#000000' };
 
 const listeners = new Set<() => void>();
 const emit = () => listeners.forEach((l) => l());

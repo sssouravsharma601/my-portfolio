@@ -5,7 +5,7 @@ import styles from './About.module.css';
 
 export default function About() {
   return (
-    <Section id="about" index="01" title="About" aside={`${YEARS} years, four companies`}>
+    <Section id="about" title="About" aside={`${YEARS} years, four companies`}>
       <div className={styles.prose}>
         <p className={`${styles.lead} reveal`}>
           I’m {profile.name}, a senior frontend engineer in Dubai. For {YEARS} years I’ve worked

@@ -1,63 +1,47 @@
 .section {
-  padding-block: clamp(56px, 9vw, 128px) 0;
+  padding-block: clamp(72px, 10vw, 136px);
+}
+
+/* Every other section sits on a soft grey band that runs edge to edge.
+   The shadow paints the band; the clip keeps it from spilling above or below. */
+.section:nth-of-type(odd) {
+  background: var(--paper-2);
+  box-shadow: 0 0 0 100vmax var(--paper-2);
+  clip-path: inset(0 -100vmax);
 }
 
 .head {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: end;
-  gap: 8px clamp(12px, 2vw, 24px);
-  padding-bottom: clamp(12px, 1.6vw, 20px);
-  margin-bottom: clamp(28px, 4vw, 56px);
-  border-bottom: var(--rule) solid var(--line);
-}
-
-.index {
-  align-self: start;
-  padding-top: 0.9em;
-  color: var(--accent-text);
+  margin-bottom: clamp(32px, 5vw, 64px);
 }
 
 .title {
-  font-family: var(--display);
-  font-size: clamp(3rem, 10vw, 8.5rem);
-  font-variation-settings: "wdth" 78;
-  line-height: 0.82;
+  font-size: clamp(2rem, 4.6vw, 3.25rem);
+  line-height: 1.08;
   letter-spacing: -0.03em;
-  text-transform: uppercase;
 }
 
 .aside {
-  max-width: 26ch;
-  padding-bottom: 0.4em;
-  color: var(--ink-2);
-  text-align: right;
-}
-
-@media (max-width: 640px) {
-  .head {
-    grid-template-columns: auto 1fr;
-  }
-
-  .aside {
-    grid-column: 1 / -1;
-    max-width: none;
-    text-align: left;
-  }
+  max-width: 36ch;
+  margin-top: 10px;
+  font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ink-3);
 }
 
 @media print {
   .section {
-    padding-top: 32px;
+    padding-block: 18px 0;
+  }
+
+  .section:nth-of-type(odd) {
+    background: none;
+    box-shadow: none;
+    clip-path: none;
   }
 
   .head {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     break-after: avoid;
-    break-inside: avoid;
-  }
-
-  .title {
-    font-size: 3.5rem;
   }
 }

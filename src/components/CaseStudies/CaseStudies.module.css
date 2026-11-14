@@ -10,27 +10,23 @@
 
 /* ── Header ───────────────────────────────────────────────── */
 .client {
-  color: var(--accent-text);
+  color: var(--ink-3);
 }
 
 .title {
-  margin-top: 10px;
-  font-family: var(--display);
-  font-size: clamp(2.25rem, 6.4vw, 5.25rem);
-  font-variation-settings: "wdth" 78;
-  line-height: 0.88;
+  margin-top: 6px;
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  line-height: 1.1;
   letter-spacing: -0.03em;
-  text-transform: uppercase;
 }
 
 .lede {
-  max-width: 34ch;
-  margin-top: 16px;
-  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-  font-weight: 500;
-  font-variation-settings: "wdth" 90;
-  line-height: 1.18;
+  max-width: 40ch;
+  margin-top: 10px;
+  font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+  line-height: 1.3;
   letter-spacing: -0.015em;
+  color: var(--ink-2);
 }
 
 /* ── Body ─────────────────────────────────────────────────────
@@ -81,6 +77,7 @@
   margin-top: 4px;
   font-weight: 600;
   line-height: 1.3;
+  text-wrap: balance;
 }
 
 .sub {
@@ -105,17 +102,18 @@
 
 .built li {
   position: relative;
-  padding-left: 26px;
+  padding-left: 20px;
 }
 
 .built li::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0.78em;
-  width: 14px;
-  height: var(--rule);
-  background: var(--accent-text);
+  left: 2px;
+  top: 0.68em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink-3);
 }
 
 .figures {
@@ -133,31 +131,30 @@
 }
 
 .value {
-  font-family: var(--display);
-  font-size: clamp(2.25rem, 4.6vw, 3.75rem);
-  font-weight: 800;
-  font-variation-settings: "wdth" 78;
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 650;
   font-variant-numeric: tabular-nums;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
 .figLabel {
-  font-weight: 500;
+  font-size: 0.9375rem;
+  color: var(--ink-2);
 }
 
 /* ── Rule sketch: nested if / else-if / else ───────────────── */
 .sketch {
-  background: var(--paper-2);
-  border: var(--rule) solid var(--line);
-  border-radius: 12px;
+  background: var(--paper);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
   overflow: hidden;
 }
 
 .draft {
   padding: 1px 7px;
   border: var(--rule) dashed var(--ink-3);
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .sketch > .branches {
@@ -185,9 +182,9 @@
   align-items: start;
   gap: 8px 10px;
   padding: 10px;
-  background: var(--paper);
-  border: var(--rule) solid var(--line);
-  border-radius: 8px;
+  background: var(--paper-2);
+  border: var(--rule) solid transparent;
+  border-radius: var(--r-ctl);
   font-size: 0.9375rem;
   line-height: 1.3;
 }
@@ -206,7 +203,7 @@
   justify-self: start;
   padding: 3px 7px;
   background: var(--accent);
-  border-radius: 4px;
+  border-radius: 6px;
   color: var(--on-accent);
   white-space: nowrap;
 }
@@ -230,9 +227,8 @@
 .test {
   justify-self: start;
   padding: 3px 8px;
-  background: var(--paper-2);
-  border: var(--rule) solid var(--line);
-  border-radius: 4px;
+  background: var(--paper);
+  border-radius: 6px;
 }
 
 /* The action block spans the box, under the conditions. */
@@ -265,8 +261,8 @@
 
 .assigns li {
   padding: 3px 8px;
-  border: var(--rule) solid var(--accent);
-  border-radius: 4px;
+  background: var(--paper);
+  border-radius: 6px;
   font-family: var(--mono);
   font-size: 0.8125rem;
   font-weight: 500;
@@ -284,9 +280,9 @@
 /* ── Diagram ──────────────────────────────────────────────── */
 .diagram {
   order: -1;
-  background: var(--paper-2);
-  border: var(--rule) solid var(--line);
-  border-radius: 12px;
+  background: var(--paper);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow);
   overflow: hidden;
 }
 
@@ -308,9 +304,9 @@
 
 .node {
   padding: 14px 16px;
-  background: var(--paper);
-  border: var(--rule) solid var(--line);
-  border-radius: 8px;
+  background: var(--paper-2);
+  border: var(--rule) solid transparent;
+  border-radius: var(--r-ctl);
   transition:
     border-color 0.2s ease,
     translate 0.25s var(--ease-out);
@@ -345,7 +341,7 @@
 .tag {
   padding: 2px 8px;
   background: var(--accent);
-  border-radius: 4px;
+  border-radius: 6px;
   color: var(--on-accent);
 }
 
@@ -365,8 +361,8 @@
 
 .parts li {
   padding: 3px 8px;
-  border: var(--rule) solid var(--line);
-  border-radius: 4px;
+  background: var(--paper);
+  border-radius: 999px;
   color: var(--ink-2);
 }
 

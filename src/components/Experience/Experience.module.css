@@ -1,53 +1,12 @@
-/* The list hangs off a wire, like nodes in a flow. The wire fills with the
-   accent as the list scrolls through the viewport. */
 .list {
-  --wire: 7px;
-  position: relative;
-  padding-left: clamp(28px, 4vw, 56px);
-}
-
-.list::before,
-.list::after {
-  content: "";
-  position: absolute;
-  left: calc(var(--wire) - 1px);
-  top: 0;
-  bottom: 0;
-  width: var(--rule);
-  background: var(--line);
-}
-
-.list::after {
-  display: none;
-  left: calc(var(--wire) - 1px);
-  width: 2px;
-  background: var(--accent);
-  transform-origin: 50% 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .list::after {
-      display: block;
-      animation: fill linear both;
-      animation-timeline: view();
-      animation-range: entry 60% exit 40%;
-    }
-  }
-}
-
-@keyframes fill {
-  from {
-    transform: scaleY(0);
-  }
+  display: grid;
 }
 
 .item {
-  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
-  gap: 16px clamp(24px, 4vw, 64px);
-  padding-block: clamp(28px, 4vw, 56px);
+  gap: 12px clamp(24px, 4vw, 56px);
+  padding-block: clamp(28px, 4vw, 48px);
 }
 
 .item + .item {
@@ -58,82 +17,60 @@
   padding-top: 0;
 }
 
-/* Node on the wire. */
-.item::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  left: calc(-1 * clamp(28px, 4vw, 56px));
-  top: clamp(28px, 4vw, 56px);
-  width: 15px;
-  height: 15px;
-  background: var(--paper);
-  border: 1.5px solid var(--ink-3);
-}
-
-.item:first-child::before {
-  top: 0;
-}
-
-.current::before {
-  background: var(--accent);
-  border-color: var(--accent);
+.item:last-child {
+  padding-bottom: 0;
 }
 
 .when {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-.n {
-  margin-bottom: 10px;
-  font-family: var(--display);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 800;
-  font-variation-settings: "wdth" 75;
-  line-height: 0.8;
-  color: var(--ink-3);
+  gap: 2px;
+  padding-top: 0.5em;
+  color: var(--ink-2);
 }
 
 .duration {
   color: var(--ink-3);
 }
 
+.what {
+  margin: calc(-1 * clamp(12px, 1.6vw, 20px));
+  padding: clamp(12px, 1.6vw, 20px);
+  border-radius: var(--r-card);
+}
+
 .heading {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 6px 16px;
+  gap: 4px 12px;
 }
 
 .company {
-  font-family: var(--display);
-  font-size: clamp(2.25rem, 6.4vw, 5.25rem);
-  font-variation-settings: "wdth" 78;
-  line-height: 0.85;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
+  font-size: clamp(1.5rem, 2.6vw, 1.875rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
 }
 
 .context {
-  font-size: clamp(1rem, 1.6vw, 1.25rem);
-  font-weight: 500;
-  color: var(--ink-2);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  letter-spacing: -0.011em;
+  color: var(--ink-3);
 }
 
 .now {
   align-self: center;
-  padding: 3px 9px;
-  background: var(--accent);
-  color: var(--on-accent);
-  border-radius: 4px;
+  padding: 3px 10px;
+  background: var(--accent-soft);
+  border-radius: 999px;
+  color: var(--accent-text);
+  font-weight: 600;
 }
 
 .title {
-  margin-top: 14px;
-  font-size: 1.125rem;
-  font-weight: 700;
+  margin-top: 6px;
+  font-weight: 600;
 }
 
 .summary {
@@ -142,39 +79,59 @@
   color: var(--ink-2);
 }
 
+.caseLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 2px;
+  color: var(--accent-text);
+  font-size: 0.9375rem;
+}
+
+.caseLink::after {
+  content: " ↑";
+  white-space: pre;
+}
+
+.caseLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .highlights {
   display: grid;
   gap: 8px;
-  max-width: 68ch;
-  margin-top: 18px;
+  max-width: 66ch;
+  margin-top: 12px;
 }
 
 .highlights li {
   position: relative;
-  padding-left: 26px;
+  padding-left: 20px;
 }
 
 .highlights li::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0.78em;
-  width: 14px;
-  height: var(--rule);
-  background: var(--accent-text);
+  left: 2px;
+  top: 0.68em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink-3);
 }
 
 .stack {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .stack li {
-  padding: 4px 9px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
+  padding: 4px 11px;
+  background: var(--paper-2);
+  border-radius: 999px;
   color: var(--ink-2);
 }
 
@@ -185,60 +142,22 @@
 
   .when {
     flex-flow: row wrap;
-    align-items: baseline;
-    gap: 4px 14px;
+    gap: 2px 12px;
+    padding-top: 0;
   }
-
-  .n {
-    width: 100%;
-  }
-}
-
-.what {
-  margin: calc(-1 * clamp(12px, 1.6vw, 20px));
-  padding: clamp(12px, 1.6vw, 20px);
-  border-radius: 12px;
-}
-
-/* The padding is hit area (46px tall); the negative margin gives the space
-   back so the link still sits one line below the summary. */
-.caseLink {
-  display: inline-block;
-  margin-bottom: -14px;
-  padding-block: 14px;
-  color: var(--accent-text);
-  text-decoration-line: underline;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 6px;
-}
-
-.caseLink::after {
-  content: " ↑";
-}
-
-.caseLink:hover {
-  color: var(--ink);
-  text-decoration-thickness: 2.5px;
 }
 
 @media print {
-  .list::after,
+  .item {
+    padding-block: 12px;
+    break-inside: avoid;
+  }
+
   .caseLink {
     display: none;
   }
 
-  .item {
-    padding-block: 20px;
-    break-inside: avoid;
-  }
-
-  .item::before {
-    top: 20px;
-  }
-
-  .what {
-    margin: 0;
-    padding: 0;
+  .stack li {
+    padding: 0 6px 0 0;
   }
 }
