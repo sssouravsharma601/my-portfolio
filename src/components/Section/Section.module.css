@@ -1,5 +1,5 @@
 .section {
-  padding-block: clamp(72px, 10vw, 136px);
+  padding-block: clamp(64px, 9vw, 120px);
 }
 
 /* Every other section sits on a soft grey band that runs edge to edge.
@@ -11,19 +11,19 @@
 }
 
 .head {
-  margin-bottom: clamp(32px, 5vw, 64px);
+  margin-bottom: clamp(32px, 4.5vw, 56px);
 }
 
 .title {
-  font-size: clamp(2rem, 4.6vw, 3.25rem);
+  font-size: clamp(1.875rem, 4.2vw, 3rem);
   line-height: 1.08;
   letter-spacing: -0.03em;
 }
 
 .aside {
   max-width: 36ch;
-  margin-top: 10px;
-  font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+  margin-top: 8px;
+  font-size: clamp(1.0625rem, 1.7vw, 1.3125rem);
   line-height: 1.3;
   letter-spacing: -0.015em;
   color: var(--ink-3);

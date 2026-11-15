@@ -39,17 +39,15 @@
   align-items: center;
   min-height: 44px;
   font-size: 0.8125rem;
-  color: var(--ink-2);
+  color: var(--ink-3);
   transition: color 0.2s ease;
 }
 
+/* The current section is marked by colour alone: a heavier weight would
+   change the word's width and nudge its neighbours as the page scrolls. */
 .navLink:hover,
 .navLink[aria-current] {
   color: var(--ink);
-}
-
-.navLink[aria-current] {
-  font-weight: 600;
 }
 
 .command,
@@ -104,17 +102,27 @@
     display: inline;
   }
 
+  /* The buttons look 36px tall, so they sit in the bar with room to spare;
+     the pseudo-element extends the touch target to 44px. */
   .command,
   .theme {
-    height: 44px;
+    position: relative;
+    height: 36px;
+  }
+
+  .command::after,
+  .theme::after {
+    content: "";
+    position: absolute;
+    inset: -5px;
   }
 
   .theme {
-    width: 44px;
+    width: 36px;
   }
 
   .command {
-    padding-inline: 16px;
+    padding-inline: 14px;
     font-size: 0.8125rem;
   }
 }

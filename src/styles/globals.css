@@ -80,8 +80,9 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--bar) + 16px);
-  /* Type and the page width (set in rem) grow together on large displays. */
-  font-size: clamp(100%, 0.4vw + 0.55rem, 118.75%);
+  /* Type and the page width (set in rem) grow together on large displays:
+     16px up to 1760px wide, 20px from 2560px. */
+  font-size: clamp(100%, 0.5vw + 0.45rem, 125%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -187,10 +188,12 @@ p {
   left: var(--gutter);
   top: -100px;
   z-index: 100;
-  padding: 10px 14px;
+  padding: 10px 16px;
   background: var(--ink);
+  border-radius: 999px;
   color: var(--paper);
   font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .skip-link:focus {
