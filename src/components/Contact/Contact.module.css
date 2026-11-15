@@ -8,7 +8,7 @@
 }
 
 .inner {
-  padding-block: clamp(72px, 10vw, 136px);
+  padding-block: clamp(64px, 9vw, 120px);
 }
 
 .head {
@@ -16,15 +16,15 @@
 }
 
 .heading {
-  font-size: clamp(2.5rem, 6.4vw, 4.5rem);
-  line-height: 1.04;
+  font-size: clamp(2.25rem, 5.6vw, 4rem);
+  line-height: 1.05;
   letter-spacing: -0.035em;
 }
 
 .kicker {
   display: block;
   margin-bottom: 8px;
-  font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+  font-size: clamp(1.0625rem, 1.7vw, 1.3125rem);
   font-weight: 500;
   line-height: 1.3;
   letter-spacing: -0.015em;
@@ -36,7 +36,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(10px, 1.4vw, 16px);
-  margin-top: clamp(40px, 6vw, 72px);
+  margin-top: clamp(40px, 5.5vw, 64px);
 }
 
 .hiring > div {
@@ -60,7 +60,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 40px clamp(32px, 7vw, 96px);
-  margin-top: clamp(40px, 6vw, 72px);
+  margin-top: clamp(40px, 5.5vw, 64px);
 }
 
 .note {
@@ -210,8 +210,7 @@
 
 .submit:hover:not(:disabled),
 .reset:hover {
-  background: var(--accent);
-  color: var(--on-accent);
+  background: color-mix(in srgb, var(--ink) 82%, var(--paper));
 }
 
 .submit:disabled {
