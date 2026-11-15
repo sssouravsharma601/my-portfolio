@@ -66,8 +66,8 @@ export default function Hero() {
         <h1 className={styles.name}>{profile.name}</h1>
 
         <p className={styles.statement}>
-          I build frontends for complicated systems: a bank’s rule engine, live classes for millions
-          of students, a launch&#8209;day checkout.
+          I build frontends for complicated systems: a&nbsp;bank’s rule engine, live classes for
+          millions of students, a launch&#8209;day checkout.
         </p>
 
         <div className={styles.actions}>

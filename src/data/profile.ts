@@ -18,15 +18,15 @@ export const profile = {
 
 /** The questions a recruiter asks first, answered up front. */
 export const hiring: { label: string; value: string }[] = [
+  { label: 'Roles', value: 'Senior Frontend Engineer, Senior Software Engineer' },
+  { label: 'Location', value: 'Dubai, UAE (UTC+4)' },
+  { label: 'Work mode', value: 'On-site only' },
   { label: 'Notice period', value: '30 days' },
   {
     label: 'Visa',
     value: 'UAE residence visa. A new employer would need to transfer or sponsor it.',
   },
-  { label: 'Location', value: 'Dubai, UAE (UTC+4)' },
-  { label: 'Work mode', value: 'On-site only' },
-  { label: 'Relocation', value: 'Open to relocating with visa sponsorship' },
-  { label: 'Roles', value: 'Senior Frontend Engineer, Senior Software Engineer' },
+  { label: 'Relocation', value: 'Open to relocating abroad with visa sponsorship' },
 ];
 
 export const roles: Role[] = [
@@ -122,7 +122,7 @@ export const caseStudies: CaseStudy[] = [
         'One decision is a stack of conditions, with more conditions nested inside them. The interface has to let someone write all of it without losing their place.',
       points: [
         'Conditions: one to a row. The first row opens with if, and each row after it joins with AND or OR.',
-        'Branches: a decision branches with if, else if and else, and a branch can hold further branches inside it.',
+        'Branches: if, else if and else, and a branch can hold further branches inside it.',
         'Actions: each branch closes with a then block, the action to take when its conditions hold. One block can assign several values.',
         'Drafts: a decision can be saved as a draft before it is finished.',
         'Screens: the same editor fits a phone, a tablet and a desktop.',
@@ -187,9 +187,9 @@ export const caseStudies: CaseStudy[] = [
     team: 'I led five frontend engineers',
     context: [
       'Learn Portal 2.0 replaced the legacy learn portal. It was the web app where students joined live classes, caught up on past ones, took tests, watched learning videos and worked through topics from a very large content library.',
-      'Students were grouped into different kinds of batches, and the portal showed each student their own class schedule. It was a progressive web app, and some free content could still be watched offline.',
+      'Students were grouped into different kinds of batches, and the portal showed each student their own class schedule.',
     ],
-    mine: 'I led the frontend team through the move off the legacy portal. On the new portal, in-class interaction, measured by attendance and time spent on the portal, was 42% higher than on the old one. The parts of the build I’d point to:',
+    mine: 'I led the frontend team through the move off the legacy portal. In-class interaction, measured by attendance and time spent on the portal, was 42% higher on the new one than on the old. The parts of the build I’d point to:',
     built: [
       'Performance: I took the Lighthouse performance score from 52 to 91. The four changes behind it are set out below.',
       'Assessments: I moved the assessment flow to optimistic updates, so the interface responds at once instead of waiting for the server.',
