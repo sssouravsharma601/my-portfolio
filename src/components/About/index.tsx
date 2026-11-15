@@ -5,14 +5,17 @@ import styles from './About.module.css';
 
 export default function About() {
   return (
-    <Section id="about" title="About" aside={`${YEARS} years, four companies`}>
+    <Section
+      id="about"
+      title="About"
+      aside={`${YEARS} years where the frontend meets a hard backend problem.`}
+    >
       <div className={styles.prose}>
         <p className={`${styles.lead} reveal`}>
-          I’m {profile.name}, a senior frontend engineer in Dubai. For {YEARS} years I’ve worked
-          where the frontend meets a hard backend problem: the application where a bank writes its
-          loan and credit-card eligibility rules, a learning portal used by millions of students a
-          day, and a reservation flow that had to hold up through one of India’s largest EV
-          launches.
+          I’m {profile.name}, a senior frontend engineer in Dubai. I’ve worked on the application
+          where a bank writes its loan and credit-card eligibility rules, a learning portal used by
+          millions of students a day, and a reservation flow that had to hold up through one of
+          India’s largest EV launches.
         </p>
         <p className={`${styles.more} reveal`}>
           I care most about the parts that don’t demo well: state that stays predictable, bundles

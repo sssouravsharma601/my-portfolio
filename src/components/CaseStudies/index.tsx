@@ -6,7 +6,11 @@ import styles from './CaseStudies.module.css';
 
 export default function CaseStudies() {
   return (
-    <Section id="cases" title="Case studies" aside="Two projects, in more depth">
+    <Section
+      id="cases"
+      title="Case studies"
+      aside="A rule editor for a bank, and a learning portal for millions of students."
+    >
       <div className={styles.list}>
         {caseStudies.map((c) => (
           <Case key={c.id} study={c} />

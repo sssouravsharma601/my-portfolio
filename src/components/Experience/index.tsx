@@ -8,7 +8,11 @@ const caseIds = new Set(caseStudies.map((c) => c.id));
 
 export default function Experience() {
   return (
-    <Section id="work" title="Experience" aside="From SaaS to banking">
+    <Section
+      id="work"
+      title="Experience"
+      aside="Four companies, from SaaS to banking. I’ve led teams at the last two."
+    >
       <ol className={styles.list}>
         {roles.map((r) => (
           <RoleItem key={r.id} role={r} />

@@ -26,19 +26,19 @@ function Snippet() {
             {'  '}role: <S>{profile.title}</S>,
           </span>
           <span className={styles.ln}>
-            {'  '}now: <S>Synechron, for Emirates NBD</S>,
+            {'  '}now: <S>Team Lead at Synechron</S>,
           </span>
           <span className={styles.ln}>
-            {'  '}before: [<S>BYJU’S</S>, <S>Ola Electric</S>, <S>Clearout</S>],
+            {'  '}builtFor: [<S>Emirates NBD</S>, <S>BYJU’S</S>, <S>Ola Electric</S>],
           </span>
           <span className={styles.ln}>
             {'  '}focus: [<S>React</S>, <S>TypeScript</S>, <S>Performance</S>],
           </span>
           <span className={styles.ln}>
-            {'  '}leadsTeams: <K>true</K>,
+            {'  '}leadsTeamOf: <K>4</K>,
           </span>
           <span className={styles.ln}>
-            {'  '}noticeDays: <K>30</K>,
+            {'  '}engineerSince: <K>2018</K>,
           </span>
           <span className={styles.ln}>{'}'};</span>
         </code>
@@ -66,8 +66,8 @@ export default function Hero() {
         <h1 className={styles.name}>{profile.name}</h1>
 
         <p className={styles.statement}>
-          I build frontends for complicated systems: bank rule engines, live classrooms,
-          launch&#8209;day checkouts.
+          I build frontends for complicated systems: a bank’s rule engine, live classes for millions
+          of students, a launch&#8209;day checkout.
         </p>
 
         <div className={styles.actions}>
