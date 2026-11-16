@@ -118,7 +118,6 @@
   margin-top: clamp(14px, 1.8vw, 20px);
   font-size: 0.875rem;
   color: var(--ink-3);
-  text-wrap: balance;
 }
 
 .dot {
@@ -204,6 +203,12 @@
 
   .pre {
     font-size: 0.75rem;
+  }
+
+  /* One line on a 375px phone; below that it wraps without a stranded word. */
+  .status {
+    font-size: 0.8125rem;
+    text-wrap: pretty;
   }
 }
 

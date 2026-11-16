@@ -153,6 +153,12 @@ p {
   outline-offset: 3px;
 }
 
+/* A text link's focus ring gets soft corners. Zero specificity, so anything
+   with a shape of its own (pills, cards) keeps it. */
+:where(a:focus-visible) {
+  border-radius: 6px;
+}
+
 /* ─────────────────────────────────────────────────────────────
    Shared primitives
    ───────────────────────────────────────────────────────────── */
