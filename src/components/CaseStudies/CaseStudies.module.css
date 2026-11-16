@@ -157,10 +157,24 @@
   border-radius: 6px;
 }
 
-.sketch > .branches {
+/* A rule set is a list of rules; each rule is its own chain of branches. */
+.rules {
   position: relative;
   z-index: 1;
-  padding: clamp(12px, 1.6vw, 20px);
+  display: grid;
+  gap: clamp(14px, 1.8vw, 20px);
+  padding: clamp(12px, 1.6vw, 18px);
+}
+
+.rule + .rule {
+  padding-top: clamp(14px, 1.8vw, 20px);
+  border-top: var(--rule) solid var(--line);
+}
+
+.ruleName {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--ink-2);
 }
 
 .branches {

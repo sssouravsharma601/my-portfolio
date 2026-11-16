@@ -55,7 +55,7 @@ export const roles: Role[] = [
       'I led five frontend engineers on Learn Portal 2.0, the student portal for live classes, tests and learning videos, used by millions of students a day.',
     highlights: [
       'Took the Lighthouse performance score from 52 to 91 through package choices, lazy loading, a CDN and a service worker.',
-      'In-class interaction, measured by attendance and time spent on the portal, was 42% higher than on the legacy portal.',
+      'Attendance in live classes rose 42% after the move from the legacy portal.',
       'Moved the assessment flow to optimistic updates, so the interface responds at once instead of waiting for the server.',
       'Built the message bridge between the React modules and the Flutter mobile shell.',
     ],
@@ -119,40 +119,52 @@ export const caseStudies: CaseStudy[] = [
     deep: {
       title: 'The hard part',
       intro:
-        'One decision is a stack of conditions, with more conditions nested inside them. The interface has to let someone write all of it without losing their place.',
+        'One rule set holds several rules, and each rule is a chain of if, else if and else branches built from AND and OR conditions. The interface has to let someone write all of it without losing their place.',
       points: [
-        'Conditions: one to a row. The first row opens with if, and each row after it joins with AND or OR.',
-        'Branches: if, else if and else, and a branch can hold further branches inside it.',
+        'Rule sets: a single rule set can hold several rules.',
+        'Rules: each rule is a chain of if, else if and else branches.',
+        'Conditions: one to a row. The first row opens the branch, and each row after it joins with AND or OR.',
         'Actions: each branch closes with a then block, the action to take when its conditions hold. One block can assign several values.',
-        'Drafts: a decision can be saved as a draft before it is finished.',
+        'Drafts: work can be saved as a draft before it is finished.',
         'Screens: the same editor fits a phone, a tablet and a desktop.',
       ],
     },
     sketch: {
-      caption: 'The shape of one decision. An illustration, not the bank’s rules.',
-      branches: [
+      caption: 'The shape of one rule set. An illustration, not the bank’s rules.',
+      rules: [
         {
-          keyword: 'if',
-          rows: [
-            { text: 'Income meets the threshold' },
-            { join: 'and', text: 'Age is within range' },
-            { join: 'or', text: 'Salary is transferred' },
-          ],
+          name: 'Rule 1',
           branches: [
             {
               keyword: 'if',
-              rows: [{ text: 'Employer is on the approved list' }],
-              then: ['decision = Eligible', 'limit band = Standard'],
+              rows: [
+                { text: 'Income meets the threshold' },
+                { join: 'and', text: 'Age is within range' },
+              ],
+              then: ['eligible = Yes'],
+            },
+            { keyword: 'else', then: ['eligible = No', 'reason = Criteria not met'] },
+          ],
+        },
+        {
+          name: 'Rule 2',
+          branches: [
+            {
+              keyword: 'if',
+              rows: [
+                { text: 'Employer is on the approved list' },
+                { join: 'or', text: 'Salary is transferred' },
+              ],
+              then: ['limit band = Standard'],
             },
             {
               keyword: 'else if',
               rows: [{ text: 'Existing customer' }],
-              then: ['decision = Eligible', 'limit band = Lower'],
+              then: ['limit band = Lower'],
             },
             { keyword: 'else', then: ['decision = Refer for review'] },
           ],
         },
-        { keyword: 'else', then: ['decision = Not eligible', 'reason = Criteria not met'] },
       ],
     },
     figures: [{ value: '−35%', label: 'Memory use during large calculations' }],
@@ -189,7 +201,7 @@ export const caseStudies: CaseStudy[] = [
       'Learn Portal 2.0 replaced the legacy learn portal. It was the web app where students joined live classes, caught up on past ones, took tests, watched learning videos and worked through topics from a very large content library.',
       'Students were grouped into different kinds of batches, and the portal showed each student their own class schedule.',
     ],
-    mine: 'I led the frontend team through the move off the legacy portal. In-class interaction, measured by attendance and time spent on the portal, was 42% higher on the new one than on the old. The parts of the build I’d point to:',
+    mine: 'I led the frontend team through the move off the legacy portal. Attendance in live classes was 42% higher afterwards. The parts of the build I’d point to:',
     built: [
       'Performance: I took the Lighthouse performance score from 52 to 91. The four changes behind it are set out below.',
       'Assessments: I moved the assessment flow to optimistic updates, so the interface responds at once instead of waiting for the server.',
@@ -202,12 +214,12 @@ export const caseStudies: CaseStudy[] = [
         'Package choices: dependencies were picked with their bundle cost in mind.',
         'Lazy loading: a student downloaded only the part of the portal they opened.',
         'CDN: static assets were served from a CDN.',
-        'Service worker: it made the portal a progressive web app, and some free content could still be watched offline.',
+        'Service worker: it made the portal a progressive web app. Offline, students could still see the list of videos, though not play them.',
       ],
     },
     figures: [
       { value: '52→91', label: 'Lighthouse performance score' },
-      { value: '+42%', label: 'In-class interaction vs the legacy portal' },
+      { value: '+42%', label: 'Live-class attendance vs the legacy portal' },
     ],
     flow: [
       { label: 'Student', note: 'In a browser or in the mobile app', next: 'opens' },
@@ -227,7 +239,7 @@ export const caseStudies: CaseStudy[] = [
 export const highlights: Highlight[] = [
   { value: '52→91', label: 'Lighthouse performance score', where: 'BYJU’S' },
   { value: '−35%', label: 'Memory use during large calculations', where: 'Emirates NBD' },
-  { value: '+42%', label: 'In-class interaction vs the legacy portal', where: 'BYJU’S' },
+  { value: '+42%', label: 'Live-class attendance vs the legacy portal', where: 'BYJU’S' },
   { value: '100k+', label: 'Concurrent requests on launch day', where: 'Ola Electric' },
 ];
 

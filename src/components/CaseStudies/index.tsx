@@ -79,10 +79,17 @@ function Case({ study: c }: { study: CaseStudy }) {
           {c.sketch && (
             <figure className={`${styles.sketch} reveal`} data-spot>
               <figcaption className={`label ${styles.caption}`}>
-                <span>decision.rule</span>
+                <span>Rule set</span>
                 <span className={styles.draft}>Draft</span>
               </figcaption>
-              <Branches branches={c.sketch.branches} />
+              <ol className={styles.rules}>
+                {c.sketch.rules.map((r) => (
+                  <li key={r.name} className={styles.rule}>
+                    <p className={`label ${styles.ruleName}`}>{r.name}</p>
+                    <Branches branches={r.branches} />
+                  </li>
+                ))}
+              </ol>
               <p className={styles.sketchNote}>{c.sketch.caption}</p>
             </figure>
           )}
