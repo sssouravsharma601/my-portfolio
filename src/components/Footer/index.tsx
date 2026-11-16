@@ -5,15 +5,12 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={`page ${styles.inner}`}>
-        <p className={styles.wordmark} aria-hidden="true">
-          {profile.name}
-        </p>
-        <div className={`label ${styles.row}`}>
+        <div className={styles.row}>
           <p>
             © {new Date().getFullYear()} {profile.name}
           </p>
           <p>
-            Set in Archivo and JetBrains Mono. Built with React and Vite.{' '}
+            Set in Inter. Built with React and Vite.{' '}
             <a
               className="link"
               href="https://github.com/sssouravsharma601/my-portfolio"

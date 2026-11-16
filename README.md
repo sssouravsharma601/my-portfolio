@@ -9,22 +9,21 @@ Live site → [souravsharma.in](https://souravsharma.in/)
 
 ## Design
 
-Built to read as an engineer's site: precise, cool, and a little like an editor.
+Calm and clear: white space, restrained type, soft rounded cards and very little colour.
 
-- **Type:** Archivo (variable weight and width) for display and text, JetBrains Mono for labels, the nav and the code panel. Both self-hosted.
-- **Colour:** cool neutrals with one soft indigo accent, in light and dark. The initial theme is resolved before first paint from the saved choice or the OS preference.
-- **Technical cues:** a drafting grid behind the hero, 1px hairlines, a `~/sourav-sharma` brand, and the at-a-glance facts written as a TypeScript object.
+- **Type:** Inter (variable, with optical sizing) throughout; JetBrains Mono only inside the code card and the rule sketch. Both self-hosted.
+- **Colour:** white and one soft grey for bands and cards, near-black text, and an indigo accent kept for links and focus. Light and dark themes; the initial theme is resolved before first paint from the saved choice or the OS preference.
+- **Layout:** a centred introduction (portrait, name, one sentence, the way to get in touch), then sections on alternating white and grey bands. Content is held to a 66rem measure.
+- **Components:** pill buttons, borderless cards with a 22px radius, a thin frosted header.
 
 ### Interaction
 
-Everything responds to the visitor; nothing plays on its own.
+Quiet, and always in response to the visitor.
 
-- **Kinetic name:** letters lose weight and width near the pointer, or under a finger dragged across them.
-- **Reactive grid:** the hero grid lights up and trails behind the pointer (`Hero/Field.tsx`, a small canvas that only draws while something is changing). The portrait leans toward the cursor.
 - **Command palette:** `⌘K` / `Ctrl+K`, or the header button, opens a native `<dialog>` to jump to a section, switch theme or copy the email. Below 760px it is the menu.
-- **Spotlight:** cards and the contact panel show a soft light under the cursor (`hooks/useSpotlight.ts`).
+- **Spotlight:** cards show a soft light under the cursor (`hooks/useSpotlight.ts`).
 - **Count-up:** the result figures count to their value the first time they scroll into view.
-- **Scroll-linked CSS** (`animation-timeline`): reveals, the wire beside the experience list, the ticker, the progress bar, and the current-section marker in the nav.
+- **Scroll-linked CSS** (`animation-timeline`): gentle reveals, and the nav marks the section in view.
 
 All of it is off under `prefers-reduced-motion`, and the content is complete without JavaScript.
 
@@ -76,15 +75,15 @@ src/
 ├── data/profile.ts         # All content: roles, highlights, skills, education
 ├── components/
 │   ├── Header/             # Sticky bar, anchor nav, theme toggle
-│   ├── Hero/               # Kinetic wordmark, reactive grid, portrait, code panel
+│   ├── Hero/               # Portrait, name, statement, actions, code card
 │   ├── CommandPalette/     # ⌘K dialog; the menu on small screens
 │   ├── CountUp/            # Figures that count up when scrolled into view
-│   ├── Section/            # Shared numbered section header
+│   ├── Section/            # Shared section header and band
 │   ├── About/              # Bio + selected results
 │   ├── CaseStudies/        # Two projects in depth, each with a system diagram
-│   ├── Experience/         # Roles on a scroll-filled wire, computed durations
+│   ├── Experience/         # Roles with computed durations
 │   ├── Skills/             # Toolkit + education
-│   ├── Contact/            # Accent block: email (copy), links, ContactForm
+│   ├── Contact/            # Hiring details, email (copy), links, ContactForm
 │   ├── LocalTime/          # Live Dubai time
 │   ├── Footer/
 │   ├── ErrorBoundary/

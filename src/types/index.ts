@@ -59,8 +59,8 @@ export interface CaseStudy {
   built: string[];
   /** The difficult part of the work, in more detail. */
   deep: { title: string; intro: string; points: string[] };
-  /** A made-up rule that shows the shape of the problem. Never real client data. */
-  sketch?: { caption: string; branches: RuleBranch[] };
+  /** A made-up rule set that shows the shape of the problem. Never real client data. */
+  sketch?: { caption: string; rules: { name: string; branches: RuleBranch[] }[] };
   figures: { value: string; label: string }[];
   flow: FlowStep[];
 }

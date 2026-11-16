@@ -19,7 +19,13 @@ export default function Header() {
   const { theme, toggle } = useThemeContext();
   const active = useActiveSection(IDS);
   const [palette, setPalette] = useState(false);
+  // The prerendered page shows the Mac key; other platforms swap it after mount.
+  const [keys, setKeys] = useState('⌘K');
   const next = theme === 'dark' ? 'light' : 'dark';
+
+  useEffect(() => {
+    if (!/Mac|iPhone|iPad/.test(navigator.platform)) setKeys('Ctrl K');
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -36,10 +42,7 @@ export default function Header() {
     <header className={styles.bar}>
       <div className={`page ${styles.inner}`}>
         <a href="#top" className={styles.brand} aria-label={`${profile.name}, back to top`}>
-          <span className={styles.prompt} aria-hidden="true">
-            ~/
-          </span>
-          sourav-sharma
+          {profile.name}
         </a>
 
         <nav aria-label="Primary" className={styles.nav}>
@@ -47,7 +50,7 @@ export default function Header() {
             <a
               key={n.id}
               href={`#${n.id}`}
-              className={`label ${styles.navLink}`}
+              className={styles.navLink}
               aria-current={active === n.id ? 'location' : undefined}
             >
               {n.label}
@@ -57,13 +60,14 @@ export default function Header() {
 
         <button
           type="button"
-          className={`label ${styles.command}`}
+          className={styles.command}
           onClick={() => setPalette(true)}
           aria-haspopup="dialog"
-          aria-label="Open command palette"
+          aria-label={`Menu: open command palette, ${keys}`}
+          aria-keyshortcuts="Meta+K Control+K"
         >
           <span className={styles.menuWord}>Menu</span>
-          <kbd className={styles.keys}>⌘K</kbd>
+          <kbd className={styles.keys}>{keys}</kbd>
         </button>
 
         <button

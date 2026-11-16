@@ -6,12 +6,9 @@ import styles from './Contact.module.css';
 
 export default function Contact() {
   return (
-    <section id="contact" aria-labelledby="contact-heading" className={styles.contact} data-spot>
+    <section id="contact" aria-labelledby="contact-heading">
       <div className={`page ${styles.inner}`}>
         <header className={styles.head}>
-          <span className="label" aria-hidden="true">
-            05 /
-          </span>
           <h2 id="contact-heading" className={styles.heading}>
             <span className={styles.kicker}>Working on something hard?</span> Let’s talk.
           </h2>

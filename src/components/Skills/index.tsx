@@ -4,7 +4,11 @@ import styles from './Skills.module.css';
 
 export default function Skills() {
   return (
-    <Section id="skills" index="04" title="Toolkit" aside="What I reach for, and what I studied">
+    <Section
+      id="skills"
+      title="Toolkit"
+      aside="React and TypeScript most days, with enough backend to see a feature through."
+    >
       <div className={styles.rows}>
         {skills.map((g) => (
           <div key={g.title} className={`${styles.row} reveal`}>

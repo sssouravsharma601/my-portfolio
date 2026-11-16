@@ -30,7 +30,6 @@ export default function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider>
-        <div className="progress" aria-hidden="true" />
         <Header />
         <main id="main">
           <Hero />
