@@ -1,12 +1,3 @@
-.contact {
-  position: relative;
-}
-
-/* The pointer spotlight (data-spot) is turned off here: the section is calm. */
-.contact::after {
-  display: none;
-}
-
 .inner {
   padding-block: clamp(64px, 9vw, 120px);
 }

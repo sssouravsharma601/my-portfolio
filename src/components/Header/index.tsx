@@ -19,7 +19,13 @@ export default function Header() {
   const { theme, toggle } = useThemeContext();
   const active = useActiveSection(IDS);
   const [palette, setPalette] = useState(false);
+  // The prerendered page shows the Mac key; other platforms swap it after mount.
+  const [keys, setKeys] = useState('⌘K');
   const next = theme === 'dark' ? 'light' : 'dark';
+
+  useEffect(() => {
+    if (!/Mac|iPhone|iPad/.test(navigator.platform)) setKeys('Ctrl K');
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -57,11 +63,11 @@ export default function Header() {
           className={styles.command}
           onClick={() => setPalette(true)}
           aria-haspopup="dialog"
-          aria-label="Menu: open command palette, ⌘K"
+          aria-label={`Menu: open command palette, ${keys}`}
           aria-keyshortcuts="Meta+K Control+K"
         >
           <span className={styles.menuWord}>Menu</span>
-          <kbd className={styles.keys}>⌘K</kbd>
+          <kbd className={styles.keys}>{keys}</kbd>
         </button>
 
         <button

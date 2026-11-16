@@ -115,6 +115,8 @@
 }
 
 .status {
+  /* The clock swaps in after load; equal-width digits keep the line still. */
+  font-variant-numeric: tabular-nums;
   margin-top: clamp(14px, 1.8vw, 20px);
   font-size: 0.875rem;
   color: var(--ink-3);
