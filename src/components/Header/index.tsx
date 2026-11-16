@@ -57,7 +57,8 @@ export default function Header() {
           className={styles.command}
           onClick={() => setPalette(true)}
           aria-haspopup="dialog"
-          aria-label="Open command palette"
+          aria-label="Menu: open command palette, ⌘K"
+          aria-keyshortcuts="Meta+K Control+K"
         >
           <span className={styles.menuWord}>Menu</span>
           <kbd className={styles.keys}>⌘K</kbd>
