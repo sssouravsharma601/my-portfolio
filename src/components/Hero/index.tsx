@@ -53,9 +53,12 @@ export default function Hero() {
       <div className={`page ${styles.inner}`}>
         <img
           src="./avatar.jpg"
+          srcSet="./avatar-128.webp 128w, ./avatar-192.webp 192w, ./avatar-256.webp 256w, ./avatar-384.webp 384w"
+          sizes="(min-width: 761px) and (max-height: 800px) 96px, (min-width: 1164px) 128px, (min-width: 873px) 11vw, 96px"
           alt={`Portrait of ${profile.name}`}
           width={560}
           height={560}
+          decoding="async"
           className={styles.avatar}
         />
 
