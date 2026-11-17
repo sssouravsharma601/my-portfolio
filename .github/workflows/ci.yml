@@ -84,6 +84,9 @@ jobs:
           name: dist
           path: dist/
           retention-days: 7
+          # Hidden files are left out by default, which would drop
+          # /.well-known/security.txt before the deploy job sees it.
+          include-hidden-files: true
 
   deploy:
     name: Deploy to GitHub Pages
@@ -107,6 +110,9 @@ jobs:
         with:
           name: dist
           path: dist/
+
+      - name: Check hidden files survived the hand-off
+        run: test -s dist/.well-known/security.txt
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
