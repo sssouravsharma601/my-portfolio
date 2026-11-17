@@ -89,7 +89,7 @@ describe('command palette', () => {
     await user.keyboard('{ArrowDown}');
     expect(selected()).toBe(options()[1]);
     await user.keyboard('{ArrowUp}{ArrowUp}');
-    expect(selected()).toBe(options().at(-1));
+    expect(selected()).toBe(options()[options().length - 1]);
     expect(input).toHaveAttribute('aria-activedescendant', selected()?.id);
   });
 

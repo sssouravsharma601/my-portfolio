@@ -60,7 +60,9 @@ describe('sendContactForm with Formspree configured', () => {
     const [url, init] = fetchMock.mock.calls[0] ?? [];
     expect(url).toBe('https://formspree.io/f/test');
     expect(init?.method).toBe('POST');
-    const body = JSON.parse(String(init?.body)) as Record<string, string>;
+    // The service sends a JSON string; anything else is a failure in itself.
+    expect(typeof init?.body).toBe('string');
+    const body = JSON.parse(init?.body as string) as Record<string, string>;
     expect(body['email']).toBe('ada@example.com');
     expect(body['message']).not.toContain('<script>');
   });
