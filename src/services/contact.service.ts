@@ -1,4 +1,5 @@
-import { FORMSPREE_ENDPOINT, OWNER_EMAIL } from '../constants';
+import { FORMSPREE_ENDPOINT } from '../constants';
+import { profile } from '../data/profile';
 import { sanitize } from '../utils/sanitize';
 import type { FormData } from '../types';
 
@@ -46,7 +47,7 @@ export async function sendContactForm(data: FormData): Promise<SendResult> {
   const body = encodeURIComponent(
     `From: ${sanitize(data.name)} <${sanitize(data.email)}>\n\n${sanitize(data.message)}`,
   );
-  const href = `mailto:${OWNER_EMAIL}?subject=${subject}&body=${body}`;
+  const href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
 
   // Use a hidden anchor so we don't block on window.open
   const anchor = document.createElement('a');

@@ -13,9 +13,6 @@ export const STORAGE_KEYS = {
   THEME: 'ss_theme',
 } as const;
 
-// ── Contact / owner info ─────────────────────────────────────────────────────
-export const OWNER_EMAIL = 'sssouravsharma601@gmail.com';
-
 // ── Formspree ────────────────────────────────────────────────────────────────
 /** Set VITE_FORMSPREE_ID in .env.local to enable real form submission. */
 export const FORMSPREE_ENDPOINT = import.meta.env['VITE_FORMSPREE_ID']

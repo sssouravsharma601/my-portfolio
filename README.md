@@ -54,6 +54,7 @@ When content changes, update `dateModified` in `index.html` and `lastmod` in `pu
 - No third-party scripts, fonts, analytics or cookies.
 - CI: actions pinned to commit SHAs, read-only default token, `npm audit` on production dependencies, Dependabot for npm and actions.
 - `/.well-known/security.txt` for reports.
+- Contact form: a hidden honeypot field filters bots, input is escaped before it leaves the browser, and external links carry `rel="noopener noreferrer"`.
 
 GitHub Pages cannot send response headers, so `frame-ancestors`, HSTS and `X-Content-Type-Options` cannot be set from this repo (they do not work from `<meta>`). `App.tsx` has a best-effort frame guard. To get real headers, put the site behind a CDN that can add them.
 
@@ -141,7 +142,7 @@ Without this the form falls back to a pre-filled `mailto:` link.
 | Script | What it does |
 |---|---|
 | `npm run dev` | Start Vite dev server with HMR |
-| `npm run build` | Type-check then produce optimised `dist/` |
+| `npm run build` | Type-check, build `dist/`, then prerender the page into `dist/index.html` |
 | `npm run preview` | Serve the built `dist/` locally |
 | `npm run typecheck` | `tsc --noEmit` — zero-emit type check |
 | `npm run lint` | ESLint with zero-warnings policy |
@@ -155,28 +156,17 @@ Without this the form falls back to a pre-filled `mailto:` link.
 
 ---
 
-## Security Highlights
-
-- **Content-Security-Policy** meta tag. `script-src` still allows `'unsafe-inline'` for the pre-paint theme script and JSON-LD; moving to a hash-based policy is a possible follow-up.
-- **Clickjacking:** GitHub Pages can't send `X-Frame-Options` or `frame-ancestors` headers, and neither works from a `<meta>` tag, so the site uses JS framebusting as a best-effort fallback. A CDN in front (e.g. Cloudflare) is needed for a real header.
-- **Permissions-Policy** — disables camera, microphone, geolocation
-- **Referrer-Policy: strict-origin-when-cross-origin**
-- **Honeypot field** on the contact form to filter bot submissions
-- **Input sanitisation** via DOM `createTextNode` before any data leaves the client
-- All external links carry `rel="noopener noreferrer"`
-
----
-
 ## CI/CD Pipeline
 
-Every push to `main` or a feature branch runs:
+Every push to `main` or a feature branch, and every pull request, runs:
 
-1. **Type-check** → `tsc --noEmit`
-2. **Lint** → ESLint (max-warnings 0)
-3. **Format** → Prettier check
-4. **Tests** → Vitest
-5. **Build** → `vite build`
-6. **Deploy** → GitHub Pages (only on `main` pushes)
+1. **Audit** → `npm audit` on production dependencies
+2. **Type-check** → `tsc --noEmit`
+3. **Lint** → ESLint (max-warnings 0)
+4. **Format** → Prettier check
+5. **Tests** → Vitest
+6. **Build** → `vite build` plus the prerender step
+7. **Deploy** → GitHub Pages, from `main` only: on every push, on the 1st of each month (so dates in the static HTML stay current), and on manual dispatch
 
 ---
 

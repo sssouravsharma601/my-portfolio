@@ -25,7 +25,7 @@ const WIN_ANSI: Record<number, number> = {
 const UNKNOWN = 0x3f; // "?"
 
 /** Swap characters the built-in fonts cannot show for ones they can. */
-export function normalise(text: string): string {
+function normalise(text: string): string {
   return text
     .replace(/\u00a0/g, ' ')
     .replace(/[\u2011\u2212]/g, '-')
