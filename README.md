@@ -31,6 +31,14 @@ All of it is off under `prefers-reduced-motion`, and the content is complete wit
 
 Sizes are fluid from 320px phones to 4K. The root font size and the page width (set in `rem`) scale together above 1440px, safe-area insets are respected on notched phones, and hover-only effects are limited to devices that can hover.
 
+## Résumé
+
+The "Résumé" button builds a PDF in the visitor's browser at the moment they press it, from the same `src/data/profile.ts` the page renders. Years of experience, the length of the current role and the "generated on" date are therefore always today's.
+
+- `src/resume/pdf.ts` is a small PDF writer (A4, the two built-in Helvetica faces, text, hairlines, links). No library and no embedded font: the generator is a lazy chunk of about 9 kB that loads on the first press.
+- `src/resume/build.ts` lays out the résumé; `src/resume/helvetica.ts` holds the font metrics used to wrap and right-align text.
+- The text is real text (selectable, readable by applicant-tracking systems), and the contact details are links.
+
 ## SEO
 
 - **Prerendered HTML.** `npm run build` renders the app to static markup and writes it into `dist/index.html` (`scripts/prerender.mjs`), then React hydrates it. Crawlers and link previews get the full content without running JavaScript.
@@ -78,6 +86,7 @@ src/
 │   ├── Hero/               # Portrait, name, statement, actions, code card
 │   ├── CommandPalette/     # ⌘K dialog; the menu on small screens
 │   ├── CountUp/            # Figures that count up when scrolled into view
+│   ├── ResumeButton/       # Builds and downloads the résumé PDF
 │   ├── Section/            # Shared section header and band
 │   ├── About/              # Bio + selected results
 │   ├── CaseStudies/        # Two projects in depth, each with a system diagram
@@ -89,14 +98,15 @@ src/
 │   ├── ErrorBoundary/
 │   └── Icons.tsx
 ├── context/ThemeContext.tsx
-├── hooks/                  # useTheme (external store) · useSpotlight · useActiveSection
+├── hooks/                  # useTheme · useNow (hydration-safe date) · useSpotlight · useActiveSection
+├── resume/                 # PDF writer, résumé layout, download
 ├── services/contact.service.ts  # Formspree → mailto fallback
 ├── styles/globals.css      # Fonts, tokens, base, primitives, motion
 ├── utils/                  # date · sanitize · validation (+ tests)
 └── types/index.ts
 ```
 
-To update content, edit `src/data/profile.ts`. Durations and years of experience are computed from dates, so they never go stale.
+To update content, edit `src/data/profile.ts`. Durations and years of experience are computed from dates, never typed in. The prerendered HTML holds them as of the build date; the browser then updates them to the visitor's date (`hooks/useNow.ts`), and CI rebuilds the site on the 1st of each month so the static HTML is never more than a month old.
 
 ---
 

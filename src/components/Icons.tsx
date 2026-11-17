@@ -46,3 +46,9 @@ export const Moon = ({ size = 16, ...p }: P) => (
     <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" />
   </svg>
 );
+
+export const Download = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14" />
+  </svg>
+);

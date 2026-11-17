@@ -1,13 +1,15 @@
 import { profile } from '../../data/profile';
+import { useNow } from '../../hooks/useNow';
 import styles from './Footer.module.css';
 
 export default function Footer() {
+  const year = useNow().getFullYear();
   return (
     <footer className={styles.footer}>
       <div className={`page ${styles.inner}`}>
         <div className={styles.row}>
           <p>
-            © {new Date().getFullYear()} {profile.name}
+            © {year} {profile.name}
           </p>
           <p>
             Set in Inter. Built with React and Vite.{' '}

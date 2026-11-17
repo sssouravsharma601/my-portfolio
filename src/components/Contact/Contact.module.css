@@ -108,7 +108,8 @@
   border-top: var(--rule) solid var(--line);
 }
 
-.links a {
+.links a,
+.links button {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -118,8 +119,23 @@
   transition: color 0.2s ease;
 }
 
-.links a:hover {
+.links a:hover,
+.links button:hover:not(:disabled) {
   color: var(--accent-text);
+}
+
+/* The résumé download is a button, so it needs the link row's shape spelled out. */
+.links button {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border-width: 0 0 var(--rule);
+  text-align: left;
+}
+
+.links button:disabled {
+  cursor: progress;
+  opacity: 0.7;
 }
 
 /* ── Form ──────────────────────────────────────────────────── */
@@ -289,7 +305,8 @@
   }
 
   .formWrap,
-  .copy {
+  .copy,
+  .links button {
     display: none;
   }
 
