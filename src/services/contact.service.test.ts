@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import type * as Constants from '../constants';
 import { profile } from '../data/profile';
 
 const DATA = {
@@ -41,7 +42,7 @@ describe('sendContactForm without a form service', () => {
 describe('sendContactForm with Formspree configured', () => {
   async function load(fetchImpl: typeof fetch) {
     vi.doMock('../constants', async (importOriginal) => ({
-      ...(await importOriginal<typeof import('../constants')>()),
+      ...(await importOriginal<typeof Constants>()),
       FORMSPREE_ENDPOINT: 'https://formspree.io/f/test',
     }));
     const fetchMock = vi.fn(fetchImpl);
@@ -51,8 +52,8 @@ describe('sendContactForm with Formspree configured', () => {
   }
 
   it('posts the sanitised fields as JSON', async () => {
-    const { sendContactForm, fetchMock } = await load(
-      async () => new Response('{}', { status: 200 }),
+    const { sendContactForm, fetchMock } = await load(() =>
+      Promise.resolve(new Response('{}', { status: 200 })),
     );
     await expect(sendContactForm(DATA)).resolves.toEqual({ ok: true, channel: 'formspree' });
 
@@ -65,8 +66,8 @@ describe('sendContactForm with Formspree configured', () => {
   });
 
   it('reports the service’s own error message', async () => {
-    const { sendContactForm } = await load(
-      async () => new Response(JSON.stringify({ error: 'Rate limited' }), { status: 429 }),
+    const { sendContactForm } = await load(() =>
+      Promise.resolve(new Response(JSON.stringify({ error: 'Rate limited' }), { status: 429 })),
     );
     await expect(sendContactForm(DATA)).resolves.toEqual({
       ok: false,
@@ -75,9 +76,7 @@ describe('sendContactForm with Formspree configured', () => {
   });
 
   it('reports a network failure', async () => {
-    const { sendContactForm } = await load(async () => {
-      throw new Error('offline');
-    });
+    const { sendContactForm } = await load(() => Promise.reject(new Error('offline')));
     await expect(sendContactForm(DATA)).resolves.toEqual({
       ok: false,
       error: 'Formspree submission failed: offline',

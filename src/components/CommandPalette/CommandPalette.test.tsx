@@ -11,13 +11,23 @@ vi.mock('../../resume/download', () => ({ downloadResume: vi.fn().mockResolvedVa
 beforeAll(() => {
   // jsdom has <dialog> but not its modal methods.
   const proto = HTMLDialogElement.prototype;
-  proto.showModal ??= function (this: HTMLDialogElement) {
-    this.setAttribute('open', '');
-  };
-  proto.close ??= function (this: HTMLDialogElement) {
-    this.removeAttribute('open');
-    this.dispatchEvent(new Event('close'));
-  };
+  if (!('showModal' in proto)) {
+    Object.defineProperty(proto, 'showModal', {
+      configurable: true,
+      value(this: HTMLDialogElement) {
+        this.setAttribute('open', '');
+      },
+    });
+  }
+  if (!('close' in proto)) {
+    Object.defineProperty(proto, 'close', {
+      configurable: true,
+      value(this: HTMLDialogElement) {
+        this.removeAttribute('open');
+        this.dispatchEvent(new Event('close'));
+      },
+    });
+  }
 });
 
 function setup() {
