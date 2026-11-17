@@ -97,9 +97,18 @@ export default defineConfig(({ isSsrBuild }) => ({
     sourcemap: false,
     // Never inline assets as data: URIs; the CSP only allows same-origin files.
     assetsInlineLimit: 0,
-    rollupOptions: isSsrBuild
+    // React (with react-dom and its scheduler) in a chunk of its own, which
+    // stays cached across content deploys.
+    rolldownOptions: isSsrBuild
       ? {}
-      : // React 19 keeps the client renderer in react-dom/client, not react-dom.
-        { output: { manualChunks: { react: ['react', 'react-dom', 'react-dom/client'] } } },
+      : {
+          output: {
+            codeSplitting: {
+              groups: [
+                { name: 'react', test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/ },
+              ],
+            },
+          },
+        },
   },
 }));

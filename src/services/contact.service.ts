@@ -3,8 +3,7 @@ import { sanitize } from '../utils/sanitize';
 import type { FormData } from '../types';
 
 export type SendResult =
-  | { ok: true; channel: 'formspree' | 'mailto' }
-  | { ok: false; error: string };
+  { ok: true; channel: 'formspree' | 'mailto' } | { ok: false; error: string };
 
 /**
  * Attempts to submit the contact form via Formspree when
