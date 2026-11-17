@@ -99,6 +99,7 @@ export default defineConfig(({ isSsrBuild }) => ({
     assetsInlineLimit: 0,
     rollupOptions: isSsrBuild
       ? {}
-      : { output: { manualChunks: { react: ['react', 'react-dom'] } } },
+      : // React 19 keeps the client renderer in react-dom/client, not react-dom.
+        { output: { manualChunks: { react: ['react', 'react-dom', 'react-dom/client'] } } },
   },
 }));
