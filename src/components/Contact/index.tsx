@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { hiring, profile } from '../../data/profile';
 import { ArrowUpRight, Check, Copy } from '../Icons';
+import ResumeButton from '../ResumeButton';
 import ContactForm from './ContactForm';
 import styles from './Contact.module.css';
 
@@ -33,6 +34,9 @@ export default function Contact() {
             <EmailRow />
 
             <ul className={styles.links}>
+              <li>
+                <ResumeButton>Download résumé (PDF)</ResumeButton>
+              </li>
               <li>
                 <a href={profile.linkedin} target="_blank" rel="noopener noreferrer me">
                   <span>LinkedIn</span>

@@ -16,13 +16,20 @@ await build({
   build: { ssr: 'src/entry-server.tsx', outDir: ssrDir, emptyOutDir: true },
 });
 
-const { render } = await import(pathToFileURL(resolve(ssrDir, 'entry-server.js')).href);
+const { render, years } = await import(pathToFileURL(resolve(ssrDir, 'entry-server.js')).href);
 const html = await readFile(htmlPath, 'utf8');
 if (!html.includes(MOUNT)) throw new Error(`prerender: ${MOUNT} not found in dist/index.html`);
 
 const app = render();
 if (!app.includes('<h1')) throw new Error('prerender: rendered markup has no <h1>');
 
-await writeFile(htmlPath, html.replace(MOUNT, `<div id="root">${app}</div>`));
+// The description texts in <head> state the years of experience; fill them in now.
+const YEARS = '{{years}}';
+if (!html.includes(YEARS)) throw new Error(`prerender: ${YEARS} not found in dist/index.html`);
+
+await writeFile(
+  htmlPath,
+  html.replaceAll(YEARS, String(years())).replace(MOUNT, `<div id="root">${app}</div>`),
+);
 await rm(ssrDir, { recursive: true, force: true });
 console.log(`prerendered ${(app.length / 1024).toFixed(1)} kB of HTML into dist/index.html`);

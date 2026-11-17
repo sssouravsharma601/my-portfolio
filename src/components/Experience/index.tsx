@@ -1,4 +1,5 @@
 import { caseStudies, roles } from '../../data/profile';
+import { useNow } from '../../hooks/useNow';
 import { formatDuration, formatYearMonth } from '../../utils/date';
 import type { Role } from '../../types';
 import Section from '../Section';
@@ -7,6 +8,7 @@ import styles from './Experience.module.css';
 const caseIds = new Set(caseStudies.map((c) => c.id));
 
 export default function Experience() {
+  const now = useNow();
   return (
     <Section
       id="work"
@@ -15,14 +17,14 @@ export default function Experience() {
     >
       <ol className={styles.list}>
         {roles.map((r) => (
-          <RoleItem key={r.id} role={r} />
+          <RoleItem key={r.id} role={r} now={now} />
         ))}
       </ol>
     </Section>
   );
 }
 
-function RoleItem({ role: r }: { role: Role }) {
+function RoleItem({ role: r, now }: { role: Role; now: Date }) {
   const current = !r.end;
   return (
     <li className={`${styles.item} ${current ? styles.current : ''}`}>
@@ -30,7 +32,7 @@ function RoleItem({ role: r }: { role: Role }) {
         <span className="label">
           {formatYearMonth(r.start)} – {r.end ? formatYearMonth(r.end) : 'Present'}
         </span>
-        <span className={`label ${styles.duration}`}>{formatDuration(r.start, r.end)}</span>
+        <span className={`label ${styles.duration}`}>{formatDuration(r.start, r.end, now)}</span>
       </div>
 
       <div className={`${styles.what} reveal`} data-spot>

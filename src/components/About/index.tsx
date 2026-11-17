@@ -1,14 +1,17 @@
-import { highlights, profile, YEARS } from '../../data/profile';
+import { CAREER_START, highlights, profile } from '../../data/profile';
+import { useNow } from '../../hooks/useNow';
+import { yearsSince } from '../../utils/date';
 import CountUp from '../CountUp';
 import Section from '../Section';
 import styles from './About.module.css';
 
 export default function About() {
+  const years = yearsSince(CAREER_START, useNow());
   return (
     <Section
       id="about"
       title="About"
-      aside={`${YEARS} years where the frontend meets a hard backend problem.`}
+      aside={`${years} years where the frontend meets a hard backend problem.`}
     >
       <div className={styles.prose}>
         <p className={`${styles.lead} reveal`}>

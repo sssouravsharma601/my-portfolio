@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { profile } from '../../data/profile';
 import LocalTime from '../LocalTime';
 import { ArrowUpRight } from '../Icons';
+import ResumeButton from '../ResumeButton';
 import styles from './Hero.module.css';
 
 const K = ({ children }: { children: ReactNode }) => <span className={styles.kw}>{children}</span>;
@@ -77,6 +78,7 @@ export default function Hero() {
           <a href={`mailto:${profile.email}`} className={styles.primary}>
             Email me
           </a>
+          <ResumeButton className={styles.outline}>Résumé</ResumeButton>
           <a
             href={profile.linkedin}
             target="_blank"

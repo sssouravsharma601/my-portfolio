@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { useThemeContext } from '../../context/ThemeContext';
 import { profile } from '../../data/profile';
+import { downloadResume } from '../../resume/download';
 import styles from './CommandPalette.module.css';
 
 interface Command {
@@ -58,6 +59,12 @@ export default function CommandPalette({ open, onClose }: Props) {
         label: 'Copy email address',
         hint: 'clipboard',
         run: () => void navigator.clipboard?.writeText(profile.email),
+      },
+      {
+        id: 'resume',
+        label: 'Download résumé (PDF)',
+        hint: 'pdf',
+        run: () => void downloadResume(),
       },
       {
         id: 'mail',

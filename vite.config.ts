@@ -85,7 +85,11 @@ function preloadDisplayFont(): Plugin {
   };
 }
 
+/** The day of this build (UTC). The prerendered HTML and the first client render both use it. */
+const BUILD_DATE = new Date().toISOString().slice(0, 10);
+
 export default defineConfig(({ isSsrBuild }) => ({
+  define: { __BUILD_DATE__: JSON.stringify(BUILD_DATE) },
   plugins: [react(), preloadDisplayFont(), csp()],
   base: './',
   build: {

@@ -1,8 +1,6 @@
 import type { CaseStudy, Degree, Highlight, Role, SkillGroup } from '../types';
-import { yearsSince } from '../utils/date';
 
 export const CAREER_START = { year: 2018, month: 2 };
-export const YEARS = yearsSince(CAREER_START);
 
 export const profile = {
   name: 'Sourav Sharma',
