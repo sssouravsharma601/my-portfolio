@@ -6,6 +6,7 @@ import { caseStudies, hiring, roles } from './data/profile';
 
 beforeAll(() => {
   // jsdom has no matchMedia
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- only checks whether it exists
   window.matchMedia ??= ((query: string) => ({
     matches: false,
     media: query,
