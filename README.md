@@ -62,12 +62,12 @@ GitHub Pages cannot send response headers, so `frame-ancestors`, HSTS and `X-Con
 
 | Layer | Choice |
 |---|---|
-| UI | React 18 (StrictMode), prerendered and hydrated; no runtime deps beyond React |
-| Language | TypeScript 5, strict |
-| Bundler | Vite 5 |
+| UI | React 19 (StrictMode), prerendered and hydrated; no runtime deps beyond React |
+| Language | TypeScript 6, strict |
+| Bundler | Vite 8 |
 | Styling | CSS Modules + custom properties |
 | Testing | Vitest + Testing Library |
-| Lint / format | ESLint 8 + `@typescript-eslint`, Prettier 3 |
+| Lint / format | ESLint 10 (flat config) + `typescript-eslint`, Prettier 3 |
 | CI/CD | GitHub Actions → GitHub Pages |
 
 ---
@@ -115,8 +115,8 @@ To update content, edit `src/data/profile.ts`. Durations and years of experience
 
 ### Prerequisites
 
-- Node.js ≥ 20
-- npm ≥ 9
+- Node.js 22 (22.22.2 or later) or 24
+- npm ≥ 10
 
 ### Install & run
 
