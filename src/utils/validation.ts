@@ -23,11 +23,6 @@ export function isMinLength(value: string, min: number): boolean {
   return value.trim().length >= min;
 }
 
-/** True when the string is non-empty after trimming. */
-export function isNonEmpty(value: string): boolean {
-  return value.trim().length > 0;
-}
-
 // ── Form-level validator ──────────────────────────────────────────────────────
 
 /**

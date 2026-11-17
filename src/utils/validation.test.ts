@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isValidEmail, isMinLength, isNonEmpty, validateContactForm } from './validation';
+import { isValidEmail, isMinLength, validateContactForm } from './validation';
 
 // ── isValidEmail ──────────────────────────────────────────────────────────────
 
@@ -61,22 +61,6 @@ describe('isMinLength', () => {
   it('trims whitespace before checking', () => {
     expect(isMinLength('  a  ', 2)).toBe(false);
     expect(isMinLength('  ab  ', 2)).toBe(true);
-  });
-});
-
-// ── isNonEmpty ────────────────────────────────────────────────────────────────
-
-describe('isNonEmpty', () => {
-  it('returns true for a non-blank string', () => {
-    expect(isNonEmpty('hello')).toBe(true);
-  });
-
-  it('returns false for an empty string', () => {
-    expect(isNonEmpty('')).toBe(false);
-  });
-
-  it('returns false for whitespace-only string', () => {
-    expect(isNonEmpty('   ')).toBe(false);
   });
 });
 

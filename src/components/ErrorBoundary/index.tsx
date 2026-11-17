@@ -1,4 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { profile } from '../../data/profile';
+import styles from './ErrorBoundary.module.css';
 
 interface Props {
   children: ReactNode;
@@ -50,52 +52,17 @@ export default class ErrorBoundary extends Component<Props, State> {
     if (fallback) return fallback(error);
 
     return (
-      <div
-        role="alert"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '60vh',
-          padding: '2rem',
-          textAlign: 'center',
-          gap: '1rem',
-        }}
-      >
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Something went wrong</h2>
-        <p style={{ opacity: 0.7, maxWidth: '36rem' }}>
-          An unexpected error occurred. Please refresh the page. If the problem persists, contact{' '}
-          <a href="mailto:sssouravsharma601@gmail.com">sssouravsharma601@gmail.com</a>.
+      <div role="alert" className={styles.fallback}>
+        <h2 className={styles.title}>Something went wrong</h2>
+        <p className={styles.body}>
+          An unexpected error occurred. Please refresh the page. If the problem persists, email{' '}
+          <a className="link" href={`mailto:${profile.email}`}>
+            {profile.email}
+          </a>
+          .
         </p>
-        {import.meta.env.DEV && (
-          <pre
-            style={{
-              background: '#1e1e1e',
-              color: '#f8f8f2',
-              padding: '1rem',
-              borderRadius: '0.5rem',
-              fontSize: '0.75rem',
-              maxWidth: '100%',
-              overflowX: 'auto',
-              textAlign: 'left',
-            }}
-          >
-            {error.stack}
-          </pre>
-        )}
-        <button
-          onClick={this.handleReset}
-          style={{
-            padding: '0.6rem 1.4rem',
-            background: 'var(--ink)',
-            color: 'var(--bg)',
-            border: 'none',
-            borderRadius: '999px',
-            cursor: 'pointer',
-            fontWeight: 600,
-          }}
-        >
+        {import.meta.env.DEV && <pre className={styles.stack}>{error.stack}</pre>}
+        <button type="button" className={styles.retry} onClick={this.handleReset}>
           Try again
         </button>
       </div>

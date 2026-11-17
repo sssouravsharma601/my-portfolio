@@ -159,7 +159,7 @@ function Branches({ branches }: { branches: RuleBranch[] }) {
 
 function Step({ step: s }: { step: FlowStep }) {
   return (
-    <li className={styles.step}>
+    <li>
       <div className={`${styles.node} ${s.mine ? styles.mine : ''}`}>
         <p className={styles.nodeHead}>
           <span className={styles.nodeLabel}>{s.label}</span>

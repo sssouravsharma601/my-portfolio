@@ -27,7 +27,7 @@ export default function Experience() {
 function RoleItem({ role: r, now }: { role: Role; now: Date }) {
   const current = !r.end;
   return (
-    <li className={`${styles.item} ${current ? styles.current : ''}`}>
+    <li className={styles.item}>
       <div className={styles.when}>
         <span className="label">
           {formatYearMonth(r.start)} – {r.end ? formatYearMonth(r.end) : 'Present'}
