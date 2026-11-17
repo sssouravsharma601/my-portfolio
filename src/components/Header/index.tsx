@@ -24,6 +24,7 @@ export default function Header() {
   const next = theme === 'dark' ? 'light' : 'dark';
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- the platform is only known after hydration
     if (!/Mac|iPhone|iPad/.test(navigator.platform)) setKeys('Ctrl K');
   }, []);
 
