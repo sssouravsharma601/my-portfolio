@@ -8,7 +8,7 @@ import styles from './Header.module.css';
 
 const NAV = [
   { id: 'about', label: 'About' },
-  { id: 'cases', label: 'Cases' },
+  { id: 'cases', label: 'Case studies' },
   { id: 'work', label: 'Experience' },
   { id: 'skills', label: 'Toolkit' },
   { id: 'contact', label: 'Contact' },

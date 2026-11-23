@@ -30,13 +30,13 @@ function Snippet() {
             {'  '}now: <S>Team Lead at Synechron</S>,
           </span>
           <span className={styles.ln}>
-            {'  '}builtFor: [<S>Emirates NBD</S>, <S>BYJU’S</S>, <S>Ola Electric</S>],
+            {'  '}builtFor: [<S>a UAE bank</S>, <S>BYJU’S</S>, <S>Ola Electric</S>],
           </span>
           <span className={styles.ln}>
             {'  '}focus: [<S>React</S>, <S>TypeScript</S>, <S>Performance</S>],
           </span>
           <span className={styles.ln}>
-            {'  '}leadsTeamOf: <K>4</K>,
+            {'  '}leads: <S>4 engineers</S>,
           </span>
           <span className={styles.ln}>
             {'  '}engineerSince: <K>2018</K>,
@@ -70,8 +70,8 @@ export default function Hero() {
         <h1 className={styles.name}>{profile.name}</h1>
 
         <p className={styles.statement}>
-          I build frontends for complicated systems: a&nbsp;bank’s rule engine, live classes for
-          millions of students, a launch&#8209;day checkout.
+          I build frontends for complicated systems: a&nbsp;UAE bank’s decision management system,
+          live classes for millions of students, a launch&#8209;day checkout.
         </p>
 
         <div className={styles.actions}>

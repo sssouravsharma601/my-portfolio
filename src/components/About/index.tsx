@@ -11,13 +11,13 @@ export default function About() {
     <Section
       id="about"
       title="About"
-      aside={`${years} years where the frontend meets a hard backend problem.`}
+      aside={`${years}+ years working where the frontend meets a hard backend problem.`}
     >
       <div className={styles.prose}>
         <p className={`${styles.lead} reveal`}>
-          I’m {profile.name}, a senior frontend engineer in Dubai. I’ve worked on the application
-          where a bank writes its loan and credit-card eligibility rules, a learning portal used by
-          millions of students a day, and a reservation flow that had to hold up through one of
+          I’m {profile.name}, a senior frontend engineer in Dubai. I’ve worked on the rule editor
+          where a UAE bank writes its loan and credit-card eligibility rules, a learning portal used
+          by millions of students a day, and a reservation flow that had to hold up through one of
           India’s largest EV launches.
         </p>
         <p className={`${styles.more} reveal`}>

@@ -13,7 +13,7 @@ export default function Experience() {
     <Section
       id="work"
       title="Experience"
-      aside="Four companies, from SaaS to banking. I’ve led teams at the last two."
+      aside="Four companies, from SaaS to banking. I’ve led teams at the two most recent."
     >
       <ol className={styles.list}>
         {roles.map((r) => (

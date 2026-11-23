@@ -10,7 +10,7 @@ export interface Role {
   id: string;
   title: string;
   company: string;
-  /** Client or context, e.g. "for Emirates NBD". Rendered muted. */
+  /** Client or context, e.g. "for a UAE bank". Rendered muted. */
   context?: string;
   start: YearMonth;
   /** Omitted = current role. */

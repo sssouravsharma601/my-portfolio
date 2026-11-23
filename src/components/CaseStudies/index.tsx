@@ -9,7 +9,7 @@ export default function CaseStudies() {
     <Section
       id="cases"
       title="Case studies"
-      aside="A rule editor for a bank, and a learning portal for millions of students."
+      aside="A rule editor for a UAE bank, and a learning portal for millions of students."
     >
       <div className={styles.list}>
         {caseStudies.map((c) => (
