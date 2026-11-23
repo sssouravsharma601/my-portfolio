@@ -93,7 +93,15 @@
 
 /* Below tablet width the palette is the menu. */
 @media (max-width: 760px) {
-  .nav,
+  .nav {
+    display: none;
+  }
+}
+
+/* Narrow screens and touch screens of any width (an iPad in portrait, a phone
+   in landscape): the button says "Menu" rather than a shortcut nobody can
+   press, and both controls get finger-sized targets. */
+@media (max-width: 760px), (pointer: coarse) {
   .keys {
     display: none;
   }

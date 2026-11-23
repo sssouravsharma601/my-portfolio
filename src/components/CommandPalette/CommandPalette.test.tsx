@@ -9,6 +9,14 @@ import { downloadResume } from '../../resume/download';
 vi.mock('../../resume/download', () => ({ downloadResume: vi.fn().mockResolvedValue(undefined) }));
 
 beforeAll(() => {
+  // jsdom does no layout, so it has no scrollIntoView.
+  if (!('scrollIntoView' in Element.prototype)) {
+    Object.defineProperty(Element.prototype, 'scrollIntoView', {
+      configurable: true,
+      writable: true,
+      value: () => undefined,
+    });
+  }
   // jsdom has <dialog> but not its modal methods.
   const proto = HTMLDialogElement.prototype;
   if (!('showModal' in proto)) {
@@ -91,6 +99,39 @@ describe('command palette', () => {
     await user.keyboard('{ArrowUp}{ArrowUp}');
     expect(selected()).toBe(options()[options().length - 1]);
     expect(input).toHaveAttribute('aria-activedescendant', selected()?.id);
+  });
+
+  it('scrolls the option picked with the arrow keys into view, instantly', async () => {
+    const scroll = vi.fn();
+    vi.spyOn(Element.prototype, 'scrollIntoView').mockImplementation(scroll);
+    const { user, input, selected } = setup();
+    await user.keyboard('{Control>}k{/Control}');
+    await user.click(input);
+    await user.keyboard('{ArrowDown}');
+    expect(scroll).toHaveBeenCalledTimes(1);
+    expect(scroll).toHaveBeenLastCalledWith({ block: 'nearest', behavior: 'instant' });
+    expect(scroll.mock.contexts[0]).toBe(selected());
+    await user.keyboard('{ArrowUp}{ArrowUp}');
+    expect(scroll).toHaveBeenCalledTimes(3);
+    expect(scroll.mock.contexts[2]).toBe(selected());
+  });
+
+  it('moves focus into the chosen section, not back to the menu button', async () => {
+    const { user, dialog, input } = setup();
+    const contact = document.createElement('section');
+    contact.id = 'contact';
+    contact.innerHTML = '<h2>Contact</h2>';
+    document.body.append(contact);
+    try {
+      await user.click(screen.getByRole('button', { name: /open command palette/i }));
+      await user.type(input, 'go to contact{Enter}');
+      expect(dialog.open).toBe(false);
+      expect(window.location.hash).toBe('#contact');
+      expect(document.activeElement).toBe(contact);
+      expect(contact).toHaveAttribute('tabindex', '-1');
+    } finally {
+      contact.remove();
+    }
   });
 
   it('says so when nothing matches', async () => {

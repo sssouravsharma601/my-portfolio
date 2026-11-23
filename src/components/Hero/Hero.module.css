@@ -241,6 +241,27 @@
   }
 }
 
+/* Below ~375px the Résumé pill and both links no longer fit on one row, and
+   wrapping strands GitHub on a line of its own. Lay them out on purpose:
+   both pills full width, then the two links sharing a row. (In em, so a
+   larger default text size switches earlier.) */
+@media (max-width: 23.4em) {
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+    align-self: stretch;
+    gap: 8px 16px;
+  }
+
+  .primary,
+  .outline {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    justify-content: center;
+  }
+}
+
 /* On a short laptop screen the name and the buttons stay on the first view. */
 @media (min-width: 761px) and (max-height: 800px) {
   .inner {

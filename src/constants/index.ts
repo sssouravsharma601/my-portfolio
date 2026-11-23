@@ -5,7 +5,7 @@ export const VALIDATION = {
   MESSAGE_MIN_LENGTH: 10,
   EMAIL_LOCAL_MAX: 64,
   EMAIL_TOTAL_MAX: 254,
-  SANITIZE_MAX_LEN: 5_000,
+  FIELD_MAX_LEN: 5_000,
 } as const;
 
 // ── Storage keys ─────────────────────────────────────────────────────────────

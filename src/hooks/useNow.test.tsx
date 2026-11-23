@@ -77,7 +77,7 @@ describe('useNow', () => {
     );
     const years = yearsSince(CAREER_START, TODAY);
     expect(years).not.toBe(yearsSince(CAREER_START, BUILD));
-    expect(screen.getByText(new RegExp(`^${years} years where`))).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(`^${years}\\+ years working where`))).toBeInTheDocument();
 
     const current = roles.find((r) => !r.end);
     const work = document.getElementById('work');

@@ -1,4 +1,6 @@
 import { createHash } from 'node:crypto';
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -27,11 +29,13 @@ function csp(): Plugin {
           `default-src 'none'`,
           `script-src 'self' ${hashes.join(' ')}`.trim(),
           `style-src 'self'`,
-          `img-src 'self' data:`,
+          `img-src 'self'`,
           `font-src 'self'`,
           `connect-src 'self' https://formspree.io`,
           `manifest-src 'self'`,
-          `form-action 'self'`,
+          // The contact form posts with fetch (or opens a mailto: draft) from
+          // script; a native submission, e.g. before hydration, is never wanted.
+          `form-action 'none'`,
           `base-uri 'none'`,
           `object-src 'none'`,
           `require-trusted-types-for 'script'`,
@@ -88,9 +92,39 @@ function preloadDisplayFont(): Plugin {
 /** The day of this build (UTC). The prerendered HTML and the first client render both use it. */
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 
+/**
+ * Stamps the build day into the dates crawlers read: `dateModified` in the
+ * JSON-LD of index.html and `<lastmod>` in sitemap.xml (copied from public/).
+ * Both hold a `{{buildDate}}` placeholder in source; the build fails if one
+ * is missing or survives.
+ */
+function stampBuildDate(): Plugin {
+  const TOKEN = '{{buildDate}}';
+  const fill = (text: string, file: string) => {
+    if (!text.includes(TOKEN)) throw new Error(`build-date: ${TOKEN} not found in ${file}`);
+    return text.replaceAll(TOKEN, BUILD_DATE);
+  };
+  let outDir = '';
+  return {
+    name: 'build-date',
+    // The client build only: the SSR build that prerendering runs has no
+    // index.html or public/ files of its own.
+    apply: (_config, env) => env.command === 'build' && !env.isSsrBuild,
+    configResolved(config) {
+      outDir = resolve(config.root, config.build.outDir);
+    },
+    transformIndexHtml: (html) => fill(html, 'index.html'),
+    // public/ has been copied into the output by the time the bundle is written.
+    async writeBundle() {
+      const sitemap = resolve(outDir, 'sitemap.xml');
+      await writeFile(sitemap, fill(await readFile(sitemap, 'utf8'), 'dist/sitemap.xml'));
+    },
+  };
+}
+
 export default defineConfig(({ isSsrBuild }) => ({
   define: { __BUILD_DATE__: JSON.stringify(BUILD_DATE) },
-  plugins: [react(), preloadDisplayFont(), csp()],
+  plugins: [react(), preloadDisplayFont(), csp(), stampBuildDate()],
   base: './',
   build: {
     outDir: 'dist',

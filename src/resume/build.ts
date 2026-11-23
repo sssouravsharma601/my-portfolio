@@ -23,8 +23,8 @@ const SITE = 'https://souravsharma.in/';
 /** The opening paragraph, assembled from statements the site already makes. */
 export function summary(years: number): string {
   return (
-    `Senior frontend engineer in Dubai with ${years} years of experience, mostly in React and TypeScript. ` +
-    'I build frontends for complicated systems: a bank’s rule engine, live classes for millions of students, a launch-day checkout. ' +
+    `Senior frontend engineer in Dubai with ${years}+ years of experience, mostly in React and TypeScript. ` +
+    'I build frontends for complicated systems: a UAE bank’s decision management system, live classes for millions of students, a launch-day checkout. ' +
     'I lead four engineers across frontend and backend today, and led five frontend engineers at BYJU’S.'
   );
 }

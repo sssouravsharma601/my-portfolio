@@ -82,7 +82,7 @@ describe('résumé', () => {
     if (!current) return;
 
     expect(text).toContain(formatDuration(current.start, undefined, NOW));
-    expect(text).toContain('with 8 years of experience');
+    expect(text).toContain('with 8+ years of experience');
     expect(text).toContain('17 November 2026');
 
     const later = new Date(2027, 5, 1);
@@ -91,7 +91,7 @@ describe('résumé', () => {
     const after = formatDuration(current.start, undefined, later);
     expect(after).not.toBe(before);
     expect(laterText).toContain(after);
-    expect(laterText).toContain('with 9 years of experience');
+    expect(laterText).toContain('with 9+ years of experience');
     expect(laterText).toContain('1 June 2027');
   });
 

@@ -46,15 +46,15 @@ The "Résumé" button builds a PDF in the visitor's browser at the moment they p
 - JSON-LD `Person` + `ProfilePage` + `WebSite` in `index.html`, with `sameAs` pointing at LinkedIn and GitHub.
 - `robots.txt`, `sitemap.xml`, canonical URL, Open Graph image.
 
-When content changes, update `dateModified` in `index.html` and `lastmod` in `public/sitemap.xml`.
+`dateModified` in the JSON-LD (`index.html`) and `lastmod` in `public/sitemap.xml` are `{{buildDate}}` placeholders, stamped with the build day (UTC) by `vite.config.ts`.
 
 ## Security
 
-- **Content-Security-Policy** generated at build time (`vite.config.ts`): `default-src 'none'`, same-origin scripts, styles and fonts only, the one inline script allowed by SHA-256 hash, no `unsafe-inline`, and Trusted Types enforced. The only third-party origin is Formspree, and only if the contact form is configured.
+- **Content-Security-Policy** generated at build time (`vite.config.ts`): `default-src 'none'`, same-origin scripts, styles and fonts only, the one inline script allowed by SHA-256 hash, no `unsafe-inline`, Trusted Types enforced, no `data:` images, and `form-action 'none'` (the form submits from script, never natively). The only third-party origin is Formspree, and only if the contact form is configured.
 - No third-party scripts, fonts, analytics or cookies.
 - CI: actions pinned to commit SHAs, read-only default token, `npm audit` on production dependencies, Dependabot for npm and actions.
 - `/.well-known/security.txt` for reports.
-- Contact form: a hidden honeypot field filters bots, input is escaped before it leaves the browser, and external links carry `rel="noopener noreferrer"`.
+- Contact form: a hidden honeypot field filters bots, fields are trimmed and length-capped (not HTML-escaped: they travel as JSON or a URL-encoded mailto draft and are never rendered as markup), and external links carry `rel="noopener noreferrer"`.
 
 GitHub Pages cannot send response headers, so `frame-ancestors`, HSTS and `X-Content-Type-Options` cannot be set from this repo (they do not work from `<meta>`). `App.tsx` has a best-effort frame guard. To get real headers, put the site behind a CDN that can add them.
 
@@ -103,7 +103,7 @@ src/
 ├── resume/                 # PDF writer, résumé layout, download
 ├── services/contact.service.ts  # Formspree → mailto fallback
 ├── styles/globals.css      # Fonts, tokens, base, primitives, motion
-├── utils/                  # date · sanitize · validation (+ tests)
+├── utils/                  # date · cleanField · validation (+ tests)
 └── types/index.ts
 ```
 

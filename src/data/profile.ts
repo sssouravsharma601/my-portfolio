@@ -22,7 +22,8 @@ export const hiring: { label: string; value: string }[] = [
   { label: 'Notice period', value: '30 days' },
   {
     label: 'Visa',
-    value: 'UAE residence visa. A new employer would need to transfer or sponsor it.',
+    value:
+      'Employer-sponsored UAE residence visa. A new employer would need to transfer it or sponsor a new one.',
   },
   { label: 'Relocation', value: 'Open to relocating abroad with visa sponsorship' },
 ];
@@ -32,7 +33,7 @@ export const roles: Role[] = [
     id: 'synechron',
     title: 'Senior Associate, Team Lead',
     company: 'Synechron',
-    context: 'for Emirates NBD',
+    context: 'for a UAE bank',
     start: { year: 2024, month: 4 },
     summary:
       'I lead four engineers across frontend and backend on the Decision Management System, the bank’s in-house platform for deciding who is eligible for a personal loan, credit card or overdraft. It is already live for multiple products.',
@@ -78,7 +79,7 @@ export const roles: Role[] = [
     id: 'social-frontier',
     title: 'Software Engineer',
     company: 'Social Frontier',
-    context: 'Clearout, Kintegra',
+    context: 'on Clearout and Kintegra',
     start: { year: 2018, month: 2 },
     end: { year: 2021, month: 4 },
     summary:
@@ -98,15 +99,15 @@ export const roles: Role[] = [
 export const caseStudies: CaseStudy[] = [
   {
     id: 'synechron',
-    client: 'Emirates NBD, via Synechron',
-    period: '2024 – present',
+    client: 'A UAE bank, via Synechron',
+    period: '2024 – Present',
     title: 'Decision Management System',
-    lede: 'A bank’s in-house platform for deciding who is eligible for a loan, a credit card or an overdraft.',
+    lede: 'A bank’s in-house platform for deciding who is eligible for a personal loan, a credit card or an overdraft.',
     role: 'Team Lead',
     team: 'I lead four engineers, frontend and backend, in a team of 10–12',
     context: [
       'Every application for a personal loan, credit card or overdraft has to be checked against the bank’s eligibility rules. The Decision Management System is the platform that runs that check. The rules themselves are written and maintained in their own application, the Business Rule Management System (BRMS).',
-      'This is a transformation project: the platform is being built in-house to replace the third-party tool the bank has used for these decisions. It is already live for multiple products, with more of the rollout due over the next couple of months.',
+      'This is a transformation project: the platform is being built in-house to replace the third-party tool the bank has used for these decisions. It is already live for multiple products, with more to follow.',
     ],
     mine: 'I lead four of the engineers and work on the BRMS myself. I also handle the non-functional requirements, such as memory use and security.',
     built: [
@@ -196,7 +197,7 @@ export const caseStudies: CaseStudy[] = [
     role: 'Senior Software Engineer',
     team: 'I led five frontend engineers',
     context: [
-      'Learn Portal 2.0 replaced the legacy learn portal. It was the web app where students joined live classes, caught up on past ones, took tests, watched learning videos and worked through topics from a very large content library.',
+      'Learn Portal 2.0 replaced the legacy portal. It was the web app where students joined live classes, caught up on past ones, took tests, watched learning videos and worked through topics from a very large content library.',
       'Students were grouped into different kinds of batches, and the portal showed each student their own class schedule.',
     ],
     mine: 'I led the frontend team through the move off the legacy portal. Attendance in live classes was 42% higher afterwards. The parts of the build I’d point to:',
@@ -236,7 +237,7 @@ export const caseStudies: CaseStudy[] = [
 
 export const highlights: Highlight[] = [
   { value: '52→91', label: 'Lighthouse performance score', where: 'BYJU’S' },
-  { value: '−35%', label: 'Memory use during large calculations', where: 'Emirates NBD' },
+  { value: '−35%', label: 'Memory use during large calculations', where: 'A UAE bank' },
   { value: '+42%', label: 'Live-class attendance vs the legacy portal', where: 'BYJU’S' },
   { value: '100k+', label: 'Concurrent requests on launch day', where: 'Ola Electric' },
 ];
