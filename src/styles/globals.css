@@ -158,6 +158,12 @@ p {
   border-radius: 6px;
 }
 
+/* Sections take focus from script (see utils/focusSection) so the next Tab
+   starts there; they aren't controls, so no ring around the whole block. */
+section[tabindex="-1"]:focus {
+  outline: none;
+}
+
 /* ─────────────────────────────────────────────────────────────
    Shared primitives
    ───────────────────────────────────────────────────────────── */

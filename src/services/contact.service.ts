@@ -1,6 +1,6 @@
 import { FORMSPREE_ENDPOINT } from '../constants';
 import { profile } from '../data/profile';
-import { sanitize } from '../utils/sanitize';
+import { cleanField } from '../utils/cleanField';
 import type { FormData } from '../types';
 
 export type SendResult =
@@ -22,10 +22,10 @@ export async function sendContactForm(data: FormData): Promise<SendResult> {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          name: sanitize(data.name),
-          email: sanitize(data.email),
-          subject: sanitize(data.subject),
-          message: sanitize(data.message),
+          name: cleanField(data.name),
+          email: cleanField(data.email),
+          subject: cleanField(data.subject),
+          message: cleanField(data.message),
         }),
       });
 
@@ -42,9 +42,9 @@ export async function sendContactForm(data: FormData): Promise<SendResult> {
   }
 
   // ── Strategy 2: mailto fallback ──────────────────────────────────────────
-  const subject = encodeURIComponent(sanitize(data.subject));
+  const subject = encodeURIComponent(cleanField(data.subject));
   const body = encodeURIComponent(
-    `From: ${sanitize(data.name)} <${sanitize(data.email)}>\n\n${sanitize(data.message)}`,
+    `From: ${cleanField(data.name)} <${cleanField(data.email)}>\n\n${cleanField(data.message)}`,
   );
   const href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
 

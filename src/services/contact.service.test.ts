@@ -3,10 +3,10 @@ import type * as Constants from '../constants';
 import { profile } from '../data/profile';
 
 const DATA = {
-  name: 'Ada <b>Lovelace</b>',
+  name: '  Ada <Lovelace>  ',
   email: 'ada@example.com',
-  subject: 'Role & team',
-  message: 'Hello <script>alert(1)</script>',
+  subject: 'Q&A <b>',
+  message: 'Q&A <b> R&D, 5 > 3 & "quoted"',
 };
 
 afterEach(() => {
@@ -17,7 +17,7 @@ afterEach(() => {
 });
 
 describe('sendContactForm without a form service', () => {
-  it('opens a mail draft addressed to the owner, with markup escaped', async () => {
+  it('opens a mail draft addressed to the owner, text kept exactly as typed', async () => {
     const { sendContactForm } = await import('./contact.service');
     let href = '';
     vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(function (
@@ -31,10 +31,13 @@ describe('sendContactForm without a form service', () => {
     const url = new URL(href);
     expect(url.protocol).toBe('mailto:');
     expect(url.pathname).toBe(profile.email);
-    expect(url.searchParams.get('subject')).toBe('Role &amp; team');
-    const body = url.searchParams.get('body') ?? '';
-    expect(body).toContain('ada@example.com');
-    expect(body).not.toContain('<script>');
+    expect(url.searchParams.get('subject')).toBe('Q&A <b>');
+    expect(url.searchParams.get('body')).toBe(
+      'From: Ada <Lovelace> <ada@example.com>\n\nQ&A <b> R&D, 5 > 3 & "quoted"',
+    );
+    // Encoded exactly once: no HTML entities and no double percent-encoding.
+    expect(href).toContain('subject=Q%26A%20%3Cb%3E&body=');
+    expect(href).not.toMatch(/%25|&amp;|&lt;|&gt;/);
     expect(document.querySelector('a[href^="mailto:"]')).toBeNull();
   });
 });
@@ -51,7 +54,7 @@ describe('sendContactForm with Formspree configured', () => {
     return { sendContactForm, fetchMock };
   }
 
-  it('posts the sanitised fields as JSON', async () => {
+  it('posts the trimmed fields as JSON, unchanged', async () => {
     const { sendContactForm, fetchMock } = await load(() =>
       Promise.resolve(new Response('{}', { status: 200 })),
     );
@@ -63,8 +66,12 @@ describe('sendContactForm with Formspree configured', () => {
     // The service sends a JSON string; anything else is a failure in itself.
     expect(typeof init?.body).toBe('string');
     const body = JSON.parse(init?.body as string) as Record<string, string>;
-    expect(body['email']).toBe('ada@example.com');
-    expect(body['message']).not.toContain('<script>');
+    expect(body).toEqual({
+      name: 'Ada <Lovelace>',
+      email: 'ada@example.com',
+      subject: 'Q&A <b>',
+      message: 'Q&A <b> R&D, 5 > 3 & "quoted"',
+    });
   });
 
   it('reports the service’s own error message', async () => {

@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type FormEvent } from 'react';
 import type { FormData, FormErrors } from '../../types';
 import { validateContactForm } from '../../utils/validation';
 import { sendContactForm } from '../../services/contact.service';
+import { FORMSPREE_ENDPOINT } from '../../constants';
 import styles from './Contact.module.css';
 
 const EMPTY: FormData = { name: '', email: '', subject: '', message: '' };
@@ -134,9 +135,21 @@ export default function ContactForm() {
         </p>
       )}
 
-      <button type="submit" className={styles.submit} disabled={status === 'sending'}>
-        {status === 'sending' ? 'Sending…' : 'Send message'}
-      </button>
+      <div className={styles.actions}>
+        <button
+          type="submit"
+          className={styles.submit}
+          disabled={status === 'sending'}
+          aria-describedby="cf-via"
+        >
+          {status === 'sending' ? 'Sending…' : 'Send message'}
+        </button>
+        <p id="cf-via" className={styles.via}>
+          {FORMSPREE_ENDPOINT
+            ? 'Sent via Formspree, a form-handling service.'
+            : 'Opens your mail app with this filled in.'}
+        </p>
+      </div>
     </form>
   );
 }

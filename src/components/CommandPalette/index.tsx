@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import { useThemeContext } from '../../context/ThemeContext';
 import { profile } from '../../data/profile';
 import { downloadResume } from '../../resume/download';
+import { focusSection } from '../../utils/focusSection';
 import styles from './CommandPalette.module.css';
 
 interface Command {
@@ -9,6 +10,8 @@ interface Command {
   label: string;
   hint: string;
   run: () => void;
+  /** Section to move focus to once the dialog has closed. */
+  target?: string;
 }
 
 interface Props {
@@ -36,6 +39,9 @@ export default function CommandPalette({ open, onClose }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
+  // Closing a modal dialog puts focus back on whatever opened it (the Menu
+  // button). For a "Go to" command, focus belongs in the section instead.
+  const focusAfterClose = useRef<string | null>(null);
   const { theme, toggle } = useThemeContext();
 
   const commands = useMemo<Command[]>(
@@ -44,6 +50,7 @@ export default function CommandPalette({ open, onClose }: Props) {
         id: s.id,
         label: s.label,
         hint: `#${s.id}`,
+        target: s.id,
         run: () => {
           window.location.hash = s.id;
         },
@@ -103,6 +110,7 @@ export default function CommandPalette({ open, onClose }: Props) {
 
   const run = (c: Command | undefined) => {
     if (!c) return;
+    focusAfterClose.current = c.target ?? null;
     onClose();
     c.run();
   };
@@ -111,7 +119,12 @@ export default function CommandPalette({ open, onClose }: Props) {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault();
       const step = e.key === 'ArrowDown' ? 1 : -1;
-      setActive((current + step + shown.length) % Math.max(1, shown.length));
+      const next = (current + step + shown.length) % Math.max(1, shown.length);
+      setActive(next);
+      // Keep the highlighted option visible in a list that scrolls (short
+      // windows). Instant, never smooth, so reduced motion is respected.
+      const option = shown[next] && document.getElementById(`palette-${shown[next].id}`);
+      option?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
     } else if (e.key === 'Enter') {
       e.preventDefault();
       run(shown[current]);
@@ -123,7 +136,14 @@ export default function CommandPalette({ open, onClose }: Props) {
       ref={dialog}
       className={styles.dialog}
       aria-label="Command palette"
-      onClose={onClose}
+      onClose={() => {
+        onClose();
+        // The close event fires after the browser has restored focus to the
+        // opener, so focusing here wins.
+        const id = focusAfterClose.current;
+        focusAfterClose.current = null;
+        if (id) focusSection(id);
+      }}
       onClick={(e) => {
         if (e.target === dialog.current) onClose();
       }}

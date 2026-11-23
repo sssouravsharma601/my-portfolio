@@ -81,6 +81,8 @@
 .list {
   padding: 6px;
   overflow-y: auto;
+  /* Options scrolled into view by the arrow keys keep the list's inset. */
+  scroll-padding-block: 6px;
   overscroll-behavior: contain;
 }
 

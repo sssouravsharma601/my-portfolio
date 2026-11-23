@@ -1,8 +1,9 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ContactForm from './ContactForm';
 import { sendContactForm, type SendResult } from '../../services/contact.service';
+import type * as Constants from '../../constants';
 
 vi.mock('../../services/contact.service', () => ({ sendContactForm: vi.fn() }));
 const send = vi.mocked(sendContactForm);
@@ -102,5 +103,30 @@ describe('contact form', () => {
     await user.click(submit());
     expect(send).not.toHaveBeenCalled();
     expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
+});
+
+describe('how the message travels', () => {
+  afterEach(() => {
+    vi.doUnmock('../../constants');
+    vi.resetModules();
+  });
+
+  it('says the mail app will open when no form service is configured', () => {
+    render(<ContactForm />);
+    expect(submit()).toHaveAccessibleDescription(/opens your mail app/i);
+    expect(screen.queryByText(/formspree/i)).not.toBeInTheDocument();
+  });
+
+  it('names Formspree when it is configured', async () => {
+    vi.resetModules();
+    vi.doMock('../../constants', async (importOriginal) => ({
+      ...(await importOriginal<typeof Constants>()),
+      FORMSPREE_ENDPOINT: 'https://formspree.io/f/test',
+    }));
+    const { default: Form } = await import('./ContactForm');
+    render(<Form />);
+    expect(submit()).toHaveAccessibleDescription(/sent via formspree/i);
+    expect(screen.queryByText(/mail app/i)).not.toBeInTheDocument();
   });
 });
