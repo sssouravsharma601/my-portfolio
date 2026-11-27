@@ -23,10 +23,10 @@ describe('npm run blog:check', () => {
     expect(out).toContain('what-trusted-types-stop');
   }, 30_000);
 
-  it('passes the empty blog in the repository', () => {
+  it('passes the blog content in the repository, however many posts it has', () => {
     const { code, out } = check('content/blog');
     expect(code).toBe(0);
-    expect(out).toContain('0 post(s) in content/blog');
+    expect(out).toMatch(/\d+ post\(s\) in content\/blog/);
   }, 30_000);
 
   it('fails, listing every problem, on invalid content', () => {
