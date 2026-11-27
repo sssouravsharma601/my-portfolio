@@ -15,7 +15,7 @@ sources:
 aiAssisted: true
 ---
 
-October was a busy month for browser releases. The [web.dev roundup for October 2026](https://web.dev/blog/web-platform-10-2026?hl=en) lists Chrome 155 and 156, Firefox 158 and 159, and Safari 27.1 and 27.2 as reaching stable that month. Several features crossed the Baseline line, but the one most frontend teams will notice is scroll-driven animations.
+October was a busy month for browser releases. The [web.dev roundup for October 2026](https://web.dev/blog/web-platform-10-2026?hl=en) lists Chrome 155 and 156, Firefox 158 and 159, and Safari 27.1 and 27.2 as reaching stable that month. Several features crossed the Baseline line, but for frontend teams the headline is scroll-driven animations.
 
 ## What happened
 
@@ -23,7 +23,7 @@ October was a busy month for browser releases. The [web.dev roundup for October 
 
 MDN now marks the [`view()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline/view) as Baseline 2026, working across the latest browsers since October 2026. The web.dev post also points to an interactive history that traces the feature from an early 2014 proposal to a standard shipped in every core browser engine.
 
-The same Firefox release also brought [scoped custom element registries](https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/159) to Baseline. That is worth noting if you combine web components from different sources, because it avoids collisions when two components declare elements with the same name.
+The same Firefox release also added support for [scoped custom element registries](https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/159), which [web.dev notes](https://web.dev/blog/web-platform-10-2026?hl=en) are now Baseline Newly available. That is worth noting if you combine web components from different sources, because it avoids collisions when two components declare elements with the same name.
 
 ## Why it matters technically
 
@@ -63,16 +63,16 @@ There are three details from the [Chrome guide](https://developer.chrome.com/doc
 2. A duration in seconds makes no sense on a scroll timeline, so the duration must be `auto` (the default if you leave it out).
 3. The demo scales the bar with `transform` rather than animating `width`, so it can use composited animations.
 
-For "animate as it enters the viewport" effects, `view()` is the tool. By default, [MDN explains](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline/view), the timeline sits at 0% when the subject first appears at one edge of the scroller. It reaches 100% when the subject's outer border edge reaches the opposite edge. The default axis is `block`, and if the chosen axis has no scrollbar the timeline stays inactive at zero progress. That last point is a common cause of "why is nothing happening?"
+For "animate as it enters the viewport" effects, `view()` is the tool. By default, [MDN explains](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline/view), the timeline sits at 0% when the subject first appears at one edge of the scroller. It reaches 100% when the subject's outer border edge reaches the opposite edge. The default axis is `block`, and if the chosen axis has no scrollbar the timeline stays inactive at zero progress. So if a `view()` animation never seems to run, check that the scroller actually scrolls along the chosen axis.
 
 ## What this means for frontend engineers
 
 - **Audit your scroll handlers.** Progress bars, parallax and fade-in-on-scroll effects that only map scroll position to a style are now candidates for plain CSS. Removing them takes work off the main thread and can remove a dependency.
 - **Keep the fallback.** "Newly available" means it works in current browsers. [MDN notes](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline/view) it "might not work in older devices or browsers." Treat the animation as an enhancement inside `@supports`, and make sure the page reads correctly without it.
-- **Animate cheap properties.** As the progress bar demo shows, prefer `transform` and `opacity` to layout properties so the animation can stay smooth.
+- **Animate cheap properties.** As the progress bar demo shows, prefer `transform` to layout properties such as `width` so the animation can use composited animations.
 - **Respect motion preferences.** Scroll-linked motion is still motion. Gate decorative effects behind `prefers-reduced-motion` just as you would time-based ones.
 - **Test in Firefox again.** If you previously disabled these effects for Firefox, or shipped a polyfill only for it, revisit that decision against Firefox 159 and later.
 
 ## Closing
 
-Scroll-driven animations have been usable in Chrome for a while. What changed in October is that they now ship in every core browser engine, which is the point where most teams can rely on them. If your codebase has scroll listeners whose only job is to move a style along with the page, this is a good time to replace them with a few lines of CSS.
+Scroll-driven animations have been usable in Chrome for a while. What changed in October is that they now ship in every core browser engine, which makes them a realistic option for most projects, with a fallback for older browsers. If your codebase has scroll listeners whose only job is to move a style along with the page, this is a good time to replace them with a few lines of CSS.
