@@ -1,0 +1,463 @@
+/* Blog pages: the list, a tag's list and a post. The same tokens, type and
+   soft cards as the home page; the reading column is narrower. */
+
+/* The hydrated header lives in a wrapper; without a box of its own the
+   sticky bar still sticks to the whole page. */
+.island {
+  display: contents;
+}
+
+/* A short page (an empty list, a tag with one post) still ends with the
+   footer at the bottom of the window. */
+:global(#root):has(> .island) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.main {
+  flex: 1 0 auto;
+  padding-block: clamp(40px, 7vw, 88px) clamp(64px, 9vw, 120px);
+}
+
+.head,
+.filter,
+.list,
+.empty,
+.article,
+.pager,
+.back {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.kicker {
+  margin-bottom: 10px;
+  color: var(--ink-3);
+}
+
+.crumb {
+  display: inline-block;
+  padding-block: 4px;
+  transition: color 0.2s ease;
+}
+
+.crumb:hover {
+  color: var(--ink);
+}
+
+.title {
+  font-size: clamp(2.25rem, 5.6vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.intro {
+  max-width: 36em;
+  margin-top: 12px;
+  font-size: clamp(1.0625rem, 1.7vw, 1.25rem);
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: var(--ink-3);
+}
+
+/* ── Tag filter: plain links, so it works without JavaScript ── */
+.filter {
+  margin-top: clamp(24px, 3.5vw, 36px);
+}
+
+.filter ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding-inline: 14px;
+  background: var(--paper-2);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.chip:hover {
+  color: var(--ink);
+}
+
+.chip[aria-current] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ── Post cards ───────────────────────────────────────────── */
+.list {
+  display: grid;
+  gap: clamp(10px, 1.4vw, 16px);
+  margin-top: clamp(20px, 2.6vw, 28px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(20px, 2.8vw, 32px);
+  background: var(--paper-2);
+  border-radius: var(--r-card);
+}
+
+.meta {
+  color: var(--ink-3);
+}
+
+.cardTitle {
+  font-size: clamp(1.1875rem, 2.1vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+}
+
+/* The whole card is the title link's target; tags sit above it. */
+.cardLink::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--r-card);
+}
+
+.cardLink:focus-visible {
+  outline: none;
+}
+
+.card:has(.cardLink:focus-visible) {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
+.cardText {
+  max-width: 40em;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.tags {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding-inline: 10px;
+  border: var(--rule) solid var(--line);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-3);
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.tag:hover,
+.tag[aria-current] {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.empty {
+  margin-top: clamp(24px, 3vw, 32px);
+  padding: clamp(48px, 7vw, 80px) 24px;
+  background: var(--paper-2);
+  border-radius: var(--r-card);
+  text-align: center;
+  color: var(--ink-3);
+}
+
+/* ── A post ───────────────────────────────────────────────── */
+.article {
+  max-width: 42rem;
+}
+
+.postHead {
+  margin-bottom: clamp(28px, 3.6vw, 40px);
+  padding-bottom: clamp(24px, 3vw, 32px);
+  border-bottom: var(--rule) solid var(--line);
+}
+
+.postTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.032em;
+}
+
+.lede {
+  margin-top: 14px;
+  font-size: clamp(1.125rem, 1.8vw, 1.3125rem);
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: var(--ink-3);
+}
+
+.byline {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 20px;
+  color: var(--ink-3);
+}
+
+.author {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.aiNote {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+.postHead .tags {
+  margin-top: 16px;
+}
+
+.prose {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  overflow-wrap: break-word;
+}
+
+.prose > * + * {
+  margin-top: 1.1em;
+}
+
+.prose :global(h2) {
+  margin-top: 2em;
+  font-size: 1.4375rem;
+  line-height: 1.25;
+}
+
+.prose :global(h3) {
+  margin-top: 1.7em;
+  font-size: 1.1875rem;
+  line-height: 1.3;
+}
+
+.prose :global(:is(h4, h5, h6)) {
+  margin-top: 1.5em;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.prose :global(:is(h2, h3, h4, h5, h6) + *) {
+  margin-top: 0.6em;
+}
+
+.prose :global(ul) {
+  padding-left: 1.3em;
+  list-style: disc;
+}
+
+.prose :global(ol) {
+  padding-left: 1.5em;
+  list-style: decimal;
+}
+
+.prose :global(li + li) {
+  margin-top: 0.4em;
+}
+
+.prose :global(li::marker) {
+  color: var(--ink-3);
+}
+
+.prose :global(a) {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.prose :global(a:hover) {
+  text-decoration-color: var(--accent);
+}
+
+.prose :global(strong) {
+  font-weight: 650;
+}
+
+.prose :global(blockquote) {
+  padding-left: 1.1em;
+  border-left: 2px solid var(--line);
+  color: var(--ink-2);
+}
+
+.prose :global(code) {
+  padding: 0.12em 0.36em;
+  background: var(--paper-2);
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 0.85em;
+}
+
+.prose :global(pre) {
+  padding: 16px 18px;
+  background: var(--paper-2);
+  border-radius: var(--r-ctl);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+.prose :global(pre code) {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+
+.prose :global(hr) {
+  margin-block: 2em;
+  border: 0;
+  border-top: var(--rule) solid var(--line);
+}
+
+/* A wide table scrolls on its own instead of widening the page. */
+.prose :global(table) {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.prose :global(:is(th, td)) {
+  padding: 8px 14px 8px 0;
+  border-bottom: var(--rule) solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose :global(th) {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.prose :global(.align-center) {
+  text-align: center;
+}
+
+.prose :global(.align-right) {
+  text-align: right;
+}
+
+.sources {
+  margin-top: clamp(40px, 5vw, 56px);
+  padding-top: 24px;
+  border-top: var(--rule) solid var(--line);
+}
+
+.sourcesTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-2);
+}
+
+.sources ol {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding-left: 1.4em;
+  list-style: decimal;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.host {
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+}
+
+/* ── Previous / next ──────────────────────────────────────── */
+.pager {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 16px);
+  max-width: 42rem;
+  margin-top: clamp(40px, 5vw, 56px);
+}
+
+.pagerLink {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 22px;
+  background: var(--paper-2);
+  border-radius: var(--r-card);
+}
+
+.pagerNext {
+  grid-column: 2;
+  text-align: right;
+}
+
+.pagerLabel {
+  color: var(--ink-3);
+}
+
+.pagerTitle {
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.back {
+  max-width: 42rem;
+  margin-top: 24px;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 600px) {
+  .pager {
+    grid-template-columns: 1fr;
+  }
+
+  .pagerNext {
+    grid-column: auto;
+    text-align: left;
+  }
+}
+
+@media print {
+  .filter,
+  .pager,
+  .back {
+    display: none;
+  }
+
+  .card {
+    padding: 8px 0;
+    border-bottom: var(--rule) solid var(--line);
+    border-radius: 0;
+  }
+
+  .prose :global(pre) {
+    white-space: pre-wrap;
+  }
+}

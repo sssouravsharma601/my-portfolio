@@ -48,6 +48,22 @@ The "Résumé" button builds a PDF in the visitor's browser at the moment they p
 
 `dateModified` in the JSON-LD (`index.html`) and `lastmod` in `public/sitemap.xml` are `{{buildDate}}` placeholders, stamped with the build day (UTC) by `vite.config.ts`.
 
+## Blog
+
+Posts are Markdown files in `content/blog/`, named `YYYY-MM-DD-slug.md`, with front matter for `title`, `description`, `date`, `tags` (1–4 from a fixed list), `sources` (at least two `https` links) and `aiAssisted`. The full format and every rule are in [`content/blog/README.md`](content/blog/README.md).
+
+- **Static, at build time.** `scripts/prerender.mjs` renders `/blog/`, one page per tag (`/blog/tag/<tag>/`, so the filter works without JavaScript), one page per post (`/blog/<slug>/`) and `/blog/feed.xml` (RSS 2.0, newest 20), and adds every blog URL to `sitemap.xml`. Markdown is rendered with `markdown-it` (a dev dependency) with raw HTML off; no Markdown code reaches the browser.
+- **Same frame as the home page.** Each page reuses the built `index.html` head (CSP, pre-paint theme script, fonts, icons) with its own title, description, canonical URL, Open Graph tags and JSON-LD (`Blog`, `CollectionPage`, `BlogPosting`). Only the header (theme switch, menu) is hydrated, by `src/blog/client.tsx`.
+- **Checked before every build.** `npm run blog:check` (`scripts/blog-check.mjs`, rules in `src/blog/validate.ts`) fails the build on invalid front matter, duplicate slugs, future dates (Dubai time), bodies under 300 or over 1500 words, raw HTML, non-`https` links, client names, contact details and lines starting with "As an AI".
+- **Kill switch.** `content/blog/config.json`: `"publishing": false` builds the site with no blog pages, feed, links or home-page cards (the posts stay in the repo); `"aiNote"` shows or hides "Researched and drafted with AI from the linked sources." on AI-assisted posts.
+
+```bash
+npm run blog:check                                      # check content/blog
+BLOG_CONTENT_DIR=src/test/fixtures/blog npm run build   # build with the three test posts
+```
+
+With no posts the list says "First posts coming soon." and the home page shows no blog cards.
+
 ## Security
 
 - **Content-Security-Policy** generated at build time (`vite.config.ts`): `default-src 'none'`, same-origin scripts, styles and fonts only, the one inline script allowed by SHA-256 hash, no `unsafe-inline`, Trusted Types enforced, no `data:` images, and `form-action 'none'` (the form submits from script, never natively). The only third-party origin is Formspree, and only if the contact form is configured.
@@ -77,11 +93,14 @@ GitHub Pages cannot send response headers, so `frame-ancestors`, HSTS and `X-Con
 ```
 index.html                  # Head: SEO meta, JSON-LD, pre-paint theme script
 vite.config.ts              # CSP generation, display-font preload
-scripts/prerender.mjs       # Build-time render into dist/index.html
+scripts/prerender.mjs       # Build-time render into dist/index.html, plus the blog pages
+scripts/blog-check.mjs      # npm run blog:check: validates content/blog
+content/blog/               # Blog posts (Markdown), config.json (kill switch), README (format)
 src/
 ├── App.tsx                 # Page composition + best-effort framebusting
 ├── entry-server.tsx        # renderToString entry used by the prerender
 ├── data/profile.ts         # All content: roles, highlights, skills, education
+├── blog/                   # Blog: content rules, Markdown, page markup, feed, header entry
 ├── components/
 │   ├── Header/             # Sticky bar, anchor nav, theme toggle
 │   ├── Hero/               # Portrait, name, statement, actions, code card
@@ -93,6 +112,7 @@ src/
 │   ├── CaseStudies/        # Two projects in depth, each with a system diagram
 │   ├── Experience/         # Roles with computed durations
 │   ├── Skills/             # Toolkit + education
+│   ├── LatestPosts/        # Newest blog posts, near the end of the home page
 │   ├── Contact/            # Hiring details, email (copy), links, ContactForm
 │   ├── LocalTime/          # Live Dubai time
 │   ├── Footer/
@@ -142,7 +162,8 @@ Without this the form falls back to a pre-filled `mailto:` link.
 | Script | What it does |
 |---|---|
 | `npm run dev` | Start Vite dev server with HMR |
-| `npm run build` | Type-check, build `dist/`, then prerender the page into `dist/index.html` |
+| `npm run build` | Type-check, check the blog content, build `dist/`, then prerender the page and the blog |
+| `npm run blog:check` | Validate the posts in `content/blog` (or `BLOG_CONTENT_DIR`) |
 | `npm run preview` | Serve the built `dist/` locally |
 | `npm run typecheck` | `tsc --noEmit` — zero-emit type check |
 | `npm run lint` | ESLint with zero-warnings policy |

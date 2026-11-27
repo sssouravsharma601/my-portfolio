@@ -1,3 +1,5 @@
+import { blogSite } from '../../blog/site';
+import { BLOG_PATH } from '../../blog/schema';
 import { profile } from '../../data/profile';
 import { useNow } from '../../hooks/useNow';
 import styles from './Footer.module.css';
@@ -11,6 +13,13 @@ export default function Footer() {
           <p>
             © {year} {profile.name}
           </p>
+          {blogSite.publishing && (
+            <p>
+              <a className="link" href={BLOG_PATH}>
+                Blog
+              </a>
+            </p>
+          )}
           <p>
             Set in Inter. Built with React and Vite.{' '}
             <a

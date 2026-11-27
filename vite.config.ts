@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { defineConfig, type Plugin } from 'vite';
+import { defineConfig, runnerImport, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 
 /**
@@ -58,9 +58,13 @@ function csp(): Plugin {
 
 /** Preloads the display font so the wordmark (the LCP element) doesn't wait on CSS discovery. */
 function preloadDisplayFont(): Plugin {
+  let base = '/';
   return {
     name: 'preload-display-font',
     apply: 'build',
+    configResolved(config) {
+      base = config.base;
+    },
     transformIndexHtml: {
       order: 'post',
       handler(html, ctx) {
@@ -77,7 +81,7 @@ function preloadDisplayFont(): Plugin {
                 rel: 'preload',
                 as: 'font',
                 type: 'font/woff2',
-                href: `./${font}`,
+                href: `${base}${font}`,
                 crossorigin: '',
               },
               injectTo: 'head',
@@ -122,27 +126,75 @@ function stampBuildDate(): Plugin {
   };
 }
 
-export default defineConfig(({ isSsrBuild }) => ({
-  define: { __BUILD_DATE__: JSON.stringify(BUILD_DATE) },
-  plugins: [react(), preloadDisplayFont(), csp(), stampBuildDate()],
-  base: './',
-  build: {
-    outDir: 'dist',
-    sourcemap: false,
-    // Never inline assets as data: URIs; the CSP only allows same-origin files.
-    assetsInlineLimit: 0,
-    // React (with react-dom and its scheduler) in a chunk of its own, which
-    // stays cached across content deploys.
-    rolldownOptions: isSsrBuild
-      ? {}
-      : {
-          output: {
-            codeSplitting: {
-              groups: [
-                { name: 'react', test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/ },
-              ],
+/** The parts of src/blog/load.ts used here. */
+interface BlogLoader {
+  BLOG_ENTRY: string;
+  loadBlog(): { config: { publishing: boolean }; errors: string[] };
+  blogSite(blog: unknown): unknown;
+}
+
+/**
+ * The blog (content/blog, or BLOG_CONTENT_DIR). The browser bundle gets only
+ * the publishing switch and the newest posts (__BLOG_SITE__); the pages
+ * themselves are rendered by scripts/prerender.mjs. A build with invalid
+ * content fails here too, not only in `npm run blog:check`. The loader is
+ * app code (src/, its own tsconfig), so it is loaded through Vite rather than
+ * imported into this file.
+ */
+async function readBlog(command: 'build' | 'serve') {
+  const { module: loader } = await runnerImport<BlogLoader>(resolve('src/blog/load.ts'), {
+    configFile: false,
+    logLevel: 'error',
+  });
+  const blog = loader.loadBlog();
+  if (blog.errors.length) {
+    const report = `blog content has problems (npm run blog:check):\n  ${blog.errors.join('\n  ')}`;
+    if (command === 'build') throw new Error(report);
+    console.warn(report);
+  }
+  return { entry: loader.BLOG_ENTRY, site: loader.blogSite(blog), ...blog };
+}
+
+export default defineConfig(async ({ command, isSsrBuild }) => {
+  const blog = await readBlog(command);
+  const publishing = blog.config.publishing;
+  return {
+    define: {
+      __BUILD_DATE__: JSON.stringify(BUILD_DATE),
+      __BLOG_SITE__: JSON.stringify(blog.site),
+    },
+    plugins: [react(), preloadDisplayFont(), csp(), stampBuildDate()],
+    // Absolute asset URLs: blog pages sit in nested folders (/blog/<slug>/).
+    base: '/',
+    build: {
+      outDir: 'dist',
+      sourcemap: false,
+      // Never inline assets as data: URIs; the CSP only allows same-origin files.
+      assetsInlineLimit: 0,
+      // One stylesheet for the whole site, in the same order as before the
+      // blog existed, cached across every page.
+      cssCodeSplit: false,
+      // Tells the prerender which files the blog entry loads; it deletes the file afterwards.
+      manifest: !isSsrBuild,
+      // React (with react-dom and its scheduler) in a chunk of its own, which
+      // stays cached across content deploys.
+      rolldownOptions: isSsrBuild
+        ? {}
+        : {
+            // Blog pages are static HTML whose header is hydrated by a small entry of its own.
+            ...(publishing && {
+              input: { index: resolve('index.html'), blog: resolve(blog.entry) },
+            }),
+            output: {
+              codeSplitting: {
+                groups: [
+                  { name: 'react', test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/ },
+                  // App code that the home page and blog pages share: the header, palette and theme.
+                  { name: 'site', test: /[\\/]src[\\/]/, minShareCount: 2 },
+                ],
+              },
             },
           },
-        },
-  },
-}));
+    },
+  };
+});

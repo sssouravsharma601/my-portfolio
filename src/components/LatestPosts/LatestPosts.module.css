@@ -1,0 +1,67 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 16px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(20px, 2.4vw, 28px);
+  background: var(--paper-2);
+  border-radius: var(--r-card);
+}
+
+.date {
+  color: var(--ink-3);
+}
+
+.title {
+  font-size: 1.1875rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+/* The whole card is the link's target; the title stays the accessible name. */
+.link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--r-card);
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.card:has(.link:focus-visible) {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
+.text {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.more {
+  margin-top: clamp(20px, 2.4vw, 28px);
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .card {
+    padding: 8px;
+    border: var(--rule) solid var(--line);
+    break-inside: avoid;
+  }
+}
