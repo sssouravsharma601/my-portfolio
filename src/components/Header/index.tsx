@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { blogSite } from '../../blog/site';
+import { BLOG_PATH } from '../../blog/schema';
 import { useThemeContext } from '../../context/ThemeContext';
 import { useActiveSection } from '../../hooks/useActiveSection';
 import { profile } from '../../data/profile';
@@ -15,7 +17,15 @@ const NAV = [
 ];
 const IDS = NAV.map((n) => n.id);
 
-export default function Header() {
+export type Page = 'home' | 'blog';
+
+interface Props {
+  /** On blog pages the section links lead back to the home page. */
+  page?: Page;
+}
+
+export default function Header({ page = 'home' }: Props) {
+  const home = page === 'home';
   const { theme, toggle } = useThemeContext();
   const active = useActiveSection(IDS);
   const [palette, setPalette] = useState(false);
@@ -42,7 +52,11 @@ export default function Header() {
   return (
     <header className={styles.bar}>
       <div className={`page ${styles.inner}`}>
-        <a href="#top" className={styles.brand} aria-label={`${profile.name}, back to top`}>
+        <a
+          href={home ? '#top' : '/'}
+          className={styles.brand}
+          aria-label={home ? `${profile.name}, back to top` : `${profile.name}, home`}
+        >
           {profile.name}
         </a>
 
@@ -50,13 +64,22 @@ export default function Header() {
           {NAV.map((n) => (
             <a
               key={n.id}
-              href={`#${n.id}`}
+              href={home ? `#${n.id}` : `/#${n.id}`}
               className={styles.navLink}
-              aria-current={active === n.id ? 'location' : undefined}
+              aria-current={home && active === n.id ? 'location' : undefined}
             >
               {n.label}
             </a>
           ))}
+          {blogSite.publishing && (
+            <a
+              href={BLOG_PATH}
+              className={styles.navLink}
+              aria-current={page === 'blog' ? 'location' : undefined}
+            >
+              Blog
+            </a>
+          )}
         </nav>
 
         <button
@@ -82,7 +105,7 @@ export default function Header() {
         </button>
       </div>
 
-      <CommandPalette open={palette} onClose={() => setPalette(false)} />
+      <CommandPalette open={palette} onClose={() => setPalette(false)} page={page} />
     </header>
   );
 }

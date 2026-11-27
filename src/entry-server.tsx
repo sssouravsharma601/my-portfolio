@@ -4,6 +4,8 @@ import App from './App';
 import { CAREER_START } from './data/profile';
 import { yearsSince } from './utils/date';
 
+export { prerenderBlog } from './blog/prerender';
+
 /** Whole years of experience on the build date, for the description texts in <head>. */
 export const years = (): number => yearsSince(CAREER_START, new Date());
 

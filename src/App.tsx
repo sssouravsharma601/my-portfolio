@@ -9,19 +9,15 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import LatestPosts from './components/LatestPosts';
 import { useSpotlight } from './hooks/useSpotlight';
+import { blogSite } from './blog/site';
+import { bustFrames } from './utils/frameGuard';
 import './styles/globals.css';
 
-/**
- * Best-effort framebusting. GitHub Pages can't send X-Frame-Options or a
- * frame-ancestors CSP header, and neither works from a <meta> tag.
- */
+/** See utils/frameGuard. */
 function useFrameGuard() {
-  useEffect(() => {
-    if (window.self !== window.top) {
-      window.top?.location.replace(window.self.location.href);
-    }
-  }, []);
+  useEffect(bustFrames, []);
 }
 
 export default function App() {
@@ -37,6 +33,7 @@ export default function App() {
           <CaseStudies />
           <Experience />
           <Skills />
+          <LatestPosts posts={blogSite.latest} />
           <Contact />
         </main>
         <Footer />

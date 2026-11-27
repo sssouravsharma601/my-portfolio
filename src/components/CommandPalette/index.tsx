@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { blogSite } from '../../blog/site';
+import { BLOG_PATH } from '../../blog/schema';
 import { useThemeContext } from '../../context/ThemeContext';
 import { profile } from '../../data/profile';
 import { downloadResume } from '../../resume/download';
@@ -17,6 +19,8 @@ interface Command {
 interface Props {
   open: boolean;
   onClose: () => void;
+  /** Away from the home page, "Go to" commands load it at that section. */
+  page?: 'home' | 'blog';
 }
 
 const SECTIONS = [
@@ -29,13 +33,16 @@ const SECTIONS = [
 ];
 
 const openTab = (url: string) => window.open(url, '_blank', 'noopener,noreferrer');
+const go = (url: string) => {
+  window.location.href = url;
+};
 
 /**
  * Keyboard-first navigation: jump to a section, switch theme, copy the email.
  * A native <dialog>, so focus trapping, Esc and the backdrop come for free.
  * On small screens it doubles as the menu.
  */
-export default function CommandPalette({ open, onClose }: Props) {
+export default function CommandPalette({ open, onClose, page = 'home' }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
@@ -46,15 +53,24 @@ export default function CommandPalette({ open, onClose }: Props) {
 
   const commands = useMemo<Command[]>(
     () => [
-      ...SECTIONS.map((s) => ({
-        id: s.id,
-        label: s.label,
-        hint: `#${s.id}`,
-        target: s.id,
-        run: () => {
-          window.location.hash = s.id;
-        },
-      })),
+      ...SECTIONS.map((s) =>
+        page === 'home'
+          ? {
+              id: s.id,
+              label: s.label,
+              hint: `#${s.id}`,
+              target: s.id,
+              run: () => {
+                window.location.hash = s.id;
+              },
+            }
+          : s.id === 'top'
+            ? { id: s.id, label: 'Go to home page', hint: '/', run: () => go('/') }
+            : { id: s.id, label: s.label, hint: `/#${s.id}`, run: () => go(`/#${s.id}`) },
+      ),
+      ...(blogSite.publishing
+        ? [{ id: 'blog', label: 'Go to blog', hint: BLOG_PATH, run: () => go(BLOG_PATH) }]
+        : []),
       {
         id: 'theme',
         label: `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`,
@@ -89,7 +105,7 @@ export default function CommandPalette({ open, onClose }: Props) {
       },
       { id: 'github', label: 'Open GitHub', hint: 'new tab', run: () => openTab(profile.github) },
     ],
-    [theme, toggle],
+    [theme, toggle, page],
   );
 
   const needle = query.trim().toLowerCase();
