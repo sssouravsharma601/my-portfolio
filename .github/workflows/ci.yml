@@ -102,7 +102,7 @@ jobs:
 
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
 
     steps:
       - name: Download build artefact
@@ -125,6 +125,19 @@ jobs:
           # drop /.well-known/security.txt from the site.
           include-hidden-files: true
 
+      # deploy-pages sometimes runs before the artefact uploaded a second
+      # earlier is listed ("No artifacts named github-pages"), so try once more
+      # after a pause instead of leaving the site on a failed deploy.
       - name: Deploy to GitHub Pages
         id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+      - name: Wait before retrying the deploy
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 30
+
+      - name: Deploy to GitHub Pages (retry)
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
